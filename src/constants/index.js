@@ -351,12 +351,12 @@ export {
 };
 
 export const navLinks = [
-    { href: "/#probleme", label: "Problème" },
-    { href: "/#solution", label: "Notre Solution" },
-    { href: "/#fonctionnalites", label: "Comment ça marche" },
-    { href: "/#impact", label: "Avantages" },
-    { href: "/#tarifs", label: "Tarifs" },
-    { href: "/#faq", label: "FAQ" },
+    { href: "#probleme", label: "Problème" },
+    { href: "#solution", label: "Notre Solution" },
+    { href: "#fonctionnalites", label: "Comment ça marche" },
+    { href: "#impact", label: "Avantages" },
+    { href: "#tarifs", label: "Tarifs" },
+    { href: "#faq", label: "FAQ" },
 ];
 
 export const navCtaLabel = "Démarrer";

@@ -45,12 +45,12 @@ const Nav = () => {
         <ul className='flex-1 flex justify-center items-center gap-16 max-lg:hidden'>
           {navLinks.map((item) => (
             <li key={item.label}>
-              <Link
-                to={item.href}
+              <a
+                href={item.href}
                 className='inline-flex items-center gap-2 font-montserrat leading-normal text-sm text-slate-gray hover:text-black transition-colors'
               >
                 {item.label}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
@@ -90,13 +90,13 @@ const Nav = () => {
               <ul className='flex flex-col gap-4'>
                 {navLinks.map((item) => (
                   <li key={item.label}>
-                    <Link
-                      to={item.href}
+                    <a
+                      href={item.href}
                       className='inline-flex items-center gap-2 font-montserrat text-base text-slate-gray hover:text-black transition-colors'
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {item.label}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>

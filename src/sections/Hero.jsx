@@ -19,8 +19,8 @@ const Hero = () => {
     >
       <div className='relative max-container padding-x pt-6 sm:pt-16 lg:pt-28 pb-8 sm:pb-14 lg:pb-20'>
         <div className='mx-auto max-w-3xl text-center'>
-          <div className='inline-flex items-center rounded-full bg-lime-300 px-4 py-1.5'>
-            <span className='font-montserrat text-[11px] sm:text-xs font-bold tracking-[0.14em] uppercase text-[#181e00]'>
+          <div className='inline-flex items-center rounded-full bg-brand-blue px-4 py-1.5'>
+            <span className='font-montserrat text-[11px] sm:text-xs font-bold tracking-[0.14em] uppercase text-white'>
               {heroBadge}
             </span>
           </div>

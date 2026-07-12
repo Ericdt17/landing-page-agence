@@ -9,6 +9,10 @@ export const entrepriseRecrutementPath = "/entreprise/recrutement";
 export const recruitmentOfferDetailPath = (jobId) =>
     `/entreprise/recrutement/offre/${encodeURIComponent(String(jobId))}`;
 
+/** URL page candidature pour une offre */
+export const recruitmentApplyPath = (jobId) =>
+    `/entreprise/recrutement/offre/${encodeURIComponent(String(jobId))}/postuler`;
+
 export const RECRUITMENT_HERO = {
     title: "Recrutement",
     subtitle: "Rejoignez l’équipe LivSight à Yaoundé.",
@@ -65,22 +69,48 @@ export const AVAILABILITY_OPTIONS = [
     { value: "weekend", label: "Week-end uniquement" },
 ];
 
+export const EDUCATION_LEVEL_OPTIONS = [
+    { value: "bac", label: "Bac" },
+    { value: "licence", label: "Licence" },
+    { value: "master", label: "Master" },
+    { value: "doctorat", label: "Doctorat" },
+];
+
+export const SPOKEN_LANGUAGE_OPTIONS = [
+    { value: "francais", label: "Français" },
+    { value: "anglais", label: "Anglais" },
+];
+
+export const YES_NO_OPTIONS = [
+    { value: "oui", label: "Oui" },
+    { value: "non", label: "Non" },
+];
+
 export const STATUS_LABELS = {
     jobDetailLoadError: "Impossible de charger cette offre.",
     jobNotFound: "Cette offre n’existe plus ou n’est plus disponible.",
     submitSuccessTitle: "Candidature envoyée !",
     submitSuccessSubtitle: "Nous reviendrons vers vous très prochainement.",
+    submitSuccessApplicationId: (id) =>
+        `Référence candidature : #${id}`,
     submitErrorGeneric: "Une erreur est survenue, veuillez réessayer.",
     submitErrorNetwork:
-        "Upload impossible. Vérifiez votre connexion et réessayez avec un fichier inférieur à 5 Mo.",
-    submitError413: "Fichier trop volumineux (max 5 Mo).",
+        "Upload impossible. Vérifiez votre connexion et réessayez avec un fichier inférieur à 10 Mo.",
+    submitError413: "Fichier trop volumineux (max 10 Mo).",
     submitError409: "Vous avez déjà postulé pour ce poste.",
     submitError400Fallback: "Données invalides. Vérifiez les champs et réessayez.",
     submitErrorMissingJobId:
         "Identifiant du poste manquant. Rechargez la page puis réessayez.",
-    cvTooLarge: "Le fichier dépasse 5 Mo. Veuillez choisir un PDF plus léger.",
+    cvTooLarge: "Le fichier dépasse 10 Mo. Veuillez choisir un PDF plus léger.",
     cvNotPdf: "Le CV doit être au format PDF.",
-    photoTooLarge: "La photo dépasse 5 Mo. Veuillez choisir une image plus légère.",
+    photoTooLarge: "La photo dépasse 10 Mo. Veuillez choisir une image plus légère.",
+    photoRequired: "La photo de profil est obligatoire.",
+    emailRequired: "L’email est obligatoire.",
+    emailInvalid: "Veuillez saisir une adresse email valide.",
+    phoneTooLong: "Le téléphone ne doit pas dépasser 32 caractères.",
+    fieldRequired: "Ce champ est obligatoire.",
+    languagesRequired: "Sélectionnez au moins une langue.",
+    yesNoRequired: "Réponse requise.",
     photoInvalidType: "Format non accepté. Utilisez une image JPEG, PNG ou WebP.",
     jobsLoadError: "Impossible de charger les offres pour le moment.",
     questionsLoadError: "Impossible de charger le formulaire pour ce poste.",
@@ -132,6 +162,7 @@ export const RECRUITMENT_PROCESS_INTRO =
 export const RECRUITMENT_JOB_UI = {
     viewDetail: "Voir le détail",
     backToOffers: "← Retour aux offres",
+    backToOffer: "← Retour à l’offre",
     descriptionHeading: "Description du poste",
     noDescription:
         "Aucune description détaillée n’est disponible pour ce poste.",
@@ -140,15 +171,28 @@ export const RECRUITMENT_JOB_UI = {
 export const APPLICATION_FORM_LABELS = {
     step1Title: "Votre profil",
     step2Title: "Questions complémentaires",
+    sectionIdentity: "Identité & contact",
+    sectionEducation: "Formation",
+    sectionLanguages: "Langues parlées",
+    languagesHint: "Cochez au moins une langue.",
+    sectionProfessional: "Situation professionnelle",
+    currentlyEmployed: "Êtes-vous actuellement en poste ?",
+    inOtherCompany: "Êtes-vous actuellement dans une autre boîte ?",
+    sectionMobility: "Mobilité & disponibilité",
+    sectionDocuments: "Documents",
     fullName: "Nom complet",
     phone: "Téléphone",
     phonePlaceholder: "+237 6XX XXX XXX",
-    neighborhood: "Quartier (optionnel)",
-    transport: "Moyen de transport (optionnel)",
-    availability: "Disponibilité (optionnel)",
-    photo: "Photo de profil (JPEG, PNG ou WebP, 5 MB max, optionnel)",
-    cv: "Votre CV (PDF uniquement, 5 MB max)",
-    coverLetter: "Lettre de motivation (PDF uniquement, 5 MB max)",
+    email: "Email",
+    neighborhood: "Quartier de résidence",
+    educationLevel: "Niveau d’études",
+    fieldOfStudy: "Filière / domaine d’études",
+    schoolName: "École ou université",
+    transport: "Moyen de transport",
+    availability: "Disponibilité",
+    photo: "Photo de profil (JPEG, PNG ou WebP, 10 Mo max)",
+    cv: "Votre CV (PDF uniquement, 10 Mo max)",
+    coverLetter: "Lettre de motivation (PDF uniquement, 10 Mo max)",
     next: "Suivant",
     back: "Retour",
     submit: "Envoyer ma candidature",
@@ -157,8 +201,9 @@ export const APPLICATION_FORM_LABELS = {
     apply: "Postuler",
     selectTransport: "Choisir…",
     selectAvailability: "Choisir…",
+    selectEducationLevel: "Choisir…",
 };
 
 export const RECRUITMENT_MODAL_TITLE = "Candidature";
 
-export const MAX_CV_BYTES = 5 * 1024 * 1024;
+export const MAX_CV_BYTES = 10 * 1024 * 1024;

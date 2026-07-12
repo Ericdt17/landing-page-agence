@@ -1,15 +1,18 @@
-import {
-    CheckCircleIcon,
-    XMarkIcon,
-} from "@heroicons/react/24/outline";
+import Lottie from "lottie-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { candidatureSuccess } from "../../assets/lottie";
 import {
     APPLICATION_FORM_LABELS,
     AVAILABILITY_OPTIONS,
+    EDUCATION_LEVEL_OPTIONS,
     MAX_CV_BYTES,
     RECRUITMENT_MODAL_TITLE,
+    SPOKEN_LANGUAGE_OPTIONS,
     STATUS_LABELS,
     TRANSPORT_OPTIONS,
+    YES_NO_OPTIONS,
+    entrepriseRecrutementPath,
 } from "../../constants";
 import { submitApplication } from "../../services/recruitmentApi";
 
@@ -25,6 +28,32 @@ const RECRUITMENT_NEIGHBORHOOD_FIELD =
     import.meta.env.VITE_RECRUITMENT_NEIGHBORHOOD_FIELD ?? "quartier";
 
 const ACCEPTED_PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const API_FIELD_TO_FORM = {
+    full_name: "fullName",
+    phone: "phone",
+    email: "email",
+    quartier: "neighborhood",
+    neighborhood: "neighborhood",
+    education_level: "educationLevel",
+    field_of_study: "fieldOfStudy",
+    study_field: "fieldOfStudy",
+    school_name: "schoolName",
+    school: "schoolName",
+    languages: "languages",
+    currently_employed: "currentlyEmployed",
+    in_other_company: "inOtherCompany",
+    transport: "transport",
+    availability: "availability",
+    photo: "photo",
+    cv: "cv",
+    cover_letter: "coverLetter",
+};
+
+const sectionHeadingClass =
+    "font-montserrat text-sm font-semibold text-brand-blue";
 
 const inputClass =
     "w-full rounded-2xl border border-gray-200 px-4 py-3 font-montserrat text-base text-gray-900 outline-none transition-all focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20";
@@ -69,11 +98,33 @@ const validatePdf = (file, setErr) => {
     return true;
 };
 
+const extractApplicationId = (body) => {
+    if (!body || typeof body !== "object") return null;
+    const id = body.data?.id ?? body.id;
+    return id != null && id !== "" ? String(id) : null;
+};
+
+const mapInvalidFieldsToForm = (body) => {
+    if (!body?.invalidFields || !Array.isArray(body.invalidFields)) return {};
+    const err = {};
+    for (const item of body.invalidFields) {
+        const field =
+            typeof item === "string"
+                ? item
+                : item?.field ?? item?.name;
+        if (!field) continue;
+        const formKey = API_FIELD_TO_FORM[field] ?? field;
+        err[formKey] = true;
+    }
+    return err;
+};
+
 const ApplicationForm = ({
     jobOffer,
     questions: questionsProp = [],
-    onClose,
     onSuccess,
+    hideHeader = false,
+    successHref = entrepriseRecrutementPath,
 }) => {
     const questions = Array.isArray(questionsProp) ? questionsProp : [];
     const hasQuestions = questions.length > 0;
@@ -81,7 +132,14 @@ const ApplicationForm = ({
     const [step, setStep] = useState(1);
     const [fullName, setFullName] = useState("");
     const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
     const [neighborhood, setNeighborhood] = useState("");
+    const [educationLevel, setEducationLevel] = useState("");
+    const [fieldOfStudy, setFieldOfStudy] = useState("");
+    const [schoolName, setSchoolName] = useState("");
+    const [selectedLanguages, setSelectedLanguages] = useState([]);
+    const [currentlyEmployed, setCurrentlyEmployed] = useState("");
+    const [inOtherCompany, setInOtherCompany] = useState("");
     const [transport, setTransport] = useState("");
     const [availability, setAvailability] = useState("");
     const [photoFile, setPhotoFile] = useState(null);
@@ -95,20 +153,20 @@ const ApplicationForm = ({
     const [fieldErrors, setFieldErrors] = useState({});
     const [submitStatus, setSubmitStatus] = useState("idle");
     const [submitError, setSubmitError] = useState("");
-
-    useEffect(() => {
-        const prev = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
-        return () => {
-            document.body.style.overflow = prev;
-        };
-    }, []);
+    const [submittedApplicationId, setSubmittedApplicationId] = useState("");
 
     useEffect(() => {
         setStep(1);
         setFullName("");
         setPhone("");
+        setEmail("");
         setNeighborhood("");
+        setEducationLevel("");
+        setFieldOfStudy("");
+        setSchoolName("");
+        setSelectedLanguages([]);
+        setCurrentlyEmployed("");
+        setInOtherCompany("");
         setTransport("");
         setAvailability("");
         setPhotoFile(null);
@@ -122,6 +180,7 @@ const ApplicationForm = ({
         setFieldErrors({});
         setSubmitStatus("idle");
         setSubmitError("");
+        setSubmittedApplicationId("");
     }, [jobOffer, questionsProp]);
 
     const handlePhotoChange = (e) => {
@@ -182,10 +241,33 @@ const ApplicationForm = ({
         }
     };
 
+    const toggleLanguage = (lang, checked) => {
+        setSelectedLanguages((prev) =>
+            checked ? [...prev, lang] : prev.filter((l) => l !== lang),
+        );
+        if (fieldErrors.languages) {
+            setFieldErrors((prev) => ({ ...prev, languages: false }));
+        }
+    };
+
     const validateStep1 = () => {
         const err = {};
         if (!fullName.trim()) err.fullName = true;
         if (!phone.trim()) err.phone = true;
+        else if (phone.trim().length > 32) err.phone = true;
+        if (!email.trim()) err.email = true;
+        else if (!EMAIL_REGEX.test(email.trim())) err.email = true;
+        if (!neighborhood.trim()) err.neighborhood = true;
+        if (!educationLevel) err.educationLevel = true;
+        if (!fieldOfStudy.trim()) err.fieldOfStudy = true;
+        if (!schoolName.trim()) err.schoolName = true;
+        if (selectedLanguages.length === 0) err.languages = true;
+        if (!currentlyEmployed) err.currentlyEmployed = true;
+        if (!inOtherCompany) err.inOtherCompany = true;
+        if (!transport) err.transport = true;
+        if (!availability) err.availability = true;
+        if (!photoFile) err.photo = true;
+        else if (photoError) err.photo = true;
         if (!cvFile) err.cv = true;
         else if (!validatePdf(cvFile, setCvError)) err.cv = true;
         if (!coverLetterFile) err.coverLetter = true;
@@ -198,7 +280,6 @@ const ApplicationForm = ({
     const validateStep2 = () => {
         const err = {};
         for (const q of questions) {
-            if (!q.is_required) continue;
             const id = resolveQuestionId(q);
             if (!id) continue;
             if (q.question_type === "text" || q.question_type === "long_text") {
@@ -237,11 +318,17 @@ const ApplicationForm = ({
         formData.append(RECRUITMENT_JOB_ID_FIELD, jobId);
         formData.append("full_name", fullName.trim());
         formData.append("phone", phone.trim());
-        const n = neighborhood.trim();
-        if (n) formData.append(RECRUITMENT_NEIGHBORHOOD_FIELD, n);
-        if (transport) formData.append("transport", transport);
-        if (availability) formData.append("availability", availability);
-        if (photoFile) formData.append(RECRUITMENT_PHOTO_FIELD, photoFile, photoFile.name);
+        formData.append("email", email.trim());
+        formData.append(RECRUITMENT_NEIGHBORHOOD_FIELD, neighborhood.trim());
+        formData.append("education_level", educationLevel);
+        formData.append("field_of_study", fieldOfStudy.trim());
+        formData.append("school_name", schoolName.trim());
+        formData.append("languages", selectedLanguages.join(","));
+        formData.append("currently_employed", currentlyEmployed);
+        formData.append("in_other_company", inOtherCompany);
+        formData.append("transport", transport);
+        formData.append("availability", availability);
+        formData.append(RECRUITMENT_PHOTO_FIELD, photoFile, photoFile.name);
         formData.append(RECRUITMENT_CV_FIELD, cvFile, cvFile.name);
         formData.append(
             RECRUITMENT_COVER_LETTER_FIELD,
@@ -275,11 +362,18 @@ const ApplicationForm = ({
         const result = await submitApplication(formData);
 
         if (result.success) {
+            setSubmittedApplicationId(
+                extractApplicationId(result.data) ?? "",
+            );
             setSubmitStatus("success");
             return;
         }
 
         setSubmitStatus("idle");
+        if (result.status === 400 && result.data) {
+            const mapped = mapInvalidFieldsToForm(result.data);
+            if (Object.keys(mapped).length) setFieldErrors(mapped);
+        }
         if (result?.error === "network") {
             // Aucun body lisible (CORS / proxy / réseau). On affiche un message actionnable.
             setSubmitError(STATUS_LABELS.submitErrorNetwork);
@@ -329,13 +423,12 @@ const ApplicationForm = ({
         if (typeof onSuccess === "function") {
             onSuccess();
         }
-        onClose();
     };
 
     const step1Fields = (
         <>
-            <p className='font-montserrat text-sm font-semibold text-brand-blue'>
-                {APPLICATION_FORM_LABELS.step1Title}
+            <p className={sectionHeadingClass}>
+                {APPLICATION_FORM_LABELS.sectionIdentity}
             </p>
             <div>
                 <label
@@ -372,6 +465,7 @@ const ApplicationForm = ({
                     placeholder={
                         APPLICATION_FORM_LABELS.phonePlaceholder
                     }
+                    maxLength={32}
                     className={`${inputClass} mt-1 ${
                         fieldErrors.phone
                             ? "border-coral-red ring-2 ring-coral-red/20"
@@ -379,34 +473,281 @@ const ApplicationForm = ({
                     }`}
                     autoComplete='tel'
                 />
+                {fieldErrors.phone && (
+                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        {phone.trim().length > 32
+                            ? STATUS_LABELS.phoneTooLong
+                            : STATUS_LABELS.fieldRequired}
+                    </p>
+                )}
+            </div>
+            <div>
+                <label
+                    htmlFor='email'
+                    className='font-montserrat text-sm font-medium text-gray-700'
+                >
+                    {APPLICATION_FORM_LABELS.email} *
+                </label>
+                <input
+                    id='email'
+                    type='email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={`${inputClass} mt-1 ${
+                        fieldErrors.email
+                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            : ""
+                    }`}
+                    autoComplete='email'
+                />
+                {fieldErrors.email && (
+                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        {!email.trim()
+                            ? STATUS_LABELS.emailRequired
+                            : STATUS_LABELS.emailInvalid}
+                    </p>
+                )}
             </div>
             <div>
                 <label
                     htmlFor='neighborhood'
                     className='font-montserrat text-sm font-medium text-gray-700'
                 >
-                    {APPLICATION_FORM_LABELS.neighborhood}
+                    {APPLICATION_FORM_LABELS.neighborhood} *
                 </label>
                 <input
                     id='neighborhood'
                     type='text'
                     value={neighborhood}
                     onChange={(e) => setNeighborhood(e.target.value)}
-                    className={`${inputClass} mt-1`}
+                    className={`${inputClass} mt-1 ${
+                        fieldErrors.neighborhood
+                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            : ""
+                    }`}
                 />
+                {fieldErrors.neighborhood && (
+                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        {STATUS_LABELS.fieldRequired}
+                    </p>
+                )}
             </div>
+
+            <p className={`${sectionHeadingClass} mt-2`}>
+                {APPLICATION_FORM_LABELS.sectionEducation}
+            </p>
+            <div>
+                <label
+                    htmlFor='education_level'
+                    className='font-montserrat text-sm font-medium text-gray-700'
+                >
+                    {APPLICATION_FORM_LABELS.educationLevel} *
+                </label>
+                <select
+                    id='education_level'
+                    value={educationLevel}
+                    onChange={(e) => setEducationLevel(e.target.value)}
+                    className={`${selectClass} mt-1 ${
+                        fieldErrors.educationLevel
+                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            : ""
+                    }`}
+                >
+                    <option value=''>
+                        {APPLICATION_FORM_LABELS.selectEducationLevel}
+                    </option>
+                    {EDUCATION_LEVEL_OPTIONS.map((o) => (
+                        <option key={o.value} value={o.value}>
+                            {o.label}
+                        </option>
+                    ))}
+                </select>
+                {fieldErrors.educationLevel && (
+                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        {STATUS_LABELS.fieldRequired}
+                    </p>
+                )}
+            </div>
+            <div>
+                <label
+                    htmlFor='field_of_study'
+                    className='font-montserrat text-sm font-medium text-gray-700'
+                >
+                    {APPLICATION_FORM_LABELS.fieldOfStudy} *
+                </label>
+                <input
+                    id='field_of_study'
+                    type='text'
+                    value={fieldOfStudy}
+                    onChange={(e) => setFieldOfStudy(e.target.value)}
+                    className={`${inputClass} mt-1 ${
+                        fieldErrors.fieldOfStudy
+                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            : ""
+                    }`}
+                />
+                {fieldErrors.fieldOfStudy && (
+                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        {STATUS_LABELS.fieldRequired}
+                    </p>
+                )}
+            </div>
+            <div>
+                <label
+                    htmlFor='school_name'
+                    className='font-montserrat text-sm font-medium text-gray-700'
+                >
+                    {APPLICATION_FORM_LABELS.schoolName} *
+                </label>
+                <input
+                    id='school_name'
+                    type='text'
+                    value={schoolName}
+                    onChange={(e) => setSchoolName(e.target.value)}
+                    className={`${inputClass} mt-1 ${
+                        fieldErrors.schoolName
+                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            : ""
+                    }`}
+                />
+                {fieldErrors.schoolName && (
+                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        {STATUS_LABELS.fieldRequired}
+                    </p>
+                )}
+            </div>
+
+            <fieldset className='mt-2 border-0 p-0'>
+                <legend className={sectionHeadingClass}>
+                    {APPLICATION_FORM_LABELS.sectionLanguages}
+                </legend>
+                <p className='mt-1 font-montserrat text-xs text-gray-500'>
+                    {APPLICATION_FORM_LABELS.languagesHint}
+                </p>
+                <div className='mt-3 grid grid-cols-2 gap-3'>
+                    {SPOKEN_LANGUAGE_OPTIONS.map((opt) => (
+                        <label
+                            key={opt.value}
+                            htmlFor={`lang-${opt.value}`}
+                            className='flex cursor-pointer items-center gap-2 font-montserrat text-sm text-gray-800'
+                        >
+                            <input
+                                id={`lang-${opt.value}`}
+                                type='checkbox'
+                                checked={selectedLanguages.includes(opt.value)}
+                                onChange={(e) =>
+                                    toggleLanguage(opt.value, e.target.checked)
+                                }
+                                className='h-4 w-4 rounded border-gray-300 text-brand-blue focus:ring-brand-blue'
+                            />
+                            <span>{opt.label}</span>
+                        </label>
+                    ))}
+                </div>
+                {fieldErrors.languages && (
+                    <p className='mt-2 font-montserrat text-xs text-coral-red'>
+                        {STATUS_LABELS.languagesRequired}
+                    </p>
+                )}
+            </fieldset>
+
+            <fieldset className='mt-2 space-y-4 border-0 p-0'>
+                <legend className={sectionHeadingClass}>
+                    {APPLICATION_FORM_LABELS.sectionProfessional}
+                </legend>
+                <div>
+                    <p className='font-montserrat text-sm font-medium text-gray-700'>
+                        {APPLICATION_FORM_LABELS.currentlyEmployed} *
+                    </p>
+                    <div className='mt-2 flex gap-4'>
+                        {YES_NO_OPTIONS.map((opt) => (
+                            <label
+                                key={`employed-${opt.value}`}
+                                className='flex cursor-pointer items-center gap-2 font-montserrat text-sm text-gray-800'
+                            >
+                                <input
+                                    type='radio'
+                                    name='currently_employed'
+                                    value={opt.value}
+                                    checked={currentlyEmployed === opt.value}
+                                    onChange={() => {
+                                        setCurrentlyEmployed(opt.value);
+                                        if (fieldErrors.currentlyEmployed) {
+                                            setFieldErrors((prev) => ({
+                                                ...prev,
+                                                currentlyEmployed: false,
+                                            }));
+                                        }
+                                    }}
+                                    className='h-4 w-4 border-gray-300 text-brand-blue focus:ring-brand-blue'
+                                />
+                                <span>{opt.label}</span>
+                            </label>
+                        ))}
+                    </div>
+                    {fieldErrors.currentlyEmployed && (
+                        <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                            {STATUS_LABELS.yesNoRequired}
+                        </p>
+                    )}
+                </div>
+                <div>
+                    <p className='font-montserrat text-sm font-medium text-gray-700'>
+                        {APPLICATION_FORM_LABELS.inOtherCompany} *
+                    </p>
+                    <div className='mt-2 flex gap-4'>
+                        {YES_NO_OPTIONS.map((opt) => (
+                            <label
+                                key={`other-company-${opt.value}`}
+                                className='flex cursor-pointer items-center gap-2 font-montserrat text-sm text-gray-800'
+                            >
+                                <input
+                                    type='radio'
+                                    name='in_other_company'
+                                    value={opt.value}
+                                    checked={inOtherCompany === opt.value}
+                                    onChange={() => {
+                                        setInOtherCompany(opt.value);
+                                        if (fieldErrors.inOtherCompany) {
+                                            setFieldErrors((prev) => ({
+                                                ...prev,
+                                                inOtherCompany: false,
+                                            }));
+                                        }
+                                    }}
+                                    className='h-4 w-4 border-gray-300 text-brand-blue focus:ring-brand-blue'
+                                />
+                                <span>{opt.label}</span>
+                            </label>
+                        ))}
+                    </div>
+                    {fieldErrors.inOtherCompany && (
+                        <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                            {STATUS_LABELS.yesNoRequired}
+                        </p>
+                    )}
+                </div>
+            </fieldset>
+
+            <p className={`${sectionHeadingClass} mt-2`}>
+                {APPLICATION_FORM_LABELS.sectionMobility}
+            </p>
             <div>
                 <label
                     htmlFor='transport'
                     className='font-montserrat text-sm font-medium text-gray-700'
                 >
-                    {APPLICATION_FORM_LABELS.transport}
+                    {APPLICATION_FORM_LABELS.transport} *
                 </label>
                 <select
                     id='transport'
                     value={transport}
                     onChange={(e) => setTransport(e.target.value)}
-                    className={`${selectClass} mt-1`}
+                    className={`${selectClass} mt-1 ${
+                        fieldErrors.transport
+                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            : ""
+                    }`}
                 >
                     <option value=''>
                         {APPLICATION_FORM_LABELS.selectTransport}
@@ -417,19 +758,28 @@ const ApplicationForm = ({
                         </option>
                     ))}
                 </select>
+                {fieldErrors.transport && (
+                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        {STATUS_LABELS.fieldRequired}
+                    </p>
+                )}
             </div>
             <div>
                 <label
                     htmlFor='availability'
                     className='font-montserrat text-sm font-medium text-gray-700'
                 >
-                    {APPLICATION_FORM_LABELS.availability}
+                    {APPLICATION_FORM_LABELS.availability} *
                 </label>
                 <select
                     id='availability'
                     value={availability}
                     onChange={(e) => setAvailability(e.target.value)}
-                    className={`${selectClass} mt-1`}
+                    className={`${selectClass} mt-1 ${
+                        fieldErrors.availability
+                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            : ""
+                    }`}
                 >
                     <option value=''>
                         {APPLICATION_FORM_LABELS.selectAvailability}
@@ -440,13 +790,22 @@ const ApplicationForm = ({
                         </option>
                     ))}
                 </select>
+                {fieldErrors.availability && (
+                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        {STATUS_LABELS.fieldRequired}
+                    </p>
+                )}
             </div>
+
+            <p className={`${sectionHeadingClass} mt-2`}>
+                {APPLICATION_FORM_LABELS.sectionDocuments}
+            </p>
             <div>
                 <label
                     htmlFor='photo'
                     className='font-montserrat text-sm font-medium text-gray-700'
                 >
-                    {APPLICATION_FORM_LABELS.photo}
+                    {APPLICATION_FORM_LABELS.photo} *
                 </label>
                 <input
                     id='photo'
@@ -460,9 +819,9 @@ const ApplicationForm = ({
                         {photoFile.name}
                     </p>
                 )}
-                {photoError && (
+                {(photoError || fieldErrors.photo) && (
                     <p className='mt-1 font-montserrat text-xs text-coral-red'>
-                        {photoError}
+                        {photoError || STATUS_LABELS.photoRequired}
                     </p>
                 )}
             </div>
@@ -487,7 +846,7 @@ const ApplicationForm = ({
                 )}
                 {(cvError || fieldErrors.cv) && (
                     <p className='mt-1 font-montserrat text-xs text-coral-red'>
-                        {cvError || "CV requis (PDF, max 5 Mo)."}
+                        {cvError || "CV requis (PDF, max 10 Mo)."}
                     </p>
                 )}
             </div>
@@ -513,7 +872,7 @@ const ApplicationForm = ({
                 {(coverLetterError || fieldErrors.coverLetter) && (
                     <p className='mt-1 font-montserrat text-xs text-coral-red'>
                         {coverLetterError ||
-                            "Lettre requise (PDF, max 5 Mo)."}
+                            "Lettre requise (PDF, max 10 Mo)."}
                     </p>
                 )}
             </div>
@@ -521,79 +880,70 @@ const ApplicationForm = ({
     );
 
     return (
-        <div
-            className='fixed inset-0 z-[100] flex items-end justify-center p-4 sm:items-center'
-            role='presentation'
-        >
-            <div
-                className='absolute inset-0 bg-black/40 backdrop-blur-sm'
-                onClick={
-                    submitStatus === "loading" ? undefined : onClose
-                }
-                aria-hidden='true'
-            />
-
-            <div
-                className='relative max-h-[min(90vh,800px)] w-full max-w-lg overflow-y-auto rounded-[24px] bg-white p-6 shadow-2xl sm:rounded-[32px] sm:p-8'
-                role='dialog'
-                aria-modal='true'
-                aria-labelledby='application-modal-title'
-            >
-                <button
-                    type='button'
-                    onClick={onClose}
-                    disabled={submitStatus === "loading"}
-                    className='absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50'
-                    aria-label='Fermer'
-                >
-                    <XMarkIcon className='h-5 w-5' aria-hidden='true' />
-                </button>
-
-                {submitStatus === "success" && (
-                    <div className='flex flex-col items-center py-6 text-center'>
-                        <div className='flex h-16 w-16 items-center justify-center rounded-2xl bg-pale-blue'>
-                            <CheckCircleIcon
-                                className='h-10 w-10 text-brand-blue'
-                                aria-hidden='true'
-                            />
-                        </div>
-                        <p className='mt-6 font-montserrat text-2xl font-bold text-gray-900'>
-                            {STATUS_LABELS.submitSuccessTitle}
-                        </p>
-                        <p className='mt-2 font-montserrat text-base leading-6 text-gray-500'>
-                            {STATUS_LABELS.submitSuccessSubtitle}
-                        </p>
-                        <button
-                            type='button'
-                            onClick={handleCloseSuccess}
-                            className='mt-8 rounded-full bg-brand-blue px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95'
-                        >
-                            {APPLICATION_FORM_LABELS.close}
-                        </button>
+        <div>
+            {submitStatus === "success" && (
+                <div className='flex flex-col items-center py-6 text-center sm:py-10'>
+                    <div
+                        className='h-36 w-36 sm:h-40 sm:w-40'
+                        aria-hidden='true'
+                    >
+                        <Lottie
+                            animationData={candidatureSuccess}
+                            loop={false}
+                            autoplay
+                        />
                     </div>
-                )}
-
-                {submitStatus !== "success" && (
-                    <>
-                        <h2
-                            id='application-modal-title'
-                            className='pr-10 font-montserrat text-xl font-bold text-gray-900 sm:text-2xl'
-                        >
-                            {RECRUITMENT_MODAL_TITLE}
-                        </h2>
-                        <p className='mt-1 font-montserrat text-sm text-gray-500'>
-                            {jobOffer?.title ?? jobOffer?.name ?? "Poste"}
+                    <p className='mt-6 font-montserrat text-2xl font-bold text-gray-900'>
+                        {STATUS_LABELS.submitSuccessTitle}
+                    </p>
+                    <p className='mt-2 font-montserrat text-base leading-6 text-gray-500'>
+                        {STATUS_LABELS.submitSuccessSubtitle}
+                    </p>
+                    {submittedApplicationId && (
+                        <p className='mt-3 font-montserrat text-sm font-semibold text-brand-blue'>
+                            {STATUS_LABELS.submitSuccessApplicationId(
+                                submittedApplicationId,
+                            )}
                         </p>
+                    )}
+                    <Link
+                        to={successHref}
+                        onClick={handleCloseSuccess}
+                        className='mt-8 rounded-full bg-brand-blue px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95'
+                    >
+                        {APPLICATION_FORM_LABELS.close}
+                    </Link>
+                </div>
+            )}
 
-                        <form
-                            className='mt-6 flex flex-col gap-4'
-                            onSubmit={
-                                step === 2 && hasQuestions
-                                    ? handleFinalSubmit
-                                    : (e) => e.preventDefault()
-                            }
-                            noValidate
-                        >
+            {submitStatus !== "success" && (
+                <>
+                    {!hideHeader && (
+                        <>
+                            <h2
+                                id='application-form-title'
+                                className='font-montserrat text-xl font-bold text-gray-900 sm:text-2xl'
+                            >
+                                {RECRUITMENT_MODAL_TITLE}
+                            </h2>
+                            <p className='mt-1 font-montserrat text-sm text-gray-500'>
+                                {jobOffer?.title ?? jobOffer?.name ?? "Poste"}
+                            </p>
+                        </>
+                    )}
+
+                    <form
+                        className={`flex flex-col gap-4 ${hideHeader ? "" : "mt-6"}`}
+                        onSubmit={
+                            step === 2 && hasQuestions
+                                ? handleFinalSubmit
+                                : (e) => e.preventDefault()
+                        }
+                        noValidate
+                        aria-labelledby={
+                            hideHeader ? undefined : "application-form-title"
+                        }
+                    >
                             {step === 1 && step1Fields}
 
                             {step === 2 && hasQuestions && (
@@ -619,10 +969,7 @@ const ApplicationForm = ({
                                                         htmlFor={`q-${qid}`}
                                                         className='font-montserrat text-sm font-medium text-gray-700'
                                                     >
-                                                        {num}. {q.question_text}
-                                                        {q.is_required
-                                                            ? " *"
-                                                            : ""}
+                                                        {num}. {q.question_text} *
                                                     </label>
                                                     <textarea
                                                         id={`q-${qid}`}
@@ -667,8 +1014,7 @@ const ApplicationForm = ({
                                                 className='border-0 p-0'
                                             >
                                                 <legend className='font-montserrat text-sm font-medium text-gray-700'>
-                                                    {num}. {q.question_text}
-                                                    {q.is_required ? " *" : ""}
+                                                    {num}. {q.question_text} *
                                                 </legend>
                                                 <div className='mt-2 flex flex-col gap-2'>
                                                     {options.map((opt, idx) => {
@@ -795,7 +1141,6 @@ const ApplicationForm = ({
                         </form>
                     </>
                 )}
-            </div>
         </div>
     );
 };

@@ -13,6 +13,8 @@ import PortailLivreurPage from "./pages/PortailLivreurPage";
 import IntegrationsApiPage from "./pages/IntegrationsApiPage";
 import ContactPage from "./pages/ContactPage";
 import RecruitmentOfferPage from "./pages/RecruitmentOfferPage";
+import RecruitmentApplyPage from "./pages/RecruitmentApplyPage";
+import RecruitmentJobLayout from "./pages/RecruitmentJobLayout";
 import RecruitmentPage from "./pages/RecruitmentPage";
 
 /** Évite `basename: './'` (Vite `base: './'`) : aucune route ne matche → `*` renvoie à `/`. */
@@ -40,8 +42,11 @@ const App = () => {
         <Route path='/entreprise/contact' element={<ContactPage />} />
         <Route
           path='/entreprise/recrutement/offre/:jobId'
-          element={<RecruitmentOfferPage />}
-        />
+          element={<RecruitmentJobLayout />}
+        >
+          <Route index element={<RecruitmentOfferPage />} />
+          <Route path='postuler' element={<RecruitmentApplyPage />} />
+        </Route>
         <Route
           path='/entreprise/recrutement'
           element={<RecruitmentPage />}

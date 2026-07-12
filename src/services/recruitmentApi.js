@@ -3,12 +3,15 @@
  * Routes publiques : credentials: "omit" (pas de cookie).
  *
  * POST /apply : FormData attendu (clés typiques, à aligner avec le backend) :
- * - job_id (string)
- * - full_name, phone, neighborhood (string)
+ * - job_offer_id (string)
+ * - full_name, phone, email, quartier (string)
+ * - education_level (bac | licence | master | doctorat)
+ * - field_of_study, school_name (string)
+ * - languages (comma-separated: francais, anglais — au moins une)
+ * - currently_employed, in_other_company (oui | non)
  * - transport, availability (string)
- * - cv (File, PDF) — VITE_RECRUITMENT_CV_FIELD (défaut cv) ; lettre : VITE_RECRUITMENT_COVER_LETTER_FIELD (défaut cover_letter)
- * - answers : chaîne `"[]"` (plus de questions dynamiques côté front)
- * - job_id — VITE_RECRUITMENT_JOB_ID_FIELD (défaut job_id, ou job_offer_id)
+ * - photo (File), cv (File, PDF), cover_letter (File, PDF) — max 10 Mo
+ * - answers : chaîne JSON `"[]"` ou `[{ question_id, answer_text }, ...]`
  *
  * Listes / détail : réponses du type `{ success: true, data: ... }` sont normalisées.
  *

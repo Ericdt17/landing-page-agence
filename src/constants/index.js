@@ -411,7 +411,7 @@ export const trustedByPartners = [
     "HEAVEN SUGAR",
 ];
 
-export const heroBadge = "Yaoundé";
+export const heroBadge = "Spécialiste de la livraison e-commerce à Yaoundé";
 
 export const heroHeadlineLines = [
     "Développez votre business en ligne.",

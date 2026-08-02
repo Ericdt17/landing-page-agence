@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Local screenshots
+tmp/
+
 # Environment variables
 .env
 .env.*

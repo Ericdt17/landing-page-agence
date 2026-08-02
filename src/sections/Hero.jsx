@@ -1,7 +1,9 @@
+import { CheckIcon } from "@heroicons/react/24/solid";
 import { Button } from "../components";
 import {
   heroBadge,
   heroCtaPrimaryHref,
+  heroCtaReassurance,
   heroCtaSecondaryLabel,
   heroHeadlineEmphasis,
   heroHeadlineLines,
@@ -48,13 +50,18 @@ const Hero = () => {
             {heroSubheadline}
           </p>
 
-          <ul className='mx-auto mt-8 flex max-w-xl list-none flex-col gap-2 sm:mt-10 sm:gap-2.5'>
+          <ul className='mx-auto mt-8 flex max-w-lg list-none flex-col gap-3 sm:mt-10'>
             {heroPerks.map((perk) => (
               <li
                 key={perk}
-                className='font-montserrat text-sm leading-6 text-gray-600 sm:text-base sm:leading-7'
+                className='flex items-center gap-3 rounded-2xl border border-brand-blue/15 bg-pale-blue/60 px-4 py-3 text-left sm:px-5 sm:py-3.5'
               >
-                {perk}
+                <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white'>
+                  <CheckIcon className='h-4 w-4' aria-hidden='true' />
+                </span>
+                <span className='font-montserrat text-sm font-semibold leading-6 text-gray-800 sm:text-base'>
+                  {perk}
+                </span>
               </li>
             ))}
           </ul>
@@ -73,6 +80,14 @@ const Hero = () => {
               iconURL={undefined}
             />
           </div>
+
+          <p className='mx-auto mt-4 flex max-w-xl items-start justify-center gap-1.5 font-montserrat text-xs leading-5 text-gray-500 sm:mt-5 sm:text-sm sm:leading-6'>
+            <CheckIcon
+              className='mt-0.5 h-4 w-4 shrink-0 text-brand-blue'
+              aria-hidden='true'
+            />
+            <span>{heroCtaReassurance}</span>
+          </p>
         </div>
       </div>
     </section>

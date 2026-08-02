@@ -422,12 +422,15 @@ export const heroHeadlineEmphasis = "business";
 export const heroSubheadline =
     "LivSight gère toute votre logistique à Yaoundé pour que vous puissiez vous concentrer sur vos ventes.";
 
-export const heroCtaPrimaryLabel = "Commencer sur WhatsApp";
+export const heroCtaPrimaryLabel = "Essayer gratuitement";
 export const heroCtaPrimaryHref = whatsappCtaHref;
 
-export const heroCtaSecondaryLabel = "Commencer sur WhatsApp";
+export const heroCtaSecondaryLabel = "Essayer gratuitement";
 
-/** Avantages sous le CTA hero (sans emoji) */
+export const heroCtaReassurance =
+    "Aucun engagement • Réponse en moins de 5 min • Mise en place le jour même";
+
+/** Avantages hero — label affiché (sans emoji) */
 export const heroPerks = [
     "2 jours de livraisons offerts",
     "Stockage gratuit à l’Hippodrome",

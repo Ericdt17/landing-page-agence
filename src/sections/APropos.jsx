@@ -95,12 +95,10 @@ const APropos = () => {
                                 key={title}
                                 className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'
                             >
-                                <div className='flex h-12 w-12 items-center justify-center rounded-2xl bg-pale-blue'>
-                                    <Icon
-                                        className='h-6 w-6 text-brand-blue'
-                                        aria-hidden='true'
-                                    />
-                                </div>
+                                <Icon
+                                    className='h-6 w-6 text-brand-blue'
+                                    aria-hidden='true'
+                                />
                                 <h3 className='mt-5 font-montserrat text-lg font-bold text-gray-900'>
                                     {title}
                                 </h3>

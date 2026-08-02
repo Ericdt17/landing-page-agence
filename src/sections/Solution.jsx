@@ -46,9 +46,10 @@ const Solution = () => {
           <ul className='mt-8 space-y-4'>
             {solutionBullets.map((text) => (
               <li key={text} className='flex items-start gap-4'>
-                <span className='mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-blue'>
-                  <CheckIcon className='h-4 w-4 text-white' aria-hidden='true' />
-                </span>
+                <CheckIcon
+                  className='mt-0.5 h-5 w-5 shrink-0 text-brand-blue'
+                  aria-hidden='true'
+                />
                 <p className='font-montserrat text-base leading-6 text-gray-900'>
                   {text}
                 </p>

@@ -67,12 +67,10 @@ const Contact = () => {
                         <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-blue'>
                             {contactWhatsAppChannel.eyebrow}
                         </p>
-                        <div className='mt-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-pale-blue'>
-                            <ChatBubbleLeftRightIcon
-                                className='h-6 w-6 text-brand-blue'
-                                aria-hidden='true'
-                            />
-                        </div>
+                        <ChatBubbleLeftRightIcon
+                            className='mt-3 h-6 w-6 text-brand-blue'
+                            aria-hidden='true'
+                        />
                         <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
                             {contactWhatsAppChannel.title}
                         </h3>
@@ -94,12 +92,10 @@ const Contact = () => {
                         <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-blue'>
                             {contactEmailChannel.eyebrow}
                         </p>
-                        <div className='mt-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-pale-blue'>
-                            <EnvelopeIcon
-                                className='h-6 w-6 text-brand-blue'
-                                aria-hidden='true'
-                            />
-                        </div>
+                        <EnvelopeIcon
+                            className='mt-3 h-6 w-6 text-brand-blue'
+                            aria-hidden='true'
+                        />
                         <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
                             {contactEmailChannel.title}
                         </h3>
@@ -118,12 +114,10 @@ const Contact = () => {
                         <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-blue'>
                             {contactVisitChannel.eyebrow}
                         </p>
-                        <div className='mt-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-pale-blue'>
-                            <MapPinIcon
-                                className='h-6 w-6 text-brand-blue'
-                                aria-hidden='true'
-                            />
-                        </div>
+                        <MapPinIcon
+                            className='mt-3 h-6 w-6 text-brand-blue'
+                            aria-hidden='true'
+                        />
                         <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
                             {contactVisitChannel.title}
                         </h3>
@@ -139,12 +133,10 @@ const Contact = () => {
                         <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-blue'>
                             {contactPhoneChannel.eyebrow}
                         </p>
-                        <div className='mt-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-pale-blue'>
-                            <PhoneIcon
-                                className='h-6 w-6 text-brand-blue'
-                                aria-hidden='true'
-                            />
-                        </div>
+                        <PhoneIcon
+                            className='mt-3 h-6 w-6 text-brand-blue'
+                            aria-hidden='true'
+                        />
                         <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
                             {contactPhoneChannel.title}
                         </h3>

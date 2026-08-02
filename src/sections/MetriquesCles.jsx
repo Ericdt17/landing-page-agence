@@ -38,9 +38,10 @@ const MetriquesCles = () => {
                 const Icon = iconMap[item.iconId];
                 return (
                   <li key={item.title} className='flex items-start gap-4'>
-                    <div className='mt-1 inline-flex h-10 w-10 items-center justify-center rounded-full bg-lime-300/15'>
-                      <Icon className='h-5 w-5 text-lime-300' aria-hidden='true' />
-                    </div>
+                    <Icon
+                      className='mt-1 h-5 w-5 shrink-0 text-lime-300'
+                      aria-hidden='true'
+                    />
                     <div>
                       <p className='font-montserrat text-lg font-bold text-white'>
                         {item.title}

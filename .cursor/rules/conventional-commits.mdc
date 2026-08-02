@@ -1,0 +1,74 @@
+---
+description: Conventional Commits 1.0.0 for all git commit messages
+alwaysApply: true
+---
+
+# Conventional Commits
+
+When creating git commits, follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/).
+
+## Format
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+- Type + optional scope + colon + space, then a short description
+- Description: imperative mood, concise, no trailing period
+- Body (optional): blank line after description; explain *why*, not only *what*
+- Footers (optional): blank line after body; `Token: value` or `Token #value`
+
+## Types (use these)
+
+| Type | When |
+|------|------|
+| `feat` | New user-facing capability (SemVer MINOR) |
+| `fix` | Bug fix (SemVer PATCH) |
+| `docs` | Documentation only |
+| `style` | Formatting; no code meaning change |
+| `refactor` | Restructure without feat/fix |
+| `perf` | Performance improvement |
+| `test` | Tests only |
+| `build` | Build system or dependencies |
+| `ci` | CI config |
+| `chore` | Maintenance that doesn’t fit above |
+| `revert` | Revert a previous commit |
+
+## Scope (optional, preferred when clear)
+
+Use a short noun in parentheses matching the area touched, e.g.:
+
+- `recruitment`, `hero`, `nav`, `footer`, `seo`, `vercel`
+
+Examples from this repo: `feat(recruitment): …`, `fix(hero): …`, `fix(nav): …`
+
+## Breaking changes
+
+- Add `!` after type/scope: `feat(api)!: …`, **or**
+- Footer: `BREAKING CHANGE: <description>` (token must be uppercase)
+
+## Good / bad
+
+```
+# ✅ GOOD
+feat(recruitment): add dedicated apply page with Lottie success
+fix(nav): make landing anchor navigation reliable
+docs: correct spelling of CHANGELOG
+
+# ❌ BAD
+Update stuff
+Fixed bug.
+feat: Added new form.    # past tense + trailing period
+FEAT(Recruitment): Add page  # prefer lowercase type; keep description imperative
+```
+
+## Agent checklist
+
+- Only commit when the user asks
+- Match this format for every commit message (including HEREDOC commits)
+- Prefer one logical change per commit; split mixed types when practical
+- Do not invent types outside the table above unless the user requests it

@@ -5,11 +5,11 @@ import {
   heroCtaSecondaryLabel,
   heroHeadlineEmphasis,
   heroHeadlineLines,
+  heroPerks,
   heroSubheadline,
 } from "../constants";
 
 const Hero = () => {
-
   return (
     <section
       id='home'
@@ -47,6 +47,17 @@ const Hero = () => {
           <p className='mt-4 sm:mt-6 font-montserrat text-base leading-6 text-gray-600 sm:text-xl sm:leading-7'>
             {heroSubheadline}
           </p>
+
+          <ul className='mx-auto mt-8 flex max-w-xl list-none flex-col gap-2 sm:mt-10 sm:gap-2.5'>
+            {heroPerks.map((perk) => (
+              <li
+                key={perk}
+                className='font-montserrat text-sm leading-6 text-gray-600 sm:text-base sm:leading-7'
+              >
+                {perk}
+              </li>
+            ))}
+          </ul>
 
           <div className='mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4'>
             <Button

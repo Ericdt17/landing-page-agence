@@ -411,23 +411,28 @@ export const trustedByPartners = [
     "HEAVEN SUGAR",
 ];
 
-export const heroBadge = "Nouvelle génération";
+export const heroBadge = "Yaoundé";
 
 export const heroHeadlineLines = [
-    "Vos livraisons,",
-    "enfin simples,",
-    "rapides et suivies",
+    "Développez votre business en ligne.",
 ];
 
-export const heroHeadlineEmphasis = "simples";
+export const heroHeadlineEmphasis = "business";
 
 export const heroSubheadline =
-    "Envoyez vos commandes sur WhatsApp, nous nous occupons du reste avec un suivi clair et professionnel.";
+    "LivSight gère toute votre logistique à Yaoundé pour que vous puissiez vous concentrer sur vos ventes.";
 
-export const heroCtaPrimaryLabel = "Écrire sur WhatsApp";
+export const heroCtaPrimaryLabel = "Commencer sur WhatsApp";
 export const heroCtaPrimaryHref = whatsappCtaHref;
 
-export const heroCtaSecondaryLabel = "Écris-nous pour tester gratuitement";
+export const heroCtaSecondaryLabel = "Commencer sur WhatsApp";
+
+/** Avantages sous le CTA hero (sans emoji) */
+export const heroPerks = [
+    "2 jours de livraisons offerts",
+    "Stockage gratuit à l’Hippodrome",
+    "Reversement des fonds en moins de 3 heures",
+];
 
 export const problemEyebrow = "Le défi logistique";
 

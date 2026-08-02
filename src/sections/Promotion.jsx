@@ -23,9 +23,10 @@ const OfferCard = ({ icon, kicker, headline }) => {
 
   return (
     <div className='relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-8 shadow-tarif-card backdrop-blur-md'>
-      <div className='mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-white/20'>
-        <Icon className='h-8 w-8 text-white' aria-hidden='true' />
-      </div>
+      <Icon
+        className='mx-auto h-8 w-8 text-white'
+        aria-hidden='true'
+      />
 
       <p className='mt-10 text-center font-montserrat text-xs font-extrabold uppercase tracking-[0.3em] text-white/80'>
         {kicker}

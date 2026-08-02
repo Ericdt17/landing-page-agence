@@ -129,11 +129,9 @@ const ComingSoonModal = () => {
         {/* ── Success ── */}
         {status === "success" && (
           <div className="flex flex-col items-center py-6 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-50">
-              <svg className="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+            <svg className="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
-            </div>
             <p className="mt-6 font-montserrat text-2xl font-bold text-gray-900">Vous êtes sur la liste !</p>
             <p className="mt-2 font-montserrat text-base leading-6 text-gray-500">
               Nous vous contacterons dès le lancement de LivSight.
@@ -151,9 +149,7 @@ const ComingSoonModal = () => {
         {/* ── Duplicate ── */}
         {status === "duplicate" && (
           <div className="flex flex-col items-center py-6 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-blue/10">
-              <RocketLaunchIcon className="h-8 w-8 text-brand-blue" aria-hidden="true" />
-            </div>
+            <RocketLaunchIcon className="h-8 w-8 text-brand-blue" aria-hidden="true" />
             <p className="mt-6 font-montserrat text-2xl font-bold text-gray-900">Déjà inscrit !</p>
             <p className="mt-2 font-montserrat text-base leading-6 text-gray-500">
               Ces coordonnées sont déjà sur notre liste. Vous serez notifié au lancement.
@@ -172,9 +168,7 @@ const ComingSoonModal = () => {
         {(status === "idle" || status === "loading" || status === "error") && (
           <>
             <div className="text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-blue/10">
-                <RocketLaunchIcon className="h-8 w-8 text-brand-blue" aria-hidden="true" />
-              </div>
+              <RocketLaunchIcon className="mx-auto h-8 w-8 text-brand-blue" aria-hidden="true" />
               <h2
                 id="modal-title"
                 className="mt-6 font-montserrat text-2xl font-bold text-gray-900"

@@ -39,7 +39,7 @@ const Footer = () => {
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label={label}
-                className='flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700 transition-colors hover:border-gray-200 hover:bg-gray-100'
+                className='flex h-10 w-10 items-center justify-center text-gray-700 transition-colors hover:text-gray-900'
               >
                 <img src={icon} alt='' width={20} height={20} className='m-0' />
               </a>

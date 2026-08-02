@@ -81,12 +81,8 @@ const Hero = () => {
             />
           </div>
 
-          <p className='mx-auto mt-4 flex max-w-xl items-start justify-center gap-1.5 font-montserrat text-xs leading-5 text-gray-500 sm:mt-5 sm:text-sm sm:leading-6'>
-            <CheckIcon
-              className='mt-0.5 h-4 w-4 shrink-0 text-brand-blue'
-              aria-hidden='true'
-            />
-            <span>{heroCtaReassurance}</span>
+          <p className='mx-auto mt-4 max-w-xl text-center font-montserrat text-xs leading-5 text-gray-500 sm:mt-5 sm:text-sm sm:leading-6'>
+            {heroCtaReassurance}
           </p>
         </div>
       </div>

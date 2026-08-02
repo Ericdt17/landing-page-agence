@@ -437,31 +437,19 @@ export const heroPerks = [
     "Reversement des fonds en moins de 3 heures",
 ];
 
-export const problemEyebrow = "Le défi logistique";
+export const problemEyebrow = "Le problème";
 
-export const problemHeadline =
-    "Gérer ses livraisons ne devrait pas être un chaos";
+export const problemHeadlineLines = [
+    "Le problème n’est pas vos ventes.",
+    "C’est tout ce qui se passe après.",
+];
 
-/** iconId maps to @heroicons/react/24/outline in LeProbleme.jsx */
+/** Points douloureux — affichés avec une croix (pas d’emoji) */
 export const problemPoints = [
-    {
-        iconId: "chat-bubble",
-        title: "Gestion Manuelle",
-        description:
-            "Les échanges WhatsApp interminables sans structure causent des retards de traitement critiques.",
-    },
-    {
-        iconId: "inbox",
-        title: "Commandes Perdues",
-        description:
-            "L'absence d'un système centralisé mène inévitablement à l'oubli de colis et à des pertes financières.",
-    },
-    {
-        iconId: "banknotes",
-        title: "Pertes de Revenus",
-        description:
-            "Chaque erreur de livraison est un client qui ne reviendra pas et un coût opérationnel inutile.",
-    },
+    "Trouver un livreur.",
+    "Suivre la commande.",
+    "Gérer les réclamations.",
+    "Récupérer votre argent.",
 ];
 
 export const ecosystemEyebrow = "L'Écosystème LivSight";

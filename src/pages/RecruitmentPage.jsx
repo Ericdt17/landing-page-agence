@@ -51,7 +51,7 @@ const RecruitmentPage = () => {
     return (
         <>
             <SEO
-                title="Rejoindre notre équipe — Livreur et Agent à Yaoundé"
+                title="Rejoindre notre équipe | Livreur et Agent à Yaoundé"
                 description='LivSight recrute des livreurs et agents à Yaoundé. Moto fournie, formation assurée, bénéfices. Postulez en ligne en moins de 5 minutes.'
                 canonical='/entreprise/recrutement'
             />

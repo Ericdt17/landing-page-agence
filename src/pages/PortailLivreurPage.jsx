@@ -11,7 +11,7 @@ const PortailLivreurPage = () => {
     return (
         <>
             <SEO
-                title='Portail Livreur — Des livreurs guidés par algorithmes'
+                title='Portail Livreur | Des livreurs guidés par algorithmes'
                 description='Nos livreurs sont guidés par des algorithmes pour livrer vos colis plus vite. GPS actif, montant verrouillé, statuts en temps réel.'
                 canonical='/plateforme/portail-livreur'
             />

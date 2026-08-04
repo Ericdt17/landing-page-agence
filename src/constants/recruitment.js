@@ -1,5 +1,5 @@
 /**
- * Page Recrutement — textes et chemins.
+ * Page Recrutement : textes et chemins.
  * Route : aligner `entrepriseRecrutementPath` avec `App.jsx` et le footer Entreprise.
  */
 
@@ -17,7 +17,7 @@ export const RECRUITMENT_HERO = {
     title: "Recrutement",
     subtitle: "Rejoignez l’équipe LivSight à Yaoundé.",
     description:
-        "Livreurs et agents : nous recrutons des profils motivés, identifiés et formés pour livrer avec sérieux. Postulez en ligne — nous vous répondons rapidement.",
+        "Livreurs et agents : nous recrutons des profils motivés, identifiés et formés pour livrer avec sérieux. Postulez en ligne : nous vous répondons rapidement.",
 };
 
 /** Badge au-dessus du hero lorsqu’il y a des offres */
@@ -128,13 +128,13 @@ export const JOB_TYPE_LABELS = {
     default: "Poste",
 };
 
-/** Section valeurs (3 cartes) — iconId : shield | academic | user-group */
+/** Section valeurs (3 cartes) : iconId : shield | academic | user-group */
 export const RECRUITMENT_VALUES = [
     {
         iconId: "shield",
         title: "Livreurs identifiés",
         description:
-            "Chaque livreur est recruté, formé et rattaché à l’agence — pas de travail au noir.",
+            "Chaque livreur est recruté, formé et rattaché à l’agence : pas de travail au noir.",
     },
     {
         iconId: "academic",
@@ -157,7 +157,7 @@ export const RECRUITMENT_PROCESS_TITLE = "Notre processus de recrutement";
 export const RECRUITMENT_PROCESS_INTRO =
     "De la candidature à l’intégration, chaque étape est claire et suivie par l’équipe.";
 
-/** Formulaire — étape 1 */
+/** Formulaire : étape 1 */
 /** Liste + page détail offre */
 export const RECRUITMENT_JOB_UI = {
     viewDetail: "Voir le détail",

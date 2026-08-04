@@ -11,7 +11,7 @@ const PortailAgentPage = () => {
     return (
         <>
             <SEO
-                title='Portail Agent — Comment fonctionne votre agent'
+                title='Portail Agent | Comment fonctionne votre agent'
                 description='Votre agent dédié gère chaque livraison en temps réel depuis son application. Assignation intelligente, suivi GPS, gestion des incidents.'
                 canonical='/plateforme/portail-agent'
             />

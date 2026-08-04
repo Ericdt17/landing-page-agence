@@ -1,5 +1,5 @@
 /**
- * Page Sécurité & confiance — contenu éditable.
+ * Page Sécurité & confiance : contenu éditable.
  * Route SPA : aligner `legalSecurityPath` avec `App.jsx`.
  */
 

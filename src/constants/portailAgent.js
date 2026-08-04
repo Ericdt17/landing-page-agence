@@ -1,5 +1,5 @@
 /**
- * Page Portail agent — contenu éditable.
+ * Page Portail agent : contenu éditable.
  * Route : aligner `plateformePortailAgentPath` avec `App.jsx` et le footer Plateforme.
  */
 
@@ -11,7 +11,7 @@ export const portailAgentPageTagline =
     "Votre agent suit chaque livraison en direct depuis son application.";
 
 export const portailAgentIntroParagraphs = [
-    "Quand vous créez une commande, elle arrive instantanément sur l'application de votre agent dédié. Il prend en charge, assigne le meilleur livreur disponible et gère tout — vous n'avez plus qu'à attendre la notification de livraison.",
+    "Quand vous créez une commande, elle arrive instantanément sur l'application de votre agent dédié. Il prend en charge, assigne le meilleur livreur disponible et gère tout : vous n'avez plus qu'à attendre la notification de livraison.",
 ];
 
 export const portailAgentStats = [
@@ -37,7 +37,7 @@ export const portailAgentForYouItems = [
         iconId: "users",
         title: "Assignation intelligente du livreur",
         description:
-            "Votre agent choisit le livreur le plus proche, le mieux noté et le moins chargé — pour que votre colis parte le plus vite possible.",
+            "Votre agent choisit le livreur le plus proche, le mieux noté et le moins chargé : pour que votre colis parte le plus vite possible.",
     },
     {
         iconId: "map",
@@ -49,7 +49,7 @@ export const portailAgentForYouItems = [
         iconId: "shield",
         title: "Gestion des incidents",
         description:
-            "Client absent, livreur en retard, colis bloqué — votre agent détecte les problèmes en temps réel et les résout sans que vous ayez à intervenir.",
+            "Client absent, livreur en retard, colis bloqué : votre agent détecte les problèmes en temps réel et les résout sans que vous ayez à intervenir.",
     },
     {
         iconId: "chat",
@@ -97,5 +97,5 @@ export const portailAgentNeverItems = [
 ];
 
 export const portailAgentClosingParagraphs = [
-    "Le portail agent est réservé à l'équipe LivSight. En tant que commerçant partenaire, vous interagissez avec votre agent directement depuis votre application client. Vous n'avez pas besoin d'accéder au portail agent — tout ce dont vous avez besoin est déjà dans votre app.",
+    "Le portail agent est réservé à l'équipe LivSight. En tant que commerçant partenaire, vous interagissez avec votre agent directement depuis votre application client. Vous n'avez pas besoin d'accéder au portail agent : tout ce dont vous avez besoin est déjà dans votre app.",
 ];

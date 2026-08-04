@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components";
+import { LandingPublicProvider } from "../context/LandingPublicContext";
 import { Footer } from "../sections";
 import APropos from "../sections/APropos";
 import { aboutPageTagline, aboutPageTitle } from "../constants";
 
 const AProposPage = () => {
     return (
-        <>
+        <LandingPublicProvider>
             <SEO
-                title='À propos — Notre histoire à Yaoundé'
+                title='À propos | Notre histoire à Yaoundé'
                 description="LivSight est une agence de livraison basée à l'Hippodrome, Yaoundé. Fondée pour digitaliser et professionnaliser la livraison au Cameroun."
                 canonical='/entreprise/a-propos'
             />
@@ -44,7 +45,7 @@ const AProposPage = () => {
                     <Footer />
                 </div>
             </div>
-        </>
+        </LandingPublicProvider>
     );
 };
 

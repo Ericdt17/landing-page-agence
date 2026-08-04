@@ -15,7 +15,7 @@ import { getJobDetail, getJobQuestions } from "../services/recruitmentApi";
 const resolveJob = (job) => ({
     id: job.id ?? job.uuid ?? job.slug ?? job._id ?? job.job_offer_id,
     title: job.title ?? job.name ?? "Poste",
-    location: job.location ?? job.city ?? job.zone ?? "—",
+    location: job.location ?? job.city ?? job.zone ?? "Non précisé",
     typeKey: String(
         job.job_type ?? job.role_type ?? job.type ?? "",
     ).toLowerCase(),
@@ -102,7 +102,7 @@ const RecruitmentApplyPage = () => {
     return (
         <>
             <SEO
-                title={`${RECRUITMENT_MODAL_TITLE} — ${offerTitle}`}
+                title={`${RECRUITMENT_MODAL_TITLE} | ${offerTitle}`}
                 canonical={`/entreprise/recrutement/offre/${jobId ?? ""}/postuler`}
             />
             <main className='min-h-[60vh] bg-white'>

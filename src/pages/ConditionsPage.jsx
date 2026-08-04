@@ -9,7 +9,7 @@ const ConditionsPage = () => {
     <>
       <SEO
         title="Conditions générales d'utilisation"
-        description="Conditions générales d'utilisation du service LivSight — agence de livraison à Yaoundé, Cameroun."
+        description="Conditions générales d'utilisation du service LivSight : agence de livraison à Yaoundé, Cameroun."
         canonical='/legal/conditions'
       />
       <main className='min-h-[60vh] bg-white'>

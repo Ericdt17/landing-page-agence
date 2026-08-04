@@ -1,5 +1,5 @@
 /**
- * Page À propos — contenu éditable.
+ * Page À propos : contenu éditable.
  * Route : aligner `entrepriseAProposPath` avec `App.jsx` et le footer Entreprise.
  */
 
@@ -11,20 +11,23 @@ export const aboutPageTagline =
     "L'agence de livraison qui prend soin de vos colis et de vos clients.";
 
 export const aboutIntroParagraphs = [
-    "LivSight est une agence de livraison basée à Yaoundé, fondée par des commerçants et des livreurs qui ont vécu les mêmes problèmes que vous — colis perdus, livreurs injoignables, argent qui ne revient pas. On a construit ce qu'on aurait voulu avoir.",
+    "LivSight est une agence de livraison basée à Yaoundé, fondée par des commerçants et des livreurs qui ont vécu les mêmes problèmes que vous : colis perdus, livreurs injoignables, argent qui ne revient pas. On a construit ce qu'on aurait voulu avoir.",
 ];
 
-/** Blocs chiffres (sous l’intro) */
+/** Blocs chiffres (sous l’intro). `id: "clients"` est remplacé par clients_count API. */
 export const aboutStats = [
     {
+        id: "presence",
         value: "2 ans",
         label: "de présence physique à l'Hippodrome",
     },
     {
+        id: "clients",
         value: "8+",
-        label: "commerçants partenaires au lancement",
+        label: "commerçants partenaires",
     },
     {
+        id: "payout",
         value: "3h max",
         label: "pour reverser vos fonds après livraison",
     },
@@ -80,6 +83,6 @@ export const aboutContactLabels = {
 
 export const aboutContactAddress = "Hippodrome, Yaoundé, Cameroun";
 
-export const aboutContactHours = "Lun – Sam · 8h00 – 20h00";
+export const aboutContactHours = "Lun au Sam · de 8h à 18h";
 
 export const aboutLegalLine = "H-Groupe SARL · Yaoundé, Cameroun";

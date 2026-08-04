@@ -8,7 +8,7 @@ const ContactPage = () => {
     return (
         <>
             <SEO
-                title='Contactez-nous — Hippodrome Yaoundé'
+                title='Contactez-nous | Hippodrome Yaoundé'
                 description="Contactez LivSight par WhatsApp ou email. Agence basée à l'Hippodrome, Yaoundé. On vous répond en moins de 30 minutes."
                 canonical='/entreprise/contact'
             />

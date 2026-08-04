@@ -9,7 +9,7 @@ const SecuritePage = () => {
     <>
       <SEO
         title='Sécurité'
-        description='Politique de sécurité de LivSight — protection de vos données et de vos livraisons.'
+        description='Politique de sécurité de LivSight : protection de vos données et de vos livraisons.'
         canonical='/legal/securite'
       />
       <main className='min-h-[60vh] bg-white'>

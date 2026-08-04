@@ -364,7 +364,6 @@ export const navLinks = [
     { href: "#offre", label: "L’offre" },
     { href: "#fonctionnalites", label: "Comment ça marche" },
     { href: "#impact", label: "Avantages" },
-    { href: "#tarifs", label: "Tarifs" },
     { href: "#faq", label: "FAQ" },
 ];
 
@@ -376,7 +375,7 @@ export const navMobileMenuCloseLabel = "Fermer le menu";
 /** Point d’entrée WhatsApp unique pour tous les CTA marketing */
 export const whatsappCtaHref = "https://wa.link/zc5ijs";
 
-/** Route SPA — politique de confidentialité */
+/** Route SPA : politique de confidentialité */
 export const legalConfidentialitePath = "/legal/confidentialite";
 
 /** Liens légaux gérés par React Router (pas de rechargement complet) */
@@ -423,15 +422,15 @@ export const heroHeadlineEmphasis = "business";
 export const heroSubheadline =
     "LivSight gère toute votre logistique à Yaoundé pour que vous puissiez vous concentrer sur vos ventes.";
 
-export const heroCtaPrimaryLabel = "Essayer gratuitement";
+export const heroCtaPrimaryLabel = "Commencer sur WhatsApp";
 export const heroCtaPrimaryHref = whatsappCtaHref;
 
-export const heroCtaSecondaryLabel = "Essayer gratuitement";
+export const heroCtaSecondaryLabel = "Commencer sur WhatsApp";
 
 export const heroCtaReassurance =
     "Aucun engagement • Réponse en moins de 5 min • Mise en place le jour même";
 
-/** Avantages hero — label affiché (sans emoji) */
+/** Avantages hero : label affiché (sans emoji) */
 export const heroPerks = [
     "2 jours de livraisons offerts",
     "Stockage gratuit à l’Hippodrome",
@@ -445,7 +444,7 @@ export const problemHeadlineLines = [
     "C’est tout ce qui se passe après.",
 ];
 
-/** Points douloureux — affichés avec une croix (pas d’emoji) */
+/** Points douloureux : affichés avec une croix (pas d’emoji) */
 export const problemPoints = [
     "Trouver un livreur.",
     "Suivre la commande.",
@@ -507,7 +506,7 @@ export const solutionBenefits = [
     },
 ];
 
-/** Section Offre — présentée comme une offre (pas une liste de features) */
+/** Section Offre : présentée comme une offre (pas une liste de features) */
 export const offreBadge = "Tout est inclus dès votre premier jour";
 
 export const offreHeadlineLines = [
@@ -629,29 +628,6 @@ export const impactStats = [
     { value: "0", label: "Commandes oubliées" },
 ];
 
-export const promoBadge = "Offre limitée de lancement";
-
-export const promoHeadlineLine1 = "Prêt à passer au";
-export const promoHeadlineEmphasis = "niveau supérieur";
-export const promoHeadlineLine2 = " ?";
-
-export const promoOfferLeft = {
-    kicker: "Vos premières livraisons",
-    headline: "Offertes",
-};
-
-export const promoOfferRight = {
-    kicker: "Stockage illimité",
-    headline: "Gratuit",
-};
-
-export const promoSubheading =
-    "Simplifiez vos livraisons, gagnez du temps et améliorez la satisfaction de vos clients dès aujourd’hui";
-
-export const promoCtaLabel = "Démarrer mon essai gratuit";
-
-export const promoFootnotes = ["Setup en 5 minutes", "Sans carte bancaire"];
-
 export const securityEyebrow = "Sécurisation des données";
 
 export const securityHeadline = "Votre sécurité est notre priorité absolue";
@@ -694,83 +670,6 @@ export const testimonialEyebrow = "Témoignages";
 
 export const testimonialHeadline = "Ce que disent nos partenaires";
 
-export const tarifsEyebrow = "Tarifs & Plans";
-
-export const tarifsHeadline = "Un plan adapté selon vos besoins";
-
-export const tarifsBillingMonthly = "Mensuel";
-
-export const tarifsBillingAnnual = "Annuel (2 mois offerts)";
-
-export const tarifsPlanTitle = "Solution Sur-Mesure";
-
-export const tarifsPlanBadge = "ENTERPRISE";
-
-export const tarifsPlanDescription =
-    "Un accompagnement complet et une plateforme évolutive pour les entreprises en pleine croissance. Optimisez votre logistique avec nos outils premium.";
-
-export const tarifsPricePrefix = "À partir de";
-
-/** Affiché lorsque la bascule est sur « Mensuel » */
-export const tarifsPriceMonthly = {
-    amount: "50 000 XAF",
-    period: "/ mois",
-};
-
-/** Affiché lorsque la bascule est sur « Annuel » (facturation annuelle, 2 mois offerts) */
-export const tarifsPriceAnnual = {
-    amount: "500 000 XAF",
-    period: "/ an",
-    subline: "Soit l'équivalent de ~41 667 XAF / mois",
-};
-
-export const tarifsFeaturesLeft = [
-    "Livraisons illimitées",
-    "Dashboard Agent Complet",
-    "Support 24/7 dédié",
-];
-
-export const tarifsFeaturesRight = [
-    "API & Intégrations CRM",
-    "Gestion de Stock intégrée",
-    "Rapports automatiques",
-];
-
-export const tarifsCtaPrimary = "Démarrer avec LivSight";
-
-export const tarifsCtaSecondary = "Contacter un expert";
-
-export const tarifsCtaSecondaryHref = whatsappCtaHref;
-
-export const pricingHeadline = "Tarifs simples & transparents";
-
-export const pricingPlans = [
-    {
-        title: "Zone 1",
-        price: "1000",
-        currency: "XAF",
-        bullets: ["0–4 km", "~ 30 minutes", "Suivi de livraison"],
-    },
-    {
-        title: "Zone 2",
-        price: "1500",
-        currency: "XAF",
-        bullets: ["4–8 km", "~ 45 minutes", "Suivi de livraison"],
-    },
-    {
-        title: "Zone 3",
-        price: "2000",
-        currency: "XAF",
-        bullets: ["8–20 km", "~ 1 heure", "Suivi de livraison"],
-    },
-    {
-        title: "Zone 4",
-        price: "2500",
-        currency: "XAF",
-        bullets: ["20–30 km", "~ 1h30", "Suivi de livraison"],
-    },
-];
-
 export const faqHeading = "Questions fréquentes";
 
 export const faqSubheading = "";
@@ -789,7 +688,7 @@ export const faqItems = [
     {
         question: "Quelle est la zone de couverture ?",
         answer:
-            "Nous couvrons d’abord les zones principales puis étendons progressivement selon la demande. Les zones et délais sont affichés dans la grille de tarifs.",
+            "Nous couvrons d’abord les zones principales puis étendons progressivement selon la demande. Contactez-nous pour connaître la couverture actuelle.",
     },
     {
         question: "Les colis sont-ils assurés ?",
@@ -824,22 +723,26 @@ export const faqItems = [
     {
         question: "Quels sont vos tarifs ?",
         answer:
-            "Les tarifs dépendent de la zone et du type de service. Référez-vous à la section Tarifs (Zones 1 à 4) ou contactez-nous pour une offre sur mesure.",
+            "Les tarifs dépendent de la zone et du type de service. Contactez-nous sur WhatsApp pour une offre adaptée à votre activité.",
     },
 ];
 
-export const ctaFinalHeading = "Prêt à ne plus perdre de colis ?";
+export const ctaFinalHeading =
+    "Développez votre business en ligne avec LivSight.";
 
 export const ctaFinalSubheading =
-    "Rejoignez les commerçants de Yaoundé qui ont remplacé WhatsApp par un suivi professionnel. Démarrage en 24h, sans engagement.";
+    "Profitez de 2 jours de livraisons offerts et découvrez une nouvelle façon de gérer vos livraisons.";
 
-export const ctaFinalPrimaryLabel = "Essayer Gratuitement";
+export const ctaFinalPerks = [
+    "2 jours de livraisons offerts",
+    "Stockage gratuit à l’Hippodrome",
+    "Reversement des fonds en moins de 3 heures",
+];
+
+/** Même libellé que le CTA hero */
+export const ctaFinalPrimaryLabel = heroCtaSecondaryLabel;
 
 export const ctaFinalPrimaryHref = whatsappCtaHref;
-
-export const ctaFinalSecondaryLabel = "Parler à un Agent";
-
-export const ctaFinalSecondaryHref = whatsappCtaHref;
 
 export const partnerTestimonials = [
     {
@@ -866,7 +769,7 @@ export const partnerTestimonials = [
 ];
 
 /**
- * Footer — Figma §16 (LivSight).
+ * Footer : Figma §16 (LivSight).
  *
  * All `href` values below are intentional placeholders for future pages or URLs.
  * Replace them here when routes, CMS pages, or external profiles exist (e.g. React Router paths,
@@ -877,7 +780,7 @@ export const footerTagline =
     "La plateforme de livraison nouvelle génération pour les entreprises modernes au Cameroun.";
 
 export const footerCopyright =
-    "© 2026 LivSight - Gestion des Livraisons. Tous droits réservés.";
+    "© 2026 LivSight · Gestion des Livraisons. Tous droits réservés.";
 
 export const footerColumns = [
     {
@@ -914,7 +817,7 @@ export const footerColumns = [
 ];
 
 /**
- * Social icons — replace `href` with real profile URLs when available.
+ * Social icons : replace `href` with real profile URLs when available.
  */
 export const footerSocialLinks = [
     {
@@ -935,10 +838,10 @@ export const footerLocales = [
     { code: "es", label: "ES", href: "/es/", active: false },
 ];
 
-/** Titre — politique de confidentialité (page `/legal/confidentialite`). */
+/** Titre : politique de confidentialité (page `/legal/confidentialite`). */
 export const footerPrivacyHeading = "Confidentialité";
 
-export const footerSupportEmail = "contact@livsight.com";
+export const footerSupportEmail = "livsight@gmail.com";
 
 export const footerPrivacyItems = [
     {
@@ -965,7 +868,7 @@ export const footerPrivacyContactConnector = " ou ";
 
 export const footerPrivacyWhatsAppLabel = "WhatsApp";
 
-/** Politique de confidentialité — page dédiée */
+/** Politique de confidentialité : page dédiée */
 export const privacyPageTitle = "Politique de Confidentialité";
 
 export const privacyPageUpdated = "Dernière mise à jour : avril 2026";

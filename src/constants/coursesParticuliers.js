@@ -1,5 +1,5 @@
 /**
- * Page Courses particuliers — contenu éditable.
+ * Page Courses particuliers : contenu éditable.
  * Route : aligner `plateformeCoursesParticuliersPath` avec `App.jsx` et le footer Plateforme.
  */
 
@@ -15,7 +15,7 @@ export const coursesParticuliersPageTagline =
     "Vous ne voulez pas vous déplacer. On s'en charge.";
 
 export const coursesParticuliersIntroParagraphs = [
-    "LivSight ne livre pas que des colis e-commerce. Toute personne à Yaoundé peut commander une course — récupérer un document, déposer un colis, faire une commission — sans bouger de chez elle.",
+    "LivSight ne livre pas que des colis e-commerce. Toute personne à Yaoundé peut commander une course : récupérer un document, déposer un colis, faire une commission, sans bouger de chez elle.",
 ];
 
 /** Trois accroches sous l'intro */
@@ -42,13 +42,13 @@ export const coursesParticuliersServices = [
         iconId: "document",
         title: "Documents & papiers",
         description:
-            "Récupérer ou déposer un document, un contrat, une carte, un acte — n'importe quel papier à faire circuler dans la ville.",
+            "Récupérer ou déposer un document, un contrat, une carte, un acte : n'importe quel papier à faire circuler dans la ville.",
     },
     {
         iconId: "shopping",
         title: "Achats & commissions",
         description:
-            "Vous avez besoin qu'on passe acheter quelque chose pour vous ? Marché, pharmacie, boutique — on s'en charge et on vous livre.",
+            "Vous avez besoin qu'on passe acheter quelque chose pour vous ? Marché, pharmacie, boutique : on s'en charge et on vous livre.",
     },
     {
         iconId: "cube",
@@ -60,19 +60,19 @@ export const coursesParticuliersServices = [
         iconId: "gift",
         title: "Cadeaux & surprises",
         description:
-            "Faire livrer un cadeau, des fleurs ou un repas à un proche — discret, rapide et livré par un livreur professionnel.",
+            "Faire livrer un cadeau, des fleurs ou un repas à un proche : discret, rapide et livré par un livreur professionnel.",
     },
     {
         iconId: "arrow",
         title: "Dépôt & récupération",
         description:
-            "Déposer quelque chose chez quelqu'un ou récupérer un objet à une adresse — sans avoir à vous déplacer vous-même.",
+            "Déposer quelque chose chez quelqu'un ou récupérer un objet à une adresse : sans avoir à vous déplacer vous-même.",
     },
     {
         iconId: "chat",
         title: "Autre chose ?",
         description:
-            "Si vous avez besoin qu'on se déplace pour vous à Yaoundé et que ça ne rentre pas dans une case — écrivez-nous, on vous répond.",
+            "Si vous avez besoin qu'on se déplace pour vous à Yaoundé et que ça ne rentre pas dans une case : écrivez-nous, on vous répond.",
     },
 ];
 
@@ -83,7 +83,7 @@ export const coursesParticuliersSteps = [
         step: "1",
         title: "Envoyez un message sur WhatsApp",
         description:
-            "Décrivez ce que vous voulez faire — récupérer, déposer, acheter, livrer. Donnez les adresses et on vous confirme le tarif en quelques minutes.",
+            "Décrivez ce que vous voulez faire : récupérer, déposer, acheter, livrer. Donnez les adresses et on vous confirme le tarif en quelques minutes.",
     },
     {
         step: "2",
@@ -95,7 +95,7 @@ export const coursesParticuliersSteps = [
         step: "3",
         title: "Le livreur s'en occupe",
         description:
-            "Votre livreur LivSight — identifié, formé et rattaché à l'agence — prend en charge la course. Vous payez à la livraison en espèces.",
+            "Votre livreur LivSight (identifié, formé et rattaché à l'agence) prend en charge la course. Vous payez à la livraison en espèces.",
     },
 ];
 
@@ -107,6 +107,6 @@ export const coursesParticuliersPricingBody =
 export const coursesParticuliersCtaTitle = "Vous avez une course ?";
 
 export const coursesParticuliersCtaBody =
-    "Écrivez-nous sur WhatsApp — on vous répond en moins de 30 minutes.";
+    "Écrivez-nous sur WhatsApp : on vous répond en moins de 30 minutes.";
 
 export const coursesParticuliersCtaButtonLabel = "Commander sur WhatsApp";

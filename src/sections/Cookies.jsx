@@ -61,7 +61,7 @@ const BrowserHintsList = () => (
         className='font-montserrat text-sm leading-6 text-gray-600 sm:text-base sm:leading-7'
       >
         <span className='font-bold text-gray-900'>{item.browser}</span>
-        {" — "}
+        {" · "}
         {item.steps}
       </li>
     ))}

@@ -1,5 +1,5 @@
 /**
- * API recrutement — base URL : import.meta.env.VITE_API_URL (Vite), repli local.
+ * API recrutement : base URL : import.meta.env.VITE_API_URL (Vite), repli local.
  * Routes publiques : credentials: "omit" (pas de cookie).
  *
  * POST /apply : FormData attendu (clés typiques, à aligner avec le backend) :
@@ -7,15 +7,15 @@
  * - full_name, phone, email, quartier (string)
  * - education_level (bac | licence | master | doctorat)
  * - field_of_study, school_name (string)
- * - languages (comma-separated: francais, anglais — au moins une)
+ * - languages (comma-separated: francais, anglais ; au moins une)
  * - currently_employed, in_other_company (oui | non)
  * - transport, availability (string)
- * - photo (File), cv (File, PDF), cover_letter (File, PDF) — max 10 Mo
+ * - photo (File), cv (File, PDF), cover_letter (File, PDF) : max 10 Mo
  * - answers : chaîne JSON `"[]"` ou `[{ question_id, answer_text }, ...]`
  *
  * Listes / détail : réponses du type `{ success: true, data: ... }` sont normalisées.
  *
- * Ne pas définir Content-Type sur le fetch multipart — le navigateur envoie le boundary.
+ * Ne pas définir Content-Type sur le fetch multipart : le navigateur envoie le boundary.
  */
 
 const API_BASE =
@@ -233,7 +233,7 @@ const extractApplyErrorMessage = (body) => {
 };
 
 /**
- * @param {FormData} formData — corps multipart déjà rempli côté UI
+ * @param {FormData} formData : corps multipart déjà rempli côté UI
  * @returns {Promise<{ success: boolean, data?: object, error?: string, status?: number, message?: string }>}
  */
 export async function submitApplication(formData) {

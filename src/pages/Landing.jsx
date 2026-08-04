@@ -8,10 +8,8 @@ import {
   LeProbleme,
   MetriquesCles,
   Offre,
-  Promotion,
   SecuriteConfiance,
   Solution,
-  Tarifs,
   TrustedBy,
 } from "../sections";
 
@@ -42,12 +40,8 @@ const Landing = () => {
           </div>
           <SecuriteConfiance />
           <MetriquesCles />
-          <Promotion />
-          <Tarifs />
           <Faq />
-          <div className='padding-x sm:py-16 py-12 w-full'>
-            <CtaFinal />
-          </div>
+          <CtaFinal />
         </div>
       </main>
       <div className='relative overflow-hidden border-t border-gray-100 bg-white padding-x padding-t pb-8'>

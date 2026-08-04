@@ -11,7 +11,7 @@ const CoursesParticuliersPage = () => {
     return (
         <>
             <SEO
-                title='Courses particuliers à Yaoundé — documents, commissions, livraisons'
+                title='Courses particuliers à Yaoundé | documents, commissions, livraisons'
                 description="Commandez une course sans vous déplacer : documents, achats, colis, cadeaux. Même grille tarifaire que les livraisons standard. Contactez LivSight sur WhatsApp."
                 canonical='/plateforme/courses-particuliers'
             />

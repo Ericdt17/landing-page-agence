@@ -1,9 +1,9 @@
 /**
- * Conditions générales d’utilisation (CGU) — contenu éditable indépendamment du reste de la config.
+ * Conditions générales d’utilisation (CGU) : contenu éditable indépendamment du reste de la config.
  * Route SPA : voir `legalConditionsPath`.
  */
 
-/** Route SPA — doit rester alignée avec la route dans `App.jsx` */
+/** Route SPA : doit rester alignée avec la route dans `App.jsx` */
 export const legalConditionsPath = "/legal/conditions";
 
 export const termsPageTitle = "Conditions Générales d'Utilisation";
@@ -50,7 +50,7 @@ export const termsGroups = [
                 art: 4,
                 title: "Mode de paiement",
                 paragraphs: [
-                    "Le paiement s'effectue exclusivement en espèces à la livraison (COD — Cash on Delivery) en francs CFA (XAF). Aucun paiement par virement, mobile money ou crédit n'est accepté en V1. Le montant à collecter est défini par le commerçant au moment de la création de la commande et ne peut être modifié après assignation au livreur.",
+                    "Le paiement s'effectue exclusivement en espèces à la livraison COD (Cash on Delivery) en francs CFA (XAF). Aucun paiement par virement, mobile money ou crédit n'est accepté en V1. Le montant à collecter est défini par le commerçant au moment de la création de la commande et ne peut être modifié après assignation au livreur.",
                     "Lorsque le commerçant confie une livraison pour laquelle le règlement a déjà été opéré par l'intermédiaire du livreur (hors encaissement COD classique pour le compte du commerçant), les frais de livraison applicables sont soit déduits du solde du commerçant chez LivSight, soit réglés directement par le commerçant, selon les modalités indiquées sur la plateforme.",
                 ],
             },

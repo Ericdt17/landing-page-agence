@@ -3,7 +3,7 @@
  * - En local : laisser VITE_API_BASE_URL vide → fetch same-origin `/api/...`
  *   (proxy Vite → gateway :4040, évite CORS).
  * - En prod : VITE_API_BASE_URL=https://votre-gateway
- * GET /api/public/landing — pas de JWT, credentials: "omit".
+ * GET /api/public/landing : pas de JWT, credentials: "omit".
  */
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL ?? "").replace(/\/$/, "");

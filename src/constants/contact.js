@@ -1,5 +1,5 @@
 /**
- * Page Contact — contenu éditable.
+ * Page Contact : contenu éditable.
  * Route : aligner `entrepriseContactPath` avec `App.jsx` et le footer Entreprise.
  */
 import { aboutContactAddress, aboutLegalLine } from "./about";
@@ -14,7 +14,7 @@ export const contactPageTitle = "Contact";
 export const contactPageTagline = "On vous répond vite. Vraiment.";
 
 export const contactIntroParagraphs = [
-    "Une question sur nos tarifs, un problème avec une livraison, ou vous voulez simplement démarrer — on est disponibles sur WhatsApp, par email ou en direct à l'Hippodrome.",
+    "Une question sur nos tarifs, un problème avec une livraison, ou vous voulez simplement démarrer : on est disponibles sur WhatsApp, par email ou en direct à l'Hippodrome.",
 ];
 
 export const contactChannelsSectionTitle = "Nous contacter";
@@ -50,7 +50,7 @@ export const contactPhoneChannel = {
 
 /** Affiché si `securityAgencyPhone` est vide dans `security.js` */
 export const contactPhoneFallbackLine =
-    "Le numéro vocal est le même que celui utilisé pour WhatsApp — ouvrez la conversation pour nous appeler.";
+    "Le numéro vocal est le même que celui utilisé pour WhatsApp : ouvrez la conversation pour nous appeler.";
 
 export const contactPracticalTitle = "Informations pratiques";
 
@@ -61,16 +61,16 @@ export const contactPracticalLabelCompany = "Entreprise";
 
 export const contactPracticalAddress = aboutContactAddress;
 
-export const contactPracticalWeekHours = "Lundi – Samedi · 8h00 – 20h00";
+export const contactPracticalWeekHours = "Lundi au Samedi · 8h00 à 18h00";
 
-export const contactPracticalSunday = "Fermé — urgences sur WhatsApp uniquement";
+export const contactPracticalSunday = "Fermé : urgences sur WhatsApp uniquement";
 
 export const contactPracticalCompany = aboutLegalLine;
 
 export const contactResponsibleTitle = "Responsable";
 
 export const contactResponsibleLine =
-    "Eric Djou — CEO & Coordinateur des opérations";
+    "Eric Djou · CEO & Coordinateur des opérations";
 
 export const contactReasonsTitle = "Pour quelle raison nous contacter";
 
@@ -105,4 +105,4 @@ export const contactReasonsItems = [
 export const contactCtaTitle = "Prêt à démarrer ?";
 
 export const contactCtaBody =
-    "Envoyez-nous un message sur WhatsApp — on vous répond en moins de 30 minutes.";
+    "Envoyez-nous un message sur WhatsApp : on vous répond en moins de 30 minutes.";

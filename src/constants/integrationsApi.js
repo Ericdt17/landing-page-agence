@@ -1,5 +1,5 @@
 /**
- * Page Intégrations API — contenu éditable.
+ * Page Intégrations API : contenu éditable.
  * Route : aligner `plateformeIntegrationsApiPath` avec `App.jsx` et le footer Plateforme.
  */
 
@@ -13,7 +13,7 @@ export const integrationsApiPageTagline =
 export const integrationsApiBadge = "Bientôt disponible";
 
 export const integrationsApiIntroParagraphs = [
-    "Bientôt, vous pourrez connecter votre site, votre boutique Shopify ou votre système de gestion de commandes à LivSight via une API. Chaque nouvelle commande créée chez vous génère automatiquement une livraison — sans ressaisie, sans copier-coller.",
+    "Bientôt, vous pourrez connecter votre site, votre boutique Shopify ou votre système de gestion de commandes à LivSight via une API. Chaque nouvelle commande créée chez vous génère automatiquement une livraison : sans ressaisie, sans copier-coller.",
     "Cette fonctionnalité est en cours de développement. Elle sera disponible dans une prochaine version de LivSight. Vous pouvez d'ores et déjà rejoindre la liste d'attente pour être notifié en priorité à la sortie.",
 ];
 

@@ -15,7 +15,7 @@ import { getJobDetail } from "../services/recruitmentApi";
 const resolveJob = (job) => ({
     id: job.id ?? job.uuid ?? job.slug ?? job._id ?? job.job_offer_id,
     title: job.title ?? job.name ?? "Poste",
-    location: job.location ?? job.city ?? job.zone ?? "—",
+    location: job.location ?? job.city ?? job.zone ?? "Non précisé",
     positions:
         job.open_positions ??
         job.positions_count ??

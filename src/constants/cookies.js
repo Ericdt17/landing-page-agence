@@ -1,5 +1,5 @@
 /**
- * Politique cookies — contenu éditable.
+ * Politique cookies : contenu éditable.
  * Aligner `legalCookiesPath` avec la route dans `App.jsx`.
  */
 
@@ -49,14 +49,14 @@ export const cookieRecapRows = [
     },
     {
         type: "Publicitaire",
-        name: "—",
+        name: "Non applicable",
         role: "Ciblage, retargeting, revente de données",
-        duration: "—",
+        duration: "Non applicable",
         active: "Non utilisé",
     },
 ];
 
-/** Art. 5 — raccourcis navigateurs (texte après l’intro) */
+/** Art. 5 : raccourcis navigateurs (texte après l’intro) */
 export const cookieBrowserHints = [
     {
         browser: "Chrome",

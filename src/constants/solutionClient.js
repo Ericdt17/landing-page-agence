@@ -1,5 +1,5 @@
 /**
- * Page Solution client — contenu éditable.
+ * Page Solution client : contenu éditable.
  * Route : aligner `plateformeSolutionClientPath` avec `App.jsx` et le footer Plateforme.
  */
 
@@ -11,7 +11,7 @@ export const solutionClientPageTagline =
     "Gérez toutes vos livraisons depuis votre téléphone.";
 
 export const solutionClientIntroParagraphs = [
-    "L'application LivSight pour commerçants vous permet de créer une livraison en 3 étapes, suivre vos colis en temps réel, gérer votre stock et communiquer avec votre agent — sans appel, sans WhatsApp, sans chaos.",
+    "L'application LivSight pour commerçants vous permet de créer une livraison en 3 étapes, suivre vos colis en temps réel, gérer votre stock et communiquer avec votre agent : sans appel, sans WhatsApp, sans chaos.",
 ];
 
 export const solutionClientFeaturesTitle = "Ce que vous pouvez faire";
@@ -40,7 +40,7 @@ export const solutionClientFeatures = [
         iconId: "chat",
         title: "Chat direct avec votre agent",
         description:
-            "Posez vos questions, signalez un problème ou demandez un suivi — depuis l'app, sans appel.",
+            "Posez vos questions, signalez un problème ou demandez un suivi : depuis l'app, sans appel.",
     },
     {
         iconId: "chart",

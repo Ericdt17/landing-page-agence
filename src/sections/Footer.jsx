@@ -1,5 +1,5 @@
 /**
- * LivSight footer — layout from Figma §16.
+ * LivSight footer : layout from Figma §16.
  * All navigation targets come from `src/constants/index.js` (`footerColumns`, `footerSocialLinks`, `footerLocales`).
  * See file-level notes there: hrefs are placeholders until real pages or URLs exist.
  */

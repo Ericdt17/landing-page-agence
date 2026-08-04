@@ -9,7 +9,7 @@ const CookiesPage = () => {
     <>
       <SEO
         title='Politique des cookies'
-        description='Politique des cookies de LivSight — agence de livraison à Yaoundé, Cameroun.'
+        description='Politique des cookies de LivSight : agence de livraison à Yaoundé, Cameroun.'
         canonical='/legal/cookies'
       />
       <main className='min-h-[60vh] bg-white'>

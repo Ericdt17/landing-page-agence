@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 
 export default function SEO({ title, description, canonical }) {
   const siteName = "LivSight";
-  const fullTitle = title ? `${title} — ${siteName}` : siteName;
+  const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const defaultDesc =
     "LivSight est l'agence de livraison rapide de Yaoundé. Stockage gratuit, suivi en temps réel, reversement en 3h.";
   const baseUrl = "https://livsight.com";

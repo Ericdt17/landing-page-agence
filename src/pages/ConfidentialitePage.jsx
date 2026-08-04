@@ -9,7 +9,7 @@ const ConfidentialitePage = () => {
     <>
       <SEO
         title='Politique de confidentialité'
-        description='Politique de confidentialité de LivSight — agence de livraison à Yaoundé, Cameroun.'
+        description='Politique de confidentialité de LivSight : agence de livraison à Yaoundé, Cameroun.'
         canonical='/legal/confidentialite'
       />
       <main className='min-h-[60vh] bg-white'>

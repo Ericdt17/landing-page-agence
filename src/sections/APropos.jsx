@@ -20,6 +20,7 @@ import {
     footerSupportEmail,
     whatsappCtaHref,
 } from "../constants";
+import { useLandingPublic } from "../context/LandingPublicContext";
 
 const iconMap = {
     shield: ShieldCheckIcon,
@@ -28,7 +29,25 @@ const iconMap = {
     chart: ChartBarIcon,
 };
 
+const formatCount = (count) => new Intl.NumberFormat("fr-FR").format(count);
+
+const buildAboutStats = (clientsCount) => {
+    if (clientsCount == null) return aboutStats;
+
+    return aboutStats.map((stat) => {
+        if (stat.id !== "clients") return stat;
+        return {
+            ...stat,
+            value: formatCount(clientsCount),
+            label: "commerçants partenaires",
+        };
+    });
+};
+
 const APropos = () => {
+    const { clientsCount } = useLandingPublic();
+    const stats = buildAboutStats(clientsCount);
+
     return (
         <div className='py-12 sm:py-16'>
             <div className='space-y-4'>
@@ -43,9 +62,9 @@ const APropos = () => {
             </div>
 
             <ul className='mt-10 grid list-none grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6'>
-                {aboutStats.map(({ value, label }) => (
+                {stats.map(({ id, value, label }) => (
                     <li
-                        key={label}
+                        key={id ?? label}
                         className='rounded-2xl border border-gray-100 bg-gray-50/80 px-5 py-6 text-center shadow-soft-card'
                     >
                         <p className='font-montserrat text-2xl font-extrabold text-brand-blue sm:text-3xl'>

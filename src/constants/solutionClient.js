@@ -58,38 +58,50 @@ export const solutionClientFeatures = [
 
 export const solutionClientHowTitle = "Comment ça marche";
 
+/** Aligné sur `howItWorksSteps` (landing) : source unique côté page Solution client */
+export const solutionClientHowSubheadline =
+    "Commencez à livrer en moins d’une journée.";
+
 export const solutionClientSteps = [
     {
         step: "1",
-        title: "Inscrivez-vous avec votre numéro de téléphone",
+        title: "Contactez-nous sur WhatsApp",
         description:
-            "Entrez votre numéro, recevez un code OTP par SMS, finalisez votre profil et choisissez LivSight comme agence partenaire. Moins de 2 minutes.",
+            "Nous échangeons avec vous pour comprendre votre activité et vos besoins.",
     },
     {
         step: "2",
-        title: "Ajoutez vos produits à votre catalogue",
+        title: "Nous créons votre espace LivSight",
         description:
-            "Créez vos références produits avec nom, description et quantité disponible. Votre stock est géré automatiquement à chaque livraison confirmée.",
+            "Nous créons votre groupe WhatsApp dédié afin que vous puissiez commencer à nous envoyer vos commandes immédiatement.",
     },
     {
         step: "3",
-        title: "Créez votre première livraison",
+        title: "Nous configurons votre compte",
         description:
-            "Sélectionnez la zone de livraison, choisissez le produit depuis votre catalogue, renseignez le montant et envoyez. Votre agent reçoit la commande instantanément.",
+            "Nous créons votre compte, installons l’application LivSight et vous montrons comment l’utiliser.",
     },
     {
         step: "4",
-        title: "Suivez en temps réel et recevez vos fonds",
+        title: "Vous vendez, nous livrons",
         description:
-            "Recevez une notification à chaque étape. Une fois la livraison confirmée, vos fonds sont reversés dans les 3 heures, déduction faite des frais de livraison.",
+            "Recevez vos commandes comme d’habitude. LivSight prend en charge les livraisons, le suivi et le reversement de vos fonds.",
     },
 ];
 
 export const solutionClientStoresTitle = "Disponible sur";
 
 export const solutionClientStores = [
-    { platform: "Android", store: "Google Play Store" },
-    { platform: "iOS", store: "Apple App Store" },
+    {
+        platform: "Android",
+        store: "Contactez-nous directement pour obtenir l’accès à la version Android",
+        href: "https://wa.link/zc5ijs",
+    },
+    {
+        platform: "iOS",
+        store: "Apple App Store",
+        href: "https://apps.apple.com/fr/app/livsight/id6788786430?l=en-GB",
+    },
 ];
 
 export const solutionClientPricingTitle = "Gratuit";

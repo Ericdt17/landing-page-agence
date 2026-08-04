@@ -14,6 +14,7 @@ import {
     solutionClientFeatures,
     solutionClientFeaturesTitle,
     solutionClientHowTitle,
+    solutionClientHowSubheadline,
     solutionClientIntroParagraphs,
     solutionClientPricingBody,
     solutionClientPricingTitle,
@@ -90,6 +91,9 @@ const SolutionClient = () => {
                 >
                     {solutionClientHowTitle}
                 </h2>
+                <p className='mt-3 font-montserrat text-base leading-7 text-gray-600 sm:text-lg sm:leading-8'>
+                    {solutionClientHowSubheadline}
+                </p>
                 <ol className='mt-8 list-none space-y-8'>
                     {solutionClientSteps.map(({ step, title, description }) => (
                         <li
@@ -126,17 +130,32 @@ const SolutionClient = () => {
                     {solutionClientStoresTitle}
                 </h2>
                 <ul className='mt-8 grid list-none grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6'>
-                    {solutionClientStores.map(({ platform, store }) => (
-                        <li
-                            key={platform}
-                            className='rounded-2xl border border-gray-100 bg-gray-50/80 px-6 py-5 shadow-soft-card'
-                        >
-                            <p className='font-montserrat text-base font-bold text-gray-900'>
-                                {platform}
-                            </p>
-                            <p className='mt-1 font-montserrat text-sm text-gray-600'>
-                                {store}
-                            </p>
+                    {solutionClientStores.map(({ platform, store, href }) => (
+                        <li key={platform}>
+                            {href ? (
+                                <a
+                                    href={href}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    className='block rounded-2xl border border-gray-100 bg-gray-50/80 px-6 py-5 shadow-soft-card transition-colors hover:border-brand-blue/30 hover:bg-pale-blue/40'
+                                >
+                                    <p className='font-montserrat text-base font-bold text-gray-900'>
+                                        {platform}
+                                    </p>
+                                    <p className='mt-1 font-montserrat text-sm font-semibold text-brand-blue'>
+                                        {store}
+                                    </p>
+                                </a>
+                            ) : (
+                                <div className='rounded-2xl border border-gray-100 bg-gray-50/80 px-6 py-5 shadow-soft-card'>
+                                    <p className='font-montserrat text-base font-bold text-gray-900'>
+                                        {platform}
+                                    </p>
+                                    <p className='mt-1 font-montserrat text-sm text-gray-600'>
+                                        {store}
+                                    </p>
+                                </div>
+                            )}
                         </li>
                     ))}
                 </ul>
@@ -155,31 +174,25 @@ const SolutionClient = () => {
                 className='mt-14 sm:mt-16'
                 aria-labelledby='solution-client-cta-heading'
             >
-                <div className='relative overflow-hidden rounded-[32px] bg-brand-blue px-6 py-10 text-center sm:px-10 sm:py-14'>
-                    <div
-                        className='pointer-events-none absolute inset-0 bg-hero-grid opacity-10'
-                        aria-hidden='true'
-                    />
-                    <div className='relative'>
-                        <h2
-                            id='solution-client-cta-heading'
-                            className='font-montserrat text-2xl font-extrabold text-white sm:text-3xl'
-                        >
-                            {solutionClientCtaTitle}
-                        </h2>
-                        <p className='mx-auto mt-4 max-w-xl font-montserrat text-sm leading-relaxed text-blue-100 sm:text-base'>
-                            {solutionClientCtaBody}
-                        </p>
-                        <a
-                            href={whatsappCtaHref}
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            className='mt-8 inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-white px-8 font-montserrat text-base font-bold text-brand-blue shadow-lg transition-opacity hover:opacity-95 sm:min-h-[70px] sm:px-10 sm:text-lg'
-                        >
-                            <WhatsAppIcon className='h-5 w-5 shrink-0' />
-                            {heroCtaPrimaryLabel}
-                        </a>
-                    </div>
+                <div className='overflow-hidden rounded-[32px] bg-brand-blue px-6 py-10 text-center sm:px-10 sm:py-14'>
+                    <h2
+                        id='solution-client-cta-heading'
+                        className='font-montserrat text-2xl font-extrabold text-white sm:text-3xl'
+                    >
+                        {solutionClientCtaTitle}
+                    </h2>
+                    <p className='mx-auto mt-4 max-w-xl font-montserrat text-sm leading-relaxed text-blue-100 sm:text-base'>
+                        {solutionClientCtaBody}
+                    </p>
+                    <a
+                        href={whatsappCtaHref}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='mt-8 inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-white px-8 font-montserrat text-base font-bold text-brand-blue shadow-lg transition-opacity hover:opacity-95 sm:min-h-[70px] sm:px-10 sm:text-lg'
+                    >
+                        <WhatsAppIcon className='h-5 w-5 shrink-0' />
+                        {heroCtaPrimaryLabel}
+                    </a>
                 </div>
             </section>
         </div>

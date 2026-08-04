@@ -56,6 +56,7 @@ import {
     solutionClientFeatures,
     solutionClientFeaturesTitle,
     solutionClientHowTitle,
+    solutionClientHowSubheadline,
     solutionClientIntroParagraphs,
     solutionClientPageTagline,
     solutionClientPageTitle,
@@ -232,6 +233,7 @@ export {
     solutionClientFeatures,
     solutionClientFeaturesTitle,
     solutionClientHowTitle,
+    solutionClientHowSubheadline,
     solutionClientIntroParagraphs,
     solutionClientPageTagline,
     solutionClientPageTitle,
@@ -800,7 +802,6 @@ export const footerColumns = [
         title: "Entreprise",
         links: [
             { label: "À Propos", href: entrepriseAProposPath },
-            { label: "Blog", href: "/entreprise/blog" },
             { label: "Recrutement", href: entrepriseRecrutementPath },
             { label: "Contact", href: entrepriseContactPath },
         ],

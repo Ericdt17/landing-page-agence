@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { SEO } from "../components";
+import { SEO, SiteFooter } from "../components";
 import CookiesSection from "../sections/Cookies";
-import { Footer } from "../sections";
 import { cookiesPageTitle, cookiesPageUpdated } from "../constants";
 
 const CookiesPage = () => {
@@ -34,16 +33,7 @@ const CookiesPage = () => {
           <CookiesSection />
         </div>
       </main>
-
-      <div className='relative overflow-hidden border-t border-gray-100 bg-white padding-x padding-t pb-8'>
-        <div
-          className='absolute inset-0 bg-hero-grid bg-[length:40px_40px] opacity-[0.15]'
-          aria-hidden='true'
-        />
-        <div className='relative'>
-          <Footer />
-        </div>
-      </div>
+      <SiteFooter />
     </>
   );
 };

@@ -5,10 +5,9 @@ import {
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Footer } from "../sections";
 import JobsList from "../sections/recruitment/JobsList";
 import ProcessSection from "../sections/recruitment/ProcessSection";
-import { SEO } from "../components";
+import { SEO, SiteFooter } from "../components";
 import {
     RECRUITMENT_HERO,
     RECRUITMENT_OPEN_BADGE,
@@ -130,16 +129,7 @@ const RecruitmentPage = () => {
                     </section>
                 </div>
             </main>
-
-            <div className='relative overflow-hidden border-t border-gray-100 bg-white padding-x padding-t pb-8'>
-                <div
-                    className='absolute inset-0 bg-hero-grid bg-[length:40px_40px] opacity-[0.15]'
-                    aria-hidden='true'
-                />
-                <div className='relative'>
-                    <Footer />
-                </div>
-            </div>
+      <SiteFooter />
 
         </>
     );

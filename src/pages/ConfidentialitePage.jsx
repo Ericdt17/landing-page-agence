@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { SEO } from "../components";
+import { SEO, SiteFooter } from "../components";
 import ConfidentialiteSection from "../sections/Confidentialite";
-import { Footer } from "../sections";
 import { privacyPageTitle, privacyPageUpdated } from "../constants";
 
 const ConfidentialitePage = () => {
@@ -36,17 +35,7 @@ const ConfidentialitePage = () => {
           <ConfidentialiteSection />
         </div>
       </main>
-
-      {/* Footer */}
-      <div className='relative overflow-hidden border-t border-gray-100 bg-white padding-x padding-t pb-8'>
-        <div
-          className='absolute inset-0 bg-hero-grid bg-[length:40px_40px] opacity-[0.15]'
-          aria-hidden='true'
-        />
-        <div className='relative'>
-          <Footer />
-        </div>
-      </div>
+      <SiteFooter />
     </>
   );
 };

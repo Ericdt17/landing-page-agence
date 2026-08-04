@@ -8,7 +8,7 @@ import {
     ServerStackIcon,
     ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
-import { WhatsAppIcon } from "../components";
+import { BrandCtaCard } from "../components";
 import {
     integrationsApiAudienceItems,
     integrationsApiAudienceTitle,
@@ -144,37 +144,14 @@ const IntegrationsApi = () => {
                 </pre>
             </section>
 
-            <section
+            <BrandCtaCard
                 className='mt-14 sm:mt-16'
-                aria-labelledby='integrations-api-waitlist-heading'
-            >
-                <div className='relative overflow-hidden rounded-[32px] bg-brand-blue px-6 py-10 text-center sm:px-10 sm:py-14'>
-                    <div
-                        className='pointer-events-none absolute inset-0 bg-hero-grid opacity-10'
-                        aria-hidden='true'
-                    />
-                    <div className='relative'>
-                        <h2
-                            id='integrations-api-waitlist-heading'
-                            className='font-montserrat text-2xl font-extrabold text-white sm:text-3xl'
-                        >
-                            {integrationsApiWaitlistTitle}
-                        </h2>
-                        <p className='mx-auto mt-4 max-w-xl font-montserrat text-sm leading-relaxed text-blue-100 sm:text-base'>
-                            {integrationsApiWaitlistBody}
-                        </p>
-                        <a
-                            href={whatsappCtaHref}
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            className='mt-8 inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-white px-8 font-montserrat text-base font-bold text-brand-blue shadow-lg transition-opacity hover:opacity-95 sm:min-h-[70px] sm:px-10 sm:text-lg'
-                        >
-                            <WhatsAppIcon className='h-5 w-5 shrink-0' />
-                            {integrationsApiWaitlistButtonLabel}
-                        </a>
-                    </div>
-                </div>
-            </section>
+                headingId='integrations-api-waitlist-heading'
+                title={integrationsApiWaitlistTitle}
+                body={integrationsApiWaitlistBody}
+                href={whatsappCtaHref}
+                buttonLabel={integrationsApiWaitlistButtonLabel}
+            />
         </div>
     );
 };

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { SEO } from "../components";
-import { Footer } from "../sections";
+import { SEO, SiteFooter } from "../components";
 import PortailLivreur from "../sections/PortailLivreur";
 import {
     portailLivreurPageTagline,
@@ -37,16 +36,7 @@ const PortailLivreurPage = () => {
                     <PortailLivreur />
                 </div>
             </main>
-
-            <div className='relative overflow-hidden border-t border-gray-100 bg-white padding-x padding-t pb-8'>
-                <div
-                    className='absolute inset-0 bg-hero-grid bg-[length:40px_40px] opacity-[0.15]'
-                    aria-hidden='true'
-                />
-                <div className='relative'>
-                    <Footer />
-                </div>
-            </div>
+      <SiteFooter />
         </>
     );
 };

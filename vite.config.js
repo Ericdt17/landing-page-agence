@@ -9,5 +9,12 @@ export default defineConfig({
   server: {
     port: 5175,
     strictPort: false,
+    // Same-origin /api/* → gateway (évite CORS en local)
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4040',
+        changeOrigin: true,
+      },
+    },
   },
 })

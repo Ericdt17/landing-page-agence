@@ -1,12 +1,50 @@
 import { CpuChipIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 import { impactFeatures, impactHeadingLines, impactStats } from "../constants";
+import { useLandingPublic } from "../context/LandingPublicContext";
 
 const iconMap = {
   agents: UserGroupIcon,
   tech: CpuChipIcon,
 };
 
+const CLIENTS_STAT_LABEL = "Clients actifs";
+const DELIVERIES_STAT_LABEL = "Livraisons réalisées";
+const CLIENTS_FALLBACK_LABELS = new Set(["Vendeurs actifs", CLIENTS_STAT_LABEL]);
+const DELIVERIES_FALLBACK_LABELS = new Set([
+  "Livraisons à temps",
+  DELIVERIES_STAT_LABEL,
+]);
+
+const formatStatCount = (count) =>
+  new Intl.NumberFormat("fr-FR").format(count);
+
+const buildImpactStats = ({ clientsCount, completedDeliveries }) => {
+  if (clientsCount == null && completedDeliveries == null) return impactStats;
+
+  return impactStats.map((stat) => {
+    if (clientsCount != null && CLIENTS_FALLBACK_LABELS.has(stat.label)) {
+      return {
+        value: formatStatCount(clientsCount),
+        label: CLIENTS_STAT_LABEL,
+      };
+    }
+    if (
+      completedDeliveries != null &&
+      DELIVERIES_FALLBACK_LABELS.has(stat.label)
+    ) {
+      return {
+        value: formatStatCount(completedDeliveries),
+        label: DELIVERIES_STAT_LABEL,
+      };
+    }
+    return stat;
+  });
+};
+
 const MetriquesCles = () => {
+  const { clientsCount, completedDeliveries } = useLandingPublic();
+  const stats = buildImpactStats({ clientsCount, completedDeliveries });
+
   return (
     <section
       id='impact'
@@ -57,7 +95,7 @@ const MetriquesCles = () => {
           </div>
 
           <ul className='grid list-none grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6'>
-            {impactStats.map((stat) => (
+            {stats.map((stat) => (
               <li
                 key={stat.label}
                 className='rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-md'

@@ -361,6 +361,7 @@ export {
 export const navLinks = [
     { href: "#probleme", label: "Problème" },
     { href: "#solution", label: "Notre Solution" },
+    { href: "#offre", label: "L’offre" },
     { href: "#fonctionnalites", label: "Comment ça marche" },
     { href: "#impact", label: "Avantages" },
     { href: "#tarifs", label: "Tarifs" },
@@ -477,42 +478,109 @@ export const ecosystemShowcases = [
     },
 ];
 
-export const solutionEyebrow = "La solution LivSight";
+export const solutionEyebrow = "La solution";
 
 export const solutionHeadlineLines = [
-    "Nous structurons vos",
-    "livraisons pour vous",
+    "Concentrez-vous sur vos ventes.",
+    "Nous nous occupons de tout le reste.",
 ];
 
-export const solutionBody =
-    "Continuez à utiliser WhatsApp comme vous l'aimez, mais profitez de la puissance d'une infrastructure professionnelle en arrière-plan.";
+export const solutionBenefitsTitle = "Les bénéfices";
 
-export const solutionBullets = [
-    "Organisation automatique de vos messages en bons de commande.",
-    "Visibilité totale sur chaque colis en temps réel.",
-    "Confirmation instantanée envoyée à vos clients finaux.",
+/** iconId maps to @heroicons/react/24/outline in Solution.jsx */
+export const solutionBenefits = [
+    {
+        iconId: "truck",
+        text: "Nous livrons vos commandes partout à Yaoundé.",
+    },
+    {
+        iconId: "map-pin",
+        text: "Vous suivez chaque livraison en temps réel.",
+    },
+    {
+        iconId: "banknotes",
+        text: "Vous récupérez vos fonds en moins de 3 heures.",
+    },
+    {
+        iconId: "cube",
+        text: "Nous stockons vos produits gratuitement à l’Hippodrome.",
+    },
 ];
 
-export const howItWorksHeading = "Comment ça marche ?";
+/** Section Offre — présentée comme une offre (pas une liste de features) */
+export const offreBadge = "Tout est inclus dès votre premier jour";
+
+export const offreHeadlineLines = [
+    "Tout ce dont vous avez besoin",
+    "pour livrer en toute sérénité.",
+];
+
+export const offreSubheadline =
+    "Une seule offre. Aucun coût caché.";
+
+/** iconId maps to @heroicons/react/24/outline in Offre.jsx */
+export const offreStack = [
+    {
+        iconId: "truck",
+        text: "Livraison partout à Yaoundé",
+    },
+    {
+        iconId: "cube",
+        text: "Stockage gratuit à l’Hippodrome",
+    },
+    {
+        iconId: "map-pin",
+        text: "Suivi des livraisons en temps réel",
+    },
+    {
+        iconId: "banknotes",
+        text: "Reversement des fonds en moins de 3 heures",
+    },
+    {
+        iconId: "device",
+        text: "Application mobile pour suivre vos commandes",
+    },
+    {
+        iconId: "gift",
+        text: "2 jours de livraisons offerts",
+    },
+];
+
+export const offreClosing = "Commencez aujourd’hui, sans risque.";
+
+export const offreCtaLabel = "Profiter des 2 jours offerts";
+
+export const offreCtaHref = whatsappCtaHref;
+
+export const howItWorksHeading = "Comment ça marche";
+
+export const howItWorksSubheadline =
+    "Commencez à livrer en moins d’une journée.";
 
 export const howItWorksSteps = [
     {
         number: "1",
-        title: "Envoyez vos commandes",
+        title: "Contactez-nous sur WhatsApp",
         description:
-            "Utilisez simplement WhatsApp ou notre application pour nous transmettre les détails. Pas de formulaires complexes.",
+            "Nous échangeons avec vous pour comprendre votre activité et vos besoins.",
     },
     {
         number: "2",
-        title: "Nous organisons",
+        title: "Nous créons votre espace LivSight",
         description:
-            "Notre technologie assigne le livreur le plus proche et optimise le trajet pour une rapidité maximale.",
+            "Nous créons votre groupe WhatsApp dédié afin que vous puissiez commencer à nous envoyer vos commandes immédiatement.",
     },
     {
         number: "3",
-        title: "Suivez tout",
+        title: "Nous configurons votre compte",
         description:
-            "Accédez à votre tableau de bord en temps réel. Recevez des notifications de statut et des confirmations de dépôt.",
+            "Nous créons votre compte, installons l’application LivSight et vous montrons comment l’utiliser.",
+    },
+    {
+        number: "4",
+        title: "Vous vendez, nous livrons",
+        description:
+            "Recevez vos commandes comme d’habitude. LivSight prend en charge les livraisons, le suivi et le reversement de vos fonds.",
     },
 ];
 
@@ -542,21 +610,21 @@ export const impactHeadingLines = [
 export const impactFeatures = [
     {
         iconId: "agents",
-        title: "Agents formés",
+        title: "Une équipe dédiée à votre réussite",
         description:
-            "Experts en relation client, capables de gérer les situations complexes avec courtoisie et efficacité.",
+            "Nos agents suivent chacune de vos commandes et vous accompagnent au quotidien.",
     },
     {
         iconId: "tech",
-        title: "Technologie interne",
+        title: "Une technologie qui travaille pour vous",
         description:
-            "Algorithmes d'optimisation de tournées et automatisation des processus pour une scalabilité sans faille.",
+            "Suivez vos livraisons, récupérez vos fonds rapidement et gardez le contrôle en temps réel.",
     },
 ];
 
 export const impactStats = [
     { value: "98%", label: "Livraisons à temps" },
-    { value: "15min", label: "Temps de réponse moyen" },
+    { value: "15 min", label: "Réponse moyenne" },
     { value: "500+", label: "Vendeurs actifs" },
     { value: "0", label: "Commandes oubliées" },
 ];

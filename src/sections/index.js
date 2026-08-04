@@ -2,6 +2,7 @@ import Hero from "./Hero";
 import TrustedBy from "./TrustedBy";
 import LeProbleme from "./LeProbleme";
 import Solution from "./Solution";
+import Offre from "./Offre";
 import MetriquesCles from "./MetriquesCles";
 import Promotion from "./Promotion";
 import SecuriteConfiance from "./SecuriteConfiance";
@@ -15,6 +16,7 @@ export {
     TrustedBy,
     LeProbleme,
     Solution,
+    Offre,
     MetriquesCles,
     Promotion,
     SecuriteConfiance,

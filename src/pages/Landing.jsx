@@ -1,4 +1,5 @@
 import { Nav, SEO } from "../components";
+import { LandingPublicProvider } from "../context/LandingPublicContext";
 import {
   CtaFinal,
   Faq,
@@ -6,6 +7,7 @@ import {
   Hero,
   LeProbleme,
   MetriquesCles,
+  Offre,
   Promotion,
   SecuriteConfiance,
   Solution,
@@ -15,7 +17,7 @@ import {
 
 const Landing = () => {
   return (
-    <>
+    <LandingPublicProvider>
       <SEO
         title='Agence de livraison rapide à Yaoundé'
         description="LivSight est l'agence de livraison de Yaoundé. Stockage gratuit, suivi en temps réel, reversement en 3h. Confiez vos livraisons à une équipe sérieuse."
@@ -35,6 +37,9 @@ const Landing = () => {
           <div className='padding'>
             <Solution />
           </div>
+          <div className='padding'>
+            <Offre />
+          </div>
           <SecuriteConfiance />
           <MetriquesCles />
           <Promotion />
@@ -51,7 +56,7 @@ const Landing = () => {
           <Footer />
         </div>
       </div>
-    </>
+    </LandingPublicProvider>
   );
 };
 

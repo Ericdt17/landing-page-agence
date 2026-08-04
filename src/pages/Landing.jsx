@@ -1,9 +1,9 @@
-import { Nav, SEO } from "../components";
+import { Helmet } from "react-helmet-async";
+import { Nav, SEO, SiteFooter } from "../components";
 import { LandingPublicProvider } from "../context/LandingPublicContext";
 import {
   CtaFinal,
   Faq,
-  Footer,
   Hero,
   LeProbleme,
   MetriquesCles,
@@ -17,10 +17,33 @@ const Landing = () => {
   return (
     <LandingPublicProvider>
       <SEO
-        title='Agence de livraison rapide à Yaoundé'
-        description="LivSight est l'agence de livraison de Yaoundé. Stockage gratuit, suivi en temps réel, reversement en 3h. Confiez vos livraisons à une équipe sérieuse."
-        canonical='/'
+        title="Agence de livraison pour commerçants à Yaoundé"
+        description="Développez votre business en ligne avec LivSight. Livraison à Yaoundé, stockage gratuit à l’Hippodrome, suivi en temps réel et reversement en moins de 3 heures."
+        canonical="/"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: "LivSight",
+            url: "https://livsight.com",
+            description:
+              "Agence de livraison pour commerçants et boutiques en ligne à Yaoundé.",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Yaoundé",
+              addressRegion: "Centre",
+              addressCountry: "CM",
+              streetAddress: "Hippodrome",
+            },
+            areaServed: {
+              "@type": "City",
+              name: "Yaoundé",
+            },
+          })}
+        </script>
+      </Helmet>
       <Nav />
       <main className='relative overflow-hidden bg-white'>
         <div className='absolute inset-0 bg-hero-grid bg-[length:40px_40px] opacity-[0.12]' aria-hidden='true' />
@@ -44,12 +67,7 @@ const Landing = () => {
           <CtaFinal />
         </div>
       </main>
-      <div className='relative overflow-hidden border-t border-gray-100 bg-white padding-x padding-t pb-8'>
-        <div className='absolute inset-0 bg-hero-grid bg-[length:40px_40px] opacity-[0.15]' aria-hidden='true' />
-        <div className='relative'>
-          <Footer />
-        </div>
-      </div>
+      <SiteFooter />
     </LandingPublicProvider>
   );
 };

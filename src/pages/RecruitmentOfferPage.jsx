@@ -100,10 +100,27 @@ const RecruitmentOfferPage = () => {
     const descriptionText = job ? descriptionFromApi(job) : "";
     const offerTitle = meta?.title || "Offre d'emploi";
 
+    const seoDescription = (() => {
+        const location = meta?.location;
+        const lead = [
+            offerTitle,
+            location && location !== "Non précisé" ? `à ${location}` : null,
+            badgeLabel ? `(${badgeLabel})` : null,
+        ]
+            .filter(Boolean)
+            .join(" ");
+        const body = descriptionText
+            ? descriptionText.replace(/\s+/g, " ").trim()
+            : "Postulez chez LivSight à Yaoundé. Formation assurée, équipe locale.";
+        const full = `${lead}. ${body}`;
+        return full.length > 160 ? `${full.slice(0, 157).trim()}…` : full;
+    })();
+
     return (
         <>
             <SEO
                 title={offerTitle}
+                description={seoDescription}
                 canonical={`/entreprise/recrutement/offre/${jobId ?? ""}`}
             />
             <main className='min-h-[60vh] bg-white'>

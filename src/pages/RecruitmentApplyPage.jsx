@@ -98,10 +98,23 @@ const RecruitmentApplyPage = () => {
 
     const offerTitle = meta?.title || "Offre d'emploi";
 
+    const seoDescription = (() => {
+        const location = meta?.location;
+        const bits = [
+            `Candidature : ${offerTitle}`,
+            location && location !== "Non précisé" ? location : null,
+            badgeLabel || null,
+            "Postulez en ligne chez LivSight à Yaoundé.",
+        ].filter(Boolean);
+        const full = bits.join(" · ");
+        return full.length > 160 ? `${full.slice(0, 157).trim()}…` : full;
+    })();
+
     return (
         <>
             <SEO
                 title={`${RECRUITMENT_MODAL_TITLE} | ${offerTitle}`}
+                description={seoDescription}
                 canonical={`/entreprise/recrutement/offre/${jobId ?? ""}/postuler`}
             />
             <main className='min-h-[60vh] bg-white'>

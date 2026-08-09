@@ -7,7 +7,7 @@ export default function SEO({
   image = "/og-livsight.jpg",
 }) {
   const siteName = "LivSight";
-  const baseUrl = "https://livsight.com";
+  const baseUrl = "https://www.livsight.com";
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const pageUrl = `${baseUrl}${canonical}`;
   const imageUrl = `${baseUrl}${image}`;

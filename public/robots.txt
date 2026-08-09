@@ -4,4 +4,4 @@ Allow: /
 Disallow: /api/
 Disallow: /entreprise/recrutement/offre/
 
-Sitemap: https://livsight.com/sitemap.xml
+Sitemap: https://www.livsight.com/sitemap.xml

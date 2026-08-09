@@ -835,8 +835,6 @@ export const footerSocialLinks = [
 
 export const footerLocales = [
     { code: "fr", label: "FR", href: "/", active: true },
-    { code: "en", label: "EN", href: "/en/", active: false },
-    { code: "es", label: "ES", href: "/es/", active: false },
 ];
 
 /** Titre : politique de confidentialité (page `/legal/confidentialite`). */

@@ -27,7 +27,7 @@ const Landing = () => {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             name: "LivSight",
-            url: "https://livsight.com",
+            url: "https://www.livsight.com",
             description:
               "Agence de livraison pour commerçants et boutiques en ligne à Yaoundé.",
             address: {

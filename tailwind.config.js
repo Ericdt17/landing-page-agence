@@ -25,7 +25,12 @@ export default {
       },
       colors: {
         'primary': "#ECEEFF",
-        "brand-blue": "#257DC4",
+        /* Bleu du logo (header-logo.svg, 35 aplats) : identité, aplats décoratifs,
+           teintes. Contraste 3,46:1 sur blanc, donc jamais pour du texte courant. */
+        "brand-blue": "#1493CE",
+        /* Même teinte assombrie pour tout ce qui porte du texte : 4,75:1 sur blanc
+           et 4,75:1 sous du blanc, donc conforme AA dans les deux sens. */
+        "brand-ink": "#0E7BB0",
         "coral-red": "#FF6452",
         "slate-gray": "#6D6D6D",
         "pale-blue": "#F5F6FF",

@@ -22,14 +22,14 @@ const AgencyContactLines = () => {
               href={whatsappCtaHref}
               target='_blank'
               rel='noopener noreferrer'
-              className='font-semibold text-brand-blue underline decoration-brand-blue/30 underline-offset-2 hover:opacity-90'
+              className='font-semibold text-brand-ink underline decoration-brand-blue/30 underline-offset-2 hover:opacity-90'
             >
               WhatsApp
             </a>
             {" · "}
             <a
               href={telHref}
-              className='font-semibold text-brand-blue underline decoration-brand-blue/30 underline-offset-2 hover:opacity-90'
+              className='font-semibold text-brand-ink underline decoration-brand-blue/30 underline-offset-2 hover:opacity-90'
             >
               {phone}
             </a>
@@ -39,7 +39,7 @@ const AgencyContactLines = () => {
             href={whatsappCtaHref}
             target='_blank'
             rel='noopener noreferrer'
-            className='font-semibold text-brand-blue underline decoration-brand-blue/30 underline-offset-2 hover:opacity-90'
+            className='font-semibold text-brand-ink underline decoration-brand-blue/30 underline-offset-2 hover:opacity-90'
           >
             Ouvrir le WhatsApp officiel LivSight
           </a>
@@ -49,7 +49,7 @@ const AgencyContactLines = () => {
         <span className='font-bold text-gray-900'>Email :</span>{" "}
         <a
           href={`mailto:${footerSupportEmail}`}
-          className='font-semibold text-brand-blue underline decoration-brand-blue/30 underline-offset-2 hover:opacity-90'
+          className='font-semibold text-brand-ink underline decoration-brand-blue/30 underline-offset-2 hover:opacity-90'
         >
           {footerSupportEmail}
         </a>
@@ -72,14 +72,14 @@ const SecuriteSection = () => {
       <div className='mt-12 flex flex-col gap-12'>
         {securityGroups.map((group) => (
           <div key={group.groupTitle}>
-            <h2 className='font-montserrat text-sm font-bold uppercase tracking-[0.14em] text-brand-blue'>
+            <h2 className='font-montserrat text-sm font-bold uppercase tracking-[0.14em] text-brand-ink'>
               {group.groupTitle}
             </h2>
             <div className='mt-8 flex flex-col gap-10'>
               {group.articles.map((article) => (
                 <div key={article.art}>
                   <div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
-                    <span className='font-montserrat text-xs font-bold tracking-[0.14em] text-brand-blue'>
+                    <span className='font-montserrat text-xs font-bold tracking-[0.14em] text-brand-ink'>
                       Art. {article.art}
                     </span>
                     <h3 className='font-montserrat text-lg font-bold text-gray-900 sm:text-xl'>
@@ -121,7 +121,7 @@ const SecuriteSection = () => {
         <div className='mt-5 flex flex-col gap-3 sm:flex-row sm:gap-4'>
           <a
             href={`mailto:${footerSupportEmail}`}
-            className='inline-flex items-center justify-center rounded-full border border-brand-blue px-6 py-3 font-montserrat text-sm font-bold text-brand-blue transition-colors hover:bg-brand-blue hover:text-white'
+            className='inline-flex items-center justify-center rounded-full border border-brand-blue px-6 py-3 font-montserrat text-sm font-bold text-brand-ink transition-colors hover:bg-brand-ink hover:text-white'
           >
             {footerSupportEmail}
           </a>
@@ -129,7 +129,7 @@ const SecuriteSection = () => {
             href={whatsappCtaHref}
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 font-montserrat text-sm font-bold text-white transition-colors hover:bg-brand-blue/90'
+            className='inline-flex items-center justify-center rounded-full bg-brand-ink px-6 py-3 font-montserrat text-sm font-bold text-white transition-colors hover:bg-brand-blue/90'
           >
             Écrire sur WhatsApp
           </a>

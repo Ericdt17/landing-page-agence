@@ -26,7 +26,7 @@ const Solution = () => {
         aria-hidden='true'
       />
       <div className='relative max-w-3xl'>
-        <p className='font-montserrat text-sm font-semibold uppercase tracking-[1.4px] text-brand-blue'>
+        <p className='font-montserrat text-sm font-semibold uppercase tracking-[1.4px] text-brand-ink'>
           {solutionEyebrow}
         </p>
         <h2 className='mt-4 font-montserrat text-2xl font-bold leading-snug text-gray-900 sm:text-3xl sm:leading-tight md:text-4xl lg:text-[48px] lg:leading-[1.15]'>
@@ -40,7 +40,7 @@ const Solution = () => {
           ))}
         </h2>
 
-        <h3 className='mt-8 font-montserrat text-sm font-semibold uppercase tracking-[1.4px] text-brand-blue'>
+        <h3 className='mt-8 font-montserrat text-sm font-semibold uppercase tracking-[1.4px] text-brand-ink'>
           {solutionBenefitsTitle}
         </h3>
 
@@ -50,7 +50,7 @@ const Solution = () => {
             return (
               <li key={text} className='flex items-start gap-3'>
                 <Icon
-                  className='mt-0.5 h-6 w-6 shrink-0 text-brand-blue'
+                  className='mt-0.5 h-6 w-6 shrink-0 text-brand-ink'
                   aria-hidden='true'
                 />
                 <p className='font-montserrat text-base font-medium leading-6 text-gray-900 sm:text-lg sm:leading-7'>

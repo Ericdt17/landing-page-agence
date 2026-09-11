@@ -64,11 +64,11 @@ const Contact = () => {
                 </h2>
                 <ul className='mt-8 grid list-none grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6'>
                     <li className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'>
-                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-blue'>
+                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-ink'>
                             {contactWhatsAppChannel.eyebrow}
                         </p>
                         <ChatBubbleLeftRightIcon
-                            className='mt-3 h-6 w-6 text-brand-blue'
+                            className='mt-3 h-6 w-6 text-brand-ink'
                             aria-hidden='true'
                         />
                         <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
@@ -78,7 +78,7 @@ const Contact = () => {
                             href={whatsappCtaHref}
                             target='_blank'
                             rel='noopener noreferrer'
-                            className='mt-2 inline-flex w-fit items-center gap-2 font-montserrat text-base font-semibold text-brand-blue underline-offset-2 hover:underline'
+                            className='mt-2 inline-flex w-fit items-center gap-2 font-montserrat text-base font-semibold text-brand-ink underline-offset-2 hover:underline'
                         >
                             <WhatsAppIcon className='h-5 w-5 shrink-0' />
                             WhatsApp
@@ -89,11 +89,11 @@ const Contact = () => {
                     </li>
 
                     <li className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'>
-                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-blue'>
+                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-ink'>
                             {contactEmailChannel.eyebrow}
                         </p>
                         <EnvelopeIcon
-                            className='mt-3 h-6 w-6 text-brand-blue'
+                            className='mt-3 h-6 w-6 text-brand-ink'
                             aria-hidden='true'
                         />
                         <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
@@ -101,7 +101,7 @@ const Contact = () => {
                         </h3>
                         <a
                             href={`mailto:${footerSupportEmail}`}
-                            className='mt-2 w-fit font-montserrat text-base font-semibold text-brand-blue underline-offset-2 hover:underline'
+                            className='mt-2 w-fit font-montserrat text-base font-semibold text-brand-ink underline-offset-2 hover:underline'
                         >
                             {footerSupportEmail}
                         </a>
@@ -111,11 +111,11 @@ const Contact = () => {
                     </li>
 
                     <li className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'>
-                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-blue'>
+                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-ink'>
                             {contactVisitChannel.eyebrow}
                         </p>
                         <MapPinIcon
-                            className='mt-3 h-6 w-6 text-brand-blue'
+                            className='mt-3 h-6 w-6 text-brand-ink'
                             aria-hidden='true'
                         />
                         <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
@@ -130,11 +130,11 @@ const Contact = () => {
                     </li>
 
                     <li className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'>
-                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-blue'>
+                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-ink'>
                             {contactPhoneChannel.eyebrow}
                         </p>
                         <PhoneIcon
-                            className='mt-3 h-6 w-6 text-brand-blue'
+                            className='mt-3 h-6 w-6 text-brand-ink'
                             aria-hidden='true'
                         />
                         <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
@@ -143,7 +143,7 @@ const Contact = () => {
                         {telHref ? (
                             <a
                                 href={telHref}
-                                className='mt-2 w-fit font-montserrat text-base font-semibold text-brand-blue underline-offset-2 hover:underline'
+                                className='mt-2 w-fit font-montserrat text-base font-semibold text-brand-ink underline-offset-2 hover:underline'
                             >
                                 {securityAgencyPhone}
                             </a>

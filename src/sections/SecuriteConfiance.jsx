@@ -23,7 +23,7 @@ const SecuriteConfiance = () => {
               key={step.number}
               className='relative overflow-hidden rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card sm:px-8 sm:py-9'
             >
-              <span className='font-montserrat text-sm font-bold tracking-wide text-brand-blue'>
+              <span className='font-montserrat text-sm font-bold tracking-wide text-brand-ink'>
                 {step.number}
               </span>
 

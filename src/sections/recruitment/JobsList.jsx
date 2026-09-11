@@ -56,7 +56,7 @@ const JobsList = ({ jobs, loading, error }) => {
         return (
             <div className='mt-10 flex flex-col items-center justify-center rounded-3xl border border-dashed border-gray-200 bg-gray-50/80 px-6 py-14 text-center'>
                 <BriefcaseIcon
-                    className='h-14 w-14 text-brand-blue'
+                    className='h-14 w-14 text-brand-ink'
                     aria-hidden='true'
                 />
                 <p className='mt-6 max-w-md font-montserrat text-base leading-relaxed text-gray-600'>
@@ -80,8 +80,8 @@ const JobsList = ({ jobs, loading, error }) => {
                 const isAgent =
                     job.typeKey.includes("agent") || job.typeKey === "agent";
                 const badgeClass = isAgent
-                    ? "bg-primary text-brand-blue"
-                    : "bg-pale-blue text-brand-blue";
+                    ? "bg-primary text-brand-ink"
+                    : "bg-pale-blue text-brand-ink";
 
                 return (
                     <li
@@ -99,7 +99,7 @@ const JobsList = ({ jobs, loading, error }) => {
                         <div className='mt-4 flex flex-col gap-2 font-montserrat text-sm text-gray-600'>
                             <span className='inline-flex items-center gap-2'>
                                 <MapPinIcon
-                                    className='h-5 w-5 shrink-0 text-brand-blue'
+                                    className='h-5 w-5 shrink-0 text-brand-ink'
                                     aria-hidden='true'
                                 />
                                 {job.location}
@@ -107,7 +107,7 @@ const JobsList = ({ jobs, loading, error }) => {
                             {job.positions != null && (
                                 <span className='inline-flex items-center gap-2'>
                                     <UserGroupIcon
-                                        className='h-5 w-5 shrink-0 text-brand-blue'
+                                        className='h-5 w-5 shrink-0 text-brand-ink'
                                         aria-hidden='true'
                                     />
                                     {job.positions} poste
@@ -118,7 +118,7 @@ const JobsList = ({ jobs, loading, error }) => {
                         </div>
                         <Link
                             to={recruitmentOfferDetailPath(job.id)}
-                            className='mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-brand-blue px-6 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 sm:w-auto sm:self-start'
+                            className='mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-brand-ink px-6 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 sm:w-auto sm:self-start'
                         >
                             {RECRUITMENT_JOB_UI.viewDetail}
                         </Link>

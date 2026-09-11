@@ -1,20 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const STORAGE_KEY = "livsight.cookies";
-
-/** @returns {"accepted"|"refused"|null} */
-export const cookieChoice = () => {
-  try {
-    const value = window.localStorage.getItem(STORAGE_KEY);
-    return value === "accepted" || value === "refused" ? value : null;
-  } catch {
-    return null;
-  }
-};
-
-/** Les cookies de mesure ne doivent être posés que si ceci renvoie vrai. */
-export const analyticsAllowed = () => cookieChoice() === "accepted";
+import { cookieChoice, rememberCookieChoice } from "../services/cookieConsent";
 
 const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
@@ -24,11 +11,7 @@ const CookieConsent = () => {
   }, []);
 
   const decide = (choice) => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, choice);
-    } catch {
-      /* stockage indisponible : on ne pose rien, donc rien à mémoriser */
-    }
+    rememberCookieChoice(choice);
     setVisible(false);
   };
 

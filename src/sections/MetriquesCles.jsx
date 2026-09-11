@@ -1,5 +1,6 @@
 import { CpuChipIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 import { impactFeatures, impactHeadingLines, impactStats } from "../constants";
+import CountUp from "../components/CountUp";
 import { useLandingPublic } from "../context/LandingPublicContext";
 
 const iconMap = {
@@ -25,6 +26,7 @@ const buildImpactStats = ({ clientsCount, completedDeliveries }) => {
     if (clientsCount != null && CLIENTS_FALLBACK_LABELS.has(stat.label)) {
       return {
         value: formatStatCount(clientsCount),
+        numeric: clientsCount,
         label: CLIENTS_STAT_LABEL,
       };
     }
@@ -34,6 +36,7 @@ const buildImpactStats = ({ clientsCount, completedDeliveries }) => {
     ) {
       return {
         value: formatStatCount(completedDeliveries),
+        numeric: completedDeliveries,
         label: DELIVERIES_STAT_LABEL,
       };
     }
@@ -100,8 +103,11 @@ const MetriquesCles = () => {
                 key={stat.label}
                 className='rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-md'
               >
-                <p className='font-montserrat text-2xl font-extrabold text-lime-300 sm:text-[30px] sm:leading-9'>
-                  {stat.value}
+                <p className='font-montserrat text-2xl font-extrabold tabular-nums text-lime-300 sm:text-[30px] sm:leading-9'>
+                  <CountUp
+                    value={stat.numeric ?? stat.value}
+                    format={formatStatCount}
+                  />
                 </p>
                 <p className='mt-3 font-montserrat text-xs font-medium uppercase tracking-[0.14em] text-slate-300'>
                   {stat.label}

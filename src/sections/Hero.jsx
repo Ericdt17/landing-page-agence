@@ -25,7 +25,7 @@ const Hero = () => {
             </span>
           </div>
 
-          <h1 className='mt-6 font-palanquin font-extrabold text-[#1a1a1a] text-[34px] leading-[1.08] tracking-tight sm:text-5xl sm:leading-[1.05] lg:text-[72px] lg:leading-[72px] lg:tracking-[-1.8px]'>
+          <h1 className='mt-6 font-montserrat font-extrabold text-[#1a1a1a] text-[34px] leading-[1.08] tracking-tight sm:text-5xl sm:leading-[1.05] lg:text-[72px] lg:leading-[72px] lg:tracking-[-1.8px]'>
             {heroHeadlineLines.map((line) => {
               if (!line.includes(heroHeadlineEmphasis)) {
                 return (

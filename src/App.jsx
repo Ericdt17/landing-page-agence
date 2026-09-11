@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieConsent from "./components/CookieConsent";
 import Landing from "./pages/Landing";
@@ -17,6 +17,7 @@ import RecruitmentOfferPage from "./pages/RecruitmentOfferPage";
 import RecruitmentApplyPage from "./pages/RecruitmentApplyPage";
 import RecruitmentJobLayout from "./pages/RecruitmentJobLayout";
 import RecruitmentPage from "./pages/RecruitmentPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 /** Évite `basename: './'` (Vite `base: './'`) : aucune route ne matche → `*` renvoie à `/`. */
 const routerBasename = (() => {
@@ -73,7 +74,7 @@ const App = () => {
           path='/plateforme/integrations-api'
           element={<IntegrationsApiPage />}
         />
-        <Route path='*' element={<Navigate to='/' replace />} />
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

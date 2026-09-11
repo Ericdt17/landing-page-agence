@@ -5,6 +5,7 @@ export default function SEO({
   description,
   canonical = "/",
   image = "/og-livsight.jpg",
+  noindex = false,
 }) {
   const siteName = "LivSight";
   const baseUrl = "https://www.livsight.com";
@@ -13,7 +14,7 @@ export default function SEO({
   const imageUrl = `${baseUrl}${image}`;
 
   const defaultDesc =
-    "Développez votre business en ligne avec LivSight : livraison à Yaoundé, stockage gratuit, suivi en temps réel et reversement en moins de 3 heures.";
+    "Développez votre business en ligne avec LivSight : livraison à Yaoundé, stockage offert 3 mois, suivi en temps réel et reversement en fin de journée.";
 
   const metaDescription = description || defaultDesc;
 
@@ -23,6 +24,7 @@ export default function SEO({
 
       <title>{fullTitle}</title>
       <meta name="description" content={metaDescription} />
+      {noindex && <meta name="robots" content="noindex, nofollow" />}
       <link rel="canonical" href={pageUrl} />
 
       <meta property="og:title" content={fullTitle} />

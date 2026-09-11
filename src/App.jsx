@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import CookieConsent from "./components/CookieConsent";
 import Landing from "./pages/Landing";
 import ConfidentialitePage from "./pages/ConfidentialitePage";
 import ConditionsPage from "./pages/ConditionsPage";
@@ -29,6 +30,7 @@ const App = () => {
   return (
     <BrowserRouter basename={routerBasename}>
       <ScrollToTop />
+      <CookieConsent />
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route

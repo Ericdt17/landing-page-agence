@@ -18,8 +18,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        palanquin: ['Palanquin', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
+        montserrat: ['Montserrat', 'system-ui', 'Segoe UI', 'sans-serif'],
+        /* Alias conservé : `font-palanquin` reste valide et rend du Montserrat,
+           le temps que d'éventuels usages restants soient repris. */
+        palanquin: ['Montserrat', 'system-ui', 'Segoe UI', 'sans-serif'],
       },
       colors: {
         'primary': "#ECEEFF",

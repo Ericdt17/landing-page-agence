@@ -1,5 +1,6 @@
 import { CpuChipIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 import { impactFeatures, impactHeadingLines, impactStats } from "../constants";
+import CountUp from "../components/CountUp";
 import { useLandingPublic } from "../context/LandingPublicContext";
 
 const iconMap = {
@@ -8,7 +9,7 @@ const iconMap = {
 };
 
 const CLIENTS_STAT_LABEL = "Clients actifs";
-const DELIVERIES_STAT_LABEL = "Livraisons réalisées";
+const DELIVERIES_STAT_LABEL = "Colis livrés depuis le début";
 const CLIENTS_FALLBACK_LABELS = new Set(["Vendeurs actifs", CLIENTS_STAT_LABEL]);
 const DELIVERIES_FALLBACK_LABELS = new Set([
   "Livraisons à temps",
@@ -19,23 +20,20 @@ const formatStatCount = (count) =>
   new Intl.NumberFormat("fr-FR").format(count);
 
 const buildImpactStats = ({ clientsCount, completedDeliveries }) => {
-  if (clientsCount == null && completedDeliveries == null) return impactStats;
+  /* Les deux chiffres vivants remplacent les vignettes correspondantes. Quand
+     l'API ne répond pas, on affiche un tiret : mieux vaut ne rien annoncer
+     qu'annoncer un chiffre inventé. */
+  const live = (count) =>
+    count == null
+      ? { value: "—", numeric: null, pending: true }
+      : { value: formatStatCount(count), numeric: count, pending: false };
 
   return impactStats.map((stat) => {
-    if (clientsCount != null && CLIENTS_FALLBACK_LABELS.has(stat.label)) {
-      return {
-        value: formatStatCount(clientsCount),
-        label: CLIENTS_STAT_LABEL,
-      };
+    if (CLIENTS_FALLBACK_LABELS.has(stat.label)) {
+      return { ...stat, ...live(clientsCount), label: CLIENTS_STAT_LABEL };
     }
-    if (
-      completedDeliveries != null &&
-      DELIVERIES_FALLBACK_LABELS.has(stat.label)
-    ) {
-      return {
-        value: formatStatCount(completedDeliveries),
-        label: DELIVERIES_STAT_LABEL,
-      };
+    if (DELIVERIES_FALLBACK_LABELS.has(stat.label)) {
+      return { ...stat, ...live(completedDeliveries), label: DELIVERIES_STAT_LABEL };
     }
     return stat;
   });
@@ -100,8 +98,11 @@ const MetriquesCles = () => {
                 key={stat.label}
                 className='rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-md'
               >
-                <p className='font-montserrat text-2xl font-extrabold text-lime-300 sm:text-[30px] sm:leading-9'>
-                  {stat.value}
+                <p
+                  className='font-montserrat text-2xl font-extrabold tabular-nums text-lime-300 sm:text-[30px] sm:leading-9'
+                  aria-busy={stat.pending ? "true" : undefined}
+                >
+                  <CountUp value={stat.numeric ?? stat.value} format={formatStatCount} />
                 </p>
                 <p className='mt-3 font-montserrat text-xs font-medium uppercase tracking-[0.14em] text-slate-300'>
                   {stat.label}

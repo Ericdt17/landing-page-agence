@@ -15,7 +15,7 @@ const PortailAgentPage = () => {
                 canonical='/plateforme/portail-agent'
             />
             <main className='min-h-[60vh] bg-white'>
-                <div className='bg-brand-blue'>
+                <div className='bg-brand-ink'>
                     <div className='max-container padding-x py-12 sm:py-16'>
                         <Link
                             to='/'

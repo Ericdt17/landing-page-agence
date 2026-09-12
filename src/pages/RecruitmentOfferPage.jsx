@@ -90,8 +90,8 @@ const RecruitmentOfferPage = () => {
         meta &&
         (meta.typeKey.includes("agent") || meta.typeKey === "agent");
     const badgeClass = isAgent
-        ? "bg-primary text-brand-blue"
-        : "bg-pale-blue text-brand-blue";
+        ? "bg-primary text-brand-ink"
+        : "bg-pale-blue text-brand-ink";
 
     const subtitle =
         meta &&
@@ -124,7 +124,7 @@ const RecruitmentOfferPage = () => {
                 canonical={`/entreprise/recrutement/offre/${jobId ?? ""}`}
             />
             <main className='min-h-[60vh] bg-white'>
-                <div className='bg-brand-blue'>
+                <div className='bg-brand-ink'>
                     <div className='max-container padding-x py-12 sm:py-16'>
                         <Link
                             to={entrepriseRecrutementPath}
@@ -176,7 +176,7 @@ const RecruitmentOfferPage = () => {
                         <p className='mt-10 font-montserrat text-base text-gray-600'>
                             <Link
                                 to={entrepriseRecrutementPath}
-                                className='font-semibold text-brand-blue underline-offset-2 hover:underline'
+                                className='font-semibold text-brand-ink underline-offset-2 hover:underline'
                             >
                                 {RECRUITMENT_JOB_UI.backToOffers}
                             </Link>
@@ -188,7 +188,7 @@ const RecruitmentOfferPage = () => {
                             <div className='mt-8 flex flex-col gap-3 font-montserrat text-sm text-gray-600 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6'>
                                 <span className='inline-flex items-center gap-2'>
                                     <MapPinIcon
-                                        className='h-5 w-5 shrink-0 text-brand-blue'
+                                        className='h-5 w-5 shrink-0 text-brand-ink'
                                         aria-hidden='true'
                                     />
                                     {meta.location}
@@ -196,7 +196,7 @@ const RecruitmentOfferPage = () => {
                                 {meta.positions != null && (
                                     <span className='inline-flex items-center gap-2'>
                                         <UserGroupIcon
-                                            className='h-5 w-5 shrink-0 text-brand-blue'
+                                            className='h-5 w-5 shrink-0 text-brand-ink'
                                             aria-hidden='true'
                                         />
                                         {meta.positions} poste
@@ -226,7 +226,7 @@ const RecruitmentOfferPage = () => {
                             <div className='mt-10'>
                                 <Link
                                     to='postuler'
-                                    className='inline-flex min-h-[48px] items-center justify-center rounded-full bg-brand-blue px-8 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95'
+                                    className='inline-flex min-h-[48px] items-center justify-center rounded-full bg-brand-ink px-8 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95'
                                 >
                                     {APPLICATION_FORM_LABELS.apply}
                                 </Link>

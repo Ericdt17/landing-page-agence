@@ -67,7 +67,7 @@ const APropos = () => {
                         key={id ?? label}
                         className='rounded-2xl border border-gray-100 bg-gray-50/80 px-5 py-6 text-center shadow-soft-card'
                     >
-                        <p className='font-montserrat text-2xl font-extrabold text-brand-blue sm:text-3xl'>
+                        <p className='font-montserrat text-2xl font-extrabold text-brand-ink sm:text-3xl'>
                             {value}
                         </p>
                         <p className='mt-2 font-montserrat text-sm leading-snug text-gray-600'>
@@ -115,7 +115,7 @@ const APropos = () => {
                                 className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'
                             >
                                 <Icon
-                                    className='h-6 w-6 text-brand-blue'
+                                    className='h-6 w-6 text-brand-ink'
                                     aria-hidden='true'
                                 />
                                 <h3 className='mt-5 font-montserrat text-lg font-bold text-gray-900'>
@@ -158,7 +158,7 @@ const APropos = () => {
                                 href={whatsappCtaHref}
                                 target='_blank'
                                 rel='noopener noreferrer'
-                                className='font-montserrat text-base font-semibold text-brand-blue underline-offset-2 hover:underline'
+                                className='font-montserrat text-base font-semibold text-brand-ink underline-offset-2 hover:underline'
                             >
                                 {footerPrivacyWhatsAppLabel}
                             </a>
@@ -171,7 +171,7 @@ const APropos = () => {
                         <dd className='mt-1'>
                             <a
                                 href={`mailto:${footerSupportEmail}`}
-                                className='font-montserrat text-base font-semibold text-brand-blue underline-offset-2 hover:underline'
+                                className='font-montserrat text-base font-semibold text-brand-ink underline-offset-2 hover:underline'
                             >
                                 {footerSupportEmail}
                             </a>

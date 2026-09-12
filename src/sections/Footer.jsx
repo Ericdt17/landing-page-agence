@@ -86,7 +86,7 @@ const Footer = () => {
             active ? (
               <span
                 key={code}
-                className='font-montserrat text-xs font-bold text-brand-blue'
+                className='font-montserrat text-xs font-bold text-brand-ink'
                 aria-current='page'
               >
                 {label}

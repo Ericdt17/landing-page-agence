@@ -55,7 +55,7 @@ const RecruitmentPage = () => {
                 canonical='/entreprise/recrutement'
             />
             <main className='min-h-[60vh] bg-white'>
-                <div className='bg-brand-blue'>
+                <div className='bg-brand-ink'>
                     <div className='max-container padding-x py-12 sm:py-16'>
                         <Link
                             to='/'
@@ -75,7 +75,7 @@ const RecruitmentPage = () => {
                 <div className='max-container padding-x pb-16'>
                     <div className='mt-8 space-y-4'>
                         {!loading && jobs.length > 0 && (
-                            <span className='inline-flex rounded-full bg-pale-blue px-3 py-1 font-montserrat text-xs font-bold uppercase tracking-wide text-brand-blue'>
+                            <span className='inline-flex rounded-full bg-pale-blue px-3 py-1 font-montserrat text-xs font-bold uppercase tracking-wide text-brand-ink'>
                                 {RECRUITMENT_OPEN_BADGE}
                             </span>
                         )}
@@ -112,7 +112,7 @@ const RecruitmentPage = () => {
                                             className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'
                                         >
                                             <Icon
-                                                className='h-6 w-6 text-brand-blue'
+                                                className='h-6 w-6 text-brand-ink'
                                                 aria-hidden='true'
                                             />
                                             <h3 className='mt-5 font-montserrat text-lg font-bold text-gray-900'>

@@ -26,7 +26,7 @@ const ProcessSection = () => {
                         key={item.step}
                         className='flex flex-col rounded-2xl border border-gray-100 bg-white px-5 py-6 shadow-soft-card'
                     >
-                        <span className='flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue font-montserrat text-sm font-bold text-white'>
+                        <span className='flex h-10 w-10 items-center justify-center rounded-full bg-brand-ink font-montserrat text-sm font-bold text-white'>
                             {item.step}
                         </span>
                         <h3 className='mt-4 font-montserrat text-base font-bold text-gray-900'>

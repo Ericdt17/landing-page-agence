@@ -22,7 +22,7 @@ const BrandCtaCard = ({
       aria-labelledby={headingId}
     >
       <div
-        className={`overflow-hidden rounded-[32px] bg-brand-blue px-6 py-10 text-center sm:px-10 sm:py-14 ${cardClassName}`}
+        className={`overflow-hidden rounded-[32px] bg-brand-ink px-6 py-10 text-center sm:px-10 sm:py-14 ${cardClassName}`}
       >
         <h2
           id={headingId}
@@ -40,7 +40,7 @@ const BrandCtaCard = ({
           href={href}
           target='_blank'
           rel='noopener noreferrer'
-          className='mt-8 inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-white px-8 font-montserrat text-base font-bold text-brand-blue shadow-lg transition-opacity hover:opacity-95 sm:min-h-[70px] sm:px-10 sm:text-lg'
+          className='mt-8 inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-white px-8 font-montserrat text-base font-bold text-brand-ink shadow-lg transition-opacity hover:opacity-95 sm:min-h-[70px] sm:px-10 sm:text-lg'
         >
           <WhatsAppIcon className='h-5 w-5 shrink-0' />
           {buttonLabel}

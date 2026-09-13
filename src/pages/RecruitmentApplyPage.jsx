@@ -1,6 +1,7 @@
+import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { SEO, SiteFooter } from "../components";
+import { PageHeader, SEO, SiteFooter } from "../components";
 import ApplicationForm from "../sections/recruitment/ApplicationForm";
 import {
     JOB_TYPE_LABELS,
@@ -118,43 +119,35 @@ const RecruitmentApplyPage = () => {
                 canonical={`/entreprise/recrutement/offre/${jobId ?? ""}/postuler`}
             />
             <main className='min-h-[60vh] bg-white'>
-                <div className='bg-brand-ink'>
-                    <div className='max-container padding-x py-12 sm:py-16'>
-                        <Link
-                            to='..'
-                            className='inline-flex items-center gap-1.5 font-montserrat text-sm font-semibold text-white/70 transition-colors hover:text-white'
+                <PageHeader backTo={'..'} backLabel={RECRUITMENT_JOB_UI.backToOffer}>
+                {loading ? (
+                    <>
+                        <div className='mt-6 h-9 max-w-md animate-pulse rounded-lg bg-white/20' />
+                        <div className='mt-3 h-4 w-48 animate-pulse rounded bg-white/15' />
+                    </>
+                ) : loadKind ? (
+                    <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
+                        {loadKind === "notfound"
+                            ? STATUS_LABELS.jobNotFound
+                            : STATUS_LABELS.jobDetailLoadError}
+                    </h1>
+                ) : meta ? (
+                    <>
+                        <span
+                            className={`mt-6 inline-flex w-fit rounded-full px-3 py-1 font-montserrat text-xs font-bold ${badgeClass}`}
                         >
-                            {RECRUITMENT_JOB_UI.backToOffer}
-                        </Link>
-                        {loading ? (
-                            <>
-                                <div className='mt-6 h-9 max-w-md animate-pulse rounded-lg bg-white/20' />
-                                <div className='mt-3 h-4 w-48 animate-pulse rounded bg-white/15' />
-                            </>
-                        ) : loadKind ? (
-                            <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
-                                {loadKind === "notfound"
-                                    ? STATUS_LABELS.jobNotFound
-                                    : STATUS_LABELS.jobDetailLoadError}
-                            </h1>
-                        ) : meta ? (
-                            <>
-                                <span
-                                    className={`mt-6 inline-flex w-fit rounded-full px-3 py-1 font-montserrat text-xs font-bold ${badgeClass}`}
-                                >
-                                    {badgeLabel}
-                                </span>
-                                <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
-                                    {RECRUITMENT_MODAL_TITLE}
-                                </h1>
-                                <p className='mt-2 font-montserrat text-sm text-white/60'>
-                                    {meta.title}
-                                    {subtitle ? ` · ${subtitle}` : ""}
-                                </p>
-                            </>
-                        ) : null}
-                    </div>
-                </div>
+                            {badgeLabel}
+                        </span>
+                        <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
+                            {RECRUITMENT_MODAL_TITLE}
+                        </h1>
+                        <p className='mt-2 font-montserrat text-sm text-white/60'>
+                            {meta.title}
+                            {subtitle ? ` · ${subtitle}` : ""}
+                        </p>
+                    </>
+                ) : null}
+                </PageHeader>
 
                 <div className='max-container padding-x pb-16'>
                     {loading && (
@@ -169,8 +162,12 @@ const RecruitmentApplyPage = () => {
                         <p className='mt-10 font-montserrat text-base text-gray-600'>
                             <Link
                                 to={entrepriseRecrutementPath}
-                                className='font-semibold text-brand-ink underline-offset-2 hover:underline'
+                                className='inline-flex items-center gap-1.5 font-semibold text-brand-ink underline-offset-2 hover:underline'
                             >
+                                <ArrowLeftIcon
+                                    className='h-4 w-4 shrink-0'
+                                    aria-hidden='true'
+                                />
                                 {RECRUITMENT_JOB_UI.backToOffers}
                             </Link>
                         </p>

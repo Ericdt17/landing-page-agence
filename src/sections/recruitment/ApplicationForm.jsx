@@ -1,3 +1,4 @@
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -1080,9 +1081,13 @@ const ApplicationForm = ({
                                             disabled={
                                                 submitStatus === "loading"
                                             }
-                                            className='rounded-full border border-gray-200 px-6 py-3 font-montserrat text-base font-semibold text-gray-800 transition-colors hover:bg-gray-50 disabled:opacity-50'
+                                            className='inline-flex items-center justify-center gap-2 rounded-full border border-gray-200 px-6 py-3 font-montserrat text-base font-semibold text-gray-800 transition-colors hover:bg-gray-50 disabled:opacity-50'
                                         >
-                                            ← {APPLICATION_FORM_LABELS.back}
+                                            <ArrowLeftIcon
+                                                className='h-5 w-5 shrink-0'
+                                                aria-hidden='true'
+                                            />
+                                            {APPLICATION_FORM_LABELS.back}
                                         </button>
                                         <button
                                             type='submit'
@@ -1124,7 +1129,13 @@ const ApplicationForm = ({
                                             Envoi…
                                         </span>
                                     ) : hasQuestions ? (
-                                        `${APPLICATION_FORM_LABELS.next} →`
+                                        <span className='inline-flex items-center justify-center gap-2'>
+                                            {APPLICATION_FORM_LABELS.next}
+                                            <ArrowRightIcon
+                                                className='h-5 w-5 shrink-0'
+                                                aria-hidden='true'
+                                            />
+                                        </span>
                                     ) : (
                                         APPLICATION_FORM_LABELS.submit
                                     )}

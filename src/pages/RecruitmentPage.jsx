@@ -4,10 +4,9 @@ import {
     UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import JobsList from "../sections/recruitment/JobsList";
 import ProcessSection from "../sections/recruitment/ProcessSection";
-import { SEO, SiteFooter } from "../components";
+import { PageHeader, SEO, SiteFooter } from "../components";
 import {
     RECRUITMENT_HERO,
     RECRUITMENT_OPEN_BADGE,
@@ -55,22 +54,7 @@ const RecruitmentPage = () => {
                 canonical='/entreprise/recrutement'
             />
             <main className='min-h-[60vh] bg-white'>
-                <div className='bg-brand-ink'>
-                    <div className='max-container padding-x py-12 sm:py-16'>
-                        <Link
-                            to='/'
-                            className='inline-flex items-center gap-1.5 font-montserrat text-sm font-semibold text-white/70 transition-colors hover:text-white'
-                        >
-                            ← Retour à l&apos;accueil
-                        </Link>
-                        <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
-                            {RECRUITMENT_HERO.title}
-                        </h1>
-                        <p className='mt-2 font-montserrat text-sm text-white/60'>
-                            {RECRUITMENT_HERO.subtitle}
-                        </p>
-                    </div>
-                </div>
+                <PageHeader title={RECRUITMENT_HERO.title} subtitle={RECRUITMENT_HERO.subtitle} />
 
                 <div className='max-container padding-x pb-16'>
                     <div className='mt-8 space-y-4'>

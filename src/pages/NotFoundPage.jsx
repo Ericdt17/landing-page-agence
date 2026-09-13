@@ -1,3 +1,4 @@
+import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 
 import SEO from "../components/SEO";
@@ -50,9 +51,7 @@ const NotFoundPage = () => (
                 </span>
                 <span className='font-montserrat text-sm text-gray-500'>{item.hint}</span>
               </span>
-              <span aria-hidden='true' className='font-montserrat text-brand-ink'>
-                &rsaquo;
-              </span>
+              <ChevronRightIcon className='h-5 w-5 shrink-0 text-brand-ink' aria-hidden='true' />
             </Link>
           </li>
         ))}

@@ -6,8 +6,23 @@
       "permanent": true
     },
     {
+      "source": "/plateforme/solution-client",
+      "destination": "/livraison-stockage",
+      "permanent": true
+    },
+    {
+      "source": "/plateforme/portail-agent",
+      "destination": "/application",
+      "permanent": true
+    },
+    {
+      "source": "/plateforme/portail-livreur",
+      "destination": "/livraison-stockage",
+      "permanent": true
+    },
+    {
       "source": "/plateforme/app-chauffeur",
-      "destination": "/plateforme/portail-livreur",
+      "destination": "/livraison-stockage",
       "permanent": true
     },
     {

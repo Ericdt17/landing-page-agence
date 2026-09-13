@@ -2,20 +2,22 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { logoMark } from "../../assets/images";
-import { siteNavCta, siteNavLinks } from "../../constants/site";
+import { links as externalLinks, navItems, routes } from "../../constants/routes";
+import { LANGUAGES } from "../../i18n";
+import { useCopy, useLanguage } from "../../i18n/useCopy";
 
-const links = siteNavLinks.filter((link) => link.enabled);
+const items = navItems.filter((item) => item.enabled);
 
-const NavItem = ({ link, onNavigate, className }) => (
+const NavItem = ({ item, label, soon, onNavigate, className }) => (
   <NavLink
-    to={link.to}
+    to={item.to}
     onClick={onNavigate}
     className={({ isActive }) =>
       `${className} ${isActive ? "font-semibold text-ls-text" : "text-ls-muted hover:text-ls-text"}`
     }
   >
-    {link.label}
-    {link.soon && <sup className='ls-soon'>BIENTÔT</sup>}
+    {label}
+    {item.soon && <sup className='ls-soon'>{soon}</sup>}
   </NavLink>
 );
 
@@ -26,7 +28,42 @@ export const SiteLogo = ({ tone = "text-ls-text" }) => (
   </span>
 );
 
+/**
+ * Sélecteur FR · EN : deux boutons à bascule. Le choix est mémorisé dans le
+ * navigateur ; la langue de la page (`<html lang>`) suit.
+ */
+export const LanguageSwitch = ({ className = "" }) => {
+  const copy = useCopy("site");
+  const { language, setLanguage } = useLanguage();
+  return (
+    <div role='group' aria-label={copy.language.label} className={`flex items-center text-xs font-semibold ${className}`}>
+      {LANGUAGES.map((code, index) => (
+        <span key={code} className='flex items-center'>
+          {index > 0 && (
+            <span aria-hidden='true' className='px-0.5 text-ls-faint'>
+              ·
+            </span>
+          )}
+          <button
+            type='button'
+            lang={code}
+            aria-pressed={language === code}
+            aria-label={copy.language.names[code]}
+            onClick={() => setLanguage(code)}
+            className={`rounded-md px-1.5 py-2 transition-colors ${
+              language === code ? "text-ls-text underline decoration-2 underline-offset-4" : "text-ls-faint hover:text-ls-text"
+            }`}
+          >
+            {copy.language.short[code]}
+          </button>
+        </span>
+      ))}
+    </div>
+  );
+};
+
 const SiteNav = () => {
+  const copy = useCopy("site");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -50,36 +87,37 @@ const SiteNav = () => {
   return (
     <header className='border-b border-ls-rule bg-ls-bg'>
       <nav
-        aria-label='Navigation principale'
+        aria-label={copy.nav.label}
         className='mx-auto flex max-w-[1440px] items-center gap-3 px-[18px] py-3.5 md:gap-10 md:px-16 md:py-[22px]'
       >
-        <Link to='/' aria-label='LivSight, accueil' onClick={close}>
+        <Link to={routes.home} aria-label={copy.nav.home} onClick={close}>
           <SiteLogo />
         </Link>
 
         <ul className='hidden items-center gap-[26px] text-sm lg:flex'>
-          {links.map((link) => (
-            <li key={link.label}>
-              <NavItem link={link} className='whitespace-nowrap transition-colors' />
+          {items.map((item) => (
+            <li key={item.id}>
+              <NavItem item={item} label={copy.nav.links[item.id]} soon={copy.nav.soon} className='whitespace-nowrap transition-colors' />
             </li>
           ))}
         </ul>
 
         <div className='ml-auto flex items-center gap-2 md:gap-[18px]'>
+          <LanguageSwitch className='max-sm:hidden' />
           <a
-            href={siteNavCta.href}
+            href={externalLinks.whatsapp}
             target='_blank'
             rel='noopener noreferrer'
             className='ls-btn ls-btn-sm ls-btn-solid max-sm:hidden'
           >
-            {siteNavCta.label}
+            {copy.nav.cta}
           </a>
           <button
             type='button'
             className='inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ls-stroke text-ls-text lg:hidden'
             aria-expanded={open}
             aria-controls='menu-principal'
-            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-label={open ? copy.nav.closeMenu : copy.nav.openMenu}
             onClick={() => setOpen((value) => !value)}
           >
             {open ? (
@@ -94,21 +132,28 @@ const SiteNav = () => {
       {open && (
         <div id='menu-principal' className='border-t border-ls-rule lg:hidden'>
           <ul className='mx-auto flex max-w-[1440px] flex-col px-[18px] md:px-16'>
-            {links.map((link) => (
-              <li key={link.label} className='border-b border-ls-rule'>
-                <NavItem link={link} onNavigate={close} className='flex py-4 text-base' />
+            {items.map((item) => (
+              <li key={item.id} className='border-b border-ls-rule'>
+                <NavItem
+                  item={item}
+                  label={copy.nav.links[item.id]}
+                  soon={copy.nav.soon}
+                  onNavigate={close}
+                  className='flex py-4 text-base'
+                />
               </li>
             ))}
           </ul>
-          <div className='mx-auto max-w-[1440px] px-[18px] pb-6 pt-5 md:px-16'>
+          <div className='mx-auto flex max-w-[1440px] flex-col gap-4 px-[18px] pb-6 pt-5 md:px-16'>
+            <LanguageSwitch className='sm:hidden' />
             <a
-              href={siteNavCta.href}
+              href={externalLinks.whatsapp}
               target='_blank'
               rel='noopener noreferrer'
               className='ls-btn ls-btn-lg ls-btn-solid w-full'
               onClick={close}
             >
-              {siteNavCta.label}
+              {copy.nav.cta}
             </a>
           </div>
         </div>

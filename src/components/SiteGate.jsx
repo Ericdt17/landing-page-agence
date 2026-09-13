@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { headerLogo } from "../assets/images";
+import { useCopy } from "../i18n/useCopy";
+import { LanguageSwitch, SiteLogo } from "./site/SiteNav";
 import { fetchSiteConfig, gateIsActive, readEnv } from "../services/siteConfig";
 
 const STORAGE_KEY = "livsight.gate";
@@ -23,6 +24,7 @@ const store = (value) => {
 };
 
 const SiteGate = ({ children }) => {
+  const { gate } = useCopy("site");
   const buildActive = useMemo(gateIsActive, []);
   const [active, setActive] = useState(buildActive);
   const [expected, setExpected] = useState(() => readEnv("VITE_SITE_GATE_CODE"));
@@ -94,20 +96,18 @@ const SiteGate = ({ children }) => {
   if (unlocked) return children;
 
   return (
-    <main className='flex min-h-screen items-center justify-center bg-white px-6 py-16'>
+    <main className='flex min-h-screen items-center justify-center bg-ls-bg px-6 py-16 font-montserrat text-ls-text'>
       <div className='w-full max-w-sm'>
-        <img src={headerLogo} alt='LivSight' className='h-9 w-auto' />
-        <h1 className='mt-6 font-montserrat text-3xl font-bold leading-tight text-gray-900'>
-          Le nouveau site arrive.
-        </h1>
-        <p className='mt-3 font-montserrat text-sm leading-6 text-gray-600'>
-          Cette version est en cours de préparation. Entrez le code d&rsquo;accès pour la
-          consulter.
-        </p>
+        <div className='flex items-center justify-between gap-4'>
+          <SiteLogo />
+          <LanguageSwitch />
+        </div>
+        <h1 className='ls-h mt-8 text-3xl leading-tight'>{gate.title}</h1>
+        <p className='mt-3 text-sm leading-6 text-ls-muted'>{gate.body}</p>
 
         <form onSubmit={submit} className='mt-8 flex flex-col gap-3'>
           <label htmlFor='gate-code' className='sr-only'>
-            Code d&rsquo;accès
+            {gate.label}
           </label>
           <input
             id='gate-code'
@@ -120,25 +120,20 @@ const SiteGate = ({ children }) => {
             }}
             aria-invalid={error}
             aria-describedby={error ? "gate-error" : undefined}
-            placeholder='Code d&rsquo;accès'
-            className='h-12 rounded-full border border-gray-200 px-5 font-montserrat text-sm text-gray-900 outline-none focus-visible:border-brand-ink focus-visible:ring-2 focus-visible:ring-brand-ink/30'
+            placeholder={gate.label}
+            className='h-12 rounded-full border border-ls-stroke bg-ls-surface px-5 text-sm text-ls-text outline-none placeholder:text-ls-faint focus-visible:border-ls-accent focus-visible:ring-2 focus-visible:ring-ls-primary-soft'
           />
-          <button
-            type='submit'
-            className='h-12 rounded-full bg-brand-ink px-5 font-montserrat text-sm font-bold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink'
-          >
-            Entrer
+          <button type='submit' className='ls-btn ls-btn-lg ls-btn-solid'>
+            {gate.submit}
           </button>
           {error && (
-            <p id='gate-error' role='alert' className='font-montserrat text-sm text-red-600'>
-              Ce code ne correspond pas. Réessayez.
+            <p id='gate-error' role='alert' className='text-sm text-ls-bad'>
+              {gate.error}
             </p>
           )}
         </form>
 
-        <p className='mt-10 font-montserrat text-xs leading-5 text-gray-500'>
-          Le site actuel reste disponible sur livsight.com.
-        </p>
+        <p className='mt-10 text-xs leading-5 text-ls-faint'>{gate.note}</p>
       </div>
     </main>
   );

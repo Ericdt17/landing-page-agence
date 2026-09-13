@@ -1,25 +1,6 @@
-import { PageHeader, SEO } from "../components";
-import SiteLayout from "../components/site/SiteLayout";
-import CookiesSection from "../sections/Cookies";
-import { cookiesPageTitle, cookiesPageUpdated } from "../constants";
+import LegalPage from "../components/site/LegalPage";
+import { routes } from "../constants/routes";
 
-const CookiesPage = () => {
-  return (
-    <>
-      <SEO
-        title='Politique des cookies'
-        description='Politique des cookies de LivSight : agence de livraison à Yaoundé, Cameroun.'
-        canonical='/legal/cookies'
-      />
-      <SiteLayout>
-        <PageHeader title={cookiesPageTitle} subtitle={cookiesPageUpdated} />
-
-        <div className='px-[18px] md:px-16'>
-          <CookiesSection />
-        </div>
-      </SiteLayout>
-    </>
-  );
-};
+const CookiesPage = () => <LegalPage namespace='legalCookies' canonical={routes.cookies} />;
 
 export default CookiesPage;

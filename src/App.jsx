@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieConsent from "./components/CookieConsent";
+import { legacyRedirects } from "./constants/routes";
 import Accueil from "./pages/Accueil";
 
 /**
@@ -14,12 +15,9 @@ const ConditionsPage = lazy(() => import("./pages/ConditionsPage"));
 const SecuritePage = lazy(() => import("./pages/SecuritePage"));
 const CookiesPage = lazy(() => import("./pages/CookiesPage"));
 const AProposPage = lazy(() => import("./pages/AProposPage"));
-const SolutionClientPage = lazy(() => import("./pages/SolutionClientPage"));
 const CoursesParticuliersPage = lazy(() =>
   import("./pages/CoursesParticuliersPage"),
 );
-const PortailAgentPage = lazy(() => import("./pages/PortailAgentPage"));
-const PortailLivreurPage = lazy(() => import("./pages/PortailLivreurPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const RecruitmentOfferPage = lazy(() => import("./pages/RecruitmentOfferPage"));
 const RecruitmentApplyPage = lazy(() => import("./pages/RecruitmentApplyPage"));
@@ -43,7 +41,7 @@ const routerBasename = (() => {
 
 /** Fond neutre le temps qu'une page arrive : pas de saut de mise en page. */
 const PageFallback = () => (
-  <div className='min-h-screen bg-white' aria-busy='true' />
+  <div className='min-h-screen bg-ls-bg' aria-busy='true' />
 );
 
 const App = () => {
@@ -81,22 +79,12 @@ const App = () => {
             element={<RecruitmentPage />}
           />
           <Route
-            path='/plateforme/solution-client'
-            element={<SolutionClientPage />}
-          />
-          <Route
             path='/plateforme/courses-particuliers'
             element={<CoursesParticuliersPage />}
           />
-          <Route
-            path='/plateforme/portail-agent'
-            element={<PortailAgentPage />}
-          />
-          <Route
-            path='/plateforme/portail-livreur'
-            element={<PortailLivreurPage />}
-          />
-          <Route path='/plateforme/integrations-api' element={<Navigate to='/api-livraison' replace />} />
+          {Object.entries(legacyRedirects).map(([from, to]) => (
+            <Route key={from} path={from} element={<Navigate to={to} replace />} />
+          ))}
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Suspense>

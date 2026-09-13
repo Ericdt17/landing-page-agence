@@ -8,48 +8,33 @@ This file provides guidance for AI assistants working in this repository.
 npm run dev       # Start dev server at localhost:5173
 npm run build     # Production build
 npm run preview   # Preview production build
-npm run lint      # ESLint (max-warnings 0 — zero tolerance)
+npm run lint      # ESLint (max-warnings 0, zero tolerance)
+npm run size      # Bundle and image size budgets (scripts/check-bundle-size.mjs)
 ```
 
 ## Architecture
 
-Single-page React + Vite + Tailwind CSS landing page (LivSight). No routing — navigation uses anchor links (`#section-id`). `App.jsx` renders all sections in order.
+React 18 + Vite + React Router + Tailwind CSS site for LivSight, deployed on Vercel (`vercel.json` holds redirects and the SPA rewrite).
 
-```
-App.jsx
-├── Nav
-├── Hero
-├── TrustedBy
-├── LeProbleme
-├── Solution
-├── MetriquesCles
-├── Temoignages
-├── SecuriteConfiance
-├── Tarifs
-├── Faq
-├── CtaFinal
-└── Footer
-```
+- `src/App.jsx`: routes. The home page is bundled; every other page is lazy-loaded. Retired URLs redirect through `legacyRedirects` (keep `vercel.json` in sync).
+- `src/pages/`: one file per route.
+- `src/sections/`: larger blocks used by pages (`accueil/`, `application/`, `offre/`, `recruitment/`).
+- `src/components/site/`: the site shell (`SiteLayout`, `SiteNav` with the FR · EN switch, `SiteFooter`, `InkHero`, `LegalPage`, `ScreenTour`, `ApiTeaser`).
+- `src/constants/routes.js`: the only source for paths, external links, nav and footer structure (links carry `enabled` / `soon` flags).
+- `src/services/`: API clients and data helpers (public landing API, recruitment API, tariffs, jobs).
 
-**`src/sections/`** — full-width page sections that compose smaller pieces  
-**`src/components/`** — reusable UI elements (`Button`, `Nav`)  
-**`src/constants/index.js`** — single source of truth for copy/data (`navLinks`, footer columns, testimonials, FAQ, tarifs, etc.)  
-**`src/assets/icons/index.js` + `src/assets/images/index.js`** — barrel exports for assets
+## Text and translations
 
-## Key Rules (from .cursor/rules/)
+- All visible text lives in `src/locales/{fr,en}/<namespace>.js`, one namespace per page (plus `site` for shared text). Both languages must keep the same shape.
+- Read text with `useCopy("<namespace>")` from `src/i18n/useCopy.js`; interpolate with `fill(text, { key })`. English falls back to French key by key.
+- `site` and `accueil` are bundled; other namespaces load with their page.
+- French is the default and the reference; legal pages in English show a note that the French version prevails.
+- Option `value`s sent to APIs stay identical across languages; only labels are translated. Data from APIs (job titles, neighbourhoods) is not translated.
 
-**Branding & content**: Prefer `src/constants/index.js` for copy and nav/footer data.
+## Rules
 
-**Assets**: Import via barrel files (`import { headerLogo } from "../assets/images"`), not raw string paths.
-
-**Theming**: Adjust look via `tailwind.config.js` tokens (colors, fonts, shadows).
-
-**Nav ↔ section IDs**: Keep `navLinks` `href` values in sync with section `id` attributes in `src/sections/*`.
-
-## Tailwind Conventions
-
-- Custom fonts: `font-palanquin`, `font-montserrat`
-- Custom colors: `coral-red`, `brand-blue`, `slate-gray`, `pale-blue`, `primary`, `security-ink`
-- Shared padding utilities: `.padding`, `.padding-x`, etc. (`src/index.css`)
-- Layout wrapper: `.max-container`
-- Custom breakpoint: `wide:` (1440px)
+- Theming: use the `ls-*` tokens (CSS variables in `src/index.css`, mapped in `tailwind.config.js`), which handle light and dark mode. No raw grays or hex colors in components.
+- Assets: import via barrel files (`src/assets/images/index.js`, `src/assets/icons/index.js`).
+- No third-party runtime calls that send visitor data abroad (law 2024/017): fonts, images and maps are self-hosted; maps are drawn, not real map tiles.
+- Copy: no em dashes; do not publish features, prices or promises that are not confirmed.
+- Contact email: contact@livsight.com.

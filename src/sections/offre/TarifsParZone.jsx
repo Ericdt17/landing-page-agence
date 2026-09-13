@@ -1,18 +1,28 @@
-import { tarifsZones } from "../../constants/offre";
-import { siteWhatsappHref } from "../../constants/site";
+import { links } from "../../constants/routes";
 import { useLandingPublic } from "../../context/LandingPublicContext";
+import { fill, useCopy, useLanguage } from "../../i18n/useCopy";
 import { cityZones, feeExtras, formatFcfa } from "../../services/tarifs";
 
-const neighborhoodLabel = (neighborhood, zoneFee) => {
-  const override = neighborhood.fee != null && neighborhood.fee !== zoneFee ? ` (${formatFcfa(neighborhood.fee)})` : "";
+const neighborhoodLabel = (neighborhood, zoneFee, language) => {
+  const override =
+    neighborhood.fee != null && neighborhood.fee !== zoneFee ? ` (${formatFcfa(neighborhood.fee, language)})` : "";
   return `${neighborhood.name}${override}${neighborhood.entryFee ? " †" : ""}`;
+};
+
+const extraValue = (extra, labels, language) => {
+  if (extra.id === "clientAbsent") return fill(labels.clientAbsentValue, { percent: extra.percent });
+  if (extra.id === "express") return fill(labels.expressValue, { amount: formatFcfa(extra.amount, language) });
+  return formatFcfa(extra.amount, language);
 };
 
 /**
  * Tarifs par zone, lus en direct depuis l'API publique. Trois états honnêtes :
- * chargement, indisponible (renvoi vers WhatsApp), ou le tableau réel.
+ * chargement, indisponible (renvoi vers WhatsApp), ou le tableau réel. Les noms
+ * de quartiers et de villes viennent de l'API et ne sont pas traduits.
  */
 const TarifsParZone = () => {
+  const { zones: copy } = useCopy("offre").tarifs;
+  const { language } = useLanguage();
   const { landing, status } = useLandingPublic();
   const cities = cityZones(landing);
   const extras = feeExtras(landing);
@@ -21,7 +31,7 @@ const TarifsParZone = () => {
   if (status === "idle" || status === "loading") {
     return (
       <p className='ls-body py-10 text-ls-muted' aria-busy='true'>
-        {tarifsZones.loading}
+        {copy.loading}
       </p>
     );
   }
@@ -29,9 +39,9 @@ const TarifsParZone = () => {
   if (cities.length === 0) {
     return (
       <div className='flex flex-col items-start gap-5 border-y border-ls-rule py-8'>
-        <p className='ls-body max-w-[60ch] text-ls-muted'>{tarifsZones.unavailable}</p>
-        <a href={siteWhatsappHref} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-line'>
-          {tarifsZones.unavailableCta}
+        <p className='ls-body max-w-[60ch] text-ls-muted'>{copy.unavailable}</p>
+        <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-line'>
+          {copy.unavailableCta}
         </a>
       </div>
     );
@@ -44,7 +54,7 @@ const TarifsParZone = () => {
         <div
           key={city.id}
           role='region'
-          aria-label={`Tarifs par zone, ${city.name}`}
+          aria-label={fill(copy.regionLabel, { city: city.name })}
           tabIndex={0}
           className='overflow-x-auto'
         >
@@ -52,7 +62,7 @@ const TarifsParZone = () => {
             <caption className='ls-h ls-d3 pb-4 text-left'>{city.name}</caption>
             <thead>
               <tr className='border-y border-ls-rule'>
-                {["Zone", "Distance", "Délai indicatif", "Quartiers", "Tarif"].map((heading, index) => (
+                {copy.headings.map((heading, index) => (
                   <th
                     key={heading}
                     scope='col'
@@ -67,16 +77,16 @@ const TarifsParZone = () => {
               {city.zones.map((zone, index) => (
                 <tr key={zone.id} className='border-b border-ls-rule align-top'>
                   <th scope='row' className='ls-h py-4 pr-4 text-base'>
-                    Zone {index + 1}
+                    {fill(copy.zoneName, { number: index + 1 })}
                   </th>
-                  <td className='ls-cap py-4 pr-4 text-ls-muted'>{zone.distance ?? "—"}</td>
-                  <td className='ls-cap py-4 pr-4 text-ls-muted'>{zone.eta ?? "—"}</td>
+                  <td className='ls-cap py-4 pr-4 text-ls-muted'>{zone.distance ?? "·"}</td>
+                  <td className='ls-cap py-4 pr-4 text-ls-muted'>{zone.eta ?? "·"}</td>
                   <td className='ls-cap max-w-[42ch] py-4 pr-4 text-ls-muted'>
                     {zone.neighborhoods.length > 0
-                      ? zone.neighborhoods.map((n) => neighborhoodLabel(n, zone.fee)).join(", ")
-                      : "—"}
+                      ? zone.neighborhoods.map((n) => neighborhoodLabel(n, zone.fee, language)).join(", ")
+                      : "·"}
                   </td>
-                  <td className='ls-num whitespace-nowrap py-4 text-right text-lg'>{formatFcfa(zone.fee)}</td>
+                  <td className='ls-num whitespace-nowrap py-4 text-right text-lg'>{formatFcfa(zone.fee, language)}</td>
                 </tr>
               ))}
             </tbody>
@@ -84,16 +94,16 @@ const TarifsParZone = () => {
         </div>
       ))}
 
-      {hasEntryFee && <p className='ls-cap text-ls-faint'>† {tarifsZones.entryFeeNote}</p>}
+      {hasEntryFee && <p className='ls-cap text-ls-faint'>† {copy.entryFeeNote}</p>}
 
       {extras.length > 0 && (
         <div>
-          <h3 className='ls-kicker pb-3 text-ls-faint'>{tarifsZones.extrasTitle}</h3>
+          <h3 className='ls-kicker pb-3 text-ls-faint'>{copy.extrasTitle}</h3>
           <dl className='grid grid-cols-1 gap-px border-y border-ls-rule bg-ls-rule sm:grid-cols-3'>
             {extras.map((extra) => (
-              <div key={extra.label} className='flex flex-col-reverse gap-1 bg-ls-bg py-4 sm:px-4 sm:first:pl-0'>
-                <dt className='ls-cap text-ls-muted'>{extra.label}</dt>
-                <dd className='ls-num text-lg'>{extra.value}</dd>
+              <div key={extra.id} className='flex flex-col-reverse gap-1 bg-ls-bg py-4 sm:px-4 sm:first:pl-0'>
+                <dt className='ls-cap text-ls-muted'>{copy.extras[extra.id]}</dt>
+                <dd className='ls-num text-lg'>{extraValue(extra, copy.extras, language)}</dd>
               </div>
             ))}
           </dl>

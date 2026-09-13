@@ -1,240 +1,125 @@
-import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { MapPinIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { PageHeader, SEO } from "../components";
+import SEO from "../components/SEO";
+import InkHero from "../components/site/InkHero";
 import SiteLayout from "../components/site/SiteLayout";
-import {
-    APPLICATION_FORM_LABELS,
-    JOB_TYPE_LABELS,
-    RECRUITMENT_JOB_UI,
-    STATUS_LABELS,
-    entrepriseRecrutementPath,
-} from "../constants";
+import { recruitmentApplyPath, recruitmentOfferPath, routes } from "../constants/routes";
+import { fill, useCopy } from "../i18n/useCopy";
 import { getJobDetail } from "../services/recruitmentApi";
-
-const resolveJob = (job) => ({
-    id: job.id ?? job.uuid ?? job.slug ?? job._id ?? job.job_offer_id,
-    title: job.title ?? job.name ?? "Poste",
-    location: job.location ?? job.city ?? job.zone ?? "Non précisé",
-    positions:
-        job.open_positions ??
-        job.positions_count ??
-        job.headcount ??
-        job.slots ??
-        null,
-    typeKey: String(
-        job.job_type ?? job.role_type ?? job.type ?? "",
-    ).toLowerCase(),
-});
-
-const descriptionFromApi = (job) => {
-    if (!job || typeof job !== "object") return "";
-    const raw =
-        job.description ??
-        job.body ??
-        job.details ??
-        job.content ??
-        job.summary ??
-        job.role_description ??
-        job.long_description;
-    return typeof raw === "string" ? raw.trim() : "";
-};
+import { jobDescription, jobType, resolveJob } from "../services/jobs";
 
 const RecruitmentOfferPage = () => {
-    const { jobId } = useParams();
-    const [job, setJob] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [loadKind, setLoadKind] = useState(null);
+  const { jobId } = useParams();
+  const { offer, jobs: jobsCopy } = useCopy("recrutement");
+  const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [loadKind, setLoadKind] = useState(null);
 
-    useEffect(() => {
-        let cancelled = false;
-        (async () => {
-            if (jobId == null || jobId === "") {
-                setJob(null);
-                setLoading(false);
-                setLoadKind("notfound");
-                return;
-            }
-            setLoading(true);
-            setLoadKind(null);
-            setJob(null);
-            const result = await getJobDetail(jobId);
-            if (cancelled) return;
-            setLoading(false);
-            if (!result.success) {
-                setLoadKind(result.status === 404 ? "notfound" : "error");
-                return;
-            }
-            if (!result.data) {
-                setLoadKind("notfound");
-                return;
-            }
-            setJob(result.data);
-        })();
-        return () => {
-            cancelled = true;
-        };
-    }, [jobId]);
-
-    const meta = useMemo(() => (job ? resolveJob(job) : null), [job]);
-
-    const badgeLabel = useMemo(() => {
-        if (!meta) return JOB_TYPE_LABELS.default;
-        if (meta.typeKey.includes("agent") || meta.typeKey === "agent")
-            return JOB_TYPE_LABELS.agent;
-        if (meta.typeKey.includes("livreur") || meta.typeKey === "livreur")
-            return JOB_TYPE_LABELS.livreur;
-        return JOB_TYPE_LABELS.default;
-    }, [meta]);
-
-    const isAgent =
-        meta &&
-        (meta.typeKey.includes("agent") || meta.typeKey === "agent");
-    const badgeClass = isAgent
-        ? "bg-ls-fill text-ls-accent"
-        : "bg-ls-select text-ls-accent";
-
-    const subtitle =
-        meta &&
-        [meta.location, badgeLabel].filter(Boolean).join(" · ");
-
-    const descriptionText = job ? descriptionFromApi(job) : "";
-    const offerTitle = meta?.title || "Offre d'emploi";
-
-    const seoDescription = (() => {
-        const location = meta?.location;
-        const lead = [
-            offerTitle,
-            location && location !== "Non précisé" ? `à ${location}` : null,
-            badgeLabel ? `(${badgeLabel})` : null,
-        ]
-            .filter(Boolean)
-            .join(" ");
-        const body = descriptionText
-            ? descriptionText.replace(/\s+/g, " ").trim()
-            : "Postulez chez LivSight à Yaoundé. Formation assurée, équipe locale.";
-        const full = `${lead}. ${body}`;
-        return full.length > 160 ? `${full.slice(0, 157).trim()}…` : full;
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      if (!jobId) {
+        setLoading(false);
+        setLoadKind("notfound");
+        return;
+      }
+      setLoading(true);
+      setLoadKind(null);
+      setJob(null);
+      const result = await getJobDetail(jobId);
+      if (cancelled) return;
+      setLoading(false);
+      if (!result.success) {
+        setLoadKind(result.status === 404 ? "notfound" : "error");
+        return;
+      }
+      if (!result.data) {
+        setLoadKind("notfound");
+        return;
+      }
+      setJob(result.data);
     })();
+    return () => {
+      cancelled = true;
+    };
+  }, [jobId]);
 
-    return (
-        <>
-            <SEO
-                title={offerTitle}
-                description={seoDescription}
-                canonical={`/entreprise/recrutement/offre/${jobId ?? ""}`}
-            />
-            <SiteLayout>
-                <PageHeader backTo={entrepriseRecrutementPath} backLabel={RECRUITMENT_JOB_UI.backToOffers}>
-                {loading ? (
-                    <>
-                        <div className='mt-6 h-9 max-w-md animate-pulse rounded-lg bg-ls-fill' />
-                        <div className='mt-3 h-4 w-48 animate-pulse rounded bg-ls-fill' />
-                    </>
-                ) : loadKind ? (
-                    <>
-                        <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-ls-text sm:text-4xl'>
-                            {loadKind === "notfound"
-                                ? STATUS_LABELS.jobNotFound
-                                : STATUS_LABELS.jobDetailLoadError}
-                        </h1>
-                    </>
-                ) : meta ? (
-                    <>
-                        <span
-                            className={`mt-6 inline-flex w-fit rounded-full px-3 py-1 font-montserrat text-xs font-bold ${badgeClass}`}
-                        >
-                            {badgeLabel}
-                        </span>
-                        <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-ls-text sm:text-4xl'>
-                            {meta.title}
-                        </h1>
-                        <p className='mt-2 font-montserrat text-sm font-medium text-ls-text'>
-                            {subtitle}
-                        </p>
-                    </>
-                ) : null}
-                </PageHeader>
+  const meta = useMemo(() => (job ? resolveJob(job, jobsCopy) : null), [job, jobsCopy]);
+  const description = jobDescription(job);
+  const subtitle = meta
+    ? [
+        meta.location,
+        jobsCopy.types[jobType(meta.typeKey)],
+        meta.positions != null
+          ? fill(meta.positions > 1 ? jobsCopy.positionsOther : jobsCopy.positionsOne, { count: meta.positions })
+          : null,
+      ]
+        .filter(Boolean)
+        .join(" · ")
+    : "";
 
-                <div className='px-[18px] md:px-16 pb-16'>
-                    {loading && (
-                        <div className='mt-10 space-y-3'>
-                            <div className='h-4 w-full animate-pulse rounded bg-ls-fill' />
-                            <div className='h-4 w-full animate-pulse rounded bg-ls-fill' />
-                            <div className='h-4 w-2/3 animate-pulse rounded bg-ls-fill' />
-                        </div>
-                    )}
+  const seoTitle = meta?.title || offer.kicker;
+  const seoDescription = (() => {
+    const full = `${[meta?.title, meta?.hasLocation ? meta.location : null].filter(Boolean).join(", ")}. ${
+      description ? description.replace(/\s+/g, " ") : offer.seoFallback
+    }`;
+    return full.length > 160 ? `${full.slice(0, 157).trim()}…` : full;
+  })();
 
-                    {!loading && loadKind && (
-                        <p className='mt-10 font-montserrat text-base text-ls-muted'>
-                            <Link
-                                to={entrepriseRecrutementPath}
-                                className='inline-flex items-center gap-1.5 font-semibold text-ls-accent underline-offset-2 hover:underline'
-                            >
-                                <ArrowLeftIcon
-                                    className='h-4 w-4 shrink-0'
-                                    aria-hidden='true'
-                                />
-                                {RECRUITMENT_JOB_UI.backToOffers}
-                            </Link>
-                        </p>
-                    )}
+  const title = loading ? null : loadKind ? (loadKind === "notfound" ? offer.notFound : offer.loadError) : meta?.title;
 
-                    {!loading && !loadKind && meta && (
-                        <>
-                            <div className='mt-8 flex flex-col gap-3 font-montserrat text-sm text-ls-muted sm:flex-row sm:flex-wrap sm:items-center sm:gap-6'>
-                                <span className='inline-flex items-center gap-2'>
-                                    <MapPinIcon
-                                        className='h-5 w-5 shrink-0 text-ls-accent'
-                                        aria-hidden='true'
-                                    />
-                                    {meta.location}
-                                </span>
-                                {meta.positions != null && (
-                                    <span className='inline-flex items-center gap-2'>
-                                        <UserGroupIcon
-                                            className='h-5 w-5 shrink-0 text-ls-accent'
-                                            aria-hidden='true'
-                                        />
-                                        {meta.positions} poste
-                                        {meta.positions > 1 ? "s" : ""}{" "}
-                                        disponible
-                                        {meta.positions > 1 ? "s" : ""}
-                                    </span>
-                                )}
-                            </div>
+  return (
+    <>
+      <SEO title={seoTitle} description={seoDescription} canonical={recruitmentOfferPath(jobId ?? "")} noindex={Boolean(loadKind)} />
+      <SiteLayout>
+        <InkHero id='offre-titre' kicker={offer.kicker} backTo={routes.recrutement} backLabel={offer.backToOffers}>
+          {loading ? (
+            <div aria-busy='true' className='flex flex-col gap-3'>
+              <div className='h-12 max-w-md animate-pulse rounded-lg bg-ls-ink-line' />
+              <div className='h-4 w-48 animate-pulse rounded bg-ls-ink-line' />
+            </div>
+          ) : (
+            <>
+              <h1 id='offre-titre' className='ls-h ls-d1 max-w-[18ch]' lang={loadKind ? undefined : "fr"}>
+                {title}
+              </h1>
+              {subtitle && <p className='ls-lede text-ls-ink-mute'>{subtitle}</p>}
+            </>
+          )}
+        </InkHero>
 
-                            <section
-                                className='mt-10'
-                                aria-labelledby='job-description-heading'
-                            >
-                                <h2
-                                    id='job-description-heading'
-                                    className='font-montserrat text-xl font-bold text-ls-text sm:text-2xl'
-                                >
-                                    {RECRUITMENT_JOB_UI.descriptionHeading}
-                                </h2>
-                                <div className='mt-4 whitespace-pre-wrap font-montserrat text-base leading-relaxed text-ls-muted'>
-                                    {descriptionText ||
-                                        RECRUITMENT_JOB_UI.noDescription}
-                                </div>
-                            </section>
+        <div className='px-[18px] pb-16 pt-12 md:px-16 md:pb-[88px] md:pt-[68px]'>
+          {!loading && loadKind && (
+            <Link to={routes.recrutement} className='ls-btn ls-btn-line'>
+              {offer.backToOffers}
+            </Link>
+          )}
 
-                            <div className='mt-10'>
-                                <Link
-                                    to='postuler'
-                                    className='inline-flex min-h-[48px] items-center justify-center rounded-full bg-ls-text px-8 font-montserrat text-base font-bold text-ls-bg transition-colors hover:bg-ls-muted'
-                                >
-                                    {APPLICATION_FORM_LABELS.apply}
-                                </Link>
-                            </div>
-                        </>
-                    )}
+          {!loading && !loadKind && meta && (
+            <div className='grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-[72px]'>
+              <section aria-labelledby='offre-description' className='flex flex-col gap-4'>
+                <h2 id='offre-description' className='ls-kicker text-ls-accent'>
+                  {offer.descriptionHeading}
+                </h2>
+                <div className='ls-body max-w-[68ch] whitespace-pre-wrap text-ls-muted' lang={description ? "fr" : undefined}>
+                  {description || offer.noDescription}
                 </div>
-            </SiteLayout>
-        </>
-    );
+              </section>
+              <div className='flex flex-col gap-3 self-start rounded-[26px] border border-ls-rule p-7'>
+                <p className='ls-h text-[19px]' lang='fr'>
+                  {meta.title}
+                </p>
+                {subtitle && <p className='ls-cap text-ls-faint'>{subtitle}</p>}
+                <Link to={recruitmentApplyPath(jobId)} className='ls-btn ls-btn-lg ls-btn-solid mt-2'>
+                  {offer.apply}
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
+      </SiteLayout>
+    </>
+  );
 };
 
 export default RecruitmentOfferPage;

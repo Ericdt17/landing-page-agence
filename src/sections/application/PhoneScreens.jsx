@@ -1,3 +1,6 @@
+import { produitCasque, produitChargeur } from "../../assets/images";
+import CarteYaounde from "../../components/site/CarteYaounde";
+
 /**
  * Écrans de l'application commerçant, dessinés en HTML d'après appClient
  * (onglets Accueil · Courses · Inbox · Rapports · Stock, cartes arrondies à
@@ -117,36 +120,7 @@ export const PlanningScreen = () => (
 
 export const CourierScreen = () => (
   <Phone height={430}>
-    <div className='relative h-[210px] overflow-hidden bg-ls-fill'>
-      <svg viewBox='0 0 340 210' className='absolute inset-0 h-full w-full'>
-        <g style={{ fill: "var(--ls-ph)" }}>
-          <rect x='12' y='16' width='86' height='52' rx='4' />
-          <rect x='112' y='10' width='120' height='44' rx='4' />
-          <rect x='246' y='20' width='80' height='66' rx='4' />
-          <rect x='16' y='84' width='70' height='70' rx='4' />
-          <rect x='102' y='70' width='110' height='58' rx='4' />
-          <rect x='226' y='100' width='98' height='52' rx='4' />
-          <rect x='24' y='170' width='130' height='34' rx='4' />
-          <rect x='172' y='164' width='146' height='40' rx='4' />
-        </g>
-        <path
-          className='ls-route'
-          d='M54 178 C 96 150, 108 108, 158 96 S 246 78, 286 50'
-          fill='none'
-          strokeWidth='3.5'
-          strokeLinecap='round'
-          style={{ stroke: "var(--ls-primary)" }}
-        />
-        <circle cx='286' cy='50' r='6' style={{ fill: "var(--ls-text)" }} />
-      </svg>
-      <div className='absolute left-10 top-[164px] flex h-[30px] w-[30px] items-center justify-center rounded-full border-[3px] border-ls-surface bg-ls-primary text-white'>
-        <svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2.2' strokeLinecap='round' strokeLinejoin='round'>
-          <circle cx='6' cy='17.5' r='2.4' />
-          <circle cx='18' cy='17.5' r='2.4' />
-          <path d='M8.4 17.5h6.6L18 9h-3l-1.4 3H9.2L7 9H4' />
-        </svg>
-      </div>
-    </div>
+    <CarteYaounde variant='phone' className='h-[210px]' />
     <div className='flex flex-col gap-3.5 p-[18px]'>
       <div className='flex items-baseline justify-between'>
         <span className='ls-h text-[17px]'>Ibrahim S. · 4 colis</span>
@@ -209,9 +183,26 @@ export const WithdrawScreen = () => (
 
 /* ── Disponible aujourd'hui ──────────────────────────────────────────────── */
 
+const initials = (label) =>
+  label
+    .split("·")
+    .pop()
+    .replace(/[^A-Za-zÀ-ÿ ]/g, " ")
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0].toUpperCase())
+    .join("");
+
+const Avatar = ({ label }) => (
+  <span className='flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full bg-ls-select text-[11px] font-bold text-ls-accent'>
+    {initials(label)}
+  </span>
+);
+
 const RecentRow = ({ name, amount, status, tone }) => (
   <div className='flex items-center gap-[9px]'>
-    <span className='h-[38px] w-[38px] rounded-full bg-ls-ph' />
+    <Avatar label={name} />
     <div className='flex-1'>
       <div className='text-[11px] font-bold'>{name}</div>
       <div className='text-[9px] font-medium tracking-[.6px] text-ls-muted'>{amount}</div>
@@ -286,11 +277,11 @@ export const StockScreen = () => (
       </AppCard>
     </div>
     {[
-      ["Chargeur USB-C 20 W", "TP-CHG-20", "0"],
-      ["Casque Bluetooth", "TP-BT-01", "24"],
-    ].map(([name, sku, qty]) => (
+      ["Chargeur USB-C 20 W", "TP-CHG-20", "0", produitChargeur],
+      ["Casque Bluetooth", "TP-BT-01", "24", produitCasque],
+    ].map(([name, sku, qty, photo]) => (
       <AppCard key={sku} className='flex items-center gap-2.5 p-[15px]'>
-        <span className='h-[50px] w-[50px] rounded-[20px] bg-ls-ph' />
+        <img src={photo} alt='' width='50' height='50' className='h-[50px] w-[50px] rounded-[20px] object-cover' />
         <div className='flex-1'>
           <div className='text-[11px] font-bold'>{name}</div>
           <div className='text-[9px] font-medium tracking-[.6px] text-ls-muted'>{sku}</div>
@@ -353,7 +344,7 @@ export const InboxScreen = () => (
       ["Course DL-88207", "Client absent, que faire ?", "hier"],
     ].map(([from, preview, meta]) => (
       <AppCard key={from} className='flex items-center gap-2.5 p-[15px]'>
-        <span className='h-[38px] w-[38px] rounded-full bg-ls-ph' />
+        <Avatar label={from} />
         <div className='flex-1'>
           <div className='text-[11px] font-bold'>{from}</div>
           <div className='text-[9px] font-medium text-ls-muted'>{preview}</div>

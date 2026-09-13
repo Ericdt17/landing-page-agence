@@ -1,3 +1,10 @@
+import {
+  marketplaceAccueilMobile,
+  marketplaceAccueilWeb,
+  marketplaceProduitMobile,
+  marketplaceSuiviMobile,
+  produitCasque,
+} from "../assets/images";
 import SEO from "../components/SEO";
 import SiteLayout from "../components/site/SiteLayout";
 import {
@@ -5,6 +12,7 @@ import {
   marketplaceHero,
   marketplaceOpen,
   marketplacePath,
+  marketplacePreview,
   marketplaceSame,
   marketplaceSeo,
   marketplaceSteps,
@@ -20,7 +28,7 @@ const Card = ({ children }) => (
 
 const ProductCard = () => (
   <Card>
-    <div className='h-[108px] rounded-[20px] bg-ls-ph' />
+    <img src={produitCasque} alt='' width='160' height='108' className='h-[108px] w-full rounded-[20px] object-cover' />
     <span className='text-[11px] leading-snug'>Casque Bluetooth sans fil</span>
     <span className='ls-h text-[15px]'>12 900 FCFA</span>
     <span className='text-[9px] font-bold text-ls-ok'>Livraison aujourd&apos;hui</span>
@@ -85,6 +93,63 @@ const MarketplacePage = () => (
         </div>
       </section>
 
+      <section aria-labelledby='marketplace-apercu' className='px-[18px] pb-16 md:px-16 md:pb-[84px]'>
+        <div className='flex flex-col gap-4 border-t border-ls-rule pb-10 pt-11'>
+          <span className='ls-kicker text-ls-accent'>{marketplacePreview.kicker}</span>
+          <h2 id='marketplace-apercu' className='ls-h ls-d2 max-w-[24ch]'>
+            {marketplacePreview.title}
+          </h2>
+          <p className='ls-body text-ls-muted'>{marketplacePreview.body}</p>
+        </div>
+
+        <figure className='overflow-hidden rounded-[18px] border border-ls-rule bg-ls-surface shadow-[0_18px_44px_rgba(0,0,0,.08)]'>
+          <div aria-hidden='true' className='flex items-center gap-1.5 border-b border-ls-rule px-4 py-2.5'>
+            <span className='h-2.5 w-2.5 rounded-full bg-ls-stroke' />
+            <span className='h-2.5 w-2.5 rounded-full bg-ls-stroke' />
+            <span className='h-2.5 w-2.5 rounded-full bg-ls-stroke' />
+          </div>
+          <img
+            src={marketplaceAccueilWeb}
+            alt={marketplacePreview.webAlt}
+            width='1200'
+            height='750'
+            loading='lazy'
+            className='block h-auto w-full'
+          />
+        </figure>
+
+        <div className='mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3'>
+          {marketplacePreview.mobile.map((screen) => (
+            <figure key={screen.key} className='flex flex-col items-center gap-3'>
+              <img
+                src={{ accueil: marketplaceAccueilMobile, produit: marketplaceProduitMobile, suivi: marketplaceSuiviMobile }[screen.key]}
+                alt={screen.alt}
+                width='260'
+                height='563'
+                loading='lazy'
+                className='h-auto w-full max-w-[260px] rounded-[30px] border border-ls-rule shadow-[0_18px_44px_rgba(0,0,0,.08)]'
+              />
+              <figcaption className='text-sm font-bold'>{screen.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <details className='mt-8 text-xs text-ls-muted'>
+          <summary className='cursor-pointer font-semibold'>{marketplacePreview.creditsLabel}</summary>
+          <p className='mt-2'>{marketplacePreview.creditsIntro}</p>
+          <ul className='mt-2 flex flex-col gap-1'>
+            {marketplacePreview.credits.map((credit) => (
+              <li key={credit.url}>
+                <a href={credit.url} target='_blank' rel='noopener noreferrer' className='underline underline-offset-2'>
+                  {credit.work}
+                </a>{" "}
+                · {credit.creator} · {credit.license}
+              </li>
+            ))}
+          </ul>
+        </details>
+      </section>
+
       <section aria-labelledby='marketplace-etapes' className='px-[18px] pb-16 md:px-16 md:pb-[84px]'>
         <div className='flex flex-col gap-4 border-t border-ls-rule pb-10 pt-11'>
           <span className='ls-kicker text-ls-accent'>{marketplaceSteps.kicker}</span>
@@ -111,7 +176,6 @@ const MarketplacePage = () => (
               {marketplaceChanges.title}
             </h2>
             <p className='ls-body text-ls-muted'>{marketplaceChanges.body}</p>
-            <p className='ls-cap text-ls-faint'>{marketplaceChanges.note}</p>
           </div>
           <div className='grid grid-cols-1 items-start gap-5 sm:grid-cols-3'>
             {marketplaceChanges.figures.map((figure, index) => {

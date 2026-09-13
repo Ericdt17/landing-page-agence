@@ -87,6 +87,11 @@
   .ls-link { color: var(--ls-accent); font-weight: 700; }
   .ls-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 
+  /* Progression de la visite d'écrans automatique */
+  .ls-tour-progress { animation-name: ls-tour-progress; animation-timing-function: linear; animation-fill-mode: forwards; transform: scaleX(0); }
+  @keyframes ls-tour-progress { to { transform: scaleX(1); } }
+  @media (prefers-reduced-motion: reduce) { .ls-tour-progress { animation: none; transform: scaleX(1); opacity: .5; } }
+
   /* Tracé d'itinéraire animé des écrans de l'application */
   .ls-route { stroke-dasharray: 620; stroke-dashoffset: 620; animation: ls-draw 2.6s ease-out .3s forwards; }
   @keyframes ls-draw { to { stroke-dashoffset: 0; } }

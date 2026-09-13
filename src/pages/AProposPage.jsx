@@ -6,26 +6,29 @@ import { routes } from "../constants/routes";
 import { LandingPublicProvider, useLandingPublic } from "../context/LandingPublicContext";
 import { useCopy, useLanguage } from "../i18n/useCopy";
 
-/* Le nombre de commerçants vient de l'API publique : sans réponse, un point, jamais un chiffre inventé */
+/* Le nombre de commerçants vient de l'API publique : sans réponse, la case n'est pas affichée, jamais un chiffre inventé */
 const Stats = ({ copy }) => {
   const { clientsCount } = useLandingPublic();
   const { language } = useLanguage();
-  const clients =
-    clientsCount != null ? new Intl.NumberFormat(language === "en" ? "en-GB" : "fr-FR").format(clientsCount) : "·";
   const items = [
     { id: "presence", value: copy.stats.presence.value, label: copy.stats.presence.label },
-    { id: "clients", value: clients, label: copy.stats.clients.label },
+    clientsCount != null && {
+      id: "clients",
+      value: new Intl.NumberFormat(language === "en" ? "en-GB" : "fr-FR").format(clientsCount),
+      label: copy.stats.clients.label,
+    },
     { id: "payout", value: copy.stats.payout.value, label: copy.stats.payout.label },
-  ];
+  ].filter(Boolean);
 
   return (
-    <dl aria-label={copy.statsLabel} className='grid grid-cols-1 gap-px border-y border-ls-rule bg-ls-rule sm:grid-cols-3'>
+    <dl
+      aria-label={copy.statsLabel}
+      className={`grid grid-cols-1 gap-px self-start border-y border-ls-rule bg-ls-rule ${items.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}
+    >
       {items.map((item) => (
         <div key={item.id} className='flex flex-col-reverse gap-2 bg-ls-bg py-7 sm:px-6 sm:first:pl-0'>
           <dt className='ls-kicker text-ls-faint'>{item.label}</dt>
-          <dd className='ls-num text-[32px] leading-none' aria-busy={item.id === "clients" && clientsCount == null ? "true" : undefined}>
-            {item.value}
-          </dd>
+          <dd className='ls-num text-[32px] leading-none'>{item.value}</dd>
         </div>
       ))}
     </dl>
@@ -55,7 +58,7 @@ const AProposPage = () => {
           <p className='ls-lede max-w-[62ch] pt-12 text-ls-muted md:pt-14'>{closing}</p>
         </section>
 
-        <section aria-labelledby='apropos-entreprise' className='grid grid-cols-1 gap-10 px-[18px] pb-16 pt-14 md:px-16 md:pb-[88px] md:pt-[68px] lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-[72px]'>
+        <section aria-labelledby='apropos-entreprise' className='grid grid-cols-1 gap-10 px-[18px] pb-16 pt-14 md:px-16 md:pb-[88px] md:pt-[68px] lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start lg:gap-[72px]'>
           <Stats copy={copy} />
           <div className='flex flex-col gap-3 rounded-[26px] bg-ls-ink-bg p-7 text-ls-ink-fg md:p-8'>
             <h2 id='apropos-entreprise' className='ls-kicker text-ls-ink-speed'>

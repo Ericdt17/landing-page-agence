@@ -112,10 +112,10 @@ const RecruitmentApplyPage = () => {
             </h1>
           ) : (
             <>
-              <h1 id='candidature-titre' className='ls-h ls-d1 max-w-[20ch]'>
-                <span lang='fr'>{meta?.title}</span>
-                {subtitle && <span className='block text-ls-ink-mute'>{subtitle}</span>}
+              <h1 id='candidature-titre' className='ls-h ls-d1 max-w-[20ch]' lang='fr'>
+                {meta?.title}
               </h1>
+              {subtitle && <p className='ls-h text-lg text-ls-ink-fg'>{subtitle}</p>}
               <p className='ls-lede max-w-[56ch] text-ls-ink-mute'>{apply.lede}</p>
             </>
           )}

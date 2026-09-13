@@ -59,7 +59,7 @@ const RecruitmentPage = () => {
                 <div className='max-container padding-x pb-16'>
                     <div className='mt-8 space-y-4'>
                         {!loading && jobs.length > 0 && (
-                            <span className='inline-flex rounded-full bg-pale-blue px-3 py-1 font-montserrat text-xs font-bold uppercase tracking-wide text-brand-ink'>
+                            <span className='inline-flex rounded-full bg-pale-blue px-3 py-1 font-montserrat text-xs font-bold uppercase tracking-wide text-brand-deep'>
                                 {RECRUITMENT_OPEN_BADGE}
                             </span>
                         )}

@@ -136,7 +136,7 @@ const SiteGate = ({ children }) => {
           )}
         </form>
 
-        <p className='mt-10 font-montserrat text-xs leading-5 text-gray-400'>
+        <p className='mt-10 font-montserrat text-xs leading-5 text-gray-500'>
           Le site actuel reste disponible sur livsight.com.
         </p>
       </div>

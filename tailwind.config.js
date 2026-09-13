@@ -31,7 +31,13 @@ export default {
         /* Même teinte assombrie pour tout ce qui porte du texte : 4,75:1 sur blanc
            et 4,75:1 sous du blanc, donc conforme AA dans les deux sens. */
         "brand-ink": "#0E7BB0",
+        /* Survol des boutons brand-ink : plus sombre, donc le texte blanc gagne en
+           contraste au survol (6,40:1) au lieu d'en perdre avec une opacité. */
+        "brand-deep": "#0A6591",
         "coral-red": "#FF6452",
+        /* Corail assombri pour le texte et les contours d'erreur : 5,15:1 sur blanc.
+           Le corail d'origine (2,92:1) reste pour les pictogrammes décoratifs. */
+        "coral-ink": "#C8392B",
         "slate-gray": "#6D6D6D",
         "pale-blue": "#F5F6FF",
         "white-400": "rgba(255, 255, 255, 0.80)",

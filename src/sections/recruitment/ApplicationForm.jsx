@@ -445,7 +445,7 @@ const ApplicationForm = ({
                     onChange={(e) => setFullName(e.target.value)}
                     className={`${inputClass} mt-1 ${
                         fieldErrors.fullName
-                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            ? "border-coral-ink ring-2 ring-coral-ink/20"
                             : ""
                     }`}
                     autoComplete='name'
@@ -469,13 +469,13 @@ const ApplicationForm = ({
                     maxLength={32}
                     className={`${inputClass} mt-1 ${
                         fieldErrors.phone
-                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            ? "border-coral-ink ring-2 ring-coral-ink/20"
                             : ""
                     }`}
                     autoComplete='tel'
                 />
                 {fieldErrors.phone && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {phone.trim().length > 32
                             ? STATUS_LABELS.phoneTooLong
                             : STATUS_LABELS.fieldRequired}
@@ -496,13 +496,13 @@ const ApplicationForm = ({
                     onChange={(e) => setEmail(e.target.value)}
                     className={`${inputClass} mt-1 ${
                         fieldErrors.email
-                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            ? "border-coral-ink ring-2 ring-coral-ink/20"
                             : ""
                     }`}
                     autoComplete='email'
                 />
                 {fieldErrors.email && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {!email.trim()
                             ? STATUS_LABELS.emailRequired
                             : STATUS_LABELS.emailInvalid}
@@ -523,12 +523,12 @@ const ApplicationForm = ({
                     onChange={(e) => setNeighborhood(e.target.value)}
                     className={`${inputClass} mt-1 ${
                         fieldErrors.neighborhood
-                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            ? "border-coral-ink ring-2 ring-coral-ink/20"
                             : ""
                     }`}
                 />
                 {fieldErrors.neighborhood && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -550,7 +550,7 @@ const ApplicationForm = ({
                     onChange={(e) => setEducationLevel(e.target.value)}
                     className={`${selectClass} mt-1 ${
                         fieldErrors.educationLevel
-                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            ? "border-coral-ink ring-2 ring-coral-ink/20"
                             : ""
                     }`}
                 >
@@ -564,7 +564,7 @@ const ApplicationForm = ({
                     ))}
                 </select>
                 {fieldErrors.educationLevel && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -583,12 +583,12 @@ const ApplicationForm = ({
                     onChange={(e) => setFieldOfStudy(e.target.value)}
                     className={`${inputClass} mt-1 ${
                         fieldErrors.fieldOfStudy
-                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            ? "border-coral-ink ring-2 ring-coral-ink/20"
                             : ""
                     }`}
                 />
                 {fieldErrors.fieldOfStudy && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -607,12 +607,12 @@ const ApplicationForm = ({
                     onChange={(e) => setSchoolName(e.target.value)}
                     className={`${inputClass} mt-1 ${
                         fieldErrors.schoolName
-                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            ? "border-coral-ink ring-2 ring-coral-ink/20"
                             : ""
                     }`}
                 />
                 {fieldErrors.schoolName && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -646,7 +646,7 @@ const ApplicationForm = ({
                     ))}
                 </div>
                 {fieldErrors.languages && (
-                    <p className='mt-2 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-2 font-montserrat text-xs text-coral-ink'>
                         {STATUS_LABELS.languagesRequired}
                     </p>
                 )}
@@ -687,7 +687,7 @@ const ApplicationForm = ({
                         ))}
                     </div>
                     {fieldErrors.currentlyEmployed && (
-                        <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                             {STATUS_LABELS.yesNoRequired}
                         </p>
                     )}
@@ -723,7 +723,7 @@ const ApplicationForm = ({
                         ))}
                     </div>
                     {fieldErrors.inOtherCompany && (
-                        <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                             {STATUS_LABELS.yesNoRequired}
                         </p>
                     )}
@@ -746,7 +746,7 @@ const ApplicationForm = ({
                     onChange={(e) => setTransport(e.target.value)}
                     className={`${selectClass} mt-1 ${
                         fieldErrors.transport
-                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            ? "border-coral-ink ring-2 ring-coral-ink/20"
                             : ""
                     }`}
                 >
@@ -760,7 +760,7 @@ const ApplicationForm = ({
                     ))}
                 </select>
                 {fieldErrors.transport && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -778,7 +778,7 @@ const ApplicationForm = ({
                     onChange={(e) => setAvailability(e.target.value)}
                     className={`${selectClass} mt-1 ${
                         fieldErrors.availability
-                            ? "border-coral-red ring-2 ring-coral-red/20"
+                            ? "border-coral-ink ring-2 ring-coral-ink/20"
                             : ""
                     }`}
                 >
@@ -792,7 +792,7 @@ const ApplicationForm = ({
                     ))}
                 </select>
                 {fieldErrors.availability && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -821,7 +821,7 @@ const ApplicationForm = ({
                     </p>
                 )}
                 {(photoError || fieldErrors.photo) && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {photoError || STATUS_LABELS.photoRequired}
                     </p>
                 )}
@@ -846,7 +846,7 @@ const ApplicationForm = ({
                     </p>
                 )}
                 {(cvError || fieldErrors.cv) && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {cvError || "CV requis (PDF, max 10 Mo)."}
                     </p>
                 )}
@@ -871,7 +871,7 @@ const ApplicationForm = ({
                     </p>
                 )}
                 {(coverLetterError || fieldErrors.coverLetter) && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {coverLetterError ||
                             "Lettre requise (PDF, max 10 Mo)."}
                     </p>
@@ -908,7 +908,7 @@ const ApplicationForm = ({
                     <Link
                         to={successHref}
                         onClick={handleCloseSuccess}
-                        className='mt-8 rounded-full bg-brand-ink px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95'
+                        className='mt-8 rounded-full bg-brand-ink px-8 py-3 font-montserrat text-base font-bold text-white transition-colors hover:bg-brand-deep'
                     >
                         {APPLICATION_FORM_LABELS.close}
                     </Link>
@@ -992,12 +992,12 @@ const ApplicationForm = ({
                                                         }
                                                         className={`${inputClass} mt-1 min-h-[100px] resize-y ${
                                                             fieldErrors[qid]
-                                                                ? "border-coral-red ring-2 ring-coral-red/20"
+                                                                ? "border-coral-ink ring-2 ring-coral-ink/20"
                                                                 : ""
                                                         }`}
                                                     />
                                                     {fieldErrors[qid] && (
-                                                        <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                                                        <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                                                             Réponse requise.
                                                         </p>
                                                     )}
@@ -1066,7 +1066,7 @@ const ApplicationForm = ({
                                                     })}
                                                 </div>
                                                 {fieldErrors[qid] && (
-                                                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                                                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
                                                         Réponse requise.
                                                     </p>
                                                 )}
@@ -1094,7 +1094,7 @@ const ApplicationForm = ({
                                             disabled={
                                                 submitStatus === "loading"
                                             }
-                                            className='rounded-full bg-brand-ink px-6 py-3 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60'
+                                            className='rounded-full bg-brand-ink px-6 py-3 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-colors hover:bg-brand-deep disabled:opacity-60'
                                         >
                                             {submitStatus === "loading" ? (
                                                 <span className='inline-flex items-center justify-center gap-2'>
@@ -1117,7 +1117,7 @@ const ApplicationForm = ({
                                     type='button'
                                     onClick={handleNext}
                                     disabled={submitStatus === "loading"}
-                                    className='mt-2 w-full rounded-full bg-brand-ink px-6 py-3.5 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60'
+                                    className='mt-2 w-full rounded-full bg-brand-ink px-6 py-3.5 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-colors hover:bg-brand-deep disabled:opacity-60'
                                 >
                                     {submitStatus === "loading" &&
                                     !hasQuestions ? (
@@ -1143,7 +1143,7 @@ const ApplicationForm = ({
                             )}
 
                             {submitError && (
-                                <p className='mt-2 text-center font-montserrat text-sm text-coral-red'>
+                                <p className='mt-2 text-center font-montserrat text-sm text-coral-ink'>
                                     {submitError}
                                 </p>
                             )}

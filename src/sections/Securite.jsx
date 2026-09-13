@@ -121,7 +121,7 @@ const SecuriteSection = () => {
         <div className='mt-5 flex flex-col gap-3 sm:flex-row sm:gap-4'>
           <a
             href={`mailto:${footerSupportEmail}`}
-            className='inline-flex items-center justify-center rounded-full border border-brand-blue px-6 py-3 font-montserrat text-sm font-bold text-brand-ink transition-colors hover:bg-brand-ink hover:text-white'
+            className='inline-flex items-center justify-center rounded-full border border-brand-blue px-6 py-3 font-montserrat text-sm font-bold text-brand-deep transition-colors hover:bg-brand-deep hover:text-white'
           >
             {footerSupportEmail}
           </a>
@@ -129,7 +129,7 @@ const SecuriteSection = () => {
             href={whatsappCtaHref}
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center justify-center rounded-full bg-brand-ink px-6 py-3 font-montserrat text-sm font-bold text-white transition-colors hover:bg-brand-blue/90'
+            className='inline-flex items-center justify-center rounded-full bg-brand-ink px-6 py-3 font-montserrat text-sm font-bold text-white transition-colors hover:bg-brand-deep'
           >
             Écrire sur WhatsApp
           </a>

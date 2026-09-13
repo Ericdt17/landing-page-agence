@@ -8,7 +8,7 @@ const TrustedBy = () => {
     >
       <div className='absolute inset-0 bg-hero-grid bg-[length:40px_40px] opacity-[0.12]' aria-hidden='true' />
       <div className='relative max-container padding-x py-12 sm:py-16'>
-        <p className='text-center font-montserrat text-sm font-bold uppercase tracking-[1.4px] text-gray-400'>
+        <p className='text-center font-montserrat text-sm font-bold uppercase tracking-[1.4px] text-gray-500'>
           {trustedByEyebrow}
         </p>
 

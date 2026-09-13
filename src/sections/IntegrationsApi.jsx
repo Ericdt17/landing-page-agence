@@ -43,7 +43,7 @@ const audienceIconMap = {
 const IntegrationsApi = () => {
     return (
         <div className='py-12 sm:py-16'>
-            <p className='inline-flex rounded-full bg-pale-blue px-4 py-1.5 font-montserrat text-xs font-bold uppercase tracking-wide text-brand-ink'>
+            <p className='inline-flex rounded-full bg-pale-blue px-4 py-1.5 font-montserrat text-xs font-bold uppercase tracking-wide text-brand-deep'>
                 {integrationsApiBadge}
             </p>
 
@@ -76,7 +76,7 @@ const IntegrationsApi = () => {
                                 key={title}
                                 className='relative flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 pt-10 shadow-soft-card'
                             >
-                                <span className='absolute right-5 top-5 rounded-md bg-pale-blue px-2 py-0.5 font-montserrat text-xs font-bold text-brand-ink'>
+                                <span className='absolute right-5 top-5 rounded-md bg-pale-blue px-2 py-0.5 font-montserrat text-xs font-bold text-brand-deep'>
                                     {integrationsApiVersionLabel}
                                 </span>
                                 <Icon

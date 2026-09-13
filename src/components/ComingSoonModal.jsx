@@ -92,7 +92,7 @@ const ComingSoonModal = () => {
   const inputClass = (name) =>
     `w-full rounded-full border px-5 py-3.5 font-montserrat text-base text-gray-900 outline-none transition-all ${
       fieldErrors[name]
-        ? "border-coral-red ring-2 ring-coral-red/20"
+        ? "border-coral-ink ring-2 ring-coral-ink/20"
         : "border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20"
     }`;
 
@@ -120,7 +120,7 @@ const ComingSoonModal = () => {
         <button
           type="button"
           onClick={close}
-          className="absolute right-4 top-4 sm:right-6 sm:top-6 flex h-9 w-9 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700"
+          className="absolute right-4 top-4 sm:right-6 sm:top-6 flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
           aria-label="Fermer"
         >
           <XMarkIcon className="h-5 w-5" aria-hidden="true" />
@@ -139,7 +139,7 @@ const ComingSoonModal = () => {
             <button
               type="button"
               onClick={close}
-              className="mt-8 rounded-full bg-brand-ink px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95"
+              className="mt-8 rounded-full bg-brand-ink px-8 py-3 font-montserrat text-base font-bold text-white transition-colors hover:bg-brand-deep"
             >
               Fermer
             </button>
@@ -157,7 +157,7 @@ const ComingSoonModal = () => {
             <button
               type="button"
               onClick={close}
-              className="mt-8 rounded-full bg-brand-ink px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95"
+              className="mt-8 rounded-full bg-brand-ink px-8 py-3 font-montserrat text-base font-bold text-white transition-colors hover:bg-brand-deep"
             >
               Parfait
             </button>
@@ -193,7 +193,7 @@ const ComingSoonModal = () => {
                   className={inputClass("email")}
                 />
                 {fieldErrors.email && (
-                  <p className="pl-5 font-montserrat text-xs text-coral-red">Email invalide ou manquant.</p>
+                  <p className="pl-5 font-montserrat text-xs text-coral-ink">Email invalide ou manquant.</p>
                 )}
               </div>
 
@@ -208,12 +208,12 @@ const ComingSoonModal = () => {
                   className={inputClass("phone")}
                 />
                 {fieldErrors.phone && (
-                  <p className="pl-5 font-montserrat text-xs text-coral-red">Numéro invalide ou manquant.</p>
+                  <p className="pl-5 font-montserrat text-xs text-coral-ink">Numéro invalide ou manquant.</p>
                 )}
               </div>
 
               {status === "error" && (
-                <p className="text-center font-montserrat text-sm text-coral-red">
+                <p className="text-center font-montserrat text-sm text-coral-ink">
                   Une erreur est survenue. Veuillez réessayer.
                 </p>
               )}
@@ -221,13 +221,13 @@ const ComingSoonModal = () => {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="mt-1 w-full rounded-full bg-brand-ink px-6 py-3.5 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60"
+                className="mt-1 w-full rounded-full bg-brand-ink px-6 py-3.5 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-colors hover:bg-brand-deep disabled:opacity-60"
               >
                 {status === "loading" ? "Envoi en cours…" : "Me notifier au lancement"}
               </button>
             </form>
 
-            <p className="mt-4 text-center font-montserrat text-xs text-gray-400">
+            <p className="mt-4 text-center font-montserrat text-xs text-gray-500">
               Pas de spam. Désabonnement en un clic.
             </p>
           </>

@@ -52,7 +52,7 @@ export const solutionClientFeatures = [
         iconId: "banknotes",
         title: "Reversement tracé",
         description:
-            "Chaque encaissement est enregistré. Vos fonds vous sont reversés en maximum 3h après confirmation de livraison.",
+            "Chaque encaissement est enregistré. Vos fonds vous sont reversés le jour même, en fin de journée.",
     },
 ];
 

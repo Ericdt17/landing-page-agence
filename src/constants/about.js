@@ -14,7 +14,7 @@ export const aboutIntroParagraphs = [
     "LivSight est une agence de livraison basée à Yaoundé, fondée par des commerçants et des livreurs qui ont vécu les mêmes problèmes que vous : colis perdus, livreurs injoignables, argent qui ne revient pas. On a construit ce qu'on aurait voulu avoir.",
 ];
 
-/** Blocs chiffres (sous l’intro). `id: "clients"` est remplacé par clients_count API. */
+/** Blocs chiffres (sous l’intro). `id: "clients"` vient de clients_count (API) : tiret si elle ne répond pas. */
 export const aboutStats = [
     {
         id: "presence",
@@ -23,13 +23,13 @@ export const aboutStats = [
     },
     {
         id: "clients",
-        value: "8+",
+        value: "—",
         label: "commerçants partenaires",
     },
     {
         id: "payout",
-        value: "3h max",
-        label: "pour reverser vos fonds après livraison",
+        value: "Le jour même",
+        label: "vos fonds reversés en fin de journée",
     },
 ];
 
@@ -52,15 +52,15 @@ export const aboutDifferentiators = [
     },
     {
         iconId: "clock",
-        title: "Reversement en 3h",
+        title: "Reversement en fin de journée",
         description:
-            "Vos fonds encaissés à la livraison vous sont reversés en maximum 3 heures.",
+            "Vos fonds encaissés à la livraison vous sont reversés le jour même, en fin de journée.",
     },
     {
         iconId: "archive",
-        title: "Stockage gratuit",
+        title: "Stockage offert 3 mois",
         description:
-            "Vos colis stockés gratuitement dans nos locaux de l'Hippodrome, Yaoundé.",
+            "Vos colis stockés dans nos locaux de l'Hippodrome, Yaoundé, 3 mois offerts.",
     },
     {
         iconId: "chart",

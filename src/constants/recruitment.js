@@ -95,7 +95,11 @@ export const STATUS_LABELS = {
         `Référence candidature : #${id}`,
     submitErrorGeneric: "Une erreur est survenue, veuillez réessayer.",
     submitErrorNetwork:
-        "Upload impossible. Vérifiez votre connexion et réessayez avec un fichier inférieur à 10 Mo.",
+        "L’envoi n’a pas abouti. Vérifiez votre connexion puis réessayez : vos réponses sont conservées.",
+    submitErrorOffline:
+        "Vous êtes hors ligne. Reconnectez-vous puis renvoyez : vos réponses sont conservées.",
+    submitErrorTimeout:
+        "L’envoi prend trop de temps, la connexion a sans doute été coupée. Réessayez : vos réponses sont conservées.",
     submitError413: "Fichier trop volumineux (max 10 Mo).",
     submitError409: "Vous avez déjà postulé pour ce poste.",
     submitError400Fallback: "Données invalides. Vérifiez les champs et réessayez.",

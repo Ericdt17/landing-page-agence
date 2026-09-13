@@ -425,13 +425,13 @@ export const heroCtaPrimaryHref = whatsappCtaHref;
 export const heroCtaSecondaryLabel = "Commencer sur WhatsApp";
 
 export const heroCtaReassurance =
-    "Aucun engagement • Réponse en moins de 5 min • Mise en place le jour même";
+    "Aucun engagement • Réponse en moins de 30 min • Mise en place le jour même";
 
 /** Avantages hero : label affiché (sans emoji) */
 export const heroPerks = [
     "2 jours de livraisons offerts",
-    "Stockage gratuit à l’Hippodrome",
-    "Reversement des fonds en moins de 3 heures",
+    "Stockage offert 3 mois à l’Hippodrome",
+    "Reversement des fonds en fin de journée",
 ];
 
 export const problemEyebrow = "Le problème";
@@ -470,11 +470,11 @@ export const solutionBenefits = [
     },
     {
         iconId: "banknotes",
-        text: "Vous récupérez vos fonds en moins de 3 heures.",
+        text: "Vous récupérez vos fonds en fin de journée.",
     },
     {
         iconId: "cube",
-        text: "Nous stockons vos produits gratuitement à l’Hippodrome.",
+        text: "Nous stockons vos produits à l’Hippodrome, 3 mois offerts.",
     },
 ];
 
@@ -497,7 +497,7 @@ export const offreStack = [
     },
     {
         iconId: "cube",
-        text: "Stockage gratuit à l’Hippodrome",
+        text: "Stockage offert 3 mois à l’Hippodrome",
     },
     {
         iconId: "map-pin",
@@ -505,7 +505,7 @@ export const offreStack = [
     },
     {
         iconId: "banknotes",
-        text: "Reversement des fonds en moins de 3 heures",
+        text: "Reversement des fonds en fin de journée",
     },
     {
         iconId: "device",
@@ -555,24 +555,6 @@ export const howItWorksSteps = [
     },
 ];
 
-export const keyMetrics = [
-    {
-        value: "98.4%",
-        label: "Taux de succès",
-        sublabel: "Satisfaction client garantie",
-    },
-    {
-        value: "45 min",
-        label: "Moyenne par livraison",
-        sublabel: "Optimisation du traitement des demandes",
-    },
-    {
-        value: "50+",
-        label: "Agences partenaires",
-        sublabel: "Réseau logistique national",
-    },
-];
-
 export const impactHeadingLines = [
     "Une équipe formée + une",
     "technologie puissante",
@@ -593,54 +575,17 @@ export const impactFeatures = [
     },
 ];
 
+/**
+ * `source` : chiffre lu depuis l'API publique, un tiret s'affiche si elle ne
+ * répond pas. Sans `source`, la valeur est un engagement déjà annoncé ailleurs
+ * sur le site, jamais une mesure qu'on ne sait pas produire.
+ */
 export const impactStats = [
-    { value: "98%", label: "Livraisons à temps" },
-    { value: "15 min", label: "Réponse moyenne" },
-    { value: "500+", label: "Vendeurs actifs" },
-    { value: "0", label: "Commandes oubliées" },
+    { source: "deliveries", label: "Colis livrés depuis le début" },
+    { value: "30 min", label: "Réponse WhatsApp, au plus" },
+    { source: "clients", label: "Clients actifs" },
+    { value: "1 000 FCFA", label: "Livraison à partir de" },
 ];
-
-export const securityEyebrow = "Sécurisation des données";
-
-export const securityHeadline = "Votre sécurité est notre priorité absolue";
-
-export const securityIntro =
-    "Nous appliquons les standards de sécurité pour protéger vos informations sensibles et celles de vos clients.";
-
-/** iconId maps to @heroicons/react/24/outline in SecuriteConfiance.jsx; variant "uptime" uses custom layout */
-export const securityFeatures = [
-    {
-        iconId: "cloud",
-        title: "Hébergement Cloud",
-        subtitle: "Un système qui s'adapte à votre demande.",
-    },
-    {
-        iconId: "lock",
-        title: "AES-256 bits",
-        subtitle: "Cryptage de bout en bout",
-    },
-    {
-        iconId: "shield-check",
-        title: "Conforme RGPD",
-        subtitle: "Respect strict de la vie privée",
-    },
-    {
-        variant: "uptime",
-        label: "Disponibilité",
-        title: "99.9%",
-        titleLine2: "Uptime",
-        subtitle: "Haute disponibilité garantie",
-    },
-];
-
-export const securityCertTitle = "Certifié LivSight Secure";
-
-export const securityCertBody =
-    "Chaque transaction et donnée est scellée numériquement pour prévenir toute fraude ou fuite.";
-
-export const testimonialEyebrow = "Témoignages";
-
-export const testimonialHeadline = "Ce que disent nos partenaires";
 
 export const faqHeading = "Questions fréquentes";
 
@@ -707,38 +652,14 @@ export const ctaFinalSubheading =
 
 export const ctaFinalPerks = [
     "2 jours de livraisons offerts",
-    "Stockage gratuit à l’Hippodrome",
-    "Reversement des fonds en moins de 3 heures",
+    "Stockage offert 3 mois à l’Hippodrome",
+    "Reversement des fonds en fin de journée",
 ];
 
 /** Même libellé que le CTA hero */
 export const ctaFinalPrimaryLabel = heroCtaSecondaryLabel;
 
 export const ctaFinalPrimaryHref = whatsappCtaHref;
-
-export const partnerTestimonials = [
-    {
-        quote:
-            "Depuis qu'on utilise LivSight, nos pertes de colis ont chuté de 95%. La traçabilité est exemplaire.",
-        name: "Matthieu Wafo",
-        role: "DG, Ongola Express",
-        rating: 5,
-    },
-    {
-        quote:
-            "L'interface agent est si simple que mon équipe a appris à l'utiliser en moins d'une heure. Impressionnant.",
-        name: "Sarah Bidjang",
-        role: "Opérations, Kamer Delivery",
-        rating: 5,
-    },
-    {
-        quote:
-            "Le ROI a été immédiat. Nous gérons 2 fois plus de livraisons avec le même nombre de livreurs.",
-        name: "Marc Kameni",
-        role: "Fondateur, Yaoundé Hub",
-        rating: 5,
-    },
-];
 
 /**
  * Footer : Figma §16 (LivSight).

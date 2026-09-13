@@ -1,10 +1,5 @@
 import { facebook, instagram } from "../assets/icons";
 import {
-    ecosystemAgent,
-    ecosystemClient,
-    ecosystemDriver,
-} from "../assets/images";
-import {
     legalConditionsPath,
     termsContactIntro,
     termsGroups,
@@ -452,31 +447,6 @@ export const problemPoints = [
     "Suivre la commande.",
     "Gérer les réclamations.",
     "Récupérer votre argent.",
-];
-
-export const ecosystemEyebrow = "L'Écosystème LivSight";
-
-export const ecosystemHeadline = "Une Solution, Trois Expériences";
-
-export const ecosystemShowcases = [
-    {
-        image: ecosystemClient,
-        title: "Pour les Clients",
-        description:
-            "Créez vos demandes en 2 clics et suivez-les en temps réel sur une interface élégante.",
-    },
-    {
-        image: ecosystemAgent,
-        title: "Pour les Agents",
-        description:
-            "Gérez les flux, assignez les chauffeurs et réglez les imprévus avec un tableau de bord puissant.",
-    },
-    {
-        image: ecosystemDriver,
-        title: "Pour les Livreurs",
-        description:
-            "Une application optimisée pour le terrain avec navigation GPS et validation instantanée.",
-    },
 ];
 
 export const solutionEyebrow = "La solution";

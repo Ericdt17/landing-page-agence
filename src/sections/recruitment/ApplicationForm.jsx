@@ -1,7 +1,5 @@
-import Lottie from "lottie-react";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { candidatureSuccess } from "../../assets/lottie";
 import {
     APPLICATION_FORM_LABELS,
     AVAILABILITY_OPTIONS,
@@ -15,6 +13,8 @@ import {
     entrepriseRecrutementPath,
 } from "../../constants";
 import { submitApplication } from "../../services/recruitmentApi";
+
+const SuccessAnimation = lazy(() => import("./SuccessAnimation"));
 
 const RECRUITMENT_PHOTO_FIELD =
     import.meta.env.VITE_RECRUITMENT_PHOTO_FIELD ?? "photo";
@@ -887,11 +887,9 @@ const ApplicationForm = ({
                         className='h-36 w-36 sm:h-40 sm:w-40'
                         aria-hidden='true'
                     >
-                        <Lottie
-                            animationData={candidatureSuccess}
-                            loop={false}
-                            autoplay
-                        />
+                        <Suspense fallback={null}>
+                            <SuccessAnimation />
+                        </Suspense>
                     </div>
                     <p className='mt-6 font-montserrat text-2xl font-bold text-gray-900'>
                         {STATUS_LABELS.submitSuccessTitle}

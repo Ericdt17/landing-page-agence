@@ -13,7 +13,7 @@ export const integrationsApiPageTagline =
 export const integrationsApiBadge = "Bientôt disponible";
 
 export const integrationsApiIntroParagraphs = [
-    "Bientôt, vous pourrez connecter votre site, votre boutique Shopify ou votre système de gestion de commandes à LivSight via une API. Chaque nouvelle commande créée chez vous génère automatiquement une livraison : sans ressaisie, sans copier-coller.",
+    "Bientôt, vous pourrez connecter votre site, votre boutique en ligne ou votre système de gestion de commandes à LivSight via une API. Chaque nouvelle commande créée chez vous génère automatiquement une livraison : sans ressaisie, sans copier-coller.",
     "Cette fonctionnalité est en cours de développement. Elle sera disponible dans une prochaine version de LivSight. Vous pouvez d'ores et déjà rejoindre la liste d'attente pour être notifié en priorité à la sortie.",
 ];
 
@@ -48,12 +48,6 @@ export const integrationsApiFeatures = [
             "Importez des centaines de commandes en une seule fois via un fichier CSV. Idéal pour les commerçants à fort volume.",
     },
     {
-        iconId: "shop",
-        title: "Connexion Shopify",
-        description:
-            "Un connecteur natif Shopify permettra de synchroniser vos commandes, produits et statuts sans configuration technique.",
-    },
-    {
         iconId: "book",
         title: "Documentation développeur",
         description:
@@ -67,7 +61,7 @@ export const integrationsApiAudienceTitle = "Qui pourra en bénéficier";
 export const integrationsApiAudienceItems = [
     {
         iconId: "shop",
-        title: "Boutiques Shopify & WooCommerce",
+        title: "Boutiques en ligne",
         description:
             "Connectez votre boutique en ligne et déclenchez une livraison LivSight automatiquement à chaque nouvelle commande client.",
     },

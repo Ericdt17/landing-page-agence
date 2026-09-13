@@ -11,7 +11,7 @@ const IntegrationsApiPage = () => {
         <>
             <SEO
                 title='Intégration API | Connectez votre boutique'
-                description='Bientôt disponible : connectez votre boutique Shopify ou votre système de gestion à LivSight via API. Import automatique des commandes.'
+                description='Bientôt disponible : connectez votre boutique en ligne ou votre système de gestion à LivSight via API. Import automatique des commandes.'
                 canonical='/plateforme/integrations-api'
             />
             <SiteLayout>

@@ -375,6 +375,14 @@ const ApplicationForm = ({
             const mapped = mapInvalidFieldsToForm(result.data);
             if (Object.keys(mapped).length) setFieldErrors(mapped);
         }
+        if (result?.error === "offline") {
+            setSubmitError(STATUS_LABELS.submitErrorOffline);
+            return;
+        }
+        if (result?.error === "timeout") {
+            setSubmitError(STATUS_LABELS.submitErrorTimeout);
+            return;
+        }
         if (result?.error === "network") {
             // Aucun body lisible (CORS / proxy / réseau). On affiche un message actionnable.
             setSubmitError(STATUS_LABELS.submitErrorNetwork);
@@ -821,7 +829,7 @@ const ApplicationForm = ({
                     </p>
                 )}
                 {(photoError || fieldErrors.photo) && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
+                    <p role='alert' className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {photoError || STATUS_LABELS.photoRequired}
                     </p>
                 )}
@@ -846,7 +854,7 @@ const ApplicationForm = ({
                     </p>
                 )}
                 {(cvError || fieldErrors.cv) && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
+                    <p role='alert' className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {cvError || "CV requis (PDF, max 10 Mo)."}
                     </p>
                 )}
@@ -871,7 +879,7 @@ const ApplicationForm = ({
                     </p>
                 )}
                 {(coverLetterError || fieldErrors.coverLetter) && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-ink'>
+                    <p role='alert' className='mt-1 font-montserrat text-xs text-coral-ink'>
                         {coverLetterError ||
                             "Lettre requise (PDF, max 10 Mo)."}
                     </p>
@@ -1143,7 +1151,10 @@ const ApplicationForm = ({
                             )}
 
                             {submitError && (
-                                <p className='mt-2 text-center font-montserrat text-sm text-coral-ink'>
+                                <p
+                                    role='alert'
+                                    className='mt-2 text-center font-montserrat text-sm text-coral-ink'
+                                >
                                     {submitError}
                                 </p>
                             )}

@@ -236,12 +236,34 @@ const extractApplyErrorMessage = (body) => {
  * @param {FormData} formData : corps multipart déjà rempli côté UI
  * @returns {Promise<{ success: boolean, data?: object, error?: string, status?: number, message?: string }>}
  */
+/**
+ * Trois fichiers de 10 Mo sur une connexion mobile lente peuvent prendre
+ * plusieurs minutes : le délai est large, il sert seulement à ne pas laisser
+ * un envoi dont la connexion est morte tourner indéfiniment.
+ */
+const SUBMIT_TIMEOUT_MS = 5 * 60 * 1000;
+
 export async function submitApplication(formData) {
+    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+        return { success: false, error: "offline" };
+    }
+
+    const controller = new AbortController();
+    let reason = null;
+    const abortWith = (why) => {
+        reason = why;
+        controller.abort();
+    };
+    const onOffline = () => abortWith("offline");
+    const timer = setTimeout(() => abortWith("timeout"), SUBMIT_TIMEOUT_MS);
+    window.addEventListener("offline", onOffline);
+
     try {
         const res = await fetch(`${API_BASE}/api/v1/recruitment/apply`, {
             method: "POST",
             body: formData,
             credentials: "omit",
+            signal: controller.signal,
         });
         const body = await res.json().catch(() => ({}));
         if (res.ok) {
@@ -255,6 +277,9 @@ export async function submitApplication(formData) {
             data: body,
         };
     } catch {
-        return { success: false, error: "network" };
+        return { success: false, error: reason ?? "network" };
+    } finally {
+        clearTimeout(timer);
+        window.removeEventListener("offline", onOffline);
     }
 }

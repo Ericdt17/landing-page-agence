@@ -8,35 +8,21 @@ const iconMap = {
   tech: CpuChipIcon,
 };
 
-const CLIENTS_STAT_LABEL = "Clients actifs";
-const DELIVERIES_STAT_LABEL = "Colis livrés depuis le début";
-const CLIENTS_FALLBACK_LABELS = new Set(["Vendeurs actifs", CLIENTS_STAT_LABEL]);
-const DELIVERIES_FALLBACK_LABELS = new Set([
-  "Livraisons à temps",
-  DELIVERIES_STAT_LABEL,
-]);
-
 const formatStatCount = (count) =>
   new Intl.NumberFormat("fr-FR").format(count);
 
 const buildImpactStats = ({ clientsCount, completedDeliveries }) => {
-  /* Les deux chiffres vivants remplacent les vignettes correspondantes. Quand
-     l'API ne répond pas, on affiche un tiret : mieux vaut ne rien annoncer
-     qu'annoncer un chiffre inventé. */
+  /* Quand l'API ne répond pas, on affiche un tiret : mieux vaut ne rien
+     annoncer qu'annoncer un chiffre inventé. */
   const live = (count) =>
     count == null
       ? { value: "—", numeric: null, pending: true }
       : { value: formatStatCount(count), numeric: count, pending: false };
 
-  return impactStats.map((stat) => {
-    if (CLIENTS_FALLBACK_LABELS.has(stat.label)) {
-      return { ...stat, ...live(clientsCount), label: CLIENTS_STAT_LABEL };
-    }
-    if (DELIVERIES_FALLBACK_LABELS.has(stat.label)) {
-      return { ...stat, ...live(completedDeliveries), label: DELIVERIES_STAT_LABEL };
-    }
-    return stat;
-  });
+  const counts = { clients: clientsCount, deliveries: completedDeliveries };
+  return impactStats.map((stat) =>
+    stat.source ? { ...stat, ...live(counts[stat.source]) } : stat,
+  );
 };
 
 const MetriquesCles = () => {

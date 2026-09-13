@@ -32,6 +32,8 @@ const iconMap = {
 const formatCount = (count) => new Intl.NumberFormat("fr-FR").format(count);
 
 const buildAboutStats = (clientsCount) => {
+    /* Sans réponse de l'API, le tiret de `aboutStats` reste affiché : pas de
+       chiffre inventé à la place du vrai. */
     if (clientsCount == null) return aboutStats;
 
     return aboutStats.map((stat) => {

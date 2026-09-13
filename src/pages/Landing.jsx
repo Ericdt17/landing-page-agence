@@ -18,7 +18,7 @@ const Landing = () => {
     <LandingPublicProvider>
       <SEO
         title="Agence de livraison pour commerçants à Yaoundé"
-        description="Développez votre business en ligne avec LivSight. Livraison à Yaoundé, stockage gratuit à l’Hippodrome, suivi en temps réel et reversement en moins de 3 heures."
+        description="Développez votre business en ligne avec LivSight. Livraison à Yaoundé, stockage offert 3 mois à l’Hippodrome, suivi en temps réel et reversement en fin de journée."
         canonical="/"
       />
       <Helmet>

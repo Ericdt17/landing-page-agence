@@ -7,6 +7,7 @@
  */
 import { facebook, instagram } from "../assets/icons";
 import { entrepriseAProposPath } from "./about";
+import { apiLivraisonPath } from "./apiLivraison";
 import { legalConditionsPath } from "./conditions";
 import { entrepriseContactPath } from "./contact";
 import { legalCookiesPath } from "./cookies";
@@ -53,6 +54,7 @@ export const siteFooterColumns = [
             { label: "L'application", to: siteApplicationPath, enabled: true },
             { label: "Commencer à livrer", href: siteWhatsappHref, enabled: true },
             { label: "Base de connaissances", to: "/base-de-connaissances", enabled: false },
+            { label: "API de livraison", to: apiLivraisonPath, soon: true, enabled: true },
             { label: "Marketplace", to: "/marketplace", soon: true, enabled: true },
         ],
     },

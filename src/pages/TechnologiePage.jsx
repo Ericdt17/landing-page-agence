@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import ApiTeaser from "../components/site/ApiTeaser";
 import SiteLayout from "../components/site/SiteLayout";
 import { entrepriseRecrutementPath } from "../constants/recruitment";
 import {
@@ -141,7 +142,8 @@ const TechnologiePage = () => (
         </ol>
       </section>
 
-      <section aria-label='Recrutement' className='px-[18px] pb-16 md:px-16 md:pb-[88px]'>
+      <section aria-label='API et recrutement' className='grid grid-cols-1 gap-5 px-[18px] pb-16 md:grid-cols-2 md:px-16 md:pb-[88px]'>
+        <ApiTeaser />
         <div className='flex flex-col gap-4 rounded-[26px] bg-ls-ink-bg p-7 text-ls-ink-fg md:p-9'>
           <h2 className='ls-h text-[22px]'>{technologieRecrutement.title}</h2>
           <p className='ls-body text-ls-ink-mute'>{technologieRecrutement.body}</p>

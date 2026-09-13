@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/plateforme/integrations-api",
-      "destination": "/livraison-stockage",
+      "destination": "/api-livraison",
       "permanent": true
     },
     {

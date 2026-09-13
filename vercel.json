@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/plateforme/integrations-api",
+      "destination": "/livraison-stockage",
+      "permanent": true
+    },
+    {
       "source": "/plateforme/app-chauffeur",
       "destination": "/plateforme/portail-livreur",
       "permanent": true
@@ -26,5 +31,10 @@
       "permanent": true
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import SiteLayout from "../components/site/SiteLayout";
 import { plateformeCoursesParticuliersPath } from "../constants/coursesParticuliers";
-import { plateformeIntegrationsApiPath } from "../constants/integrationsApi";
 import {
   livraisonAdresse,
-  livraisonApi,
   livraisonHero,
   livraisonPath,
   livraisonSeo,
@@ -82,16 +80,7 @@ const LivraisonStockagePage = () => (
 
       <ReversementFormule id='livraison-reversement' />
 
-      <section aria-label='Intégration et adresse' className='grid grid-cols-1 gap-5 px-[18px] pb-16 md:grid-cols-2 md:px-16 md:pb-[88px]'>
-        <div className='flex flex-col gap-4 rounded-[26px] border border-ls-rule p-7 md:p-9'>
-          <span className='ls-kicker text-ls-speed'>{livraisonApi.kicker}</span>
-          <h2 className='ls-h ls-d3'>{livraisonApi.title}</h2>
-          <p className='ls-body text-ls-muted'>{livraisonApi.body}</p>
-          <Link to={plateformeIntegrationsApiPath} className='ls-link mt-auto inline-flex w-fit items-center gap-1.5 text-sm'>
-            {livraisonApi.link}
-            <ArrowRightIcon className='h-4 w-4' aria-hidden='true' />
-          </Link>
-        </div>
+      <section aria-label='Horaires et adresse' className='px-[18px] pb-16 md:px-16 md:pb-[88px]'>
         <div className='flex flex-col gap-4 rounded-[26px] bg-ls-ink-bg p-7 text-ls-ink-fg md:p-9'>
           <span className='ls-kicker text-ls-ink-speed'>{livraisonAdresse.kicker}</span>
           <h2 className='ls-h ls-d3'>{livraisonAdresse.title}</h2>

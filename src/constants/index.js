@@ -87,23 +87,6 @@ import {
     portailLivreurStats,
 } from "./portailLivreur";
 import {
-    integrationsApiAudienceItems,
-    integrationsApiAudienceTitle,
-    integrationsApiBadge,
-    integrationsApiCodeSample,
-    integrationsApiCodeTitle,
-    integrationsApiFeatures,
-    integrationsApiFeaturesTitle,
-    integrationsApiIntroParagraphs,
-    integrationsApiPageTagline,
-    integrationsApiPageTitle,
-    integrationsApiVersionLabel,
-    integrationsApiWaitlistBody,
-    integrationsApiWaitlistButtonLabel,
-    integrationsApiWaitlistTitle,
-    plateformeIntegrationsApiPath,
-} from "./integrationsApi";
-import {
     coursesParticuliersCtaBody,
     coursesParticuliersCtaButtonLabel,
     coursesParticuliersCtaTitle,
@@ -267,21 +250,6 @@ export {
 };
 
 export {
-    integrationsApiAudienceItems,
-    integrationsApiAudienceTitle,
-    integrationsApiBadge,
-    integrationsApiCodeSample,
-    integrationsApiCodeTitle,
-    integrationsApiFeatures,
-    integrationsApiFeaturesTitle,
-    integrationsApiIntroParagraphs,
-    integrationsApiPageTagline,
-    integrationsApiPageTitle,
-    integrationsApiVersionLabel,
-    integrationsApiWaitlistBody,
-    integrationsApiWaitlistButtonLabel,
-    integrationsApiWaitlistTitle,
-    plateformeIntegrationsApiPath,
 };
 
 export {
@@ -391,7 +359,6 @@ export const footerSpaPaths = [
     plateformeCoursesParticuliersPath,
     plateformePortailAgentPath,
     plateformePortailLivreurPath,
-    plateformeIntegrationsApiPath,
     entrepriseContactPath,
     entrepriseRecrutementPath,
 ];
@@ -686,7 +653,6 @@ export const footerColumns = [
             },
             { label: "Portail Agent", href: plateformePortailAgentPath },
             { label: "Portail livreur", href: plateformePortailLivreurPath },
-            { label: "Intégrations API", href: plateformeIntegrationsApiPath },
         ],
     },
     {

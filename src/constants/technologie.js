@@ -63,14 +63,6 @@ export const technologieProblems = {
     ],
 };
 
-export const technologieApi = {
-    badge: "Bientôt",
-    title: "L'API commerçants",
-    body: "Connectez votre boutique en ligne directement à LivSight : créez vos livraisons depuis votre site, récupérez les statuts, sans ressaisie.",
-    sampleLabel: "Aperçu, sujet à changement",
-    link: "En savoir plus",
-};
-
 export const technologieRecrutement = {
     title: "Nous recrutons.",
     body: "Logistique réelle, argent réel, contraintes réelles, sur le terrain comme dans le code. Livreurs, entrepôt, conseillers, support, ingénieurs : si ça vous parle, écrivez-nous.",

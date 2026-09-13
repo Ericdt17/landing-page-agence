@@ -68,13 +68,6 @@ export const reversementCopy = {
     ],
 };
 
-export const livraisonApi = {
-    kicker: "Bientôt",
-    title: "Connectez votre boutique en ligne directement à LivSight.",
-    body: "Une API pour créer vos livraisons automatiquement depuis votre site, sans ressaisie.",
-    link: "En savoir plus",
-};
-
 export const livraisonAdresse = {
     kicker: "Horaires & adresse",
     title: "Hippodrome, Yaoundé.",

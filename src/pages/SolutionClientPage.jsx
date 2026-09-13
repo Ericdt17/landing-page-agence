@@ -1,4 +1,5 @@
-import { PageHeader, SEO, SiteFooter } from "../components";
+import { PageHeader, SEO } from "../components";
+import SiteLayout from "../components/site/SiteLayout";
 import SolutionClient from "../sections/SolutionClient";
 import {
     solutionClientPageTagline,
@@ -13,14 +14,13 @@ const SolutionClientPage = () => {
                 description="Créez une livraison en 3 étapes, suivez vos colis en temps réel et recevez vos fonds en fin de journée. L'application LivSight pour commerçants à Yaoundé."
                 canonical='/plateforme/solution-client'
             />
-            <main className='min-h-[60vh] bg-white'>
+            <SiteLayout>
                 <PageHeader title={solutionClientPageTitle} subtitle={solutionClientPageTagline} />
 
-                <div className='max-container padding-x'>
+                <div className='px-[18px] md:px-16'>
                     <SolutionClient />
                 </div>
-            </main>
-      <SiteFooter />
+            </SiteLayout>
         </>
     );
 };

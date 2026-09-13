@@ -1,4 +1,5 @@
-import { PageHeader, SEO, SiteFooter } from "../components";
+import { PageHeader, SEO } from "../components";
+import SiteLayout from "../components/site/SiteLayout";
 import ConditionsSection from "../sections/Conditions";
 import { termsPageTitle, termsPageUpdated } from "../constants";
 
@@ -10,14 +11,13 @@ const ConditionsPage = () => {
         description="Conditions générales d'utilisation du service LivSight : agence de livraison à Yaoundé, Cameroun."
         canonical='/legal/conditions'
       />
-      <main className='min-h-[60vh] bg-white'>
+      <SiteLayout>
         <PageHeader title={termsPageTitle} subtitle={termsPageUpdated} />
 
-        <div className='max-container padding-x'>
+        <div className='px-[18px] md:px-16'>
           <ConditionsSection />
         </div>
-      </main>
-      <SiteFooter />
+      </SiteLayout>
     </>
   );
 };

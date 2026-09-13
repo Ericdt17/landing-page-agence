@@ -1,4 +1,5 @@
-import { PageHeader, SEO, SiteFooter } from "../components";
+import { PageHeader, SEO } from "../components";
+import SiteLayout from "../components/site/SiteLayout";
 import CoursesParticuliers from "../sections/CoursesParticuliers";
 import {
     coursesParticuliersPageTagline,
@@ -13,14 +14,13 @@ const CoursesParticuliersPage = () => {
                 description="Commandez une course sans vous déplacer : documents, achats, colis, cadeaux. Même grille tarifaire que les livraisons standard. Contactez LivSight sur WhatsApp."
                 canonical='/plateforme/courses-particuliers'
             />
-            <main className='min-h-[60vh] bg-white'>
+            <SiteLayout>
                 <PageHeader title={coursesParticuliersPageTitle} subtitle={coursesParticuliersPageTagline} />
 
-                <div className='max-container padding-x'>
+                <div className='px-[18px] md:px-16'>
                     <CoursesParticuliers />
                 </div>
-            </main>
-      <SiteFooter />
+            </SiteLayout>
         </>
     );
 };

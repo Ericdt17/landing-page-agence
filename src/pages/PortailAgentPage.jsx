@@ -1,4 +1,5 @@
-import { PageHeader, SEO, SiteFooter } from "../components";
+import { PageHeader, SEO } from "../components";
+import SiteLayout from "../components/site/SiteLayout";
 import PortailAgent from "../sections/PortailAgent";
 import {
     portailAgentPageTagline,
@@ -13,14 +14,13 @@ const PortailAgentPage = () => {
                 description='Votre agent dédié gère chaque livraison en temps réel depuis son application. Assignation intelligente, suivi GPS, gestion des incidents.'
                 canonical='/plateforme/portail-agent'
             />
-            <main className='min-h-[60vh] bg-white'>
+            <SiteLayout>
                 <PageHeader title={portailAgentPageTitle} subtitle={portailAgentPageTagline} />
 
-                <div className='max-container padding-x'>
+                <div className='px-[18px] md:px-16'>
                     <PortailAgent />
                 </div>
-            </main>
-      <SiteFooter />
+            </SiteLayout>
         </>
     );
 };

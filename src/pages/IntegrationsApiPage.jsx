@@ -1,4 +1,5 @@
-import { PageHeader, SEO, SiteFooter } from "../components";
+import { PageHeader, SEO } from "../components";
+import SiteLayout from "../components/site/SiteLayout";
 import IntegrationsApi from "../sections/IntegrationsApi";
 import {
     integrationsApiPageTagline,
@@ -13,14 +14,13 @@ const IntegrationsApiPage = () => {
                 description='Bientôt disponible : connectez votre boutique Shopify ou votre système de gestion à LivSight via API. Import automatique des commandes.'
                 canonical='/plateforme/integrations-api'
             />
-            <main className='min-h-[60vh] bg-white'>
+            <SiteLayout>
                 <PageHeader title={integrationsApiPageTitle} subtitle={integrationsApiPageTagline} />
 
-                <div className='max-container padding-x'>
+                <div className='px-[18px] md:px-16'>
                     <IntegrationsApi />
                 </div>
-            </main>
-      <SiteFooter />
+            </SiteLayout>
         </>
     );
 };

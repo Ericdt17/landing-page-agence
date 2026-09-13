@@ -32,7 +32,7 @@ const PortailAgent = () => {
                 {portailAgentIntroParagraphs.map((p) => (
                     <p
                         key={p.slice(0, 48)}
-                        className='font-montserrat text-base leading-relaxed text-gray-600 sm:text-lg'
+                        className='font-montserrat text-base leading-relaxed text-ls-muted sm:text-lg'
                     >
                         {p}
                     </p>
@@ -43,12 +43,12 @@ const PortailAgent = () => {
                 {portailAgentStats.map(({ value, label }) => (
                     <li
                         key={label}
-                        className='rounded-2xl border border-gray-100 bg-gray-50/80 px-5 py-6 text-center shadow-soft-card'
+                        className='rounded-2xl border border-ls-rule bg-ls-fill px-5 py-6 text-center '
                     >
-                        <p className='font-montserrat text-2xl font-extrabold text-brand-ink sm:text-3xl'>
+                        <p className='font-montserrat text-2xl font-extrabold text-ls-accent sm:text-3xl'>
                             {value}
                         </p>
-                        <p className='mt-2 font-montserrat text-sm leading-snug text-gray-600'>
+                        <p className='mt-2 font-montserrat text-sm leading-snug text-ls-muted'>
                             {label}
                         </p>
                     </li>
@@ -61,7 +61,7 @@ const PortailAgent = () => {
             >
                 <h2
                     id='portail-agent-for-you-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {portailAgentForYouTitle}
                 </h2>
@@ -71,16 +71,16 @@ const PortailAgent = () => {
                         return (
                             <li
                                 key={title}
-                                className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'
+                                className='flex flex-col rounded-3xl border border-ls-rule bg-ls-surface px-6 py-7 '
                             >
                                 <Icon
-                                    className='h-6 w-6 text-brand-ink'
+                                    className='h-6 w-6 text-ls-accent'
                                     aria-hidden='true'
                                 />
-                                <h3 className='mt-5 font-montserrat text-lg font-bold text-gray-900'>
+                                <h3 className='mt-5 font-montserrat text-lg font-bold text-ls-text'>
                                     {title}
                                 </h3>
-                                <p className='mt-3 font-montserrat text-sm leading-relaxed text-gray-600'>
+                                <p className='mt-3 font-montserrat text-sm leading-relaxed text-ls-muted'>
                                     {description}
                                 </p>
                             </li>
@@ -95,7 +95,7 @@ const PortailAgent = () => {
             >
                 <h2
                     id='portail-agent-never-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {portailAgentNeverTitle}
                 </h2>
@@ -103,12 +103,12 @@ const PortailAgent = () => {
                     {portailAgentNeverItems.map(({ title, description }) => (
                         <li
                             key={title}
-                            className='rounded-2xl border border-gray-100 bg-gray-50/80 px-5 py-5 shadow-soft-card sm:px-6 sm:py-6'
+                            className='rounded-2xl border border-ls-rule bg-ls-fill px-5 py-5 sm:px-6 sm:py-6'
                         >
-                            <h3 className='font-montserrat text-base font-bold text-gray-900 sm:text-lg'>
+                            <h3 className='font-montserrat text-base font-bold text-ls-text sm:text-lg'>
                                 {title}
                             </h3>
-                            <p className='mt-2 font-montserrat text-sm leading-relaxed text-gray-600'>
+                            <p className='mt-2 font-montserrat text-sm leading-relaxed text-ls-muted'>
                                 {description}
                             </p>
                         </li>
@@ -116,11 +116,11 @@ const PortailAgent = () => {
                 </ul>
             </section>
 
-            <div className='mt-14 space-y-4 border-t border-gray-100 pt-10'>
+            <div className='mt-14 space-y-4 border-t border-ls-rule pt-10'>
                 {portailAgentClosingParagraphs.map((p) => (
                     <p
                         key={p.slice(0, 48)}
-                        className='font-montserrat text-base leading-relaxed text-gray-600 sm:text-lg'
+                        className='font-montserrat text-base leading-relaxed text-ls-muted sm:text-lg'
                     >
                         {p}
                     </p>

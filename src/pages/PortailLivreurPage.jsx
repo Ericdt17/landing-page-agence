@@ -1,4 +1,5 @@
-import { PageHeader, SEO, SiteFooter } from "../components";
+import { PageHeader, SEO } from "../components";
+import SiteLayout from "../components/site/SiteLayout";
 import PortailLivreur from "../sections/PortailLivreur";
 import {
     portailLivreurPageTagline,
@@ -13,14 +14,13 @@ const PortailLivreurPage = () => {
                 description='Nos livreurs sont guidés par des algorithmes pour livrer vos colis plus vite. GPS actif, montant verrouillé, statuts en temps réel.'
                 canonical='/plateforme/portail-livreur'
             />
-            <main className='min-h-[60vh] bg-white'>
+            <SiteLayout>
                 <PageHeader title={portailLivreurPageTitle} subtitle={portailLivreurPageTagline} />
 
-                <div className='max-container padding-x'>
+                <div className='px-[18px] md:px-16'>
                     <PortailLivreur />
                 </div>
-            </main>
-      <SiteFooter />
+            </SiteLayout>
         </>
     );
 };

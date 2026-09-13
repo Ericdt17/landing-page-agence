@@ -6,7 +6,8 @@ import {
 import { useEffect, useState } from "react";
 import JobsList from "../sections/recruitment/JobsList";
 import ProcessSection from "../sections/recruitment/ProcessSection";
-import { PageHeader, SEO, SiteFooter } from "../components";
+import { PageHeader, SEO } from "../components";
+import SiteLayout from "../components/site/SiteLayout";
 import {
     RECRUITMENT_HERO,
     RECRUITMENT_OPEN_BADGE,
@@ -53,17 +54,17 @@ const RecruitmentPage = () => {
                 description='LivSight recrute des livreurs et agents à Yaoundé. Moto fournie, formation assurée, bénéfices. Postulez en ligne en moins de 5 minutes.'
                 canonical='/entreprise/recrutement'
             />
-            <main className='min-h-[60vh] bg-white'>
+            <SiteLayout>
                 <PageHeader title={RECRUITMENT_HERO.title} subtitle={RECRUITMENT_HERO.subtitle} />
 
-                <div className='max-container padding-x pb-16'>
+                <div className='px-[18px] md:px-16 pb-16'>
                     <div className='mt-8 space-y-4'>
                         {!loading && jobs.length > 0 && (
-                            <span className='inline-flex rounded-full bg-pale-blue px-3 py-1 font-montserrat text-xs font-bold uppercase tracking-wide text-brand-deep'>
+                            <span className='inline-flex rounded-full bg-ls-select px-3 py-1 font-montserrat text-xs font-bold uppercase tracking-wide text-ls-accent'>
                                 {RECRUITMENT_OPEN_BADGE}
                             </span>
                         )}
-                        <p className='max-w-3xl font-montserrat text-base leading-relaxed text-gray-600 sm:text-lg'>
+                        <p className='max-w-3xl font-montserrat text-base leading-relaxed text-ls-muted sm:text-lg'>
                             {RECRUITMENT_HERO.description}
                         </p>
                     </div>
@@ -82,7 +83,7 @@ const RecruitmentPage = () => {
                     >
                         <h2
                             id='recruitment-values-heading'
-                            className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                            className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                         >
                             {RECRUITMENT_VALUES_TITLE}
                         </h2>
@@ -93,16 +94,16 @@ const RecruitmentPage = () => {
                                     return (
                                         <li
                                             key={title}
-                                            className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'
+                                            className='flex flex-col rounded-3xl border border-ls-rule bg-ls-surface px-6 py-7 '
                                         >
                                             <Icon
-                                                className='h-6 w-6 text-brand-ink'
+                                                className='h-6 w-6 text-ls-accent'
                                                 aria-hidden='true'
                                             />
-                                            <h3 className='mt-5 font-montserrat text-lg font-bold text-gray-900'>
+                                            <h3 className='mt-5 font-montserrat text-lg font-bold text-ls-text'>
                                                 {title}
                                             </h3>
-                                            <p className='mt-3 font-montserrat text-sm leading-relaxed text-gray-600'>
+                                            <p className='mt-3 font-montserrat text-sm leading-relaxed text-ls-muted'>
                                                 {description}
                                             </p>
                                         </li>
@@ -112,8 +113,7 @@ const RecruitmentPage = () => {
                         </ul>
                     </section>
                 </div>
-            </main>
-      <SiteFooter />
+            </SiteLayout>
 
         </>
     );

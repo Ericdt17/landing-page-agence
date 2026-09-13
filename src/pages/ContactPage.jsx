@@ -1,4 +1,5 @@
-import { PageHeader, SEO, SiteFooter } from "../components";
+import { PageHeader, SEO } from "../components";
+import SiteLayout from "../components/site/SiteLayout";
 import Contact from "../sections/Contact";
 import { contactPageTagline, contactPageTitle } from "../constants";
 
@@ -10,14 +11,13 @@ const ContactPage = () => {
                 description="Contactez LivSight par WhatsApp ou email. Agence basée à l'Hippodrome, Yaoundé. On vous répond en moins de 30 minutes."
                 canonical='/entreprise/contact'
             />
-            <main className='min-h-[60vh] bg-white'>
+            <SiteLayout>
                 <PageHeader title={contactPageTitle} subtitle={contactPageTagline} />
 
-                <div className='max-container padding-x'>
+                <div className='px-[18px] md:px-16'>
                     <Contact />
                 </div>
-            </main>
-      <SiteFooter />
+            </SiteLayout>
         </>
     );
 };

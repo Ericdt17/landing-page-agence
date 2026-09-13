@@ -22,16 +22,16 @@ const BrandCtaCard = ({
       aria-labelledby={headingId}
     >
       <div
-        className={`overflow-hidden rounded-[32px] bg-brand-ink px-6 py-10 text-center sm:px-10 sm:py-14 ${cardClassName}`}
+        className={`overflow-hidden rounded-[32px] bg-ls-ink-bg px-6 py-10 text-center sm:px-10 sm:py-14 ${cardClassName}`}
       >
         <h2
           id={headingId}
-          className='font-montserrat text-2xl font-extrabold text-white sm:text-3xl'
+          className='font-montserrat text-2xl font-extrabold text-ls-ink-fg sm:text-3xl'
         >
           {title}
         </h2>
         {body ? (
-          <p className='mx-auto mt-4 max-w-xl font-montserrat text-sm leading-relaxed text-white sm:text-base'>
+          <p className='mx-auto mt-4 max-w-xl font-montserrat text-sm leading-relaxed text-ls-ink-fg sm:text-base'>
             {body}
           </p>
         ) : null}
@@ -40,7 +40,7 @@ const BrandCtaCard = ({
           href={href}
           target='_blank'
           rel='noopener noreferrer'
-          className='mt-8 inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-white px-8 font-montserrat text-base font-bold text-brand-deep shadow-lg transition-colors hover:bg-pale-blue sm:min-h-[70px] sm:px-10 sm:text-lg'
+          className='mt-8 inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-ls-ink-fg px-8 font-montserrat text-base font-bold text-ls-ink-bg  transition-colors hover:bg-white sm:min-h-[70px] sm:px-10 sm:text-lg'
         >
           <WhatsAppIcon className='h-5 w-5 shrink-0' />
           {buttonLabel}

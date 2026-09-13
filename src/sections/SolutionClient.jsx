@@ -40,7 +40,7 @@ const SolutionClient = () => {
                 {solutionClientIntroParagraphs.map((p) => (
                     <p
                         key={p.slice(0, 48)}
-                        className='font-montserrat text-base leading-relaxed text-gray-600 sm:text-lg'
+                        className='font-montserrat text-base leading-relaxed text-ls-muted sm:text-lg'
                     >
                         {p}
                     </p>
@@ -53,7 +53,7 @@ const SolutionClient = () => {
             >
                 <h2
                     id='solution-client-features-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {solutionClientFeaturesTitle}
                 </h2>
@@ -63,16 +63,16 @@ const SolutionClient = () => {
                         return (
                             <li
                                 key={title}
-                                className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'
+                                className='flex flex-col rounded-3xl border border-ls-rule bg-ls-surface px-6 py-7 '
                             >
                                 <Icon
-                                    className='h-6 w-6 text-brand-ink'
+                                    className='h-6 w-6 text-ls-accent'
                                     aria-hidden='true'
                                 />
-                                <h3 className='mt-5 font-montserrat text-lg font-bold text-gray-900'>
+                                <h3 className='mt-5 font-montserrat text-lg font-bold text-ls-text'>
                                     {title}
                                 </h3>
-                                <p className='mt-3 font-montserrat text-sm leading-relaxed text-gray-600'>
+                                <p className='mt-3 font-montserrat text-sm leading-relaxed text-ls-muted'>
                                     {description}
                                 </p>
                             </li>
@@ -87,11 +87,11 @@ const SolutionClient = () => {
             >
                 <h2
                     id='solution-client-how-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {solutionClientHowTitle}
                 </h2>
-                <p className='mt-3 font-montserrat text-base leading-7 text-gray-600 sm:text-lg sm:leading-8'>
+                <p className='mt-3 font-montserrat text-base leading-7 text-ls-muted sm:text-lg sm:leading-8'>
                     {solutionClientHowSubheadline}
                 </p>
                 <ol className='mt-8 list-none space-y-8'>
@@ -101,16 +101,16 @@ const SolutionClient = () => {
                             className='flex gap-4 sm:gap-6'
                         >
                             <span
-                                className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-ink font-montserrat text-sm font-bold text-white sm:h-12 sm:w-12 sm:text-base'
+                                className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ls-text font-montserrat text-sm font-bold text-ls-bg sm:h-12 sm:w-12 sm:text-base'
                                 aria-hidden='true'
                             >
                                 {step}
                             </span>
                             <div>
-                                <h3 className='font-montserrat text-lg font-bold text-gray-900'>
+                                <h3 className='font-montserrat text-lg font-bold text-ls-text'>
                                     {title}
                                 </h3>
-                                <p className='mt-2 font-montserrat text-sm leading-relaxed text-gray-600 sm:text-base'>
+                                <p className='mt-2 font-montserrat text-sm leading-relaxed text-ls-muted sm:text-base'>
                                     {description}
                                 </p>
                             </div>
@@ -125,7 +125,7 @@ const SolutionClient = () => {
             >
                 <h2
                     id='solution-client-stores-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {solutionClientStoresTitle}
                 </h2>
@@ -137,21 +137,21 @@ const SolutionClient = () => {
                                     href={href}
                                     target='_blank'
                                     rel='noopener noreferrer'
-                                    className='block rounded-2xl border border-gray-100 bg-gray-50/80 px-6 py-5 shadow-soft-card transition-colors hover:border-brand-blue/30 hover:bg-pale-blue/40'
+                                    className='block rounded-2xl border border-ls-rule bg-ls-fill px-6 py-5 transition-colors hover:border-ls-rule hover:bg-ls-select'
                                 >
-                                    <p className='font-montserrat text-base font-bold text-gray-900'>
+                                    <p className='font-montserrat text-base font-bold text-ls-text'>
                                         {platform}
                                     </p>
-                                    <p className='mt-1 font-montserrat text-sm font-semibold text-brand-ink'>
+                                    <p className='mt-1 font-montserrat text-sm font-semibold text-ls-accent'>
                                         {store}
                                     </p>
                                 </a>
                             ) : (
-                                <div className='rounded-2xl border border-gray-100 bg-gray-50/80 px-6 py-5 shadow-soft-card'>
-                                    <p className='font-montserrat text-base font-bold text-gray-900'>
+                                <div className='rounded-2xl border border-ls-rule bg-ls-fill px-6 py-5 '>
+                                    <p className='font-montserrat text-base font-bold text-ls-text'>
                                         {platform}
                                     </p>
-                                    <p className='mt-1 font-montserrat text-sm text-gray-600'>
+                                    <p className='mt-1 font-montserrat text-sm text-ls-muted'>
                                         {store}
                                     </p>
                                 </div>
@@ -161,11 +161,11 @@ const SolutionClient = () => {
                 </ul>
             </section>
 
-            <div className='mt-10 rounded-2xl border border-gray-100 bg-gray-50/80 px-6 py-5 text-center shadow-soft-card sm:px-8'>
-                <p className='font-montserrat text-lg font-bold text-brand-ink'>
+            <div className='mt-10 rounded-2xl border border-ls-rule bg-ls-fill px-6 py-5 text-center sm:px-8'>
+                <p className='font-montserrat text-lg font-bold text-ls-accent'>
                     {solutionClientPricingTitle}
                 </p>
-                <p className='mt-1 font-montserrat text-sm text-gray-600'>
+                <p className='mt-1 font-montserrat text-sm text-ls-muted'>
                     {solutionClientPricingBody}
                 </p>
             </div>

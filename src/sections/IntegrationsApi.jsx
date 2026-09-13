@@ -43,7 +43,7 @@ const audienceIconMap = {
 const IntegrationsApi = () => {
     return (
         <div className='py-12 sm:py-16'>
-            <p className='inline-flex rounded-full bg-pale-blue px-4 py-1.5 font-montserrat text-xs font-bold uppercase tracking-wide text-brand-deep'>
+            <p className='inline-flex rounded-full bg-ls-select px-4 py-1.5 font-montserrat text-xs font-bold uppercase tracking-wide text-ls-accent'>
                 {integrationsApiBadge}
             </p>
 
@@ -51,7 +51,7 @@ const IntegrationsApi = () => {
                 {integrationsApiIntroParagraphs.map((p) => (
                     <p
                         key={p.slice(0, 48)}
-                        className='font-montserrat text-base leading-relaxed text-gray-600 sm:text-lg'
+                        className='font-montserrat text-base leading-relaxed text-ls-muted sm:text-lg'
                     >
                         {p}
                     </p>
@@ -64,7 +64,7 @@ const IntegrationsApi = () => {
             >
                 <h2
                     id='integrations-api-features-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {integrationsApiFeaturesTitle}
                 </h2>
@@ -74,19 +74,19 @@ const IntegrationsApi = () => {
                         return (
                             <li
                                 key={title}
-                                className='relative flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 pt-10 shadow-soft-card'
+                                className='relative flex flex-col rounded-3xl border border-ls-rule bg-ls-surface px-6 py-7 pt-10 '
                             >
-                                <span className='absolute right-5 top-5 rounded-md bg-pale-blue px-2 py-0.5 font-montserrat text-xs font-bold text-brand-deep'>
+                                <span className='absolute right-5 top-5 rounded-md bg-ls-select px-2 py-0.5 font-montserrat text-xs font-bold text-ls-accent'>
                                     {integrationsApiVersionLabel}
                                 </span>
                                 <Icon
-                                    className='h-6 w-6 text-brand-ink'
+                                    className='h-6 w-6 text-ls-accent'
                                     aria-hidden='true'
                                 />
-                                <h3 className='mt-5 font-montserrat text-lg font-bold text-gray-900'>
+                                <h3 className='mt-5 font-montserrat text-lg font-bold text-ls-text'>
                                     {title}
                                 </h3>
-                                <p className='mt-3 font-montserrat text-sm leading-relaxed text-gray-600'>
+                                <p className='mt-3 font-montserrat text-sm leading-relaxed text-ls-muted'>
                                     {description}
                                 </p>
                             </li>
@@ -101,7 +101,7 @@ const IntegrationsApi = () => {
             >
                 <h2
                     id='integrations-api-audience-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {integrationsApiAudienceTitle}
                 </h2>
@@ -111,16 +111,16 @@ const IntegrationsApi = () => {
                         return (
                             <li
                                 key={title}
-                                className='flex flex-col rounded-3xl border border-gray-100 bg-gray-50/80 px-6 py-7 shadow-soft-card'
+                                className='flex flex-col rounded-3xl border border-ls-rule bg-ls-fill px-6 py-7 '
                             >
                                 <Icon
-                                    className='h-6 w-6 text-brand-ink'
+                                    className='h-6 w-6 text-ls-accent'
                                     aria-hidden='true'
                                 />
-                                <h3 className='mt-5 font-montserrat text-lg font-bold text-gray-900'>
+                                <h3 className='mt-5 font-montserrat text-lg font-bold text-ls-text'>
                                     {title}
                                 </h3>
-                                <p className='mt-3 font-montserrat text-sm leading-relaxed text-gray-600'>
+                                <p className='mt-3 font-montserrat text-sm leading-relaxed text-ls-muted'>
                                     {description}
                                 </p>
                             </li>
@@ -135,11 +135,11 @@ const IntegrationsApi = () => {
             >
                 <h2
                     id='integrations-api-code-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {integrationsApiCodeTitle}
                 </h2>
-                <pre className='mt-6 overflow-x-auto rounded-2xl bg-security-ink p-5 font-montserrat text-xs leading-relaxed text-gray-200 shadow-soft-card sm:p-6 sm:text-sm'>
+                <pre role='region' aria-label='Exemple de requête' tabIndex={0} className='mt-6 overflow-x-auto rounded-2xl bg-ls-ink-bg p-5 font-montserrat text-xs leading-relaxed text-ls-ink-mute sm:p-6 sm:text-sm'>
                     <code>{integrationsApiCodeSample}</code>
                 </pre>
             </section>

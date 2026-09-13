@@ -1,8 +1,10 @@
 /**
  * Traductions du site (français par défaut, anglais).
  *
- * - Langue : choix mémorisé du visiteur, sinon langue du navigateur ; le
- *   sélecteur FR · EN de la navigation permet de changer à tout moment.
+ * - Langue : français par défaut, sur toutes les adresses. L'anglais s'affiche
+ *   seulement quand le visiteur le choisit avec le sélecteur FR · EN, et ce
+ *   choix est mémorisé. La langue du navigateur n'est pas utilisée : pas de
+ *   bascule automatique (les adresses /en viendront avec le pré-rendu).
  * - Textes : un fichier par page et par langue dans src/locales/. Les textes
  *   communs (navigation, pied de page…) et l'accueil sont inclus d'emblée ;
  *   ceux des autres pages sont chargés à la demande, avec la page.
@@ -39,7 +41,7 @@ i18n
         ns: ["site"],
         defaultNS: "site",
         detection: {
-            order: ["localStorage", "navigator"],
+            order: ["localStorage"],
             lookupLocalStorage: LANGUAGE_STORAGE_KEY,
             caches: ["localStorage"],
         },

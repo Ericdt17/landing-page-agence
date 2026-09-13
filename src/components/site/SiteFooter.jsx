@@ -80,7 +80,7 @@ const SiteFooter = () => {
                   target='_blank'
                   rel='noopener noreferrer'
                   aria-label={footer.social[social.id]}
-                  className='inline-flex h-[34px] w-[34px] items-center justify-center rounded-full border border-ls-ink-line transition-colors hover:border-ls-ink-fg'
+                  className='inline-flex h-11 w-11 items-center justify-center rounded-full border border-ls-ink-line transition-colors hover:border-ls-ink-fg'
                 >
                   <img src={social.icon} alt='' width='16' height='16' className='h-4 w-4 opacity-80 invert' />
                 </a>
@@ -92,7 +92,7 @@ const SiteFooter = () => {
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label={footer.social.whatsapp}
-                className='inline-flex h-[34px] w-[34px] items-center justify-center rounded-full border border-ls-ink-line text-ls-ink-mute transition-colors hover:border-ls-ink-fg hover:text-ls-ink-fg'
+                className='inline-flex h-11 w-11 items-center justify-center rounded-full border border-ls-ink-line text-ls-ink-mute transition-colors hover:border-ls-ink-fg hover:text-ls-ink-fg'
               >
                 <WhatsAppIcon className='h-4 w-4' />
               </a>

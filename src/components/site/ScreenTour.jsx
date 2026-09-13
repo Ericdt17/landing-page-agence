@@ -184,7 +184,7 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
           type='button'
           onClick={() => setPlaying((value) => !value)}
           aria-label={playing ? tour.pause : tour.play}
-          className='inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-ls-stroke text-ls-muted transition-colors hover:border-ls-text hover:text-ls-text'
+          className='inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ls-stroke text-ls-muted transition-colors hover:border-ls-text hover:text-ls-text'
         >
           {playing ? <PauseIcon className='h-4 w-4' aria-hidden='true' /> : <PlayIcon className='h-4 w-4' aria-hidden='true' />}
         </button>

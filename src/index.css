@@ -5,9 +5,10 @@
 
 /* ── Nouveau site : jetons de la maquette (canvas « Site web »). Les gris et
    bleus portant du texte sont assombris par rapport à la maquette pour tenir
-   4,5:1 ; le reste est repris tel quel. ──────────────────────────────────── */
+   4,5:1 ; le reste est repris tel quel. Thème clair uniquement. ──────────────────────────────────── */
 @layer base {
   :root {
+    color-scheme: light;
     --ls-bg: #F8F9FA; --ls-surface: #FFFFFF; --ls-fill: #F8F9FA; --ls-stroke: #E2E8F0; --ls-rule: #DCE3E5;
     --ls-text: #191C1D; --ls-muted: #3C4A3C; --ls-faint: #5F6873;
     --ls-primary: #1891CA; --ls-accent: #11698F; --ls-ph: #EEF2F7;
@@ -15,17 +16,6 @@
     --ls-speed: #8A5700;
     --ls-select: #F2F8FC; --ls-primary-soft: rgba(24,145,202,.14); --ls-ok-bg: #EAF7EE;
     --ls-ink-bg: #0E1518; --ls-ink-fg: #F2F5F6; --ls-ink-mute: #A3B4BB; --ls-ink-line: #2A3B42; --ls-ink-speed: #E0A32B;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --ls-bg: #101518; --ls-surface: #1A2023; --ls-fill: #232A2E; --ls-stroke: #2F383C; --ls-rule: #28353A;
-      --ls-text: #ECEFF1; --ls-muted: #B4BDC2; --ls-faint: #97A1A7;
-      --ls-primary: #5CC2F0; --ls-accent: #8FD9F8; --ls-ph: #272F34;
-      --ls-ok: #79D389; --ls-warn: #E3C572; --ls-bad: #F18F8F; --ls-dim: #4A545A;
-      --ls-speed: #E9B44A;
-      --ls-select: #15252D; --ls-primary-soft: rgba(92,194,240,.18); --ls-ok-bg: #17301D;
-      --ls-ink-bg: #080E11; --ls-ink-fg: #F2F5F6; --ls-ink-mute: #A3B4BB; --ls-ink-line: #243238; --ls-ink-speed: #E9B44A;
-    }
   }
 }
 
@@ -55,8 +45,8 @@
   .ls-d4 { font-size: 18px; line-height: 1.3; }
   .ls-lede { font-size: 16px; line-height: 1.62; }
   .ls-body { font-size: 16px; line-height: 1.68; }
-  .ls-cap { font-size: 13px; line-height: 1.55; }
-  .ls-kicker { font-size: 11px; line-height: 1.4; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }
+  .ls-cap { font-size: 14px; line-height: 1.55; }
+  .ls-kicker { font-size: 12px; line-height: 1.4; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }
   .ls-num { font-variant-numeric: tabular-nums; font-weight: 700; letter-spacing: -0.02em; }
   .ls-measure { max-width: 60ch; }
   @media (min-width: 768px) {
@@ -111,7 +101,7 @@
   @media (prefers-reduced-motion: reduce) { .ls-route { animation: none; stroke-dashoffset: 0; } }
 
   .ls-soon {
-    font-size: 8px; font-weight: 800; letter-spacing: .06em; line-height: 0;
+    font-size: 10px; font-weight: 800; letter-spacing: .05em; line-height: 0;
     vertical-align: super; margin-left: 3px; color: var(--ls-speed);
   }
 }

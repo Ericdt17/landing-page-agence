@@ -61,8 +61,8 @@ export const accueilDifferences = {
             text: "Reversé dès que vos livraisons sont terminées, pas une semaine plus tard.",
         },
         {
-            title: "Assignation calculée",
-            text: "Les livraisons proches sont regroupées, et l'échéance passe avant l'ordre d'arrivée.",
+            title: "Tournées calculées",
+            text: "Les livraisons proches sont regroupées en tournées, et l'ordre des arrêts est calculé pour le trajet le plus court.",
         },
         {
             title: "Une réponse, vraiment",

@@ -1,7 +1,7 @@
 import SEO from "../components/SEO";
 import ScreenTour from "../components/site/ScreenTour";
 import SiteLayout from "../components/site/SiteLayout";
-import { links, routes } from "../constants/routes";
+import { routes } from "../constants/routes";
 import { useCopy } from "../i18n/useCopy";
 import { Link } from "react-router-dom";
 import {
@@ -15,6 +15,7 @@ import {
   WithdrawScreen,
   ZonesScreen,
 } from "../sections/application/PhoneScreens";
+import WhatsAppButton from "../components/site/WhatsAppButton";
 
 const soonScreens = { planning: PlanningScreen, livreur: CourierScreen, retrait: WithdrawScreen };
 
@@ -44,9 +45,9 @@ const ApplicationPage = () => {
           </h1>
           <p className='ls-lede ls-measure text-ls-muted'>{hero.lede}</p>
           <div className='flex flex-col gap-3 sm:flex-row sm:items-center'>
-            <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-lg ls-btn-solid'>
+            <WhatsAppButton className='ls-btn ls-btn-lg ls-btn-solid'>
               {hero.primary}
-            </a>
+            </WhatsAppButton>
             <a href='#ecrans' className='ls-btn ls-btn-lg ls-btn-line'>
               {hero.secondary}
             </a>
@@ -113,9 +114,9 @@ const ApplicationPage = () => {
             <p className='ls-body max-w-[52ch] text-ls-ink-mute'>{install.body}</p>
           </div>
           <div className='flex flex-col gap-2.5'>
-            <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-ink'>
+            <WhatsAppButton className='ls-btn ls-btn-ink'>
               {install.primary}
-            </a>
+            </WhatsAppButton>
             <Link to={routes.contact} className='ls-btn ls-btn-ink-line'>
               {install.secondary}
             </Link>

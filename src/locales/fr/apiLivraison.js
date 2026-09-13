@@ -18,7 +18,7 @@ export default {
         kicker: "API de livraison",
         title: "Vos commandes en ligne, livrées par nos livreurs, à la demande.",
         lede: "Bientôt, vous pourrez connecter votre site ou votre logiciel de commandes à LivSight. Une commande passée chez vous crée une demande de livraison, et un livreur LivSight s'en charge.",
-        cta: "Être prévenu au lancement",
+        cta: "Écrire sur WhatsApp",
         note: "Nous prévenons d'abord les commerçants qui livrent déjà avec nous.",
     },
     steps: {
@@ -40,6 +40,6 @@ export default {
     contact: {
         title: "Vous voulez intégrer LivSight à votre site ?",
         body: "L'API n'est pas encore ouverte. Parlez-nous de votre site et de vos volumes : nous vous préviendrons au lancement.",
-        cta: "En parler sur WhatsApp",
+        cta: "Écrire sur WhatsApp",
     },
 };

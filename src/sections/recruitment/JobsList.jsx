@@ -1,8 +1,9 @@
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-import { links, recruitmentOfferPath } from "../../constants/routes";
+import { recruitmentOfferPath } from "../../constants/routes";
 import { fill, useCopy } from "../../i18n/useCopy";
 import { jobType, resolveJob } from "../../services/jobs";
+import WhatsAppButton from "../../components/site/WhatsAppButton";
 
 const JobSkeleton = () => (
   <li aria-hidden='true' className='flex flex-col gap-3 rounded-[26px] border border-ls-rule bg-ls-surface p-7'>
@@ -28,9 +29,9 @@ const JobsList = ({ jobs, loading, error }) => {
     return (
       <div className='flex flex-col items-start gap-5 rounded-[26px] border border-ls-rule p-7 md:p-9'>
         <p className='ls-body max-w-[60ch] text-ls-muted'>{error ? copy.loadError : copy.empty}</p>
-        <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-line'>
+        <WhatsAppButton className='ls-btn ls-btn-line'>
           {copy.emptyCta}
-        </a>
+        </WhatsAppButton>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { links, routes } from "../../constants/routes";
+import { routes } from "../../constants/routes";
 import { useCopy } from "../../i18n/useCopy";
+import WhatsAppButton from "../../components/site/WhatsAppButton";
 
 const AccueilHero = () => {
   const { hero } = useCopy("accueil");
@@ -13,9 +14,9 @@ const AccueilHero = () => {
       </h1>
       <p className='ls-lede ls-measure text-ls-muted'>{hero.lede}</p>
       <div className='flex flex-col gap-3 sm:flex-row sm:items-center'>
-        <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-lg ls-btn-solid'>
+        <WhatsAppButton className='ls-btn ls-btn-lg ls-btn-solid'>
           {hero.primary}
-        </a>
+        </WhatsAppButton>
         <Link to={routes.tarifs} className='ls-btn ls-btn-lg ls-btn-line'>
           {hero.secondary}
         </Link>

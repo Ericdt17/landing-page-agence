@@ -1,7 +1,8 @@
 import SEO from "../components/SEO";
 import SiteLayout from "../components/site/SiteLayout";
-import { links, routes } from "../constants/routes";
+import { routes } from "../constants/routes";
 import { useCopy } from "../i18n/useCopy";
+import WhatsAppButton from "../components/site/WhatsAppButton";
 
 const ApiLivraisonPage = () => {
   const { seo, hero, steps, audience, contact } = useCopy("apiLivraison");
@@ -22,9 +23,9 @@ const ApiLivraisonPage = () => {
           </h1>
           <p className='ls-lede ls-measure text-ls-muted'>{hero.lede}</p>
           <div className='flex flex-col items-start gap-3'>
-            <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-lg ls-btn-solid max-sm:w-full'>
+            <WhatsAppButton className='ls-btn ls-btn-lg ls-btn-solid max-sm:w-full'>
               {hero.cta}
-            </a>
+            </WhatsAppButton>
             <p className='ls-cap text-ls-muted'>{hero.note}</p>
           </div>
         </div>
@@ -75,9 +76,9 @@ const ApiLivraisonPage = () => {
             </h2>
             <p className='ls-body max-w-[52ch] text-ls-ink-mute'>{contact.body}</p>
           </div>
-          <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-ink'>
+          <WhatsAppButton className='ls-btn ls-btn-ink'>
             {contact.cta}
-          </a>
+          </WhatsAppButton>
         </div>
       </section>
     </SiteLayout>

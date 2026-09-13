@@ -10,7 +10,7 @@ export default {
         kicker: "The LivSight marketplace",
         title: "We already deliver for you. Soon, we'll bring you the customers.",
         lede: "A marketplace where your products are on display and shoppers in Yaoundé order directly. Same warehouse, same drivers, same payouts. Nothing to change in the way you work.",
-        cta: "Get notified at launch",
+        cta: "Message us on WhatsApp",
         note: "We notify the merchants who already deliver with us first.",
     },
     steps: {
@@ -50,7 +50,7 @@ export default {
             "We are not publishing marketplace pricing yet: we want to set it with the merchants who already deliver with us, not decide it alone.",
             "If you'd like to discuss it before launch, write to us.",
         ],
-        cta: "Discuss it on WhatsApp",
+        cta: "Message us on WhatsApp",
     },
     preview: {
         kicker: "Preview",

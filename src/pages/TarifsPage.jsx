@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import SiteLayout from "../components/site/SiteLayout";
-import { links, routes } from "../constants/routes";
+import { routes } from "../constants/routes";
 import { fill, useCopy, useLanguage } from "../i18n/useCopy";
 import { LandingPublicProvider, useLandingPublic } from "../context/LandingPublicContext";
 import ReversementFormule from "../sections/offre/ReversementFormule";
 import TarifsParZone from "../sections/offre/TarifsParZone";
 import { deliveryFeeRange } from "../services/tarifs";
+import WhatsAppButton from "../components/site/WhatsAppButton";
 
 /** Fourchette confirmée, utilisée tant que l'API ne répond pas. */
 const FALLBACK_RANGE = { min: 1000, max: 5000 };
@@ -94,9 +95,9 @@ const TarifsPage = () => {
         <div className='flex flex-col gap-4 rounded-[26px] border border-ls-rule p-7 md:p-8'>
           <h2 className='ls-h text-[22px]'>{volumes.title}</h2>
           <p className='ls-body text-ls-muted'>{volumes.body}</p>
-          <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-line mt-auto self-start'>
+          <WhatsAppButton className='ls-btn ls-btn-line mt-auto self-start'>
             {volumes.cta}
-          </a>
+          </WhatsAppButton>
         </div>
         <div className='flex flex-col gap-4 rounded-[26px] bg-ls-ink-bg p-7 text-ls-ink-fg md:p-8'>
           <div className='flex items-center gap-2.5'>

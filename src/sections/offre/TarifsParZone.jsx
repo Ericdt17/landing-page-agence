@@ -1,7 +1,7 @@
-import { links } from "../../constants/routes";
 import { useLandingPublic } from "../../context/LandingPublicContext";
 import { fill, useCopy, useLanguage } from "../../i18n/useCopy";
 import { cityZones, feeExtras, formatFcfa } from "../../services/tarifs";
+import WhatsAppButton from "../../components/site/WhatsAppButton";
 
 const neighborhoodLabel = (neighborhood, zoneFee, language) => {
   const override =
@@ -40,9 +40,9 @@ const TarifsParZone = () => {
     return (
       <div className='flex flex-col items-start gap-5 border-y border-ls-rule py-8'>
         <p className='ls-body max-w-[60ch] text-ls-muted'>{copy.unavailable}</p>
-        <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-line'>
+        <WhatsAppButton className='ls-btn ls-btn-line'>
           {copy.unavailableCta}
-        </a>
+        </WhatsAppButton>
       </div>
     );
   }

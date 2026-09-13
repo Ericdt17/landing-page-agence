@@ -10,7 +10,7 @@ export default {
         kicker: "Delivery API",
         title: "Your online orders, delivered by our drivers, on demand.",
         lede: "Soon, you'll be able to connect your website or your order software to LivSight. An order placed with you creates a delivery request, and a LivSight driver takes care of it.",
-        cta: "Get notified at launch",
+        cta: "Message us on WhatsApp",
         note: "We notify the merchants who already deliver with us first.",
     },
     steps: {
@@ -32,6 +32,6 @@ export default {
     contact: {
         title: "Want to connect LivSight to your website?",
         body: "The API isn't open yet. Tell us about your website and your volumes: we'll let you know at launch.",
-        cta: "Talk about it on WhatsApp",
+        cta: "Message us on WhatsApp",
     },
 };

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { links, routes } from "../../constants/routes";
+import { routes } from "../../constants/routes";
 import { useCopy } from "../../i18n/useCopy";
+import WhatsAppButton from "../../components/site/WhatsAppButton";
 
 /** Le seul moment sombre de la page. */
 const AccueilMarketplace = () => {
@@ -19,9 +20,9 @@ const AccueilMarketplace = () => {
         <Link to={routes.marketplace} className='ls-btn ls-btn-ink'>
           {marketplace.link}
         </Link>
-        <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-ink-line'>
+        <WhatsAppButton className='ls-btn ls-btn-ink-line'>
           {marketplace.cta}
-        </a>
+        </WhatsAppButton>
       </div>
     </div>
   </section>

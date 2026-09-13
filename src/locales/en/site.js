@@ -62,7 +62,7 @@ export default {
         siteName: "LivSight",
         locale: "en_CM",
         defaultDescription:
-            "LivSight, a delivery agency in Yaoundé: 3 months of free storage, real-time tracking and payouts at the end of the day.",
+            "LivSight, a delivery agency in Yaoundé: 3 months of free storage, cash collection on delivery and payouts at the end of the day.",
     },
     tour: {
         pause: "Pause the screen slideshow",

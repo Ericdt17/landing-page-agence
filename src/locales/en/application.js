@@ -60,7 +60,7 @@ export default {
     install: {
         title: "We come to install it and show you, at your shop.",
         body: "No tutorial to read on your own. An advisor visits, creates your account and runs your first delivery with you. You keep their WhatsApp.",
-        primary: "Book a visit",
+        primary: "Message us on WhatsApp",
         secondary: "Write to us",
     },
     screensNote: "The screens show the app in French, with sample data.",

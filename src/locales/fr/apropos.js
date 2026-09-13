@@ -11,12 +11,12 @@ export default {
     seo: {
         title: "À propos",
         description:
-            "LivSight est née à Yaoundé d'un constat simple : le problème des commerçants n'est pas de vendre, c'est tout ce qui se passe après.",
+            "LivSight a été fondée à Yaoundé par des jeunes ambitieux, partis d'un constat simple : le problème des commerçants n'est pas de vendre, c'est tout ce qui se passe après.",
     },
     hero: {
         kicker: "Notre histoire",
         title: "Nous avons commencé par livrer. Nous continuons par vendre.",
-        lede: "LivSight est née à Yaoundé d'un constat simple : le problème des commerçants n'est pas de vendre, c'est tout ce qui se passe après. Les colis oubliés, les clients qui appellent pour savoir où en est leur commande, l'argent qui met une semaine à revenir.",
+        lede: "LivSight a été fondée à Yaoundé par des jeunes ambitieux, partis d'un constat simple : le problème des commerçants n'est pas de vendre, c'est tout ce qui se passe après. Les colis oubliés, les clients qui appellent pour savoir où en est leur commande, l'argent qui met une semaine à revenir.",
     },
     principlesLabel: "Nos principes",
     principles: [
@@ -46,7 +46,7 @@ export default {
     },
     company: {
         title: "L'entreprise",
-        lines: ["H-Groupe SARL · Yaoundé, Cameroun", "Hippodrome, Yaoundé", "Lundi au samedi · 8h00 à 18h00"],
+        lines: ["LivSight SARL · Yaoundé, Cameroun", "Hippodrome, Yaoundé", "Lundi au samedi · 8h00 à 18h00"],
         cta: "Nous contacter",
     },
 };

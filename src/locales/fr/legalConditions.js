@@ -5,7 +5,7 @@ export default {
         description: "Conditions générales d'utilisation du service LivSight, agence de livraison à Yaoundé, Cameroun.",
     },
     title: "Conditions générales d'utilisation",
-    updated: "Dernière mise à jour : avril 2026",
+    updated: "Dernière mise à jour : septembre 2026",
     intro: "Les présentes conditions encadrent l'utilisation du service LivSight par les commerçants partenaires. En utilisant la plateforme, vous acceptez l'ensemble des dispositions ci-dessous.",
     contactIntro: "Pour toute question relative à ces conditions générales, notre équipe est disponible :",
     groups: [
@@ -42,7 +42,7 @@ export default {
                     art: 4,
                     title: "Mode de paiement",
                     paragraphs: [
-                        "Le paiement s'effectue exclusivement en espèces à la livraison (paiement à la livraison) en francs CFA (XAF). Aucun paiement par virement, mobile money ou crédit n'est accepté en V1. Le montant à collecter est défini par le commerçant au moment de la création de la commande et ne peut être modifié après assignation au livreur.",
+                        "Le paiement s'effectue exclusivement en espèces à la livraison (paiement à la livraison) en francs CFA (XAF). Aucun paiement par virement, mobile money ou crédit n'est accepté à ce jour. Le montant à collecter est défini par le commerçant au moment de la création de la commande et ne peut être modifié après assignation au livreur.",
                         "Lorsque le commerçant confie une livraison pour laquelle le règlement a déjà été opéré par l'intermédiaire du livreur (hors encaissement classique à la livraison pour le compte du commerçant), les frais de livraison applicables sont soit déduits du solde du commerçant chez LivSight, soit réglés directement par le commerçant, selon les modalités indiquées sur la plateforme.",
                     ],
                 },
@@ -50,7 +50,7 @@ export default {
                     art: 5,
                     title: "Reversement des fonds encaissés",
                     paragraphs: [
-                        "LivSight s'engage à reverser au commerçant les fonds collectés lors de la livraison dans un délai maximum de 3 heures suivant la confirmation de livraison. Ce reversement est effectué après déduction des frais de livraison applicables et de toute dette en cours du commerçant envers l'agence.",
+                        "LivSight s'engage à reverser au commerçant les fonds collectés lors de la livraison en fin de journée de travail, une fois ses livraisons terminées. Ce reversement est effectué après déduction des frais de livraison applicables et de toute dette en cours du commerçant envers l'agence.",
                     ],
                     highlight: "Le montant reversé = Montant encaissé − Frais de livraison − Dettes en cours du commerçant.",
                 },

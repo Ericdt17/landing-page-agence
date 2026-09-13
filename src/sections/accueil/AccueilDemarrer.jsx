@@ -1,5 +1,5 @@
-import { links } from "../../constants/routes";
 import { useCopy } from "../../i18n/useCopy";
+import WhatsAppButton from "../../components/site/WhatsAppButton";
 
 const AccueilDemarrer = () => {
   const { steps } = useCopy("accueil");
@@ -9,9 +9,9 @@ const AccueilDemarrer = () => {
       <h2 id='accueil-demarrer' className='ls-h ls-d2 max-w-[22ch]'>
         {steps.title}
       </h2>
-      <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-lg ls-btn-solid'>
+      <WhatsAppButton className='ls-btn ls-btn-lg ls-btn-solid'>
         {steps.cta}
-      </a>
+      </WhatsAppButton>
     </div>
     <ol className='grid grid-cols-1 gap-px border-y border-ls-rule bg-ls-rule md:grid-cols-3'>
       {steps.steps.map((step, index) => (

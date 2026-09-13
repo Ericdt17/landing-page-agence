@@ -62,7 +62,7 @@ export default {
         siteName: "LivSight",
         locale: "fr_CM",
         defaultDescription:
-            "LivSight, agence de livraison à Yaoundé : stockage offert 3 mois, suivi en temps réel et reversement en fin de journée.",
+            "LivSight, agence de livraison à Yaoundé : stockage offert 3 mois, encaissement à la livraison et reversement en fin de journée.",
     },
     tour: {
         pause: "Mettre en pause le défilement des écrans",

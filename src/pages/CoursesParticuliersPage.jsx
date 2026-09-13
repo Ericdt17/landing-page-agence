@@ -1,7 +1,8 @@
 import SEO from "../components/SEO";
 import SiteLayout from "../components/site/SiteLayout";
-import { links, routes } from "../constants/routes";
+import { routes } from "../constants/routes";
 import { useCopy } from "../i18n/useCopy";
+import WhatsAppButton from "../components/site/WhatsAppButton";
 
 const CoursesParticuliersPage = () => {
   const { seo, hero, highlightsLabel, highlights, services, steps, closing } = useCopy("courses");
@@ -17,9 +18,9 @@ const CoursesParticuliersPage = () => {
               {hero.title}
             </h1>
             <p className='ls-lede ls-measure text-ls-muted'>{hero.lede}</p>
-            <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-lg ls-btn-solid self-start max-sm:w-full'>
+            <WhatsAppButton className='ls-btn ls-btn-lg ls-btn-solid self-start max-sm:w-full'>
               {hero.cta}
-            </a>
+            </WhatsAppButton>
           </div>
         </section>
 
@@ -82,9 +83,9 @@ const CoursesParticuliersPage = () => {
               </h2>
               <p className='ls-body max-w-[52ch] text-ls-ink-mute'>{closing.body}</p>
             </div>
-            <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-ink'>
+            <WhatsAppButton className='ls-btn ls-btn-ink'>
               {closing.cta}
-            </a>
+            </WhatsAppButton>
           </div>
         </section>
       </SiteLayout>

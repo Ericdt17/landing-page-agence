@@ -4,7 +4,7 @@
  * Écarts volontaires avec la maquette :
  * - « Base de connaissances » remplacé par un lien vers les écrans, la base
  *   n'étant pas encore construite ;
- * - « Prendre rendez-vous » mène à WhatsApp, seul canal de prise de rendez-vous.
+ * - la prise de rendez-vous passe par WhatsApp, seul canal disponible.
  */
 export default {
     seo: {
@@ -67,7 +67,7 @@ export default {
     install: {
         title: "On vient l'installer et vous montrer, chez vous.",
         body: "Pas de tutoriel à lire seul. Un conseiller passe, crée votre compte, lance votre première course avec vous. Vous gardez son WhatsApp.",
-        primary: "Prendre rendez-vous",
+        primary: "Écrire sur WhatsApp",
         secondary: "Nous écrire",
     },
     screensNote: "",

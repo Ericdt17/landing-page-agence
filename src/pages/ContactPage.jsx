@@ -1,6 +1,7 @@
 import { ChatBubbleLeftRightIcon, EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/outline";
 import SEO from "../components/SEO";
 import InkHero from "../components/site/InkHero";
+import WhatsAppButton from "../components/site/WhatsAppButton";
 import SiteLayout from "../components/site/SiteLayout";
 import { links, routes } from "../constants/routes";
 import { useCopy } from "../i18n/useCopy";
@@ -37,7 +38,7 @@ const PlaceMap = ({ label }) => (
 const channelRows = [
   { id: "whatsapp", Icon: ChatBubbleLeftRightIcon, href: links.whatsapp, external: true, primary: true },
   { id: "email", Icon: EnvelopeIcon, href: `mailto:${links.email}`, detail: links.email },
-  { id: "phone", Icon: PhoneIcon, href: links.whatsapp, external: true },
+  { id: "phone", Icon: PhoneIcon },
 ];
 
 const ContactPage = () => {
@@ -68,13 +69,15 @@ const ContactPage = () => {
                       <p className='ls-cap text-ls-muted'>{channels[id].text}</p>
                       {detail && <p className='text-sm font-semibold text-ls-accent'>{detail}</p>}
                     </div>
-                    <a
-                      href={href}
-                      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                      className={`ls-btn shrink-0 self-start sm:self-auto ${primary ? "ls-btn-lg ls-btn-solid" : "ls-btn-line"}`}
-                    >
-                      {channels[id].cta}
-                    </a>
+                    {external ? (
+                      <WhatsAppButton className='ls-btn ls-btn-lg ls-btn-solid shrink-0 self-start sm:self-auto'>
+                        {channels[id].cta}
+                      </WhatsAppButton>
+                    ) : href ? (
+                      <a href={href} className='ls-btn ls-btn-line shrink-0 self-start sm:self-auto'>
+                        {channels[id].cta}
+                      </a>
+                    ) : null}
                   </li>
                 ))}
               </ul>
@@ -117,7 +120,6 @@ const ContactPage = () => {
             <div className='flex flex-col gap-1.5 rounded-[26px] bg-ls-fill p-6 text-sm md:p-7'>
               <h2 className='ls-kicker pb-1 text-ls-faint'>{company.title}</h2>
               <p className='font-semibold'>{company.name}</p>
-              <p className='text-ls-muted'>{company.responsible}</p>
             </div>
           </aside>
         </div>

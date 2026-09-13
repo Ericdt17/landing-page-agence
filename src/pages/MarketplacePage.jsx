@@ -8,8 +8,9 @@ import {
 import SEO from "../components/SEO";
 import SiteLayout from "../components/site/SiteLayout";
 import { marketplacePhotoCredits } from "../constants/photoCredits";
-import { links, routes } from "../constants/routes";
+import { routes } from "../constants/routes";
 import { useCopy } from "../i18n/useCopy";
+import WhatsAppButton from "../components/site/WhatsAppButton";
 
 /* Aperçus d'écrans : données d'exemple, masquées aux lecteurs d'écran */
 const Card = ({ children }) => (
@@ -80,9 +81,9 @@ const MarketplacePage = () => {
           </h1>
           <p className='ls-lede max-w-[62ch] text-ls-muted'>{hero.lede}</p>
           <div className='flex flex-col items-start gap-3'>
-            <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-lg ls-btn-solid max-sm:w-full'>
+            <WhatsAppButton className='ls-btn ls-btn-lg ls-btn-solid max-sm:w-full'>
               {hero.cta}
-            </a>
+            </WhatsAppButton>
             <p className='ls-cap text-ls-muted'>{hero.note}</p>
           </div>
         </div>
@@ -210,9 +211,9 @@ const MarketplacePage = () => {
               {paragraph}
             </p>
           ))}
-          <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-ink mt-auto self-start'>
+          <WhatsAppButton className='ls-btn ls-btn-ink mt-auto self-start'>
             {open.cta}
-          </a>
+          </WhatsAppButton>
         </div>
       </section>
     </SiteLayout>

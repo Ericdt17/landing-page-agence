@@ -48,7 +48,7 @@ export default {
         viewDetailLabel: "Voir le poste : {{title}}",
         loadError: "Impossible de charger les offres pour le moment.",
         empty: "Il n'y a aucun poste ouvert pour le moment. Revenez bientôt ou écrivez-nous sur WhatsApp.",
-        emptyCta: "Nous écrire sur WhatsApp",
+        emptyCta: "Écrire sur WhatsApp",
         positionsOne: "{{count}} poste disponible",
         positionsOther: "{{count}} postes disponibles",
         unknownLocation: "Lieu non précisé",

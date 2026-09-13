@@ -2,9 +2,10 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { logoMark } from "../../assets/images";
-import { links as externalLinks, navItems, routes } from "../../constants/routes";
+import { navItems, routes } from "../../constants/routes";
 import { LANGUAGES } from "../../i18n";
 import { useCopy, useLanguage } from "../../i18n/useCopy";
+import WhatsAppButton from "./WhatsAppButton";
 
 const items = navItems.filter((item) => item.enabled);
 
@@ -104,14 +105,7 @@ const SiteNav = () => {
 
         <div className='ml-auto flex items-center gap-2 md:gap-[18px]'>
           <LanguageSwitch className='max-sm:hidden' />
-          <a
-            href={externalLinks.whatsapp}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='ls-btn ls-btn-sm ls-btn-solid max-sm:hidden'
-          >
-            {copy.nav.cta}
-          </a>
+          <WhatsAppButton className='ls-btn ls-btn-sm ls-btn-solid max-sm:hidden'>{copy.nav.cta}</WhatsAppButton>
           <button
             type='button'
             className='inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ls-stroke text-ls-text lg:hidden'
@@ -146,15 +140,9 @@ const SiteNav = () => {
           </ul>
           <div className='mx-auto flex max-w-[1440px] flex-col gap-4 px-[18px] pb-6 pt-5 md:px-16'>
             <LanguageSwitch className='sm:hidden' />
-            <a
-              href={externalLinks.whatsapp}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='ls-btn ls-btn-lg ls-btn-solid w-full'
-              onClick={close}
-            >
+            <WhatsAppButton className='ls-btn ls-btn-lg ls-btn-solid w-full' onClick={close}>
               {copy.nav.cta}
-            </a>
+            </WhatsAppButton>
           </div>
         </div>
       )}

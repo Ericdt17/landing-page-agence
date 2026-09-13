@@ -3,12 +3,12 @@ export default {
     seo: {
         title: "About",
         description:
-            "LivSight was born in Yaoundé from a simple observation: merchants' problem isn't selling, it's everything that happens afterwards.",
+            "LivSight was founded in Yaoundé by a group of ambitious young people, starting from a simple observation: merchants' problem isn't selling, it's everything that happens afterwards.",
     },
     hero: {
         kicker: "Our story",
         title: "We started by delivering. We're carrying on by selling.",
-        lede: "LivSight was born in Yaoundé from a simple observation: merchants' problem isn't selling, it's everything that happens afterwards. Forgotten parcels, customers calling to ask where their order is, money that takes a week to come back.",
+        lede: "LivSight was founded in Yaoundé by a group of ambitious young people, starting from a simple observation: merchants' problem isn't selling, it's everything that happens afterwards. Forgotten parcels, customers calling to ask where their order is, money that takes a week to come back.",
     },
     principlesLabel: "Our principles",
     principles: [
@@ -38,7 +38,7 @@ export default {
     },
     company: {
         title: "The company",
-        lines: ["H-Groupe SARL · Yaoundé, Cameroon", "Hippodrome, Yaoundé", "Monday to Saturday · 8am to 6pm"],
+        lines: ["LivSight SARL · Yaoundé, Cameroon", "Hippodrome, Yaoundé", "Monday to Saturday · 8am to 6pm"],
         cta: "Contact us",
     },
 };

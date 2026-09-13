@@ -17,9 +17,9 @@ export default {
     },
     channelsLabel: "Nous joindre",
     channels: {
-        whatsapp: { title: "WhatsApp", text: "Réponse en moins de 30 min · le canal le plus rapide", cta: "Écrire" },
+        whatsapp: { title: "WhatsApp", text: "Réponse en moins de 30 min · le canal le plus rapide", cta: "Écrire sur WhatsApp" },
         email: { title: "Email", text: "Demandes formelles, partenariats, presse", cta: "Envoyer un email" },
-        phone: { title: "Téléphone", text: "Pour les urgences uniquement : appelez le numéro WhatsApp de LivSight", cta: "Ouvrir WhatsApp" },
+        phone: { title: "Téléphone", text: "Pour les urgences uniquement : appelez le numéro WhatsApp de LivSight" },
     },
     place: {
         mapLabel: "Plan de situation : Hippodrome, Yaoundé",
@@ -38,7 +38,6 @@ export default {
     },
     company: {
         title: "L'entreprise",
-        name: "H-Groupe SARL · Yaoundé, Cameroun",
-        responsible: "Responsable : Eric Djou, CEO et coordinateur des opérations",
+        name: "LivSight SARL · Yaoundé, Cameroun",
     },
 };

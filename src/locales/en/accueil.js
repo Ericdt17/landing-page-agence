@@ -33,7 +33,7 @@ export default {
             orders: { title: "The order queue", text: "What's waiting, at the top. One tap to accept." },
             stock: { title: "Stock, up to date", text: "A keypad, not a form." },
             payout: { title: "Money, traced", text: "Every line, explained." },
-            tracking: { title: "Live tracking", text: "You and your customer, the same view." },
+            tracking: { title: "Soon: live tracking", text: "You and your customer will see the same map." },
         },
     },
     differences: {
@@ -61,7 +61,7 @@ export default {
     },
     steps: {
         title: "Start delivering in less than a day.",
-        cta: "Talk to someone",
+        cta: "Message us on WhatsApp",
         steps: [
             { number: "01", title: "We listen", text: "We get to know your business and your volumes." },
             { number: "02", title: "We set everything up", text: "Account created, app installed, team trained." },
@@ -72,7 +72,7 @@ export default {
         kicker: "Soon · the LivSight marketplace",
         title: "What if we brought you the customers too?",
         body: "A marketplace where your products are on display and shoppers in Yaoundé order directly. Same warehouse, same drivers, same payouts.",
-        cta: "Get notified",
+        cta: "Message us on WhatsApp",
         link: "How it will work",
     },
     finalCta: {

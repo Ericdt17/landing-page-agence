@@ -10,7 +10,7 @@ export default {
             kicker: "Delivery & storage",
             title: "The delivery agency for Yaoundé's merchants.",
             lede: "Where we started, and that doesn't change. Whether you sell on social media or on your own website, we store, we deliver and we collect payment.",
-            primary: "Ask for a quote",
+            primary: "Message us on WhatsApp",
             secondary: "See pricing",
             facts: [
                 { label: "Payout", value: "at the end of the day" },
@@ -86,7 +86,7 @@ export default {
             livraison: {
                 kicker: "Delivery",
                 text: "Depends on the delivery neighbourhood in Yaoundé. You get the exact price before the delivery.",
-                bullets: ["Cash collection on delivery included", "Real-time tracking included", "Price known before the delivery"],
+                bullets: ["Cash collection on delivery included", "Status of every delivery in the app", "Price known before the delivery"],
             },
             stockage: {
                 kicker: "Storage",
@@ -109,7 +109,7 @@ export default {
             loading: "Loading prices…",
             unavailable:
                 "Prices by neighbourhood appear as soon as our service responds. In the meantime, ask for your neighbourhood's price on WhatsApp: we reply in under 30 minutes.",
-            unavailableCta: "Ask for a price",
+            unavailableCta: "Message us on WhatsApp",
             extrasTitle: "Additional fees",
             entryFeeNote: "An access fee may apply for this neighbourhood.",
             regionLabel: "Prices by zone, {{city}}",
@@ -126,7 +126,7 @@ export default {
         volumes: {
             title: "Large volumes",
             body: "High-volume merchants: dedicated rounds and a negotiated rate. Let's talk.",
-            cta: "Ask for a quote",
+            cta: "Message us on WhatsApp",
         },
         marketplace: {
             badge: "Soon",

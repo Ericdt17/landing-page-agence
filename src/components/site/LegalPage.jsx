@@ -2,6 +2,7 @@ import SEO from "../SEO";
 import { links } from "../../constants/routes";
 import { fill, useCopy } from "../../i18n/useCopy";
 import SiteLayout from "./SiteLayout";
+import WhatsAppButton from "./WhatsAppButton";
 
 const paragraphClass = "ls-body text-ls-muted";
 
@@ -163,9 +164,9 @@ const LegalPage = ({ namespace, canonical }) => {
                 <a href={`mailto:${links.email}`} className='ls-btn ls-btn-line'>
                   {links.email}
                 </a>
-                <a href={links.whatsapp} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-solid'>
+                <WhatsAppButton className='ls-btn ls-btn-solid'>
                   {legal.whatsappCta}
-                </a>
+                </WhatsAppButton>
               </div>
             </aside>
           </div>

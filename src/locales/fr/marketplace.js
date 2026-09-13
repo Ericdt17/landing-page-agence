@@ -19,7 +19,7 @@ export default {
         kicker: "La marketplace LivSight",
         title: "Nous livrons déjà pour vous. Bientôt, nous vous amènerons les clients.",
         lede: "Une place de marché où vos produits sont en vitrine et où les acheteurs de Yaoundé commandent directement. Même entrepôt, mêmes livreurs, même reversement. Vous n'avez rien à changer à votre façon de travailler.",
-        cta: "Être prévenu au lancement",
+        cta: "Écrire sur WhatsApp",
         note: "Nous prévenons d'abord les commerçants qui livrent déjà avec nous.",
     },
     steps: {
@@ -59,7 +59,7 @@ export default {
             "Nous ne publions pas encore les tarifs de la marketplace : nous voulons les fixer avec les commerçants qui livrent déjà avec nous, pas les décider seuls.",
             "Si vous voulez en discuter avant le lancement, écrivez-nous.",
         ],
-        cta: "En discuter sur WhatsApp",
+        cta: "Écrire sur WhatsApp",
     },
     preview: {
         kicker: "Aperçu",

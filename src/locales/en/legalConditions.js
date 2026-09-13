@@ -5,7 +5,7 @@ export default {
         description: "Terms of use of the LivSight service, delivery agency in Yaoundé, Cameroon.",
     },
     title: "Terms of use",
-    updated: "Last updated: April 2026",
+    updated: "Last updated: September 2026",
     intro: "These terms govern the use of the LivSight service by partner merchants. By using the platform, you accept all the provisions below.",
     contactIntro: "For any question about these terms, our team is available:",
     groups: [
@@ -42,7 +42,7 @@ export default {
                     art: 4,
                     title: "Payment method",
                     paragraphs: [
-                        "Payment is made exclusively in cash on delivery, in CFA francs (XAF). No payment by bank transfer, mobile money or credit is accepted in V1. The amount to collect is set by the merchant when creating the order and cannot be changed once the order is assigned to a driver.",
+                        "Payment is made exclusively in cash on delivery, in CFA francs (XAF). No payment by bank transfer, mobile money or credit is accepted at this time. The amount to collect is set by the merchant when creating the order and cannot be changed once the order is assigned to a driver.",
                         "When the merchant entrusts a delivery for which payment has already been made through the driver (outside standard cash collection on the merchant's behalf), the applicable delivery fees are either deducted from the merchant's LivSight balance or paid directly by the merchant, as set out on the platform.",
                     ],
                 },
@@ -50,7 +50,7 @@ export default {
                     art: 5,
                     title: "Payout of collected funds",
                     paragraphs: [
-                        "LivSight undertakes to pay the merchant the funds collected on delivery within a maximum of 3 hours after delivery confirmation. This payout is made after deducting the applicable delivery fees and any outstanding debt owed by the merchant to the agency.",
+                        "LivSight undertakes to pay the merchant the funds collected on delivery at the end of the working day, once their deliveries are completed. This payout is made after deducting the applicable delivery fees and any outstanding debt owed by the merchant to the agency.",
                     ],
                     highlight: "Amount paid out = Amount collected − Delivery fees − Merchant's outstanding debts.",
                 },

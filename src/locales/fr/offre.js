@@ -19,7 +19,7 @@ export default {
             kicker: "Livraison & stockage",
             title: "L'agence de livraison des commerçants de Yaoundé.",
             lede: "Notre métier d'origine, et il ne change pas. Que vous vendiez sur les réseaux sociaux ou sur votre propre site, nous stockons, nous livrons et nous encaissons.",
-            primary: "Demander un devis",
+            primary: "Écrire sur WhatsApp",
             secondary: "Voir les tarifs",
             facts: [
                 { label: "Reversement", value: "en fin de journée" },
@@ -56,7 +56,7 @@ export default {
                 "WhatsApp, réponse en moins de 30 min",
                 "Téléphone pour les urgences uniquement",
             ],
-            cta: "Nous écrire sur WhatsApp",
+            cta: "Écrire sur WhatsApp",
         },
     },
     reversement: {
@@ -95,7 +95,7 @@ export default {
             livraison: {
                 kicker: "Livraison",
                 text: "Selon le quartier de livraison dans Yaoundé. Le tarif exact vous est donné avant la course.",
-                bullets: ["Encaissement à la livraison inclus", "Suivi en temps réel inclus", "Tarif connu avant la course"],
+                bullets: ["Encaissement à la livraison inclus", "Statut de chaque course dans l'application", "Tarif connu avant la course"],
             },
             stockage: {
                 kicker: "Stockage",
@@ -118,7 +118,7 @@ export default {
             loading: "Chargement des tarifs…",
             unavailable:
                 "Les tarifs par quartier s'affichent dès que notre service répond. En attendant, demandez le tarif de votre quartier sur WhatsApp : nous répondons en moins de 30 minutes.",
-            unavailableCta: "Demander un tarif",
+            unavailableCta: "Écrire sur WhatsApp",
             extrasTitle: "Frais annexes",
             entryFeeNote: "Des frais d'accès peuvent s'ajouter pour ce quartier.",
             regionLabel: "Tarifs par zone, {{city}}",
@@ -135,7 +135,7 @@ export default {
         volumes: {
             title: "Gros volumes",
             body: "Commerçants à fort volume : tournées dédiées et tarif négocié. Parlons-en.",
-            cta: "Demander un devis",
+            cta: "Écrire sur WhatsApp",
         },
         marketplace: {
             badge: "Bientôt",

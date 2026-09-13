@@ -40,7 +40,7 @@ export default {
             orders: { title: "La file de commandes", text: "Ce qui attend, en haut. Un geste pour accepter." },
             stock: { title: "Le stock, à jour", text: "Un clavier, pas un formulaire." },
             payout: { title: "L'argent, tracé", text: "Chaque ligne, expliquée." },
-            tracking: { title: "Le suivi en direct", text: "Vous et votre client, la même vue." },
+            tracking: { title: "Bientôt : le suivi en direct", text: "Vous et votre client verrez la même carte." },
         },
     },
     differences: {
@@ -68,7 +68,7 @@ export default {
     },
     steps: {
         title: "Commencez à livrer en moins d'une journée.",
-        cta: "Parler à quelqu'un",
+        cta: "Écrire sur WhatsApp",
         steps: [
             { number: "01", title: "On vous écoute", text: "Nous comprenons votre activité et vos volumes." },
             { number: "02", title: "On installe tout", text: "Compte créé, application installée, équipe formée." },
@@ -79,7 +79,7 @@ export default {
         kicker: "Bientôt · la marketplace LivSight",
         title: "Et si nous vous amenions les clients aussi ?",
         body: "Une place de marché où vos produits sont en vitrine et où les acheteurs de Yaoundé commandent directement. Même entrepôt, mêmes livreurs, même reversement.",
-        cta: "Être prévenu",
+        cta: "Écrire sur WhatsApp",
         link: "Comment ça va marcher",
     },
     finalCta: {

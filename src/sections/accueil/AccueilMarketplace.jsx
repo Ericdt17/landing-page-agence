@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import { accueilMarketplace } from "../../constants/accueil";
+import { marketplacePath } from "../../constants/marketplace";
 import { siteWhatsappHref } from "../../constants/site";
 
 /** Le seul moment sombre de la page. */
@@ -12,9 +14,14 @@ const AccueilMarketplace = () => (
         </h2>
         <p className='ls-body max-w-[54ch] text-ls-ink-mute'>{accueilMarketplace.body}</p>
       </div>
-      <a href={siteWhatsappHref} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-ink'>
-        {accueilMarketplace.cta}
-      </a>
+      <div className='flex flex-col gap-2.5'>
+        <Link to={marketplacePath} className='ls-btn ls-btn-ink'>
+          {accueilMarketplace.link}
+        </Link>
+        <a href={siteWhatsappHref} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-ink-line'>
+          {accueilMarketplace.cta}
+        </a>
+      </div>
     </div>
   </section>
 );

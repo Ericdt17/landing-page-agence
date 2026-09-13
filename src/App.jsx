@@ -30,6 +30,8 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const ApplicationPage = lazy(() => import("./pages/ApplicationPage"));
 const LivraisonStockagePage = lazy(() => import("./pages/LivraisonStockagePage"));
 const TarifsPage = lazy(() => import("./pages/TarifsPage"));
+const TechnologiePage = lazy(() => import("./pages/TechnologiePage"));
+const MarketplacePage = lazy(() => import("./pages/MarketplacePage"));
 
 /** Évite `basename: './'` (Vite `base: './'`) : aucune route ne matche → `*` renvoie à `/`. */
 const routerBasename = (() => {
@@ -55,6 +57,8 @@ const App = () => {
           <Route path='/application' element={<ApplicationPage />} />
           <Route path='/livraison-stockage' element={<LivraisonStockagePage />} />
           <Route path='/tarifs' element={<TarifsPage />} />
+          <Route path='/technologie' element={<TechnologiePage />} />
+          <Route path='/marketplace' element={<MarketplacePage />} />
           <Route
             path='/legal/confidentialite'
             element={<ConfidentialitePage />}

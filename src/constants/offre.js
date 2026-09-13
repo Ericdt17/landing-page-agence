@@ -144,4 +144,5 @@ export const tarifsMarketplace = {
     badge: "Bientôt",
     title: "Tarifs marketplace",
     body: "Les tarifs de la place de marché ne sont pas encore fixés. Nous les définirons avec les commerçants qui livrent déjà avec nous.",
+    link: "Comment ça va marcher",
 };

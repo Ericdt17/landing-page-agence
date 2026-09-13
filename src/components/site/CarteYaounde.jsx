@@ -7,7 +7,8 @@ import { carteYaounde } from "../../assets/images";
  * donc aucune donnée de visiteur envoyée hors du site. L'attribution
  * « © contributeurs OpenStreetMap » est obligatoire et reste visible.
  *
- * Coordonnées en pixels dans l'image 768 × 768 (zoom 15).
+ * Coordonnées en pixels dans l'assemblage 768 × 768 (zoom 15) ; l'image servie
+ * n'en garde que la bande utile, de y = 60 à y = 630, pour tenir le budget.
  */
 const HIPPODROME = [159, 494];
 const NLONGKAK = [357, 307];
@@ -41,8 +42,9 @@ const CarteYaounde = ({ variant = "phone", className = "" }) => {
       <svg viewBox={viewBox} preserveAspectRatio='xMidYMid slice' className='absolute inset-0 h-full w-full'>
         <image
           href={carteYaounde}
+          y='60'
           width='768'
-          height='768'
+          height='570'
           className='dark:[filter:invert(.92)_hue-rotate(180deg)_saturate(.55)_brightness(.95)]'
         />
         {/* Trajet déjà parcouru, puis trajet restant en pointillés */}

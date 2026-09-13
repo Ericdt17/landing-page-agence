@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import { accueilHero } from "../../constants/accueil";
+import { tarifsPath } from "../../constants/offre";
 import { siteWhatsappHref } from "../../constants/site";
 
 const AccueilHero = () => (
@@ -13,9 +15,9 @@ const AccueilHero = () => (
         <a href={siteWhatsappHref} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-lg ls-btn-solid'>
           {accueilHero.primary}
         </a>
-        <a href='#demarrer' className='ls-btn ls-btn-lg ls-btn-line'>
+        <Link to={tarifsPath} className='ls-btn ls-btn-lg ls-btn-line'>
           {accueilHero.secondary}
-        </a>
+        </Link>
       </div>
       <p className='ls-num text-xs font-semibold tracking-[0.02em] text-ls-faint'>{accueilHero.reassurance}</p>
     </div>

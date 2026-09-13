@@ -161,8 +161,8 @@ export const RECRUITMENT_PROCESS_INTRO =
 /** Liste + page détail offre */
 export const RECRUITMENT_JOB_UI = {
     viewDetail: "Voir le détail",
-    backToOffers: "← Retour aux offres",
-    backToOffer: "← Retour à l’offre",
+    backToOffers: "Retour aux offres",
+    backToOffer: "Retour à l’offre",
     descriptionHeading: "Description du poste",
     noDescription:
         "Aucune description détaillée n’est disponible pour ce poste.",

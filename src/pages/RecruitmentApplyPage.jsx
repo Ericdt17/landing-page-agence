@@ -91,7 +91,7 @@ const RecruitmentApplyPage = () => {
         (meta.typeKey.includes("agent") || meta.typeKey === "agent");
     const badgeClass = isAgent
         ? "bg-primary text-brand-ink"
-        : "bg-pale-blue text-brand-ink";
+        : "bg-pale-blue text-brand-deep";
 
     const subtitle =
         meta &&
@@ -141,7 +141,7 @@ const RecruitmentApplyPage = () => {
                         <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
                             {RECRUITMENT_MODAL_TITLE}
                         </h1>
-                        <p className='mt-2 font-montserrat text-sm text-white/60'>
+                        <p className='mt-2 font-montserrat text-sm font-medium text-white'>
                             {meta.title}
                             {subtitle ? ` · ${subtitle}` : ""}
                         </p>
@@ -180,7 +180,7 @@ const RecruitmentApplyPage = () => {
                         >
                             {questionsFetchError && (
                                 <p
-                                    className='mb-6 rounded-2xl border border-coral-red/30 bg-red-50/80 px-4 py-3 font-montserrat text-sm text-coral-red'
+                                    className='mb-6 rounded-2xl border border-coral-ink/30 bg-red-50/80 px-4 py-3 font-montserrat text-sm text-coral-ink'
                                     role='alert'
                                 >
                                     {questionsFetchError}

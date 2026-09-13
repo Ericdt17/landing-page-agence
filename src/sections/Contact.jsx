@@ -171,7 +171,7 @@ const Contact = () => {
                 </h2>
                 <dl className='mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2'>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-400'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
                             {contactPracticalLabelAddress}
                         </dt>
                         <dd className='mt-1 font-montserrat text-base text-gray-700'>
@@ -179,7 +179,7 @@ const Contact = () => {
                         </dd>
                     </div>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-400'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
                             {contactPracticalLabelHours}
                         </dt>
                         <dd className='mt-1 font-montserrat text-base text-gray-700'>
@@ -187,7 +187,7 @@ const Contact = () => {
                         </dd>
                     </div>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-400'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
                             {contactPracticalLabelSunday}
                         </dt>
                         <dd className='mt-1 font-montserrat text-base text-gray-700'>
@@ -195,7 +195,7 @@ const Contact = () => {
                         </dd>
                     </div>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-400'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
                             {contactPracticalLabelCompany}
                         </dt>
                         <dd className='mt-1 font-montserrat text-base text-gray-700'>
@@ -203,7 +203,7 @@ const Contact = () => {
                         </dd>
                     </div>
                     <div className='sm:col-span-2'>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-400'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
                             {contactResponsibleTitle}
                         </dt>
                         <dd className='mt-1 font-montserrat text-base text-gray-700'>

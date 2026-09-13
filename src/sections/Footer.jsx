@@ -78,7 +78,7 @@ const Footer = () => {
       </div>
 
       <div className='max-container mt-8 sm:mt-12 flex flex-col gap-4 border-t border-gray-100 pt-6 sm:pt-8 sm:flex-row sm:items-center sm:justify-between'>
-        <p className='font-montserrat text-xs leading-4 text-gray-400'>
+        <p className='font-montserrat text-xs leading-4 text-gray-500'>
           {footerCopyright}
         </p>
         <div className='flex items-center gap-3 sm:gap-6'>
@@ -95,7 +95,7 @@ const Footer = () => {
               <a
                 key={code}
                 href={href}
-                className='font-montserrat text-xs font-bold text-gray-400 opacity-70 transition-opacity hover:opacity-100'
+                className='font-montserrat text-xs font-bold text-gray-500 transition-colors hover:text-gray-700'
               >
                 {label}
               </a>

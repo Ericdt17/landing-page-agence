@@ -142,7 +142,7 @@ const APropos = () => {
                 </h2>
                 <dl className='mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2'>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-400'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
                             {aboutContactLabels.address}
                         </dt>
                         <dd className='mt-1 font-montserrat text-base text-gray-700'>
@@ -150,7 +150,7 @@ const APropos = () => {
                         </dd>
                     </div>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-400'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
                             {aboutContactLabels.whatsapp}
                         </dt>
                         <dd className='mt-1'>
@@ -165,7 +165,7 @@ const APropos = () => {
                         </dd>
                     </div>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-400'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
                             {aboutContactLabels.email}
                         </dt>
                         <dd className='mt-1'>
@@ -178,7 +178,7 @@ const APropos = () => {
                         </dd>
                     </div>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-400'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
                             {aboutContactLabels.hours}
                         </dt>
                         <dd className='mt-1 font-montserrat text-base text-gray-700'>
@@ -186,7 +186,7 @@ const APropos = () => {
                         </dd>
                     </div>
                     <div className='sm:col-span-2'>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-400'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
                             {aboutContactLabels.company}
                         </dt>
                         <dd className='mt-1 font-montserrat text-base text-gray-700'>

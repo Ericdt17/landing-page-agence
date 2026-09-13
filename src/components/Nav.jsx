@@ -60,7 +60,7 @@ const Nav = () => {
             href={whatsappCtaHref}
             target='_blank'
             rel='noopener noreferrer'
-            className='max-lg:hidden inline-flex items-center gap-2 rounded-full bg-brand-ink px-6 py-3 text-sm font-semibold font-montserrat text-white shadow-lg shadow-brand-blue/20 hover:opacity-95 transition-opacity'
+            className='max-lg:hidden inline-flex items-center gap-2 rounded-full bg-brand-ink px-6 py-3 text-sm font-semibold font-montserrat text-white shadow-lg shadow-brand-blue/20 hover:bg-brand-deep transition-colors'
           >
             <WhatsAppIcon className="h-4 w-4 shrink-0" />
             {navCtaLabel}
@@ -105,7 +105,7 @@ const Nav = () => {
                 href={whatsappCtaHref}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-flex items-center justify-center gap-2 rounded-full bg-brand-ink px-6 py-3 text-sm font-semibold font-montserrat text-white shadow-lg shadow-brand-blue/20 hover:opacity-95 transition-opacity'
+                className='inline-flex items-center justify-center gap-2 rounded-full bg-brand-ink px-6 py-3 text-sm font-semibold font-montserrat text-white shadow-lg shadow-brand-blue/20 hover:bg-brand-deep transition-colors'
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <WhatsAppIcon className="h-4 w-4 shrink-0" />

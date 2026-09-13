@@ -92,7 +92,7 @@ const RecruitmentOfferPage = () => {
         (meta.typeKey.includes("agent") || meta.typeKey === "agent");
     const badgeClass = isAgent
         ? "bg-primary text-brand-ink"
-        : "bg-pale-blue text-brand-ink";
+        : "bg-pale-blue text-brand-deep";
 
     const subtitle =
         meta &&
@@ -149,7 +149,7 @@ const RecruitmentOfferPage = () => {
                         <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
                             {meta.title}
                         </h1>
-                        <p className='mt-2 font-montserrat text-sm text-white/60'>
+                        <p className='mt-2 font-montserrat text-sm font-medium text-white'>
                             {subtitle}
                         </p>
                     </>
@@ -223,7 +223,7 @@ const RecruitmentOfferPage = () => {
                             <div className='mt-10'>
                                 <Link
                                     to='postuler'
-                                    className='inline-flex min-h-[48px] items-center justify-center rounded-full bg-brand-ink px-8 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95'
+                                    className='inline-flex min-h-[48px] items-center justify-center rounded-full bg-brand-ink px-8 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-colors hover:bg-brand-deep'
                                 >
                                     {APPLICATION_FORM_LABELS.apply}
                                 </Link>

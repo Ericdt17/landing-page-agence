@@ -31,7 +31,7 @@ const BrandCtaCard = ({
           {title}
         </h2>
         {body ? (
-          <p className='mx-auto mt-4 max-w-xl font-montserrat text-sm leading-relaxed text-blue-100 sm:text-base'>
+          <p className='mx-auto mt-4 max-w-xl font-montserrat text-sm leading-relaxed text-white sm:text-base'>
             {body}
           </p>
         ) : null}
@@ -40,7 +40,7 @@ const BrandCtaCard = ({
           href={href}
           target='_blank'
           rel='noopener noreferrer'
-          className='mt-8 inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-white px-8 font-montserrat text-base font-bold text-brand-ink shadow-lg transition-opacity hover:opacity-95 sm:min-h-[70px] sm:px-10 sm:text-lg'
+          className='mt-8 inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-white px-8 font-montserrat text-base font-bold text-brand-deep shadow-lg transition-colors hover:bg-pale-blue sm:min-h-[70px] sm:px-10 sm:text-lg'
         >
           <WhatsAppIcon className='h-5 w-5 shrink-0' />
           {buttonLabel}

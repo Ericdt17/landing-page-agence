@@ -81,7 +81,7 @@ const JobsList = ({ jobs, loading, error }) => {
                     job.typeKey.includes("agent") || job.typeKey === "agent";
                 const badgeClass = isAgent
                     ? "bg-primary text-brand-ink"
-                    : "bg-pale-blue text-brand-ink";
+                    : "bg-pale-blue text-brand-deep";
 
                 return (
                     <li
@@ -118,7 +118,7 @@ const JobsList = ({ jobs, loading, error }) => {
                         </div>
                         <Link
                             to={recruitmentOfferDetailPath(job.id)}
-                            className='mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-brand-ink px-6 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 sm:w-auto sm:self-start'
+                            className='mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-brand-ink px-6 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-colors hover:bg-brand-deep sm:w-auto sm:self-start'
                         >
                             {RECRUITMENT_JOB_UI.viewDetail}
                         </Link>

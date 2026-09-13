@@ -19,7 +19,7 @@ const Button = ({
     ${
       backgroundColor
         ? `${backgroundColor} ${textColor} ${borderColor}`
-        : "bg-coral-red text-white border-coral-red"
+        : "bg-coral-ink text-white border-coral-ink"
     } rounded-full ${fullWidth ? "w-full sm:w-auto" : ""} ${classNameProp ?? ""}`;
 
   const content = (

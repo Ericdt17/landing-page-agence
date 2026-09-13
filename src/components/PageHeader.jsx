@@ -17,7 +17,7 @@ const PageHeader = ({
     <div className='max-container padding-x py-12 sm:py-16'>
       <Link
         to={backTo}
-        className='inline-flex items-center gap-1.5 font-montserrat text-sm font-semibold text-white/70 transition-colors hover:text-white'
+        className='inline-flex items-center gap-1.5 font-montserrat text-sm font-semibold text-white underline-offset-4 hover:underline'
       >
         <ArrowLeftIcon className='h-4 w-4 shrink-0' aria-hidden='true' />
         {backLabel}
@@ -28,7 +28,7 @@ const PageHeader = ({
             {title}
           </h1>
           {subtitle && (
-            <p className='mt-2 font-montserrat text-sm text-white/60'>
+            <p className='mt-2 font-montserrat text-sm font-medium text-white'>
               {subtitle}
             </p>
           )}

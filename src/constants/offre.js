@@ -57,7 +57,7 @@ export const livraisonServices = {
 export const reversementCopy = {
     kicker: "Le reversement",
     title: "Une formule, pas une surprise.",
-    body: "Chaque encaissement est enregistré. Le montant à encaisser est verrouillé avant le départ du livreur, donc il ne peut pas bouger en route.",
+    body: "Chaque encaissement est enregistré, livraison par livraison, et chaque ligne de la formule apparaît dans votre relevé.",
     note: "Versé sur votre numéro Mobile Money. Aucune donnée bancaire n'est collectée.",
     exampleLabel: "Exemple de relevé",
     example: [
@@ -95,7 +95,7 @@ export const tarifsSeo = {
 export const tarifsHero = {
     kicker: "Tarifs",
     title: "Pas d'abonnement. Vos 3 premiers mois de stockage sont offerts.",
-    lede: "Vous payez la livraison, rien d'autre. Le montant est fixé avant le départ du livreur et ne bouge pas en route.",
+    lede: "Vous payez la livraison, rien d'autre. Le tarif de votre quartier est connu avant la course.",
 };
 
 /** Fourchette confirmée, utilisée tant que l'API ne répond pas. */
@@ -105,7 +105,7 @@ export const tarifsColumns = {
     livraison: {
         kicker: "Livraison",
         text: "Selon le quartier de livraison dans Yaoundé. Le tarif exact vous est donné avant la course.",
-        bullets: ["Encaissement à la livraison inclus", "Suivi en temps réel inclus", "Tarif verrouillé avant le départ"],
+        bullets: ["Encaissement à la livraison inclus", "Suivi en temps réel inclus", "Tarif connu avant la course"],
     },
     stockage: {
         kicker: "Stockage",
@@ -118,7 +118,7 @@ export const tarifsColumns = {
         kicker: "Reversement",
         value: "Fin de journée",
         text: "En fin de journée de travail, livraisons terminées, sur votre numéro Mobile Money.",
-        bullets: ["Chaque encaissement enregistré", "Relevé détaillé dans l'application", "Montant verrouillé avant départ"],
+        bullets: ["Chaque encaissement enregistré", "Relevé détaillé dans l'application", "Sur votre numéro Mobile Money"],
     },
 };
 

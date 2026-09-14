@@ -133,6 +133,7 @@ const MarketplacePage = () => {
         <details className='mt-8 text-xs text-ls-muted'>
           <summary className='cursor-pointer font-semibold'>{preview.creditsLabel}</summary>
           <p className='mt-2'>{preview.creditsIntro}</p>
+          {marketplacePhotoCredits.length > 0 && (
           <ul className='mt-2 flex flex-col gap-1'>
             {marketplacePhotoCredits.map((credit) => (
               <li key={credit.url}>
@@ -143,6 +144,7 @@ const MarketplacePage = () => {
               </li>
             ))}
           </ul>
+          )}
         </details>
       </section>
 

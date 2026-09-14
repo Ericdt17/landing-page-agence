@@ -65,7 +65,7 @@ export default {
         kicker: "Aperçu",
         title: "Voilà à quoi ressemblera la marketplace.",
         body: "Écrans en cours de conception : les produits, les prix et les avis sont des exemples.",
-        webAlt: "Page d'accueil de la marketplace sur ordinateur : recherche, rayons alimentaire, téléphones, mode et beauté, commandes à racheter et suivi de commande en cours.",
+        webAlt: "Page d'accueil de la marketplace sur ordinateur : recherche, rayons maison, téléphones et audio, mode et beauté, articles à racheter et suivi de commande en cours.",
         browserLabel: "marketplace.livsight.com",
         mobile: [
             { key: "accueil", caption: "L'accueil sur téléphone", alt: "Accueil de la marketplace sur téléphone : livraison à Bastos, commande en route, rayons et produits populaires." },
@@ -73,7 +73,7 @@ export default {
             { key: "suivi", caption: "Le suivi du livreur", alt: "Suivi en direct du livreur sur une carte, arrivée dans 25 minutes, étapes de la commande." },
         ],
         creditsLabel: "Crédits des photos",
-        creditsIntro: "Photos de produits sous licence CC0 (domaine public) ou CC BY, via Openverse.",
+        creditsIntro: "Photos de produits sous licence CC0 (domaine public), via StockSnap et rawpixel.",
         creditBy: "par",
     },
 };

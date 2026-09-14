@@ -56,7 +56,7 @@ export default {
         kicker: "Preview",
         title: "This is what the marketplace will look like.",
         body: "Screens still being designed, shown in French: products, prices and reviews are examples.",
-        webAlt: "Marketplace home page on a computer: search, grocery, phones, fashion and beauty aisles, orders to buy again and an order being tracked.",
+        webAlt: "Marketplace home page on a computer: search, home, phones and audio, fashion and beauty aisles, items to buy again and an order being tracked.",
         browserLabel: "marketplace.livsight.com",
         mobile: [
             { key: "accueil", caption: "Home on a phone", alt: "Marketplace home on a phone: delivery to Bastos, an order on its way, aisles and popular products." },
@@ -64,7 +64,7 @@ export default {
             { key: "suivi", caption: "Tracking the driver", alt: "Live tracking of the driver on a map, arriving in 25 minutes, order steps." },
         ],
         creditsLabel: "Photo credits",
-        creditsIntro: "Product photos licensed CC0 (public domain) or CC BY, via Openverse.",
+        creditsIntro: "Product photos licensed CC0 (public domain), via StockSnap and rawpixel.",
         creditBy: "by",
     },
 };

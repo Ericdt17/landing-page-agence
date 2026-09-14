@@ -1,8 +1,33 @@
 {
   "redirects": [
     {
+      "source": "/application",
+      "destination": "/espace-commercant",
+      "permanent": true
+    },
+    {
+      "source": "/plateforme/integrations-api",
+      "destination": "/api-livraison",
+      "permanent": true
+    },
+    {
+      "source": "/plateforme/solution-client",
+      "destination": "/livraison-stockage",
+      "permanent": true
+    },
+    {
+      "source": "/plateforme/portail-agent",
+      "destination": "/espace-commercant",
+      "permanent": true
+    },
+    {
+      "source": "/plateforme/portail-livreur",
+      "destination": "/livraison-stockage",
+      "permanent": true
+    },
+    {
       "source": "/plateforme/app-chauffeur",
-      "destination": "/plateforme/portail-livreur",
+      "destination": "/livraison-stockage",
       "permanent": true
     },
     {
@@ -26,5 +51,10 @@
       "permanent": true
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

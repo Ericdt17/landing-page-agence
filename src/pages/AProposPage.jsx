@@ -1,42 +1,82 @@
 import { Link } from "react-router-dom";
-import { SEO, SiteFooter } from "../components";
-import { LandingPublicProvider } from "../context/LandingPublicContext";
-import APropos from "../sections/APropos";
-import { aboutPageTagline, aboutPageTitle } from "../constants";
+import SEO from "../components/SEO";
+import InkHero from "../components/site/InkHero";
+import SiteLayout from "../components/site/SiteLayout";
+import { routes } from "../constants/routes";
+import { LandingPublicProvider, useLandingPublic } from "../context/LandingPublicContext";
+import { useCopy, useLanguage } from "../i18n/useCopy";
+
+/* Le nombre de commerçants vient de l'API publique : sans réponse, la case n'est pas affichée, jamais un chiffre inventé */
+const Stats = ({ copy }) => {
+  const { clientsCount } = useLandingPublic();
+  const { language } = useLanguage();
+  const items = [
+    { id: "presence", value: copy.stats.presence.value, label: copy.stats.presence.label },
+    clientsCount != null && {
+      id: "clients",
+      value: new Intl.NumberFormat(language === "en" ? "en-GB" : "fr-FR").format(clientsCount),
+      label: copy.stats.clients.label,
+    },
+    { id: "payout", value: copy.stats.payout.value, label: copy.stats.payout.label },
+  ].filter(Boolean);
+
+  return (
+    <dl
+      aria-label={copy.statsLabel}
+      className={`grid grid-cols-1 gap-px self-start border-y border-ls-rule bg-ls-rule ${items.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}
+    >
+      {items.map((item) => (
+        <div key={item.id} className='flex flex-col-reverse gap-2 bg-ls-bg py-7 sm:px-6 sm:first:pl-0'>
+          <dt className='ls-kicker text-ls-faint'>{item.label}</dt>
+          <dd className='ls-num text-[32px] leading-none'>{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+};
 
 const AProposPage = () => {
-    return (
-        <LandingPublicProvider>
-            <SEO
-                title='À propos | Notre histoire à Yaoundé'
-                description="LivSight est une agence de livraison basée à l'Hippodrome, Yaoundé. Fondée pour digitaliser et professionnaliser la livraison au Cameroun."
-                canonical='/entreprise/a-propos'
-            />
-            <main className='min-h-[60vh] bg-white'>
-                <div className='bg-brand-ink'>
-                    <div className='max-container padding-x py-12 sm:py-16'>
-                        <Link
-                            to='/'
-                            className='inline-flex items-center gap-1.5 font-montserrat text-sm font-semibold text-white/70 transition-colors hover:text-white'
-                        >
-                            ← Retour à l&apos;accueil
-                        </Link>
-                        <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
-                            {aboutPageTitle}
-                        </h1>
-                        <p className='mt-2 font-montserrat text-sm text-white/60'>
-                            {aboutPageTagline}
-                        </p>
-                    </div>
-                </div>
+  const copy = useCopy("apropos");
+  const { seo, hero, principles, closing, company } = copy;
 
-                <div className='max-container padding-x'>
-                    <APropos />
-                </div>
-            </main>
-      <SiteFooter />
-        </LandingPublicProvider>
-    );
+  return (
+    <LandingPublicProvider>
+      <SEO title={seo.title} description={seo.description} canonical={routes.apropos} />
+      <SiteLayout>
+        <InkHero id='apropos-titre' kicker={hero.kicker} title={hero.title} lede={hero.lede} />
+
+        <section aria-label={copy.principlesLabel} className='px-[18px] pt-12 md:px-16 md:pt-[68px]'>
+          <ol className='grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5'>
+            {principles.map((item) => (
+              <li key={item.number} className='flex flex-col gap-3 rounded-[26px] border border-ls-rule p-7 md:p-8'>
+                <span className='ls-num text-sm font-semibold text-ls-accent'>{item.number}</span>
+                <h2 className='ls-h text-[21px] leading-tight'>{item.title}</h2>
+                <p className='ls-cap text-ls-muted'>{item.text}</p>
+              </li>
+            ))}
+          </ol>
+          <p className='ls-lede max-w-[62ch] pt-12 text-ls-muted md:pt-14'>{closing}</p>
+        </section>
+
+        <section aria-labelledby='apropos-entreprise' className='grid grid-cols-1 gap-10 px-[18px] pb-16 pt-14 md:px-16 md:pb-[88px] md:pt-[68px] lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start lg:gap-[72px]'>
+          <Stats copy={copy} />
+          <div className='flex flex-col gap-3 rounded-[26px] bg-ls-ink-bg p-7 text-ls-ink-fg md:p-8'>
+            <h2 id='apropos-entreprise' className='ls-kicker text-ls-ink-speed'>
+              {company.title}
+            </h2>
+            <ul className='flex flex-col gap-1.5 text-sm text-ls-ink-mute'>
+              {company.lines.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+            <Link to={routes.contact} className='ls-btn ls-btn-ink mt-3 self-start'>
+              {company.cta}
+            </Link>
+          </div>
+        </section>
+      </SiteLayout>
+    </LandingPublicProvider>
+  );
 };
 
 export default AProposPage;

@@ -1,17 +1,8 @@
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-    APPLICATION_FORM_LABELS,
-    AVAILABILITY_OPTIONS,
-    EDUCATION_LEVEL_OPTIONS,
-    MAX_CV_BYTES,
-    RECRUITMENT_MODAL_TITLE,
-    SPOKEN_LANGUAGE_OPTIONS,
-    STATUS_LABELS,
-    TRANSPORT_OPTIONS,
-    YES_NO_OPTIONS,
-    entrepriseRecrutementPath,
-} from "../../constants";
+import { routes } from "../../constants/routes";
+import { fill, useCopy } from "../../i18n/useCopy";
 import { submitApplication } from "../../services/recruitmentApi";
 
 const SuccessAnimation = lazy(() => import("./SuccessAnimation"));
@@ -26,6 +17,8 @@ const RECRUITMENT_JOB_ID_FIELD =
     import.meta.env.VITE_RECRUITMENT_JOB_ID_FIELD ?? "job_offer_id";
 const RECRUITMENT_NEIGHBORHOOD_FIELD =
     import.meta.env.VITE_RECRUITMENT_NEIGHBORHOOD_FIELD ?? "quartier";
+
+const MAX_FILE_BYTES = 10 * 1024 * 1024;
 
 const ACCEPTED_PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
@@ -53,13 +46,13 @@ const API_FIELD_TO_FORM = {
 };
 
 const sectionHeadingClass =
-    "font-montserrat text-sm font-semibold text-brand-ink";
+    "font-montserrat text-sm font-semibold text-ls-accent";
 
 const inputClass =
-    "w-full rounded-2xl border border-gray-200 px-4 py-3 font-montserrat text-base text-gray-900 outline-none transition-all focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20";
+    "w-full rounded-2xl border border-ls-rule bg-ls-surface px-4 py-3 font-montserrat text-base text-ls-text placeholder:text-ls-faint outline-none transition-all focus:border-ls-primary focus:ring-2 focus:ring-ls-primary-soft";
 
 const selectClass =
-    "w-full rounded-2xl border border-gray-200 px-4 py-3 font-montserrat text-base text-gray-900 outline-none transition-all focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 bg-white";
+    "w-full rounded-2xl border border-ls-rule bg-ls-surface px-4 py-3 font-montserrat text-base text-ls-text placeholder:text-ls-faint outline-none transition-all focus:border-ls-primary focus:ring-2 focus:ring-ls-primary-soft bg-ls-surface";
 
 const stringifyEntityId = (raw) => {
     if (raw == null || raw === "") return "";
@@ -85,14 +78,14 @@ const resolveJobId = (job) =>
 const resolveQuestionId = (q) =>
     stringifyEntityId(q?.id ?? q?.question_id ?? q?._id);
 
-const validatePdf = (file, setErr) => {
+const validatePdf = (file, setErr, labels) => {
     if (!file) return false;
-    if (file.size > MAX_CV_BYTES) {
-        setErr(STATUS_LABELS.cvTooLarge);
+    if (file.size > MAX_FILE_BYTES) {
+        setErr(labels.cvTooLarge);
         return false;
     }
     if (file.type !== "application/pdf") {
-        setErr(STATUS_LABELS.cvNotPdf);
+        setErr(labels.cvNotPdf);
         return false;
     }
     return true;
@@ -124,8 +117,20 @@ const ApplicationForm = ({
     questions: questionsProp = [],
     onSuccess,
     hideHeader = false,
-    successHref = entrepriseRecrutementPath,
+    successHref = routes.recrutement,
+    onStepChange,
+    consent = null,
 }) => {
+    const copy = useCopy("recrutement");
+    const APPLICATION_FORM_LABELS = copy.form;
+    const STATUS_LABELS = copy.status;
+    const {
+        transport: TRANSPORT_OPTIONS,
+        availability: AVAILABILITY_OPTIONS,
+        education: EDUCATION_LEVEL_OPTIONS,
+        languages: SPOKEN_LANGUAGE_OPTIONS,
+        yesNo: YES_NO_OPTIONS,
+    } = copy.options;
     const questions = Array.isArray(questionsProp) ? questionsProp : [];
     const hasQuestions = questions.length > 0;
 
@@ -183,6 +188,12 @@ const ApplicationForm = ({
         setSubmittedApplicationId("");
     }, [jobOffer, questionsProp]);
 
+    useEffect(() => {
+        if (typeof onStepChange === "function") {
+            onStepChange(submitStatus === "success" ? 3 : step);
+        }
+    }, [onStepChange, step, submitStatus]);
+
     const handlePhotoChange = (e) => {
         const file = e.target.files?.[0];
         setPhotoError("");
@@ -190,7 +201,7 @@ const ApplicationForm = ({
             setPhotoFile(null);
             return;
         }
-        if (file.size > MAX_CV_BYTES) {
+        if (file.size > MAX_FILE_BYTES) {
             setPhotoError(STATUS_LABELS.photoTooLarge);
             setPhotoFile(null);
             e.target.value = "";
@@ -212,7 +223,7 @@ const ApplicationForm = ({
             setCvFile(null);
             return;
         }
-        if (!validatePdf(file, setCvError)) {
+        if (!validatePdf(file, setCvError, STATUS_LABELS)) {
             setCvFile(null);
             e.target.value = "";
             return;
@@ -230,7 +241,7 @@ const ApplicationForm = ({
             setCoverLetterFile(null);
             return;
         }
-        if (!validatePdf(file, setCoverLetterError)) {
+        if (!validatePdf(file, setCoverLetterError, STATUS_LABELS)) {
             setCoverLetterFile(null);
             e.target.value = "";
             return;
@@ -269,9 +280,9 @@ const ApplicationForm = ({
         if (!photoFile) err.photo = true;
         else if (photoError) err.photo = true;
         if (!cvFile) err.cv = true;
-        else if (!validatePdf(cvFile, setCvError)) err.cv = true;
+        else if (!validatePdf(cvFile, setCvError, STATUS_LABELS)) err.cv = true;
         if (!coverLetterFile) err.coverLetter = true;
-        else if (!validatePdf(coverLetterFile, setCoverLetterError))
+        else if (!validatePdf(coverLetterFile, setCoverLetterError, STATUS_LABELS))
             err.coverLetter = true;
         setFieldErrors(err);
         return Object.keys(err).length === 0;
@@ -374,6 +385,14 @@ const ApplicationForm = ({
             const mapped = mapInvalidFieldsToForm(result.data);
             if (Object.keys(mapped).length) setFieldErrors(mapped);
         }
+        if (result?.error === "offline") {
+            setSubmitError(STATUS_LABELS.submitErrorOffline);
+            return;
+        }
+        if (result?.error === "timeout") {
+            setSubmitError(STATUS_LABELS.submitErrorTimeout);
+            return;
+        }
         if (result?.error === "network") {
             // Aucun body lisible (CORS / proxy / réseau). On affiche un message actionnable.
             setSubmitError(STATUS_LABELS.submitErrorNetwork);
@@ -433,7 +452,7 @@ const ApplicationForm = ({
             <div>
                 <label
                     htmlFor='full_name'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.fullName} *
                 </label>
@@ -443,17 +462,17 @@ const ApplicationForm = ({
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     className={`${inputClass} mt-1 ${
-                        fieldErrors.fullName
-                            ? "border-coral-red ring-2 ring-coral-red/20"
-                            : ""
-                    }`}
+ fieldErrors.fullName
+ ? "border-ls-bad ring-2 ring-ls-bad"
+ : ""
+ }`}
                     autoComplete='name'
                 />
             </div>
             <div>
                 <label
                     htmlFor='phone'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.phone} *
                 </label>
@@ -467,14 +486,14 @@ const ApplicationForm = ({
                     }
                     maxLength={32}
                     className={`${inputClass} mt-1 ${
-                        fieldErrors.phone
-                            ? "border-coral-red ring-2 ring-coral-red/20"
-                            : ""
-                    }`}
+ fieldErrors.phone
+ ? "border-ls-bad ring-2 ring-ls-bad"
+ : ""
+ }`}
                     autoComplete='tel'
                 />
                 {fieldErrors.phone && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {phone.trim().length > 32
                             ? STATUS_LABELS.phoneTooLong
                             : STATUS_LABELS.fieldRequired}
@@ -484,7 +503,7 @@ const ApplicationForm = ({
             <div>
                 <label
                     htmlFor='email'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.email} *
                 </label>
@@ -494,14 +513,14 @@ const ApplicationForm = ({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className={`${inputClass} mt-1 ${
-                        fieldErrors.email
-                            ? "border-coral-red ring-2 ring-coral-red/20"
-                            : ""
-                    }`}
+ fieldErrors.email
+ ? "border-ls-bad ring-2 ring-ls-bad"
+ : ""
+ }`}
                     autoComplete='email'
                 />
                 {fieldErrors.email && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {!email.trim()
                             ? STATUS_LABELS.emailRequired
                             : STATUS_LABELS.emailInvalid}
@@ -511,7 +530,7 @@ const ApplicationForm = ({
             <div>
                 <label
                     htmlFor='neighborhood'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.neighborhood} *
                 </label>
@@ -521,13 +540,13 @@ const ApplicationForm = ({
                     value={neighborhood}
                     onChange={(e) => setNeighborhood(e.target.value)}
                     className={`${inputClass} mt-1 ${
-                        fieldErrors.neighborhood
-                            ? "border-coral-red ring-2 ring-coral-red/20"
-                            : ""
-                    }`}
+ fieldErrors.neighborhood
+ ? "border-ls-bad ring-2 ring-ls-bad"
+ : ""
+ }`}
                 />
                 {fieldErrors.neighborhood && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -539,7 +558,7 @@ const ApplicationForm = ({
             <div>
                 <label
                     htmlFor='education_level'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.educationLevel} *
                 </label>
@@ -548,13 +567,13 @@ const ApplicationForm = ({
                     value={educationLevel}
                     onChange={(e) => setEducationLevel(e.target.value)}
                     className={`${selectClass} mt-1 ${
-                        fieldErrors.educationLevel
-                            ? "border-coral-red ring-2 ring-coral-red/20"
-                            : ""
-                    }`}
+ fieldErrors.educationLevel
+ ? "border-ls-bad ring-2 ring-ls-bad"
+ : ""
+ }`}
                 >
                     <option value=''>
-                        {APPLICATION_FORM_LABELS.selectEducationLevel}
+                        {APPLICATION_FORM_LABELS.choose}
                     </option>
                     {EDUCATION_LEVEL_OPTIONS.map((o) => (
                         <option key={o.value} value={o.value}>
@@ -563,7 +582,7 @@ const ApplicationForm = ({
                     ))}
                 </select>
                 {fieldErrors.educationLevel && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -571,7 +590,7 @@ const ApplicationForm = ({
             <div>
                 <label
                     htmlFor='field_of_study'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.fieldOfStudy} *
                 </label>
@@ -581,13 +600,13 @@ const ApplicationForm = ({
                     value={fieldOfStudy}
                     onChange={(e) => setFieldOfStudy(e.target.value)}
                     className={`${inputClass} mt-1 ${
-                        fieldErrors.fieldOfStudy
-                            ? "border-coral-red ring-2 ring-coral-red/20"
-                            : ""
-                    }`}
+ fieldErrors.fieldOfStudy
+ ? "border-ls-bad ring-2 ring-ls-bad"
+ : ""
+ }`}
                 />
                 {fieldErrors.fieldOfStudy && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -595,7 +614,7 @@ const ApplicationForm = ({
             <div>
                 <label
                     htmlFor='school_name'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.schoolName} *
                 </label>
@@ -605,13 +624,13 @@ const ApplicationForm = ({
                     value={schoolName}
                     onChange={(e) => setSchoolName(e.target.value)}
                     className={`${inputClass} mt-1 ${
-                        fieldErrors.schoolName
-                            ? "border-coral-red ring-2 ring-coral-red/20"
-                            : ""
-                    }`}
+ fieldErrors.schoolName
+ ? "border-ls-bad ring-2 ring-ls-bad"
+ : ""
+ }`}
                 />
                 {fieldErrors.schoolName && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -621,7 +640,7 @@ const ApplicationForm = ({
                 <legend className={sectionHeadingClass}>
                     {APPLICATION_FORM_LABELS.sectionLanguages}
                 </legend>
-                <p className='mt-1 font-montserrat text-xs text-gray-500'>
+                <p className='mt-1 font-montserrat text-xs text-ls-faint'>
                     {APPLICATION_FORM_LABELS.languagesHint}
                 </p>
                 <div className='mt-3 grid grid-cols-2 gap-3'>
@@ -629,7 +648,7 @@ const ApplicationForm = ({
                         <label
                             key={opt.value}
                             htmlFor={`lang-${opt.value}`}
-                            className='flex cursor-pointer items-center gap-2 font-montserrat text-sm text-gray-800'
+                            className='flex cursor-pointer items-center gap-2 font-montserrat text-sm text-ls-text'
                         >
                             <input
                                 id={`lang-${opt.value}`}
@@ -638,14 +657,14 @@ const ApplicationForm = ({
                                 onChange={(e) =>
                                     toggleLanguage(opt.value, e.target.checked)
                                 }
-                                className='h-4 w-4 rounded border-gray-300 text-brand-ink focus:ring-brand-blue'
+                                className='h-4 w-4 rounded border-ls-stroke text-ls-accent focus:ring-ls-primary'
                             />
                             <span>{opt.label}</span>
                         </label>
                     ))}
                 </div>
                 {fieldErrors.languages && (
-                    <p className='mt-2 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-2 font-montserrat text-xs text-ls-bad'>
                         {STATUS_LABELS.languagesRequired}
                     </p>
                 )}
@@ -656,14 +675,14 @@ const ApplicationForm = ({
                     {APPLICATION_FORM_LABELS.sectionProfessional}
                 </legend>
                 <div>
-                    <p className='font-montserrat text-sm font-medium text-gray-700'>
+                    <p className='font-montserrat text-sm font-medium text-ls-muted'>
                         {APPLICATION_FORM_LABELS.currentlyEmployed} *
                     </p>
                     <div className='mt-2 flex gap-4'>
                         {YES_NO_OPTIONS.map((opt) => (
                             <label
                                 key={`employed-${opt.value}`}
-                                className='flex cursor-pointer items-center gap-2 font-montserrat text-sm text-gray-800'
+                                className='flex cursor-pointer items-center gap-2 font-montserrat text-sm text-ls-text'
                             >
                                 <input
                                     type='radio'
@@ -679,27 +698,27 @@ const ApplicationForm = ({
                                             }));
                                         }
                                     }}
-                                    className='h-4 w-4 border-gray-300 text-brand-ink focus:ring-brand-blue'
+                                    className='h-4 w-4 border-ls-stroke text-ls-accent focus:ring-ls-primary'
                                 />
                                 <span>{opt.label}</span>
                             </label>
                         ))}
                     </div>
                     {fieldErrors.currentlyEmployed && (
-                        <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        <p className='mt-1 font-montserrat text-xs text-ls-bad'>
                             {STATUS_LABELS.yesNoRequired}
                         </p>
                     )}
                 </div>
                 <div>
-                    <p className='font-montserrat text-sm font-medium text-gray-700'>
+                    <p className='font-montserrat text-sm font-medium text-ls-muted'>
                         {APPLICATION_FORM_LABELS.inOtherCompany} *
                     </p>
                     <div className='mt-2 flex gap-4'>
                         {YES_NO_OPTIONS.map((opt) => (
                             <label
                                 key={`other-company-${opt.value}`}
-                                className='flex cursor-pointer items-center gap-2 font-montserrat text-sm text-gray-800'
+                                className='flex cursor-pointer items-center gap-2 font-montserrat text-sm text-ls-text'
                             >
                                 <input
                                     type='radio'
@@ -715,14 +734,14 @@ const ApplicationForm = ({
                                             }));
                                         }
                                     }}
-                                    className='h-4 w-4 border-gray-300 text-brand-ink focus:ring-brand-blue'
+                                    className='h-4 w-4 border-ls-stroke text-ls-accent focus:ring-ls-primary'
                                 />
                                 <span>{opt.label}</span>
                             </label>
                         ))}
                     </div>
                     {fieldErrors.inOtherCompany && (
-                        <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                        <p className='mt-1 font-montserrat text-xs text-ls-bad'>
                             {STATUS_LABELS.yesNoRequired}
                         </p>
                     )}
@@ -735,7 +754,7 @@ const ApplicationForm = ({
             <div>
                 <label
                     htmlFor='transport'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.transport} *
                 </label>
@@ -744,13 +763,13 @@ const ApplicationForm = ({
                     value={transport}
                     onChange={(e) => setTransport(e.target.value)}
                     className={`${selectClass} mt-1 ${
-                        fieldErrors.transport
-                            ? "border-coral-red ring-2 ring-coral-red/20"
-                            : ""
-                    }`}
+ fieldErrors.transport
+ ? "border-ls-bad ring-2 ring-ls-bad"
+ : ""
+ }`}
                 >
                     <option value=''>
-                        {APPLICATION_FORM_LABELS.selectTransport}
+                        {APPLICATION_FORM_LABELS.choose}
                     </option>
                     {TRANSPORT_OPTIONS.map((o) => (
                         <option key={o.value} value={o.value}>
@@ -759,7 +778,7 @@ const ApplicationForm = ({
                     ))}
                 </select>
                 {fieldErrors.transport && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -767,7 +786,7 @@ const ApplicationForm = ({
             <div>
                 <label
                     htmlFor='availability'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.availability} *
                 </label>
@@ -776,13 +795,13 @@ const ApplicationForm = ({
                     value={availability}
                     onChange={(e) => setAvailability(e.target.value)}
                     className={`${selectClass} mt-1 ${
-                        fieldErrors.availability
-                            ? "border-coral-red ring-2 ring-coral-red/20"
-                            : ""
-                    }`}
+ fieldErrors.availability
+ ? "border-ls-bad ring-2 ring-ls-bad"
+ : ""
+ }`}
                 >
                     <option value=''>
-                        {APPLICATION_FORM_LABELS.selectAvailability}
+                        {APPLICATION_FORM_LABELS.choose}
                     </option>
                     {AVAILABILITY_OPTIONS.map((o) => (
                         <option key={o.value} value={o.value}>
@@ -791,7 +810,7 @@ const ApplicationForm = ({
                     ))}
                 </select>
                 {fieldErrors.availability && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {STATUS_LABELS.fieldRequired}
                     </p>
                 )}
@@ -803,7 +822,7 @@ const ApplicationForm = ({
             <div>
                 <label
                     htmlFor='photo'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.photo} *
                 </label>
@@ -812,15 +831,15 @@ const ApplicationForm = ({
                     type='file'
                     accept='image/jpeg,image/png,image/webp'
                     onChange={handlePhotoChange}
-                    className='mt-2 w-full font-montserrat text-sm text-gray-600 file:mr-4 file:rounded-full file:border-0 file:bg-brand-ink file:px-4 file:py-2 file:font-semibold file:text-white'
+                    className='mt-2 w-full font-montserrat text-sm text-ls-muted file:mr-4 file:rounded-full file:border-0 file:bg-ls-text file:px-4 file:py-2 file:font-semibold file:text-ls-bg'
                 />
                 {photoFile && (
-                    <p className='mt-2 font-montserrat text-xs text-gray-600'>
+                    <p className='mt-2 font-montserrat text-xs text-ls-muted'>
                         {photoFile.name}
                     </p>
                 )}
                 {(photoError || fieldErrors.photo) && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p role='alert' className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {photoError || STATUS_LABELS.photoRequired}
                     </p>
                 )}
@@ -828,7 +847,7 @@ const ApplicationForm = ({
             <div>
                 <label
                     htmlFor='cv'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.cv} *
                 </label>
@@ -837,23 +856,23 @@ const ApplicationForm = ({
                     type='file'
                     accept='.pdf,application/pdf'
                     onChange={handleCvChange}
-                    className='mt-2 w-full font-montserrat text-sm text-gray-600 file:mr-4 file:rounded-full file:border-0 file:bg-brand-ink file:px-4 file:py-2 file:font-semibold file:text-white'
+                    className='mt-2 w-full font-montserrat text-sm text-ls-muted file:mr-4 file:rounded-full file:border-0 file:bg-ls-text file:px-4 file:py-2 file:font-semibold file:text-ls-bg'
                 />
                 {cvFile && (
-                    <p className='mt-2 font-montserrat text-xs text-gray-600'>
+                    <p className='mt-2 font-montserrat text-xs text-ls-muted'>
                         {cvFile.name}
                     </p>
                 )}
                 {(cvError || fieldErrors.cv) && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
-                        {cvError || "CV requis (PDF, max 10 Mo)."}
+                    <p role='alert' className='mt-1 font-montserrat text-xs text-ls-bad'>
+                        {cvError || STATUS_LABELS.cvRequired}
                     </p>
                 )}
             </div>
             <div>
                 <label
                     htmlFor='cover_letter'
-                    className='font-montserrat text-sm font-medium text-gray-700'
+                    className='font-montserrat text-sm font-medium text-ls-muted'
                 >
                     {APPLICATION_FORM_LABELS.coverLetter} *
                 </label>
@@ -862,17 +881,17 @@ const ApplicationForm = ({
                     type='file'
                     accept='.pdf,application/pdf'
                     onChange={handleCoverLetterChange}
-                    className='mt-2 w-full font-montserrat text-sm text-gray-600 file:mr-4 file:rounded-full file:border-0 file:bg-brand-ink file:px-4 file:py-2 file:font-semibold file:text-white'
+                    className='mt-2 w-full font-montserrat text-sm text-ls-muted file:mr-4 file:rounded-full file:border-0 file:bg-ls-text file:px-4 file:py-2 file:font-semibold file:text-ls-bg'
                 />
                 {coverLetterFile && (
-                    <p className='mt-2 font-montserrat text-xs text-gray-600'>
+                    <p className='mt-2 font-montserrat text-xs text-ls-muted'>
                         {coverLetterFile.name}
                     </p>
                 )}
                 {(coverLetterError || fieldErrors.coverLetter) && (
-                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
+                    <p role='alert' className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {coverLetterError ||
-                            "Lettre requise (PDF, max 10 Mo)."}
+                            STATUS_LABELS.coverLetterRequired}
                     </p>
                 )}
             </div>
@@ -891,23 +910,23 @@ const ApplicationForm = ({
                             <SuccessAnimation />
                         </Suspense>
                     </div>
-                    <p className='mt-6 font-montserrat text-2xl font-bold text-gray-900'>
+                    <p className='mt-6 font-montserrat text-2xl font-bold text-ls-text'>
                         {STATUS_LABELS.submitSuccessTitle}
                     </p>
-                    <p className='mt-2 font-montserrat text-base leading-6 text-gray-500'>
+                    <p className='mt-2 font-montserrat text-base leading-6 text-ls-faint'>
                         {STATUS_LABELS.submitSuccessSubtitle}
                     </p>
                     {submittedApplicationId && (
-                        <p className='mt-3 font-montserrat text-sm font-semibold text-brand-ink'>
-                            {STATUS_LABELS.submitSuccessApplicationId(
-                                submittedApplicationId,
-                            )}
+                        <p className='mt-3 font-montserrat text-sm font-semibold text-ls-accent'>
+                            {fill(STATUS_LABELS.submitSuccessApplicationId, {
+                                id: submittedApplicationId,
+                            })}
                         </p>
                     )}
                     <Link
                         to={successHref}
                         onClick={handleCloseSuccess}
-                        className='mt-8 rounded-full bg-brand-ink px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95'
+                        className='mt-8 rounded-full bg-ls-text px-8 py-3 font-montserrat text-base font-bold text-ls-bg transition-colors hover:bg-ls-muted'
                     >
                         {APPLICATION_FORM_LABELS.close}
                     </Link>
@@ -920,12 +939,12 @@ const ApplicationForm = ({
                         <>
                             <h2
                                 id='application-form-title'
-                                className='font-montserrat text-xl font-bold text-gray-900 sm:text-2xl'
+                                className='font-montserrat text-xl font-bold text-ls-text sm:text-2xl'
                             >
-                                {RECRUITMENT_MODAL_TITLE}
+                                {APPLICATION_FORM_LABELS.title}
                             </h2>
-                            <p className='mt-1 font-montserrat text-sm text-gray-500'>
-                                {jobOffer?.title ?? jobOffer?.name ?? "Poste"}
+                            <p className='mt-1 font-montserrat text-sm text-ls-faint'>
+                                {jobOffer?.title ?? jobOffer?.name ?? APPLICATION_FORM_LABELS.jobFallback}
                             </p>
                         </>
                     )}
@@ -946,7 +965,7 @@ const ApplicationForm = ({
 
                             {step === 2 && hasQuestions && (
                                 <div className='flex flex-col gap-6'>
-                                    <p className='font-montserrat text-sm font-semibold text-brand-ink'>
+                                    <p className='font-montserrat text-sm font-semibold text-ls-accent'>
                                         {APPLICATION_FORM_LABELS.step2Title}
                                     </p>
                                     {questions
@@ -965,7 +984,7 @@ const ApplicationForm = ({
                                                 <div key={String(qid)}>
                                                     <label
                                                         htmlFor={`q-${qid}`}
-                                                        className='font-montserrat text-sm font-medium text-gray-700'
+                                                        className='font-montserrat text-sm font-medium text-ls-muted'
                                                     >
                                                         {num}. {q.question_text} *
                                                     </label>
@@ -990,14 +1009,14 @@ const ApplicationForm = ({
                                                             APPLICATION_FORM_LABELS.textareaPlaceholder
                                                         }
                                                         className={`${inputClass} mt-1 min-h-[100px] resize-y ${
-                                                            fieldErrors[qid]
-                                                                ? "border-coral-red ring-2 ring-coral-red/20"
-                                                                : ""
-                                                        }`}
+ fieldErrors[qid]
+ ? "border-ls-bad ring-2 ring-ls-bad"
+ : ""
+ }`}
                                                     />
                                                     {fieldErrors[qid] && (
-                                                        <p className='mt-1 font-montserrat text-xs text-coral-red'>
-                                                            Réponse requise.
+                                                        <p className='mt-1 font-montserrat text-xs text-ls-bad'>
+                                                            {STATUS_LABELS.answerRequired}
                                                         </p>
                                                     )}
                                                 </div>
@@ -1011,7 +1030,7 @@ const ApplicationForm = ({
                                                 key={String(qid)}
                                                 className='border-0 p-0'
                                             >
-                                                <legend className='font-montserrat text-sm font-medium text-gray-700'>
+                                                <legend className='font-montserrat text-sm font-medium text-ls-muted'>
                                                     {num}. {q.question_text} *
                                                 </legend>
                                                 <div className='mt-2 flex flex-col gap-2'>
@@ -1033,7 +1052,7 @@ const ApplicationForm = ({
                                                         return (
                                                             <label
                                                                 key={`${qid}-${val}`}
-                                                                className='flex cursor-pointer items-start gap-2 font-montserrat text-sm text-gray-800'
+                                                                className='flex cursor-pointer items-start gap-2 font-montserrat text-sm text-ls-text'
                                                             >
                                                                 <input
                                                                     type='radio'
@@ -1055,7 +1074,7 @@ const ApplicationForm = ({
                                                                             }),
                                                                         )
                                                                     }
-                                                                    className='mt-1 h-4 w-4 border-gray-300 text-brand-ink focus:ring-brand-blue'
+                                                                    className='mt-1 h-4 w-4 border-ls-stroke text-ls-accent focus:ring-ls-primary'
                                                                 />
                                                                 <span>
                                                                     {lab}
@@ -1065,14 +1084,15 @@ const ApplicationForm = ({
                                                     })}
                                                 </div>
                                                 {fieldErrors[qid] && (
-                                                    <p className='mt-1 font-montserrat text-xs text-coral-red'>
-                                                        Réponse requise.
+                                                    <p className='mt-1 font-montserrat text-xs text-ls-bad'>
+                                                        {STATUS_LABELS.answerRequired}
                                                     </p>
                                                 )}
                                             </fieldset>
                                         );
                                     })}
 
+                                    {consent}
                                     <div className='flex flex-col gap-3 sm:flex-row sm:justify-between'>
                                         <button
                                             type='button'
@@ -1080,24 +1100,28 @@ const ApplicationForm = ({
                                             disabled={
                                                 submitStatus === "loading"
                                             }
-                                            className='rounded-full border border-gray-200 px-6 py-3 font-montserrat text-base font-semibold text-gray-800 transition-colors hover:bg-gray-50 disabled:opacity-50'
+                                            className='inline-flex items-center justify-center gap-2 rounded-full border border-ls-rule px-6 py-3 font-montserrat text-base font-semibold text-ls-text transition-colors hover:bg-ls-fill disabled:opacity-50'
                                         >
-                                            ← {APPLICATION_FORM_LABELS.back}
+                                            <ArrowLeftIcon
+                                                className='h-5 w-5 shrink-0'
+                                                aria-hidden='true'
+                                            />
+                                            {APPLICATION_FORM_LABELS.back}
                                         </button>
                                         <button
                                             type='submit'
                                             disabled={
                                                 submitStatus === "loading"
                                             }
-                                            className='rounded-full bg-brand-ink px-6 py-3 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60'
+                                            className='rounded-full bg-ls-text px-6 py-3 font-montserrat text-base font-bold text-ls-bg transition-colors hover:bg-ls-muted disabled:opacity-60'
                                         >
                                             {submitStatus === "loading" ? (
                                                 <span className='inline-flex items-center justify-center gap-2'>
                                                     <span
-                                                        className='h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent'
+                                                        className='h-5 w-5 animate-spin rounded-full border-2 border-ls-bg border-t-transparent'
                                                         aria-hidden='true'
                                                     />
-                                                    Envoi…
+                                                    {APPLICATION_FORM_LABELS.sending}
                                                 </span>
                                             ) : (
                                                 APPLICATION_FORM_LABELS.submit
@@ -1107,24 +1131,31 @@ const ApplicationForm = ({
                                 </div>
                             )}
 
+                            {step === 1 && !hasQuestions && consent}
                             {step === 1 && (
                                 <button
                                     type='button'
                                     onClick={handleNext}
                                     disabled={submitStatus === "loading"}
-                                    className='mt-2 w-full rounded-full bg-brand-ink px-6 py-3.5 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60'
+                                    className='mt-2 w-full rounded-full bg-ls-text px-6 py-3.5 font-montserrat text-base font-bold text-ls-bg transition-colors hover:bg-ls-muted disabled:opacity-60'
                                 >
                                     {submitStatus === "loading" &&
                                     !hasQuestions ? (
                                         <span className='inline-flex items-center justify-center gap-2'>
                                             <span
-                                                className='h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent'
+                                                className='h-5 w-5 animate-spin rounded-full border-2 border-ls-bg border-t-transparent'
                                                 aria-hidden='true'
                                             />
-                                            Envoi…
+                                            {APPLICATION_FORM_LABELS.sending}
                                         </span>
                                     ) : hasQuestions ? (
-                                        `${APPLICATION_FORM_LABELS.next} →`
+                                        <span className='inline-flex items-center justify-center gap-2'>
+                                            {APPLICATION_FORM_LABELS.next}
+                                            <ArrowRightIcon
+                                                className='h-5 w-5 shrink-0'
+                                                aria-hidden='true'
+                                            />
+                                        </span>
                                     ) : (
                                         APPLICATION_FORM_LABELS.submit
                                     )}
@@ -1132,7 +1163,10 @@ const ApplicationForm = ({
                             )}
 
                             {submitError && (
-                                <p className='mt-2 text-center font-montserrat text-sm text-coral-red'>
+                                <p
+                                    role='alert'
+                                    className='mt-2 text-center font-montserrat text-sm text-ls-bad'
+                                >
                                     {submitError}
                                 </p>
                             )}

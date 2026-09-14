@@ -1,5 +1,11 @@
 import { Helmet } from "react-helmet-async";
+import { useCopy, useLanguage } from "../i18n/useCopy";
 
+/**
+ * Balises de la page. La langue (`<html lang>`, `og:locale`) et la description
+ * par défaut suivent la langue choisie par le visiteur. Les adresses restent
+ * les mêmes dans les deux langues.
+ */
 export default function SEO({
   title,
   description,
@@ -7,20 +13,18 @@ export default function SEO({
   image = "/og-livsight.jpg",
   noindex = false,
 }) {
-  const siteName = "LivSight";
+  const { seo } = useCopy("site");
+  const { language } = useLanguage();
   const baseUrl = "https://www.livsight.com";
-  const fullTitle = title ? `${title} | ${siteName}` : siteName;
+  const fullTitle = title ? `${title} | ${seo.siteName}` : seo.siteName;
   const pageUrl = `${baseUrl}${canonical}`;
   const imageUrl = `${baseUrl}${image}`;
-
-  const defaultDesc =
-    "Développez votre business en ligne avec LivSight : livraison à Yaoundé, stockage offert 3 mois, suivi en temps réel et reversement en fin de journée.";
-
-  const metaDescription = description || defaultDesc;
+  const metaDescription = description || seo.defaultDescription;
+  const alternateLocale = language === "en" ? "fr_CM" : "en_CM";
 
   return (
     <Helmet>
-      <html lang="fr" />
+      <html lang={language} />
 
       <title>{fullTitle}</title>
       <meta name="description" content={metaDescription} />
@@ -31,8 +35,9 @@ export default function SEO({
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={pageUrl} />
-      <meta property="og:site_name" content={siteName} />
-      <meta property="og:locale" content="fr_CM" />
+      <meta property="og:site_name" content={seo.siteName} />
+      <meta property="og:locale" content={seo.locale} />
+      <meta property="og:locale:alternate" content={alternateLocale} />
       <meta property="og:image" content={imageUrl} />
 
       <meta name="twitter:card" content="summary_large_image" />

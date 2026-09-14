@@ -1,138 +1,86 @@
-import {
-    AcademicCapIcon,
-    ShieldCheckIcon,
-    UserGroupIcon,
-} from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
+import InkHero from "../components/site/InkHero";
+import SiteLayout from "../components/site/SiteLayout";
+import { routes } from "../constants/routes";
+import { useCopy } from "../i18n/useCopy";
 import JobsList from "../sections/recruitment/JobsList";
-import ProcessSection from "../sections/recruitment/ProcessSection";
-import { SEO, SiteFooter } from "../components";
-import {
-    RECRUITMENT_HERO,
-    RECRUITMENT_OPEN_BADGE,
-    RECRUITMENT_VALUES,
-    RECRUITMENT_VALUES_TITLE,
-} from "../constants";
 import { getOpenJobs } from "../services/recruitmentApi";
 
-const valueIconMap = {
-    shield: ShieldCheckIcon,
-    academic: AcademicCapIcon,
-    users: UserGroupIcon,
-};
-
 const RecruitmentPage = () => {
-    const [jobs, setJobs] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [listError, setListError] = useState(false);
+  const { seo, hero, valuesLabel, values, jobs: jobsCopy, process } = useCopy("recrutement");
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [listError, setListError] = useState(false);
 
-    useEffect(() => {
-        let cancelled = false;
-        (async () => {
-            setLoading(true);
-            setListError(false);
-            const result = await getOpenJobs();
-            if (cancelled) return;
-            if (result.success) {
-                setJobs(result.data);
-            } else {
-                setJobs([]);
-                setListError(true);
-            }
-            setLoading(false);
-        })();
-        return () => {
-            cancelled = true;
-        };
-    }, []);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      setListError(false);
+      const result = await getOpenJobs();
+      if (cancelled) return;
+      setJobs(result.success ? result.data : []);
+      setListError(!result.success);
+      setLoading(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
-    return (
-        <>
-            <SEO
-                title="Rejoindre notre équipe | Livreur et Agent à Yaoundé"
-                description='LivSight recrute des livreurs et agents à Yaoundé. Moto fournie, formation assurée, bénéfices. Postulez en ligne en moins de 5 minutes.'
-                canonical='/entreprise/recrutement'
-            />
-            <main className='min-h-[60vh] bg-white'>
-                <div className='bg-brand-ink'>
-                    <div className='max-container padding-x py-12 sm:py-16'>
-                        <Link
-                            to='/'
-                            className='inline-flex items-center gap-1.5 font-montserrat text-sm font-semibold text-white/70 transition-colors hover:text-white'
-                        >
-                            ← Retour à l&apos;accueil
-                        </Link>
-                        <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
-                            {RECRUITMENT_HERO.title}
-                        </h1>
-                        <p className='mt-2 font-montserrat text-sm text-white/60'>
-                            {RECRUITMENT_HERO.subtitle}
-                        </p>
-                    </div>
-                </div>
+  return (
+    <>
+      <SEO title={seo.title} description={seo.description} canonical={routes.recrutement} />
+      <SiteLayout>
+        <InkHero id='recrutement-titre' kicker={hero.kicker} title={hero.title} lede={hero.lede}>
+          <a href='#postes' className='ls-btn ls-btn-lg ls-btn-ink mt-2 self-start'>
+            {hero.cta}
+          </a>
+        </InkHero>
 
-                <div className='max-container padding-x pb-16'>
-                    <div className='mt-8 space-y-4'>
-                        {!loading && jobs.length > 0 && (
-                            <span className='inline-flex rounded-full bg-pale-blue px-3 py-1 font-montserrat text-xs font-bold uppercase tracking-wide text-brand-ink'>
-                                {RECRUITMENT_OPEN_BADGE}
-                            </span>
-                        )}
-                        <p className='max-w-3xl font-montserrat text-base leading-relaxed text-gray-600 sm:text-lg'>
-                            {RECRUITMENT_HERO.description}
-                        </p>
-                    </div>
+        <section aria-label={valuesLabel} className='px-[18px] pt-12 md:px-16 md:pt-[68px]'>
+          <ul className='grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5'>
+            {values.map((value) => (
+              <li key={value.title} className='flex flex-col gap-2.5 rounded-[26px] border border-ls-rule p-7'>
+                <h2 className='ls-h text-[19px]'>{value.title}</h2>
+                <p className='ls-cap text-ls-muted'>{value.text}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-                    <JobsList
-                        jobs={jobs}
-                        loading={loading}
-                        error={listError}
-                    />
+        <section id='postes' aria-labelledby='recrutement-postes' className='scroll-mt-6 px-[18px] pt-14 md:px-16 md:pt-[76px]'>
+          <div className='flex flex-col gap-4 pb-8'>
+            <span className='ls-kicker text-ls-accent'>{jobsCopy.kicker}</span>
+            <h2 id='recrutement-postes' className='ls-h ls-d2 max-w-[22ch]'>
+              {jobsCopy.title}
+            </h2>
+            {jobsCopy.languageNote && <p className='ls-cap text-ls-faint'>{jobsCopy.languageNote}</p>}
+          </div>
+          <JobsList jobs={jobs} loading={loading} error={listError} />
+        </section>
 
-                    <ProcessSection />
-
-                    <section
-                        className='mt-16 sm:mt-20'
-                        aria-labelledby='recruitment-values-heading'
-                    >
-                        <h2
-                            id='recruitment-values-heading'
-                            className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
-                        >
-                            {RECRUITMENT_VALUES_TITLE}
-                        </h2>
-                        <ul className='mt-8 grid list-none grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6'>
-                            {RECRUITMENT_VALUES.map(
-                                ({ iconId, title, description }) => {
-                                    const Icon = valueIconMap[iconId];
-                                    return (
-                                        <li
-                                            key={title}
-                                            className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'
-                                        >
-                                            <Icon
-                                                className='h-6 w-6 text-brand-ink'
-                                                aria-hidden='true'
-                                            />
-                                            <h3 className='mt-5 font-montserrat text-lg font-bold text-gray-900'>
-                                                {title}
-                                            </h3>
-                                            <p className='mt-3 font-montserrat text-sm leading-relaxed text-gray-600'>
-                                                {description}
-                                            </p>
-                                        </li>
-                                    );
-                                },
-                            )}
-                        </ul>
-                    </section>
-                </div>
-            </main>
-      <SiteFooter />
-
-        </>
-    );
+        <section aria-labelledby='recrutement-etapes' className='px-[18px] pb-16 pt-14 md:px-16 md:pb-[88px] md:pt-[76px]'>
+          <div className='flex flex-col gap-4 border-t border-ls-rule pb-10 pt-11'>
+            <span className='ls-kicker text-ls-accent'>{process.kicker}</span>
+            <h2 id='recrutement-etapes' className='ls-h ls-d2 max-w-[22ch]'>
+              {process.title}
+            </h2>
+          </div>
+          <ol className='grid grid-cols-1 gap-px border-y border-ls-rule bg-ls-rule sm:grid-cols-2 lg:grid-cols-3'>
+            {process.steps.map((step, index) => (
+              <li key={step.title} className='flex flex-col gap-2 bg-ls-bg py-7 sm:px-6'>
+                <span className='ls-num text-sm text-ls-accent'>{String(index + 1).padStart(2, "0")}</span>
+                <h3 className='ls-h text-[19px]'>{step.title}</h3>
+                <p className='ls-cap text-ls-muted'>{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </SiteLayout>
+    </>
+  );
 };
 
 export default RecruitmentPage;

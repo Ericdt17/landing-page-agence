@@ -19,45 +19,35 @@ export default {
     extend: {
       fontFamily: {
         montserrat: ['Montserrat', 'system-ui', 'Segoe UI', 'sans-serif'],
-        /* Alias conservé : `font-palanquin` reste valide et rend du Montserrat,
-           le temps que d'éventuels usages restants soient repris. */
-        palanquin: ['Montserrat', 'system-ui', 'Segoe UI', 'sans-serif'],
       },
       colors: {
-        'primary': "#ECEEFF",
-        /* Bleu du logo (header-logo.svg, 35 aplats) : identité, aplats décoratifs,
-           teintes. Contraste 3,46:1 sur blanc, donc jamais pour du texte courant. */
-        "brand-blue": "#1493CE",
-        /* Même teinte assombrie pour tout ce qui porte du texte : 4,75:1 sur blanc
-           et 4,75:1 sous du blanc, donc conforme AA dans les deux sens. */
-        "brand-ink": "#0E7BB0",
-        "coral-red": "#FF6452",
-        "slate-gray": "#6D6D6D",
-        "pale-blue": "#F5F6FF",
-        "white-400": "rgba(255, 255, 255, 0.80)",
-        "security-ink": "#1a1a1a",
+        /* Nouveau site : jetons pilotés par des variables CSS (src/index.css),
+           donc clair et sombre sans dupliquer les classes. */
+        "ls-bg": "var(--ls-bg)",
+        "ls-surface": "var(--ls-surface)",
+        "ls-fill": "var(--ls-fill)",
+        "ls-stroke": "var(--ls-stroke)",
+        "ls-rule": "var(--ls-rule)",
+        "ls-text": "var(--ls-text)",
+        "ls-muted": "var(--ls-muted)",
+        "ls-faint": "var(--ls-faint)",
+        "ls-primary": "var(--ls-primary)",
+        "ls-accent": "var(--ls-accent)",
+        "ls-ph": "var(--ls-ph)",
+        "ls-ok": "var(--ls-ok)",
+        "ls-warn": "var(--ls-warn)",
+        "ls-bad": "var(--ls-bad)",
+        "ls-dim": "var(--ls-dim)",
+        "ls-speed": "var(--ls-speed)",
+        "ls-select": "var(--ls-select)",
+        "ls-primary-soft": "var(--ls-primary-soft)",
+        "ls-ok-bg": "var(--ls-ok-bg)",
+        "ls-ink-bg": "var(--ls-ink-bg)",
+        "ls-ink-fg": "var(--ls-ink-fg)",
+        "ls-ink-mute": "var(--ls-ink-mute)",
+        "ls-ink-line": "var(--ls-ink-line)",
+        "ls-ink-speed": "var(--ls-ink-speed)",
       },
-      boxShadow: {
-        '3xl': '0 10px 40px rgba(0, 0, 0, 0.1)',
-        'soft-card': '0 10px 40px -10px rgba(0, 0, 0, 0.05)',
-        'tarif-card': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        'cta-final': '0 25px 50px -12px rgba(37, 125, 196, 0.3)',
-      },
-      backgroundImage: {
-        'hero-grid': "linear-gradient(180deg, rgb(226, 232, 240) 2.5%, rgba(226, 232, 240, 0) 2.5%), linear-gradient(90deg, rgb(226, 232, 240) 2.5%, rgba(226, 232, 240, 0) 2.5%)",
-      },
-      screens: {
-        "wide": "1440px"
-      },
-      animation: {
-        'marquee': 'marquee 25s linear infinite',
-      },
-      keyframes: {
-        marquee: {
-          from: { transform: 'translateX(0)' },
-          to: { transform: 'translateX(-50%)' },
-        },
-      }
     },
   },
   plugins: [],

@@ -1,0 +1,196 @@
+import { PauseIcon, PlayIcon } from "@heroicons/react/20/solid";
+import { useEffect, useId, useRef, useState } from "react";
+import { useCopy } from "../../i18n/useCopy";
+
+const SPACING = 322;
+const AUTOPLAY_MS = 5000;
+
+const placement = (offset) => {
+  const distance = Math.abs(offset);
+  if (distance === 0) return { scale: 1, opacity: 1, z: 3 };
+  if (distance === 1) return { scale: 0.84, opacity: 0.34, z: 2 };
+  return { scale: 0.76, opacity: 0, z: 1 };
+};
+
+/* Écart circulaire : après le dernier écran, le premier arrive par la droite
+   au lieu de faire traverser toute la rangée ; au-delà des voisins, les écrans
+   (invisibles) attendent juste hors champ. */
+const circularOffset = (index, active, count) => {
+  let offset = index - active;
+  if (offset > count / 2) offset -= count;
+  if (offset < -count / 2) offset += count;
+  return Math.max(-2, Math.min(2, offset));
+};
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/**
+ * Visite d'écrans : des onglets en pastilles au-dessus, l'écran choisi au
+ * centre, ses voisins estompés de part et d'autre (sur mobile, seul l'écran
+ * choisi est affiché). Onglets conformes au motif ARIA : flèches, Début, Fin.
+ *
+ * Défilement automatique toutes les 5 secondes, avec un bouton pause (un
+ * contenu qui bouge plus de 5 s doit pouvoir être arrêté). Le simple survol
+ * ne l'arrête pas : un clic dans la visite la suspend, et elle reprend quand
+ * le pointeur quitte la zone. Elle s'interrompt aussi quand le focus clavier
+ * est dedans ou quand l'onglet du navigateur est caché, et ne démarre pas si
+ * l'appareil demande moins de mouvement.
+ *
+ * `screens` associe l'`id` de chaque onglet à son composant d'écran.
+ */
+const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
+  const { tour } = useCopy("site");
+  const [active, setActive] = useState(0);
+  const [playing, setPlaying] = useState(() => !prefersReducedMotion());
+  const [clicked, setClicked] = useState(false);
+  const [focusWithin, setFocusWithin] = useState(false);
+  const [pageHidden, setPageHidden] = useState(false);
+  const baseId = useId();
+  const tabRefs = useRef([]);
+
+  useEffect(() => {
+    const onVisibility = () => setPageHidden(document.hidden);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
+  const running = playing && !clicked && !focusWithin && !pageHidden;
+
+  useEffect(() => {
+    if (!running) return undefined;
+    /* `active` en dépendance : un choix manuel repart pour 5 secondes pleines */
+    const timer = setTimeout(() => setActive((index) => (index + 1) % tabs.length), AUTOPLAY_MS);
+    return () => clearTimeout(timer);
+  }, [running, active, tabs.length]);
+
+  const select = (index, focus = false) => {
+    setActive(index);
+    if (focus) tabRefs.current[index]?.focus();
+  };
+
+  const onKeyDown = (event, index) => {
+    const last = tabs.length - 1;
+    const next = {
+      ArrowRight: index === last ? 0 : index + 1,
+      ArrowLeft: index === 0 ? last : index - 1,
+      Home: 0,
+      End: last,
+    }[event.key];
+    if (next === undefined) return;
+    event.preventDefault();
+    select(next, true);
+  };
+
+  return (
+    <div
+      onPointerDown={(event) => {
+        if (event.pointerType !== "touch") setClicked(true);
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType !== "touch") setClicked(false);
+      }}
+      onFocus={(event) => {
+        /* Seul le focus clavier compte : un clic donne aussi le focus, mais la visite reprend quand le pointeur s'en va */
+        if (event.target.matches(":focus-visible")) setFocusWithin(true);
+      }}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setFocusWithin(false);
+      }}
+    >
+      <div
+        role='tablist'
+        aria-label={label}
+        className='flex flex-wrap items-start justify-center gap-2.5 pb-8 md:gap-3.5 md:pb-[76px]'
+      >
+        {tabs.map((tab, index) => {
+          const selected = index === active;
+          return (
+            <button
+              key={tab.id}
+              ref={(node) => {
+                tabRefs.current[index] = node;
+              }}
+              type='button'
+              role='tab'
+              id={`${baseId}-onglet-${index}`}
+              aria-selected={selected}
+              aria-controls={`${baseId}-ecran`}
+              tabIndex={selected ? 0 : -1}
+              onClick={() => select(index)}
+              onKeyDown={(event) => onKeyDown(event, index)}
+              style={{ "--lift": `${tab.lift ?? 0}px` }}
+              className={`relative flex items-center gap-2.5 overflow-hidden rounded-full border px-4 py-3 shadow-[0_6px_18px_rgba(0,0,0,.06)] transition-colors md:translate-y-[var(--lift)] md:px-[18px] md:py-[13px] ${
+                selected ? "border-ls-primary bg-ls-select" : "border-ls-stroke bg-ls-surface hover:border-ls-faint"
+              }`}
+            >
+              <span aria-hidden='true' className={`h-2 w-2 shrink-0 rounded-full ${selected ? "bg-ls-primary" : "bg-ls-stroke"}`} />
+              <span className='ls-h whitespace-nowrap text-sm'>{tab.label}</span>
+              {selected && running && (
+                /* Barre de progression : montre quand l'écran suivant arrive */
+                <span
+                  key={`progress-${active}`}
+                  aria-hidden='true'
+                  className='ls-tour-progress absolute inset-x-0 bottom-0 h-[2px] origin-left bg-ls-primary'
+                  style={{ animationDuration: `${AUTOPLAY_MS}ms` }}
+                />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      <div
+        id={`${baseId}-ecran`}
+        role='tabpanel'
+        aria-labelledby={`${baseId}-onglet-${active}`}
+        className='relative overflow-hidden'
+        style={{ height }}
+      >
+        {tabs.map((tab, index) => {
+          const offset = circularOffset(index, active, tabs.length);
+          const { scale, opacity, z } = placement(offset);
+          const Screen = screens[tab.id];
+          return (
+            <div
+              key={tab.id}
+              aria-hidden={offset !== 0}
+              /* Voisins estompés : aperçu décoratif (WCAG 1.4.3 l'exempte), jamais atteignable */
+              inert={offset !== 0 ? "" : undefined}
+              data-side={offset !== 0 ? "" : undefined}
+              className={`ls-tour-screen absolute left-1/2 top-0 -ml-[150px] w-[300px] ${offset !== 0 ? "pointer-events-none" : ""}`}
+              style={{
+                transform: `translate3d(${offset * SPACING}px, 0, 0) scale(${scale})`,
+                "--tour-opacity": opacity,
+                zIndex: z,
+              }}
+            >
+              <Screen />
+            </div>
+          );
+        })}
+      </div>
+
+      <div className='flex items-center justify-center gap-3 pt-[22px]'>
+        {/* Lu seulement quand la visite est arrêtée : pas d'annonce toutes les 5 s */}
+        <p className='ls-cap flex min-h-[40px] items-center text-center text-ls-faint' aria-live={running ? "off" : "polite"}>
+          <span key={active} className='ls-fade-in'>
+            {tabs[active].caption}
+          </span>
+        </p>
+        <button
+          type='button'
+          onClick={() => setPlaying((value) => !value)}
+          aria-label={playing ? tour.pause : tour.play}
+          className='inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ls-stroke text-ls-muted transition-colors hover:border-ls-text hover:text-ls-text'
+        >
+          {playing ? <PauseIcon className='h-4 w-4' aria-hidden='true' /> : <PlayIcon className='h-4 w-4' aria-hidden='true' />}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ScreenTour;

@@ -40,6 +40,8 @@ const PRODUCTS = [
 const CATEGORIES = ["tech", "mode", "beaute", "maison"];
 const byId = Object.fromEntries(PRODUCTS.map((item) => [item.id, item]));
 const TRACK_MS = 2800;
+/* Tarif de livraison d'exemple pour Bastos : le vrai tarif dépend du quartier */
+const DELIVERY_FEE = 1000;
 const MOMO_MS = 3200;
 
 /* Palette de l'application marketplace (maquettes « Boutique »), bleu assombri pour le contraste AA */
@@ -196,6 +198,7 @@ const MarketplaceDemo = () => {
   const [, setHistory] = useState([]);
   const [productId, setProductId] = useState(null);
   const [category, setCategory] = useState("all");
+  const [query, setQuery] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [favorites, setFavorites] = useState({});
   const [cart, setCart] = useState({});
@@ -204,15 +207,28 @@ const MarketplaceDemo = () => {
   const [awaitingMomo, setAwaitingMomo] = useState(false);
   const [order, setOrder] = useState(null);
   const [trackStep, setTrackStep] = useState(0);
+  const [notificationsRead, setNotificationsRead] = useState(false);
+  const [notificationsOn, setNotificationsOn] = useState(true);
   const titleRef = useRef(null);
+  const searchRef = useRef(null);
   const mounted = useRef(false);
   const scroller = useRef(null);
 
   const items = Object.entries(cart).filter(([, count]) => count > 0);
   const cartCount = items.reduce((sum, [, count]) => sum + count, 0);
   const subtotal = items.reduce((sum, [id, count]) => sum + byId[id].price * count, 0);
+  const total = items.length ? subtotal + DELIVERY_FEE : 0;
   const listed = useMemo(() => (category === "all" ? PRODUCTS : PRODUCTS.filter((item) => item.category === category)), [category]);
   const product = productId ? byId[productId] : null;
+  /* Recherche : sans accents ni majuscules, sur le nom de l'article et son rayon */
+  const normalize = (text) => String(text).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  const results = useMemo(() => {
+    const words = normalize(query).split(/\s+/).filter(Boolean);
+    return PRODUCTS.filter((item) => category === "all" || item.category === category).filter((item) => {
+      const haystack = normalize(`${demo.products[item.id]} ${demo.categories[item.category]}`);
+      return words.every((word) => haystack.includes(word));
+    });
+  }, [query, category, demo]);
 
   useEffect(() => {
     if (!mounted.current) {
@@ -220,7 +236,7 @@ const MarketplaceDemo = () => {
       return;
     }
     scroller.current?.scrollTo?.(0, 0);
-    titleRef.current?.focus({ preventScroll: true });
+    (screen === "search" ? searchRef.current : titleRef.current)?.focus({ preventScroll: true });
   }, [screen, productId, awaitingMomo]);
 
   /* Paiement Mobile Money simulé : la confirmation arrive seule après quelques secondes */
@@ -263,6 +279,13 @@ const MarketplaceDemo = () => {
     setHistory([]);
     setScreen(next === "orders" ? (order ? "tracking" : "orders") : next);
   };
+  const openSearch = () => {
+    setAwaitingMomo(false);
+    setToast("");
+    setCategory("all");
+    setHistory([]);
+    setScreen("search");
+  };
   const openProduct = (id) => {
     setQuantity(1);
     go("product", { id });
@@ -274,7 +297,8 @@ const MarketplaceDemo = () => {
   const changeCart = (id, delta) => setCart((current) => ({ ...current, [id]: Math.max(0, (current[id] ?? 0) + delta) }));
   function placeOrder(method) {
     setAwaitingMomo(false);
-    setOrder({ items, subtotal, method, count: cartCount, photo: byId[items[0]?.[0]]?.photo });
+    setOrder({ items, subtotal, total, method, count: cartCount, photo: byId[items[0]?.[0]]?.photo });
+    setNotificationsRead(false);
     setCart({});
     setTrackStep(0);
     setHistory([]);
@@ -285,6 +309,7 @@ const MarketplaceDemo = () => {
     setHistory([]);
     setProductId(null);
     setCategory("all");
+    setQuery("");
     setQuantity(1);
     setFavorites({});
     setCart({});
@@ -293,10 +318,12 @@ const MarketplaceDemo = () => {
     setAwaitingMomo(false);
     setOrder(null);
     setTrackStep(0);
+    setNotificationsRead(false);
+    setNotificationsOn(true);
   };
 
-  const activeStep = { home: 0, category: 0, product: 1, cart: 1, payment: 2, confirmed: 3, tracking: 3 }[screen] ?? 0;
-  const tabFor = { home: "home", category: "search", product: "home", cart: "cart", payment: "cart", confirmed: "orders", tracking: "orders", orders: "orders", account: "account" }[screen];
+  const activeStep = { home: 0, search: 0, category: 0, product: 1, cart: 1, payment: 2, confirmed: 3, tracking: 3, notifications: 0, account: 0, favorites: 0, addresses: 0 }[screen] ?? 0;
+  const tabFor = { home: "home", search: "search", category: "home", product: "home", cart: "cart", payment: "cart", confirmed: "orders", tracking: "orders", orders: "orders", account: "account", favorites: "account", addresses: "account", notifications: "home" }[screen];
   const withTabs = !["product", "payment", "confirmed", "tracking"].includes(screen);
 
   const ProductCard = ({ item, wide = false }) => (
@@ -384,16 +411,21 @@ const MarketplaceDemo = () => {
                         <Icon name='chevron' size={16} width={2.2} />
                       </span>
                     </div>
-                    <RoundButton label={demo.notifications}>
+                    <RoundButton
+                      label={notificationsRead ? demo.notifications : fill(demo.notificationsUnread, { count: demo.notificationsList.length + (order ? 1 : 0) })}
+                      onClick={() => {
+                        setNotificationsRead(true);
+                        go("notifications");
+                      }}
+                      className='relative'
+                    >
                       <Icon name='bell' size={21} width={1.8} />
+                      {!notificationsRead && <span aria-hidden='true' className='absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-[#C62828]' />}
                     </RoundButton>
                   </div>
                   <button
                     type='button'
-                    onClick={() => {
-                      setCategory("all");
-                      go("category");
-                    }}
+                    onClick={openSearch}
                     className='flex h-12 items-center gap-2.5 rounded-full border border-[var(--m-stroke)] bg-[var(--m-surface)] px-[18px] text-left'
                   >
                     <Icon name='search' size={19} width={2.1} color='var(--m-faint)' />
@@ -500,6 +532,82 @@ const MarketplaceDemo = () => {
                     <ProductCard key={item.id} item={item} />
                   ))}
                 </div>
+              </div>
+            )}
+
+            {screen === "search" && (
+              <div className='flex flex-col gap-3 px-4 pb-6 pt-2'>
+                <div className='flex items-center gap-2.5'>
+                  <RoundButton label={demo.back} onClick={() => tab("home")} className='border-transparent bg-transparent'>
+                    <Icon name='back' size={21} width={2.2} />
+                  </RoundButton>
+                  <div className='flex h-11 flex-1 items-center gap-2 rounded-full border border-[var(--m-stroke)] bg-[var(--m-surface)] pl-4 pr-1 focus-within:border-[var(--m-primary)]'>
+                    <Icon name='search' size={17} width={2.1} color='var(--m-faint)' />
+                    <input
+                      ref={searchRef}
+                      id='demo-search'
+                      type='search'
+                      value={query}
+                      onChange={(event) => setQuery(event.target.value)}
+                      placeholder={demo.searchPlaceholder}
+                      aria-label={demo.searchPlaceholder}
+                      autoComplete='off'
+                      className='min-w-0 flex-1 bg-transparent text-[14px] font-medium outline-none placeholder:font-normal placeholder:text-[var(--m-faint)] [&::-webkit-search-cancel-button]:hidden'
+                    />
+                    {query && (
+                      <button type='button' onClick={() => setQuery("")} aria-label={demo.clearSearch} className='flex h-9 w-9 items-center justify-center rounded-full'>
+                        <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='var(--m-faint)' strokeWidth='2.4' strokeLinecap='round' aria-hidden='true'>
+                          <path d='M6 6l12 12M18 6 6 18' />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <h3 ref={titleRef} tabIndex={-1} className='sr-only'>
+                  {demo.nav.search}
+                </h3>
+                <p aria-live='polite' className='text-[12px] text-[var(--m-muted)]'>
+                  <span className='font-bold text-[var(--m-text)]'>{fill(results.length > 1 ? demo.resultsCount : demo.resultsCountOne, { count: results.length })}</span> · Yaoundé
+                </p>
+                <div role='group' aria-label={demo.aisles} className='-mx-4 flex gap-2 overflow-x-auto px-4'>
+                  {["all", ...CATEGORIES].map((id) => (
+                    <button
+                      key={id}
+                      type='button'
+                      aria-pressed={category === id}
+                      onClick={() => setCategory(id)}
+                      className={`min-h-[36px] shrink-0 rounded-full px-3.5 text-[12px] font-bold ${
+                        category === id ? "bg-[var(--m-info)] text-[var(--m-primary)]" : "border border-[var(--m-stroke)] font-semibold text-[var(--m-muted)]"
+                      }`}
+                    >
+                      {id === "all" ? demo.all : demo.categories[id]}
+                    </button>
+                  ))}
+                </div>
+                {!query && (
+                  <div className='flex flex-col gap-2 pt-1'>
+                    <span className='text-[13px] font-bold'>{demo.popularSearches}</span>
+                    <div className='flex flex-wrap gap-2'>
+                      {demo.suggestions.map((word) => (
+                        <button key={word} type='button' onClick={() => setQuery(word)} className='min-h-[36px] rounded-full border border-[var(--m-stroke)] bg-[var(--m-surface)] px-3.5 text-[12px] font-semibold'>
+                          {word}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {results.length > 0 ? (
+                  <div className='grid grid-cols-2 gap-3 pt-1'>
+                    {results.map((item) => (
+                      <ProductCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className='flex flex-col gap-1 rounded-[24px] border border-[var(--m-stroke)] bg-[var(--m-surface)] p-4 text-[13px]'>
+                    <p className='font-bold'>{fill(demo.noResults, { query })}</p>
+                    <p className='text-[var(--m-muted)]'>{demo.noResultsHint}</p>
+                  </div>
+                )}
               </div>
             )}
 
@@ -632,7 +740,7 @@ const MarketplaceDemo = () => {
                     <dl className='flex w-full flex-col gap-2 rounded-[24px] bg-[var(--m-bg)] p-4 text-[12px]'>
                       <div className='flex items-baseline justify-between'>
                         <dt className='text-[var(--m-muted)]'>{demo.amount}</dt>
-                        <dd className='text-[20px] font-bold'>{price(subtotal)}</dd>
+                        <dd className='text-[20px] font-bold'>{price(total)}</dd>
                       </div>
                       <div className='flex justify-between'>
                         <dt className='text-[var(--m-muted)]'>{demo.operator}</dt>
@@ -680,12 +788,36 @@ const MarketplaceDemo = () => {
                       <p className='font-bold'>{demo.deliveredTo}</p>
                       <p className='text-[var(--m-muted)]'>{demo.deliveredToValue}</p>
                     </div>
-                    <div className='flex items-baseline justify-between'>
-                      <span className='text-[14px] font-bold'>{demo.total}</span>
-                      <span className='text-[22px] font-bold tracking-[-.02em]'>{price(subtotal)}</span>
+                    <div className='flex flex-col gap-2 rounded-[24px] border border-[var(--m-stroke)] bg-[var(--m-surface)] p-4 text-[13px]'>
+                      <p className='pb-1 text-[13px] font-bold'>{demo.breakdown}</p>
+                      <ul className='flex flex-col gap-1.5 border-b border-[var(--m-stroke)] pb-2.5'>
+                        {items.map(([id, count]) => (
+                          <li key={id} className='flex justify-between gap-3 text-[12px]'>
+                            <span className='truncate text-[var(--m-muted)]'>
+                              {count} × {demo.products[id]}
+                            </span>
+                            <span className='shrink-0'>{price(byId[id].price * count)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <dl className='flex flex-col gap-1.5'>
+                        <div className='flex justify-between'>
+                          <dt className='text-[var(--m-muted)]'>{fill(cartCount > 1 ? demo.subtotalItems : demo.subtotalItemsOne, { count: cartCount })}</dt>
+                          <dd className='font-semibold'>{price(subtotal)}</dd>
+                        </div>
+                        <div className='flex justify-between'>
+                          <dt className='text-[var(--m-muted)]'>{demo.deliveryTo}</dt>
+                          <dd className='font-semibold'>{price(DELIVERY_FEE)}</dd>
+                        </div>
+                        <div className='flex items-baseline justify-between border-t border-[var(--m-stroke)] pt-2'>
+                          <dt className='text-[14px] font-bold'>{demo.total}</dt>
+                          <dd className='text-[22px] font-bold tracking-[-.02em]'>{price(total)}</dd>
+                        </div>
+                      </dl>
+                      <p className='text-[11px] text-[var(--m-faint)]'>{demo.feeNote}</p>
                     </div>
                     <PrimaryButton onClick={() => (payment === "momo" ? setAwaitingMomo(true) : placeOrder("cash"))}>
-                      {payment === "momo" ? fill(demo.pay, { amount: price(subtotal) }) : demo.confirm}
+                      {payment === "momo" ? fill(demo.pay, { amount: price(total) }) : demo.confirm}
                     </PrimaryButton>
                   </>
                 )}
@@ -702,7 +834,7 @@ const MarketplaceDemo = () => {
                     {demo.confirmedTitle}
                   </Title>
                   <p className='text-[13px] text-[var(--m-muted)]'>
-                    {fill(order.method === "momo" ? demo.paidWith : demo.toPay, { amount: price(order.subtotal) })}
+                    {fill(order.method === "momo" ? demo.paidWith : demo.toPay, { amount: price(order.total) })}
                   </p>
                 </div>
                 <div className='flex gap-2.5 rounded-[24px] bg-[var(--m-info)] p-4 text-[12px] leading-[18px] text-[var(--m-ink)]'>
@@ -714,7 +846,7 @@ const MarketplaceDemo = () => {
                   <div className='flex flex-col gap-0.5'>
                     <span className='text-[13px] font-bold'>{demo.orderRef}</span>
                     <span className='text-[11px] text-[var(--m-muted)]'>
-                      {countLabel(order.count)} · {price(order.subtotal)}
+                      {countLabel(order.count)} · {price(order.total)}
                     </span>
                     <span className='text-[11px] font-semibold text-[var(--m-ok)]'>{demo.trackSteps[0]}</span>
                   </div>
@@ -812,11 +944,139 @@ const MarketplaceDemo = () => {
             )}
 
             {screen === "account" && (
-              <div className='flex flex-col items-start gap-4 px-6 pt-8'>
-                <Title titleRef={titleRef} className='text-[22px]'>
-                  {demo.nav.account}
-                </Title>
-                <p className='text-[14px] text-[var(--m-muted)]'>{demo.accountBody}</p>
+              <div className='flex flex-col gap-3 px-4 pb-6 pt-2'>
+                <div className='flex items-center gap-3.5 px-1 py-2'>
+                  <span aria-hidden='true' className='flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full bg-[#E0F2FE] text-[22px] font-bold text-[var(--m-ink)]'>
+                    AN
+                  </span>
+                  <div className='flex flex-col gap-0.5'>
+                    <Title titleRef={titleRef} className='text-[20px]'>
+                      {demo.accountName}
+                    </Title>
+                    <span className='text-[12px] text-[var(--m-muted)]'>{demo.accountPhone}</span>
+                    <span className='self-start rounded-full bg-[var(--m-ok-bg)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[.04em] text-[var(--m-ok)]'>{demo.demoAccount}</span>
+                  </div>
+                </div>
+                <ul className='overflow-hidden rounded-[24px] border border-[var(--m-stroke)] bg-[var(--m-surface)]'>
+                  {[
+                    ["orders", "truck", demo.myOrders, order ? "1" : "0", () => tab("orders")],
+                    ["addresses", "home", demo.myAddresses, "1", () => go("addresses")],
+                    ["favorites", "heart", demo.myFavorites, String(Object.keys(favorites).filter((id) => favorites[id]).length), () => go("favorites")],
+                  ].map(([id, icon, label, count, action], index) => (
+                    <li key={id} className={index > 0 ? "border-t border-[var(--m-stroke)]" : ""}>
+                      <button type='button' onClick={action} className='flex min-h-[64px] w-full items-center gap-3 px-4 text-left'>
+                        <span className='flex h-[38px] w-[38px] items-center justify-center rounded-[12px] bg-[#E0F2FE] text-[var(--m-ink)]'>
+                          <Icon name={icon} size={19} />
+                        </span>
+                        <span className='flex-1 text-[13px] font-semibold'>{label}</span>
+                        <span className='rounded-full bg-[var(--m-info)] px-2 py-0.5 text-[11px] font-bold text-[var(--m-primary)]'>{count}</span>
+                        <Icon name='next' size={18} width={2.2} color='var(--m-muted)' />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+                <div className='overflow-hidden rounded-[24px] border border-[var(--m-stroke)] bg-[var(--m-surface)]'>
+                  <div className='flex min-h-[56px] items-center gap-3 px-4'>
+                    <span id='demo-notif-label' className='flex-1 text-[13px] font-semibold'>
+                      {demo.notifSetting}
+                    </span>
+                    <button
+                      type='button'
+                      role='switch'
+                      aria-checked={notificationsOn}
+                      aria-labelledby='demo-notif-label'
+                      onClick={() => setNotificationsOn((value) => !value)}
+                      className={`flex h-[26px] w-11 items-center rounded-full px-[3px] transition-colors ${notificationsOn ? "justify-end bg-[var(--m-primary)]" : "justify-start bg-[#C7CDD2]"}`}
+                    >
+                      <span className='h-5 w-5 rounded-full bg-white shadow' />
+                    </button>
+                  </div>
+                </div>
+                <button type='button' onClick={() => setToast(demo.logoutDemo)} className='min-h-[48px] text-[13px] font-bold text-[#C62828]'>
+                  {demo.logout}
+                </button>
+              </div>
+            )}
+
+            {screen === "favorites" && (
+              <div className='flex flex-col gap-3 px-4 pb-6 pt-2'>
+                <div className='flex items-center gap-2'>
+                  <RoundButton label={demo.back} onClick={back} className='border-transparent bg-transparent'>
+                    <Icon name='back' size={21} width={2.2} />
+                  </RoundButton>
+                  <Title titleRef={titleRef} className='text-[20px]'>
+                    {demo.myFavorites}
+                  </Title>
+                </div>
+                {Object.keys(favorites).filter((id) => favorites[id]).length === 0 ? (
+                  <p className='px-1 text-[13px] text-[var(--m-muted)]'>{demo.favoritesEmpty}</p>
+                ) : (
+                  <div className='grid grid-cols-2 gap-3'>
+                    {Object.keys(favorites).filter((id) => favorites[id]).map((id) => (
+                      <ProductCard key={id} item={byId[id]} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {screen === "addresses" && (
+              <div className='flex flex-col gap-3 px-4 pb-6 pt-2'>
+                <div className='flex items-center gap-2'>
+                  <RoundButton label={demo.back} onClick={back} className='border-transparent bg-transparent'>
+                    <Icon name='back' size={21} width={2.2} />
+                  </RoundButton>
+                  <Title titleRef={titleRef} className='text-[20px]'>
+                    {demo.myAddresses}
+                  </Title>
+                </div>
+                <div className='flex items-start gap-3 rounded-[24px] border-2 border-[var(--m-primary)] bg-[var(--m-surface)] p-4'>
+                  <span className='flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[12px] bg-[#E0F2FE] text-[var(--m-ink)]'>
+                    <Icon name='home' size={19} />
+                  </span>
+                  <span className='flex flex-col gap-0.5 text-[12px]'>
+                    <span className='text-[13px] font-bold'>{demo.addressHome}</span>
+                    <span className='text-[var(--m-muted)]'>{demo.deliveredToValue}</span>
+                    <span className='font-semibold text-[var(--m-primary)]'>{demo.addressDefault}</span>
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {screen === "notifications" && (
+              <div className='flex flex-col gap-3 px-4 pb-6 pt-2'>
+                <div className='flex items-center gap-2'>
+                  <RoundButton label={demo.back} onClick={back} className='border-transparent bg-transparent'>
+                    <Icon name='back' size={21} width={2.2} />
+                  </RoundButton>
+                  <Title titleRef={titleRef} className='text-[20px]'>
+                    {demo.notifications}
+                  </Title>
+                </div>
+                <ul className='flex flex-col gap-2.5'>
+                  {[
+                    ...(order ? [{ icon: "truck", title: demo.orderRef, body: demo.trackSteps[trackStep], time: demo.justNow, action: () => tab("orders") }] : []),
+                    ...demo.notificationsList.map((note) => ({ ...note, icon: note.icon })),
+                  ].map((note) => (
+                    <li key={note.title}>
+                      <button
+                        type='button'
+                        onClick={note.action ?? (() => {})}
+                        className='flex w-full items-start gap-3 rounded-[24px] border border-[var(--m-stroke)] bg-[var(--m-surface)] p-4 text-left'
+                      >
+                        <span className='flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[12px] bg-[#E0F2FE] text-[var(--m-ink)]'>
+                          <Icon name={note.icon} size={19} />
+                        </span>
+                        <span className='flex flex-1 flex-col gap-0.5'>
+                          <span className='text-[13px] font-bold'>{note.title}</span>
+                          <span className='text-[12px] leading-[18px] text-[var(--m-muted)]'>{note.body}</span>
+                          <span className='text-[11px] text-[var(--m-faint)]'>{note.time}</span>
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+                <p className='px-1 text-[11px] text-[var(--m-faint)]'>{demo.notificationsNote}</p>
               </div>
             )}
           </div>
@@ -853,16 +1113,16 @@ const MarketplaceDemo = () => {
           {screen === "cart" && items.length > 0 && (
             <div className='flex flex-col gap-2.5 border-t border-[var(--m-stroke)] bg-[var(--m-surface)] px-4 pb-8 pt-3.5 text-[12px] shadow-[0_-2px_12px_rgba(0,0,0,.06)]'>
               <div className='flex justify-between'>
-                <span className='text-[var(--m-muted)]'>{demo.articles}</span>
+                <span className='text-[var(--m-muted)]'>{fill(cartCount > 1 ? demo.subtotalItems : demo.subtotalItemsOne, { count: cartCount })}</span>
                 <span className='font-semibold'>{price(subtotal)}</span>
               </div>
               <div className='flex justify-between'>
-                <span className='text-[var(--m-muted)]'>{demo.delivery}</span>
-                <span className='font-semibold'>{demo.deliveryValue}</span>
+                <span className='text-[var(--m-muted)]'>{demo.deliveryTo}</span>
+                <span className='font-semibold'>{price(DELIVERY_FEE)}</span>
               </div>
               <div className='flex items-baseline justify-between'>
                 <span className='text-[14px] font-bold'>{demo.total}</span>
-                <span className='text-[22px] font-bold tracking-[-.02em]'>{price(subtotal)}</span>
+                <span className='text-[22px] font-bold tracking-[-.02em]'>{price(total)}</span>
               </div>
               <PrimaryButton onClick={() => go("payment")}>{demo.placeOrder}</PrimaryButton>
             </div>
@@ -883,13 +1143,7 @@ const MarketplaceDemo = () => {
                     key={id}
                     type='button'
                     aria-current={current ? "page" : undefined}
-                    onClick={() => {
-                      if (id === "search") {
-                        setCategory("all");
-                        setHistory([]);
-                        setScreen("category");
-                      } else tab(id);
-                    }}
+                    onClick={() => (id === "search" ? openSearch() : tab(id))}
                     className={`flex min-h-[52px] flex-1 flex-col items-center justify-center gap-1 text-[10px] ${current ? "font-bold text-[var(--m-primary)]" : "font-medium text-[var(--m-faint)]"}`}
                   >
                     <span className='relative'>

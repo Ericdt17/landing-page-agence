@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieConsent from "./components/CookieConsent";
-import Landing from "./pages/Landing";
+import Accueil from "./pages/Accueil";
 
 /**
  * L'accueil reste dans le paquet principal : c'est la page la plus visitée.
@@ -48,7 +48,7 @@ const App = () => {
       <CookieConsent />
       <Suspense fallback={<PageFallback />}>
         <Routes>
-          <Route path='/' element={<Landing />} />
+          <Route path='/' element={<Accueil />} />
           <Route
             path='/legal/confidentialite'
             element={<ConfidentialitePage />}

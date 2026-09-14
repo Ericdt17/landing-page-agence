@@ -45,7 +45,7 @@ const Contact = () => {
                 {contactIntroParagraphs.map((p) => (
                     <p
                         key={p.slice(0, 48)}
-                        className='font-montserrat text-base leading-relaxed text-gray-600 sm:text-lg'
+                        className='font-montserrat text-base leading-relaxed text-ls-muted sm:text-lg'
                     >
                         {p}
                     </p>
@@ -58,101 +58,101 @@ const Contact = () => {
             >
                 <h2
                     id='contact-channels-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {contactChannelsSectionTitle}
                 </h2>
                 <ul className='mt-8 grid list-none grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6'>
-                    <li className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'>
-                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-ink'>
+                    <li className='flex flex-col rounded-3xl border border-ls-rule bg-ls-surface px-6 py-7 '>
+                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-ls-accent'>
                             {contactWhatsAppChannel.eyebrow}
                         </p>
                         <ChatBubbleLeftRightIcon
-                            className='mt-3 h-6 w-6 text-brand-ink'
+                            className='mt-3 h-6 w-6 text-ls-accent'
                             aria-hidden='true'
                         />
-                        <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
+                        <h3 className='mt-4 font-montserrat text-lg font-bold text-ls-text'>
                             {contactWhatsAppChannel.title}
                         </h3>
                         <a
                             href={whatsappCtaHref}
                             target='_blank'
                             rel='noopener noreferrer'
-                            className='mt-2 inline-flex w-fit items-center gap-2 font-montserrat text-base font-semibold text-brand-ink underline-offset-2 hover:underline'
+                            className='mt-2 inline-flex w-fit items-center gap-2 font-montserrat text-base font-semibold text-ls-accent underline-offset-2 hover:underline'
                         >
                             <WhatsAppIcon className='h-5 w-5 shrink-0' />
                             WhatsApp
                         </a>
-                        <p className='mt-3 font-montserrat text-sm leading-relaxed text-gray-600'>
+                        <p className='mt-3 font-montserrat text-sm leading-relaxed text-ls-muted'>
                             {contactWhatsAppChannel.description}
                         </p>
                     </li>
 
-                    <li className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'>
-                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-ink'>
+                    <li className='flex flex-col rounded-3xl border border-ls-rule bg-ls-surface px-6 py-7 '>
+                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-ls-accent'>
                             {contactEmailChannel.eyebrow}
                         </p>
                         <EnvelopeIcon
-                            className='mt-3 h-6 w-6 text-brand-ink'
+                            className='mt-3 h-6 w-6 text-ls-accent'
                             aria-hidden='true'
                         />
-                        <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
+                        <h3 className='mt-4 font-montserrat text-lg font-bold text-ls-text'>
                             {contactEmailChannel.title}
                         </h3>
                         <a
                             href={`mailto:${footerSupportEmail}`}
-                            className='mt-2 w-fit font-montserrat text-base font-semibold text-brand-ink underline-offset-2 hover:underline'
+                            className='mt-2 w-fit font-montserrat text-base font-semibold text-ls-accent underline-offset-2 hover:underline'
                         >
                             {footerSupportEmail}
                         </a>
-                        <p className='mt-3 font-montserrat text-sm leading-relaxed text-gray-600'>
+                        <p className='mt-3 font-montserrat text-sm leading-relaxed text-ls-muted'>
                             {contactEmailChannel.description}
                         </p>
                     </li>
 
-                    <li className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'>
-                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-ink'>
+                    <li className='flex flex-col rounded-3xl border border-ls-rule bg-ls-surface px-6 py-7 '>
+                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-ls-accent'>
                             {contactVisitChannel.eyebrow}
                         </p>
                         <MapPinIcon
-                            className='mt-3 h-6 w-6 text-brand-ink'
+                            className='mt-3 h-6 w-6 text-ls-accent'
                             aria-hidden='true'
                         />
-                        <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
+                        <h3 className='mt-4 font-montserrat text-lg font-bold text-ls-text'>
                             {contactVisitChannel.title}
                         </h3>
-                        <p className='mt-2 font-montserrat text-base font-semibold text-gray-900'>
+                        <p className='mt-2 font-montserrat text-base font-semibold text-ls-text'>
                             {contactVisitChannel.addressLine}
                         </p>
-                        <p className='mt-3 font-montserrat text-sm leading-relaxed text-gray-600'>
+                        <p className='mt-3 font-montserrat text-sm leading-relaxed text-ls-muted'>
                             {contactVisitChannel.description}
                         </p>
                     </li>
 
-                    <li className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'>
-                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-brand-ink'>
+                    <li className='flex flex-col rounded-3xl border border-ls-rule bg-ls-surface px-6 py-7 '>
+                        <p className='font-montserrat text-xs font-semibold uppercase tracking-wide text-ls-accent'>
                             {contactPhoneChannel.eyebrow}
                         </p>
                         <PhoneIcon
-                            className='mt-3 h-6 w-6 text-brand-ink'
+                            className='mt-3 h-6 w-6 text-ls-accent'
                             aria-hidden='true'
                         />
-                        <h3 className='mt-4 font-montserrat text-lg font-bold text-gray-900'>
+                        <h3 className='mt-4 font-montserrat text-lg font-bold text-ls-text'>
                             {contactPhoneChannel.title}
                         </h3>
                         {telHref ? (
                             <a
                                 href={telHref}
-                                className='mt-2 w-fit font-montserrat text-base font-semibold text-brand-ink underline-offset-2 hover:underline'
+                                className='mt-2 w-fit font-montserrat text-base font-semibold text-ls-accent underline-offset-2 hover:underline'
                             >
                                 {securityAgencyPhone}
                             </a>
                         ) : (
-                            <p className='mt-2 font-montserrat text-sm leading-relaxed text-gray-600'>
+                            <p className='mt-2 font-montserrat text-sm leading-relaxed text-ls-muted'>
                                 {contactPhoneFallbackLine}
                             </p>
                         )}
-                        <p className='mt-3 font-montserrat text-sm leading-relaxed text-gray-600'>
+                        <p className='mt-3 font-montserrat text-sm leading-relaxed text-ls-muted'>
                             {contactPhoneChannel.description}
                         </p>
                     </li>
@@ -165,48 +165,48 @@ const Contact = () => {
             >
                 <h2
                     id='contact-practical-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {contactPracticalTitle}
                 </h2>
                 <dl className='mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2'>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-ls-faint'>
                             {contactPracticalLabelAddress}
                         </dt>
-                        <dd className='mt-1 font-montserrat text-base text-gray-700'>
+                        <dd className='mt-1 font-montserrat text-base text-ls-muted'>
                             {contactPracticalAddress}
                         </dd>
                     </div>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-ls-faint'>
                             {contactPracticalLabelHours}
                         </dt>
-                        <dd className='mt-1 font-montserrat text-base text-gray-700'>
+                        <dd className='mt-1 font-montserrat text-base text-ls-muted'>
                             {contactPracticalWeekHours}
                         </dd>
                     </div>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-ls-faint'>
                             {contactPracticalLabelSunday}
                         </dt>
-                        <dd className='mt-1 font-montserrat text-base text-gray-700'>
+                        <dd className='mt-1 font-montserrat text-base text-ls-muted'>
                             {contactPracticalSunday}
                         </dd>
                     </div>
                     <div>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-ls-faint'>
                             {contactPracticalLabelCompany}
                         </dt>
-                        <dd className='mt-1 font-montserrat text-base text-gray-700'>
+                        <dd className='mt-1 font-montserrat text-base text-ls-muted'>
                             {contactPracticalCompany}
                         </dd>
                     </div>
                     <div className='sm:col-span-2'>
-                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-gray-500'>
+                        <dt className='font-montserrat text-xs font-semibold uppercase tracking-wide text-ls-faint'>
                             {contactResponsibleTitle}
                         </dt>
-                        <dd className='mt-1 font-montserrat text-base text-gray-700'>
+                        <dd className='mt-1 font-montserrat text-base text-ls-muted'>
                             {contactResponsibleLine}
                         </dd>
                     </div>
@@ -219,7 +219,7 @@ const Contact = () => {
             >
                 <h2
                     id='contact-reasons-heading'
-                    className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                    className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
                 >
                     {contactReasonsTitle}
                 </h2>
@@ -227,12 +227,12 @@ const Contact = () => {
                     {contactReasonsItems.map(({ title, description }) => (
                         <li
                             key={title}
-                            className='rounded-2xl border border-gray-100 bg-gray-50/80 px-5 py-5 shadow-soft-card sm:px-6'
+                            className='rounded-2xl border border-ls-rule bg-ls-fill px-5 py-5 sm:px-6'
                         >
-                            <h3 className='font-montserrat text-base font-bold text-gray-900 sm:text-lg'>
+                            <h3 className='font-montserrat text-base font-bold text-ls-text sm:text-lg'>
                                 {title}
                             </h3>
-                            <p className='mt-2 font-montserrat text-sm leading-relaxed text-gray-600'>
+                            <p className='mt-2 font-montserrat text-sm leading-relaxed text-ls-muted'>
                                 {description}
                             </p>
                         </li>

@@ -50,12 +50,6 @@
   </url>
 
   <url>
-    <loc>https://www.livsight.com/plateforme/integrations-api</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
     <loc>https://www.livsight.com/legal/confidentialite</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -79,4 +73,7 @@
     <priority>0.3</priority>
   </url>
 
+  <url>
+    <loc>https://www.livsight.com/api-livraison</loc>
+  </url>
 </urlset>

@@ -1,7 +1,8 @@
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { PageHeader, SEO, SiteFooter } from "../components";
+import { PageHeader, SEO } from "../components";
+import SiteLayout from "../components/site/SiteLayout";
 import ApplicationForm from "../sections/recruitment/ApplicationForm";
 import {
     JOB_TYPE_LABELS,
@@ -90,8 +91,8 @@ const RecruitmentApplyPage = () => {
         meta &&
         (meta.typeKey.includes("agent") || meta.typeKey === "agent");
     const badgeClass = isAgent
-        ? "bg-primary text-brand-ink"
-        : "bg-pale-blue text-brand-deep";
+        ? "bg-ls-fill text-ls-accent"
+        : "bg-ls-select text-ls-accent";
 
     const subtitle =
         meta &&
@@ -118,15 +119,15 @@ const RecruitmentApplyPage = () => {
                 description={seoDescription}
                 canonical={`/entreprise/recrutement/offre/${jobId ?? ""}/postuler`}
             />
-            <main className='min-h-[60vh] bg-white'>
+            <SiteLayout>
                 <PageHeader backTo={'..'} backLabel={RECRUITMENT_JOB_UI.backToOffer}>
                 {loading ? (
                     <>
-                        <div className='mt-6 h-9 max-w-md animate-pulse rounded-lg bg-white/20' />
-                        <div className='mt-3 h-4 w-48 animate-pulse rounded bg-white/15' />
+                        <div className='mt-6 h-9 max-w-md animate-pulse rounded-lg bg-ls-fill' />
+                        <div className='mt-3 h-4 w-48 animate-pulse rounded bg-ls-fill' />
                     </>
                 ) : loadKind ? (
-                    <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
+                    <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-ls-text sm:text-4xl'>
                         {loadKind === "notfound"
                             ? STATUS_LABELS.jobNotFound
                             : STATUS_LABELS.jobDetailLoadError}
@@ -138,10 +139,10 @@ const RecruitmentApplyPage = () => {
                         >
                             {badgeLabel}
                         </span>
-                        <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-white sm:text-4xl'>
+                        <h1 className='mt-4 font-montserrat text-3xl font-extrabold tracking-tight text-ls-text sm:text-4xl'>
                             {RECRUITMENT_MODAL_TITLE}
                         </h1>
-                        <p className='mt-2 font-montserrat text-sm font-medium text-white'>
+                        <p className='mt-2 font-montserrat text-sm font-medium text-ls-text'>
                             {meta.title}
                             {subtitle ? ` · ${subtitle}` : ""}
                         </p>
@@ -149,20 +150,20 @@ const RecruitmentApplyPage = () => {
                 ) : null}
                 </PageHeader>
 
-                <div className='max-container padding-x pb-16'>
+                <div className='px-[18px] md:px-16 pb-16'>
                     {loading && (
                         <div className='mt-10 space-y-3'>
-                            <div className='h-4 w-full animate-pulse rounded bg-gray-100' />
-                            <div className='h-4 w-full animate-pulse rounded bg-gray-100' />
-                            <div className='h-4 w-2/3 animate-pulse rounded bg-gray-100' />
+                            <div className='h-4 w-full animate-pulse rounded bg-ls-fill' />
+                            <div className='h-4 w-full animate-pulse rounded bg-ls-fill' />
+                            <div className='h-4 w-2/3 animate-pulse rounded bg-ls-fill' />
                         </div>
                     )}
 
                     {!loading && loadKind && (
-                        <p className='mt-10 font-montserrat text-base text-gray-600'>
+                        <p className='mt-10 font-montserrat text-base text-ls-muted'>
                             <Link
                                 to={entrepriseRecrutementPath}
-                                className='inline-flex items-center gap-1.5 font-semibold text-brand-ink underline-offset-2 hover:underline'
+                                className='inline-flex items-center gap-1.5 font-semibold text-ls-accent underline-offset-2 hover:underline'
                             >
                                 <ArrowLeftIcon
                                     className='h-4 w-4 shrink-0'
@@ -180,7 +181,7 @@ const RecruitmentApplyPage = () => {
                         >
                             {questionsFetchError && (
                                 <p
-                                    className='mb-6 rounded-2xl border border-coral-ink/30 bg-red-50/80 px-4 py-3 font-montserrat text-sm text-coral-ink'
+                                    className='mb-6 rounded-2xl border border-ls-bad bg-ls-fill px-4 py-3 font-montserrat text-sm text-ls-bad'
                                     role='alert'
                                 >
                                     {questionsFetchError}
@@ -196,8 +197,7 @@ const RecruitmentApplyPage = () => {
                         </section>
                     )}
                 </div>
-            </main>
-      <SiteFooter />
+            </SiteLayout>
         </>
     );
 };

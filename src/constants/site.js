@@ -7,11 +7,11 @@
  */
 import { facebook, instagram } from "../assets/icons";
 import { entrepriseAProposPath } from "./about";
+import { apiLivraisonPath } from "./apiLivraison";
 import { legalConditionsPath } from "./conditions";
 import { entrepriseContactPath } from "./contact";
 import { legalCookiesPath } from "./cookies";
 import { plateformeCoursesParticuliersPath } from "./coursesParticuliers";
-import { plateformeIntegrationsApiPath } from "./integrationsApi";
 import { entrepriseRecrutementPath } from "./recruitment";
 
 /** Point d'entrée WhatsApp unique (même lien que l'ancien site). */
@@ -54,7 +54,7 @@ export const siteFooterColumns = [
             { label: "L'application", to: siteApplicationPath, enabled: true },
             { label: "Commencer à livrer", href: siteWhatsappHref, enabled: true },
             { label: "Base de connaissances", to: "/base-de-connaissances", enabled: false },
-            { label: "API", to: plateformeIntegrationsApiPath, soon: true, enabled: true },
+            { label: "API de livraison", to: apiLivraisonPath, soon: true, enabled: true },
             { label: "Marketplace", to: "/marketplace", soon: true, enabled: true },
         ],
     },

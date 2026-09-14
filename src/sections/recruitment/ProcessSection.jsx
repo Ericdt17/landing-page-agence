@@ -12,11 +12,11 @@ const ProcessSection = () => {
         >
             <h2
                 id='recruitment-process-heading'
-                className='font-montserrat text-2xl font-bold text-gray-900 sm:text-3xl'
+                className='font-montserrat text-2xl font-bold text-ls-text sm:text-3xl'
             >
                 {RECRUITMENT_PROCESS_TITLE}
             </h2>
-            <p className='mt-3 max-w-2xl font-montserrat text-base text-gray-600'>
+            <p className='mt-3 max-w-2xl font-montserrat text-base text-ls-muted'>
                 {RECRUITMENT_PROCESS_INTRO}
             </p>
 
@@ -24,15 +24,15 @@ const ProcessSection = () => {
                 {FUNNEL_STEPS.map((item) => (
                     <li
                         key={item.step}
-                        className='flex flex-col rounded-2xl border border-gray-100 bg-white px-5 py-6 shadow-soft-card'
+                        className='flex flex-col rounded-2xl border border-ls-rule bg-ls-surface px-5 py-6 '
                     >
-                        <span className='flex h-10 w-10 items-center justify-center rounded-full bg-brand-ink font-montserrat text-sm font-bold text-white'>
+                        <span className='flex h-10 w-10 items-center justify-center rounded-full bg-ls-text font-montserrat text-sm font-bold text-ls-bg'>
                             {item.step}
                         </span>
-                        <h3 className='mt-4 font-montserrat text-base font-bold text-gray-900'>
+                        <h3 className='mt-4 font-montserrat text-base font-bold text-ls-text'>
                             {item.label}
                         </h3>
-                        <p className='mt-2 font-montserrat text-sm leading-relaxed text-gray-600'>
+                        <p className='mt-2 font-montserrat text-sm leading-relaxed text-ls-muted'>
                             {item.description}
                         </p>
                     </li>

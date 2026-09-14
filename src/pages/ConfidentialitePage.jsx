@@ -1,4 +1,5 @@
-import { PageHeader, SEO, SiteFooter } from "../components";
+import { PageHeader, SEO } from "../components";
+import SiteLayout from "../components/site/SiteLayout";
 import ConfidentialiteSection from "../sections/Confidentialite";
 import { privacyPageTitle, privacyPageUpdated } from "../constants";
 
@@ -10,15 +11,14 @@ const ConfidentialitePage = () => {
         description='Politique de confidentialité de LivSight : agence de livraison à Yaoundé, Cameroun.'
         canonical='/legal/confidentialite'
       />
-      <main className='min-h-[60vh] bg-white'>
+      <SiteLayout>
         <PageHeader title={privacyPageTitle} subtitle={privacyPageUpdated} />
 
         {/* Document body */}
-        <div className='max-container padding-x'>
+        <div className='px-[18px] md:px-16'>
           <ConfidentialiteSection />
         </div>
-      </main>
-      <SiteFooter />
+      </SiteLayout>
     </>
   );
 };

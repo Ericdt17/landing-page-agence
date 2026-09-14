@@ -8,25 +8,25 @@ import {
 
 const ConditionsSection = () => {
   return (
-    <div className='mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16'>
-      <p className='font-montserrat text-base leading-7 text-gray-600 sm:text-lg sm:leading-8'>
+    <div className='max-w-3xl pb-16 pt-2'>
+      <p className='font-montserrat text-base leading-7 text-ls-muted sm:text-lg sm:leading-8'>
         {termsPageIntro}
       </p>
 
       <div className='mt-12 flex flex-col gap-12'>
         {termsGroups.map((group) => (
           <div key={group.groupTitle}>
-            <h2 className='font-montserrat text-sm font-bold uppercase tracking-[0.14em] text-brand-ink'>
+            <h2 className='font-montserrat text-sm font-bold uppercase tracking-[0.14em] text-ls-accent'>
               {group.groupTitle}
             </h2>
             <div className='mt-8 flex flex-col gap-10'>
               {group.articles.map((article) => (
                 <div key={article.art}>
                   <div className='flex flex-wrap items-baseline gap-x-3 gap-y-1'>
-                    <span className='font-montserrat text-xs font-bold tracking-[0.14em] text-brand-ink'>
+                    <span className='font-montserrat text-xs font-bold tracking-[0.14em] text-ls-accent'>
                       Art. {article.art}
                     </span>
-                    <h3 className='font-montserrat text-lg font-bold text-gray-900 sm:text-xl'>
+                    <h3 className='font-montserrat text-lg font-bold text-ls-text sm:text-xl'>
                       {article.title}
                     </h3>
                   </div>
@@ -34,14 +34,14 @@ const ConditionsSection = () => {
                     {article.paragraphs.map((para, idx) => (
                       <p
                         key={`${article.art}-${idx}`}
-                        className='font-montserrat text-sm leading-6 text-gray-600 sm:text-base sm:leading-7'
+                        className='font-montserrat text-sm leading-6 text-ls-muted sm:text-base sm:leading-7'
                       >
                         {para}
                       </p>
                     ))}
                   </div>
                   {article.highlightLine ? (
-                    <p className='mt-4 rounded-xl border border-brand-blue/20 bg-brand-blue/5 px-4 py-3 font-montserrat text-sm font-semibold leading-6 text-gray-800 sm:text-base'>
+                    <p className='mt-4 rounded-xl border border-ls-rule bg-ls-fill px-4 py-3 font-montserrat text-sm font-semibold leading-6 text-ls-text sm:text-base'>
                       {article.highlightLine}
                     </p>
                   ) : null}
@@ -52,17 +52,17 @@ const ConditionsSection = () => {
         ))}
       </div>
 
-      <div className='mt-14 rounded-2xl border border-brand-blue/20 bg-brand-blue/5 p-6 sm:p-8'>
-        <h2 className='font-montserrat text-base font-bold text-gray-900 sm:text-lg'>
+      <div className='mt-14 rounded-2xl border border-ls-rule bg-ls-fill p-6 sm:p-8'>
+        <h2 className='font-montserrat text-base font-bold text-ls-text sm:text-lg'>
           Nous contacter
         </h2>
-        <p className='mt-2 font-montserrat text-sm leading-6 text-gray-600 sm:text-base sm:leading-7'>
+        <p className='mt-2 font-montserrat text-sm leading-6 text-ls-muted sm:text-base sm:leading-7'>
           {termsContactIntro}
         </p>
         <div className='mt-5 flex flex-col gap-3 sm:flex-row sm:gap-4'>
           <a
             href={`mailto:${footerSupportEmail}`}
-            className='inline-flex items-center justify-center rounded-full border border-brand-blue px-6 py-3 font-montserrat text-sm font-bold text-brand-deep transition-colors hover:bg-brand-deep hover:text-white'
+            className='inline-flex items-center justify-center rounded-full border border-ls-rule px-6 py-3 font-montserrat text-sm font-bold text-ls-accent transition-colors hover:bg-ls-muted hover:text-ls-bg'
           >
             {footerSupportEmail}
           </a>
@@ -70,7 +70,7 @@ const ConditionsSection = () => {
             href={whatsappCtaHref}
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center justify-center rounded-full bg-brand-ink px-6 py-3 font-montserrat text-sm font-bold text-white transition-colors hover:bg-brand-deep'
+            className='inline-flex items-center justify-center rounded-full bg-ls-text px-6 py-3 font-montserrat text-sm font-bold text-ls-bg transition-colors hover:bg-ls-muted'
           >
             Écrire sur WhatsApp
           </a>

@@ -1,11 +1,9 @@
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import ApiTeaser from "../components/site/ApiTeaser";
 import SiteLayout from "../components/site/SiteLayout";
-import { plateformeIntegrationsApiPath } from "../constants/integrationsApi";
 import { entrepriseRecrutementPath } from "../constants/recruitment";
 import {
-  technologieApi,
   technologieHero,
   technologiePath,
   technologieProblems,
@@ -145,29 +143,7 @@ const TechnologiePage = () => (
       </section>
 
       <section aria-label='API et recrutement' className='grid grid-cols-1 gap-5 px-[18px] pb-16 md:grid-cols-2 md:px-16 md:pb-[88px]'>
-        <div className='flex flex-col gap-4 rounded-[26px] border border-ls-rule p-7 md:p-9'>
-          <div className='flex items-center gap-2.5'>
-            <span className='rounded-full border border-ls-speed px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[.06em] text-ls-speed'>
-              {technologieApi.badge}
-            </span>
-            <h2 className='ls-h text-[22px]'>{technologieApi.title}</h2>
-          </div>
-          <p className='ls-body text-ls-muted'>{technologieApi.body}</p>
-          <figure className='flex flex-col gap-2'>
-            <pre className='overflow-x-auto rounded-2xl bg-ls-ink-bg p-4 text-[12px] leading-relaxed text-ls-ink-mute'>
-              <code>
-                <span className='text-ls-ink-speed'>POST</span> /v1/deliveries{"\n"}
-                {"  "}pickup, dropoff, amount_to_collect{"\n\n"}
-                <span className='text-ls-ink-fg'>→ 201</span> delivery_id, tracking_url
-              </code>
-            </pre>
-            <figcaption className='text-[11px] text-ls-faint'>{technologieApi.sampleLabel}</figcaption>
-          </figure>
-          <Link to={plateformeIntegrationsApiPath} className='ls-link mt-auto inline-flex w-fit items-center gap-1.5 text-sm'>
-            {technologieApi.link}
-            <ArrowRightIcon className='h-4 w-4' aria-hidden='true' />
-          </Link>
-        </div>
+        <ApiTeaser />
         <div className='flex flex-col gap-4 rounded-[26px] bg-ls-ink-bg p-7 text-ls-ink-fg md:p-9'>
           <h2 className='ls-h text-[22px]'>{technologieRecrutement.title}</h2>
           <p className='ls-body text-ls-ink-mute'>{technologieRecrutement.body}</p>

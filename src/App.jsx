@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieConsent from "./components/CookieConsent";
 import Accueil from "./pages/Accueil";
@@ -20,7 +20,6 @@ const CoursesParticuliersPage = lazy(() =>
 );
 const PortailAgentPage = lazy(() => import("./pages/PortailAgentPage"));
 const PortailLivreurPage = lazy(() => import("./pages/PortailLivreurPage"));
-const IntegrationsApiPage = lazy(() => import("./pages/IntegrationsApiPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const RecruitmentOfferPage = lazy(() => import("./pages/RecruitmentOfferPage"));
 const RecruitmentApplyPage = lazy(() => import("./pages/RecruitmentApplyPage"));
@@ -32,6 +31,7 @@ const LivraisonStockagePage = lazy(() => import("./pages/LivraisonStockagePage")
 const TarifsPage = lazy(() => import("./pages/TarifsPage"));
 const TechnologiePage = lazy(() => import("./pages/TechnologiePage"));
 const MarketplacePage = lazy(() => import("./pages/MarketplacePage"));
+const ApiLivraisonPage = lazy(() => import("./pages/ApiLivraisonPage"));
 
 /** Évite `basename: './'` (Vite `base: './'`) : aucune route ne matche → `*` renvoie à `/`. */
 const routerBasename = (() => {
@@ -59,6 +59,7 @@ const App = () => {
           <Route path='/tarifs' element={<TarifsPage />} />
           <Route path='/technologie' element={<TechnologiePage />} />
           <Route path='/marketplace' element={<MarketplacePage />} />
+          <Route path='/api-livraison' element={<ApiLivraisonPage />} />
           <Route
             path='/legal/confidentialite'
             element={<ConfidentialitePage />}
@@ -95,10 +96,7 @@ const App = () => {
             path='/plateforme/portail-livreur'
             element={<PortailLivreurPage />}
           />
-          <Route
-            path='/plateforme/integrations-api'
-            element={<IntegrationsApiPage />}
-          />
+          <Route path='/plateforme/integrations-api' element={<Navigate to='/api-livraison' replace />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Suspense>

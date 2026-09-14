@@ -32,7 +32,7 @@ export default {
         "We grow step by step: one neighbourhood after another, one merchant after another. What works, we keep; what doesn't, we stop before scaling it.",
     statsLabel: "LivSight in figures",
     stats: {
-        presence: { value: "2 years", label: "at Hippodrome" },
+        presence: { value: "1 year", label: "at Hippodrome" },
         clients: { label: "partner merchants" },
         payout: { value: "End of day", label: "your payout" },
     },

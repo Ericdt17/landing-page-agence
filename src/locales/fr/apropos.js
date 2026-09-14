@@ -40,7 +40,7 @@ export default {
         "Nous grandissons petit à petit : un quartier après l'autre, un commerçant après l'autre. Ce qui marche, nous le gardons ; ce qui ne marche pas, nous l'arrêtons avant de l'étendre.",
     statsLabel: "LivSight en chiffres",
     stats: {
-        presence: { value: "2 ans", label: "de présence à l'Hippodrome" },
+        presence: { value: "1 an", label: "de présence à l'Hippodrome" },
         clients: { label: "commerçants partenaires" },
         payout: { value: "Fin de journée", label: "vos fonds reversés" },
     },

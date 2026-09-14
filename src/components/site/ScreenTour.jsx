@@ -1,5 +1,6 @@
 import { PauseIcon, PlayIcon } from "@heroicons/react/20/solid";
 import { useEffect, useId, useRef, useState } from "react";
+import { useCopy } from "../../i18n/useCopy";
 
 const SPACING = 322;
 const AUTOPLAY_MS = 5000;
@@ -9,6 +10,16 @@ const placement = (offset) => {
   if (distance === 0) return { scale: 1, opacity: 1, z: 3 };
   if (distance === 1) return { scale: 0.84, opacity: 0.34, z: 2 };
   return { scale: 0.76, opacity: 0, z: 1 };
+};
+
+/* Écart circulaire : après le dernier écran, le premier arrive par la droite
+   au lieu de faire traverser toute la rangée ; au-delà des voisins, les écrans
+   (invisibles) attendent juste hors champ. */
+const circularOffset = (index, active, count) => {
+  let offset = index - active;
+  if (offset > count / 2) offset -= count;
+  if (offset < -count / 2) offset += count;
+  return Math.max(-2, Math.min(2, offset));
 };
 
 const prefersReducedMotion = () =>
@@ -22,17 +33,19 @@ const prefersReducedMotion = () =>
  * choisi est affiché). Onglets conformes au motif ARIA : flèches, Début, Fin.
  *
  * Défilement automatique toutes les 5 secondes, avec un bouton pause (un
- * contenu qui bouge plus de 5 s doit pouvoir être arrêté). Il s'interrompt
- * au survol, quand un onglet a le focus clavier ou quand l'onglet du
- * navigateur est caché, et ne démarre pas si l'appareil demande moins de
- * mouvement.
+ * contenu qui bouge plus de 5 s doit pouvoir être arrêté). Le simple survol
+ * ne l'arrête pas : un clic dans la visite la suspend, et elle reprend quand
+ * le pointeur quitte la zone. Elle s'interrompt aussi quand le focus clavier
+ * est dedans ou quand l'onglet du navigateur est caché, et ne démarre pas si
+ * l'appareil demande moins de mouvement.
  *
  * `screens` associe l'`id` de chaque onglet à son composant d'écran.
  */
 const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
+  const { tour } = useCopy("site");
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(() => !prefersReducedMotion());
-  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
   const [focusWithin, setFocusWithin] = useState(false);
   const [pageHidden, setPageHidden] = useState(false);
   const baseId = useId();
@@ -44,7 +57,7 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
     return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
 
-  const running = playing && !hovered && !focusWithin && !pageHidden;
+  const running = playing && !clicked && !focusWithin && !pageHidden;
 
   useEffect(() => {
     if (!running) return undefined;
@@ -73,9 +86,16 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
 
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocus={() => setFocusWithin(true)}
+      onPointerDown={(event) => {
+        if (event.pointerType !== "touch") setClicked(true);
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType !== "touch") setClicked(false);
+      }}
+      onFocus={(event) => {
+        /* Seul le focus clavier compte : un clic donne aussi le focus, mais la visite reprend quand le pointeur s'en va */
+        if (event.target.matches(":focus-visible")) setFocusWithin(true);
+      }}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setFocusWithin(false);
       }}
@@ -130,7 +150,7 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
         style={{ height }}
       >
         {tabs.map((tab, index) => {
-          const offset = index - active;
+          const offset = circularOffset(index, active, tabs.length);
           const { scale, opacity, z } = placement(offset);
           const Screen = screens[tab.id];
           return (
@@ -139,10 +159,13 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
               aria-hidden={offset !== 0}
               /* Voisins estompés : aperçu décoratif (WCAG 1.4.3 l'exempte), jamais atteignable */
               inert={offset !== 0 ? "" : undefined}
-              className={`absolute left-1/2 top-0 -ml-[150px] w-[300px] transition-[transform,opacity] duration-[380ms] ease-[cubic-bezier(.22,.61,.36,1)] motion-reduce:transition-none ${
-                offset !== 0 ? "pointer-events-none max-md:hidden" : ""
-              }`}
-              style={{ transform: `translateX(${offset * SPACING}px) scale(${scale})`, opacity, zIndex: z }}
+              data-side={offset !== 0 ? "" : undefined}
+              className={`ls-tour-screen absolute left-1/2 top-0 -ml-[150px] w-[300px] ${offset !== 0 ? "pointer-events-none" : ""}`}
+              style={{
+                transform: `translate3d(${offset * SPACING}px, 0, 0) scale(${scale})`,
+                "--tour-opacity": opacity,
+                zIndex: z,
+              }}
             >
               <Screen />
             </div>
@@ -152,14 +175,16 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
 
       <div className='flex items-center justify-center gap-3 pt-[22px]'>
         {/* Lu seulement quand la visite est arrêtée : pas d'annonce toutes les 5 s */}
-        <p className='ls-cap text-center text-ls-faint' aria-live={running ? "off" : "polite"}>
-          {tabs[active].caption}
+        <p className='ls-cap flex min-h-[40px] items-center text-center text-ls-faint' aria-live={running ? "off" : "polite"}>
+          <span key={active} className='ls-fade-in'>
+            {tabs[active].caption}
+          </span>
         </p>
         <button
           type='button'
           onClick={() => setPlaying((value) => !value)}
-          aria-label={playing ? "Mettre en pause le défilement des écrans" : "Faire défiler les écrans automatiquement"}
-          className='inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-ls-stroke text-ls-muted transition-colors hover:border-ls-text hover:text-ls-text'
+          aria-label={playing ? tour.pause : tour.play}
+          className='inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ls-stroke text-ls-muted transition-colors hover:border-ls-text hover:text-ls-text'
         >
           {playing ? <PauseIcon className='h-4 w-4' aria-hidden='true' /> : <PlayIcon className='h-4 w-4' aria-hidden='true' />}
         </button>

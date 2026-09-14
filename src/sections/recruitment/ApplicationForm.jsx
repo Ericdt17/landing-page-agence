@@ -1,18 +1,8 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-    APPLICATION_FORM_LABELS,
-    AVAILABILITY_OPTIONS,
-    EDUCATION_LEVEL_OPTIONS,
-    MAX_CV_BYTES,
-    RECRUITMENT_MODAL_TITLE,
-    SPOKEN_LANGUAGE_OPTIONS,
-    STATUS_LABELS,
-    TRANSPORT_OPTIONS,
-    YES_NO_OPTIONS,
-    entrepriseRecrutementPath,
-} from "../../constants";
+import { routes } from "../../constants/routes";
+import { fill, useCopy } from "../../i18n/useCopy";
 import { submitApplication } from "../../services/recruitmentApi";
 
 const SuccessAnimation = lazy(() => import("./SuccessAnimation"));
@@ -27,6 +17,8 @@ const RECRUITMENT_JOB_ID_FIELD =
     import.meta.env.VITE_RECRUITMENT_JOB_ID_FIELD ?? "job_offer_id";
 const RECRUITMENT_NEIGHBORHOOD_FIELD =
     import.meta.env.VITE_RECRUITMENT_NEIGHBORHOOD_FIELD ?? "quartier";
+
+const MAX_FILE_BYTES = 10 * 1024 * 1024;
 
 const ACCEPTED_PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
@@ -86,14 +78,14 @@ const resolveJobId = (job) =>
 const resolveQuestionId = (q) =>
     stringifyEntityId(q?.id ?? q?.question_id ?? q?._id);
 
-const validatePdf = (file, setErr) => {
+const validatePdf = (file, setErr, labels) => {
     if (!file) return false;
-    if (file.size > MAX_CV_BYTES) {
-        setErr(STATUS_LABELS.cvTooLarge);
+    if (file.size > MAX_FILE_BYTES) {
+        setErr(labels.cvTooLarge);
         return false;
     }
     if (file.type !== "application/pdf") {
-        setErr(STATUS_LABELS.cvNotPdf);
+        setErr(labels.cvNotPdf);
         return false;
     }
     return true;
@@ -125,8 +117,20 @@ const ApplicationForm = ({
     questions: questionsProp = [],
     onSuccess,
     hideHeader = false,
-    successHref = entrepriseRecrutementPath,
+    successHref = routes.recrutement,
+    onStepChange,
+    consent = null,
 }) => {
+    const copy = useCopy("recrutement");
+    const APPLICATION_FORM_LABELS = copy.form;
+    const STATUS_LABELS = copy.status;
+    const {
+        transport: TRANSPORT_OPTIONS,
+        availability: AVAILABILITY_OPTIONS,
+        education: EDUCATION_LEVEL_OPTIONS,
+        languages: SPOKEN_LANGUAGE_OPTIONS,
+        yesNo: YES_NO_OPTIONS,
+    } = copy.options;
     const questions = Array.isArray(questionsProp) ? questionsProp : [];
     const hasQuestions = questions.length > 0;
 
@@ -184,6 +188,12 @@ const ApplicationForm = ({
         setSubmittedApplicationId("");
     }, [jobOffer, questionsProp]);
 
+    useEffect(() => {
+        if (typeof onStepChange === "function") {
+            onStepChange(submitStatus === "success" ? 3 : step);
+        }
+    }, [onStepChange, step, submitStatus]);
+
     const handlePhotoChange = (e) => {
         const file = e.target.files?.[0];
         setPhotoError("");
@@ -191,7 +201,7 @@ const ApplicationForm = ({
             setPhotoFile(null);
             return;
         }
-        if (file.size > MAX_CV_BYTES) {
+        if (file.size > MAX_FILE_BYTES) {
             setPhotoError(STATUS_LABELS.photoTooLarge);
             setPhotoFile(null);
             e.target.value = "";
@@ -213,7 +223,7 @@ const ApplicationForm = ({
             setCvFile(null);
             return;
         }
-        if (!validatePdf(file, setCvError)) {
+        if (!validatePdf(file, setCvError, STATUS_LABELS)) {
             setCvFile(null);
             e.target.value = "";
             return;
@@ -231,7 +241,7 @@ const ApplicationForm = ({
             setCoverLetterFile(null);
             return;
         }
-        if (!validatePdf(file, setCoverLetterError)) {
+        if (!validatePdf(file, setCoverLetterError, STATUS_LABELS)) {
             setCoverLetterFile(null);
             e.target.value = "";
             return;
@@ -270,9 +280,9 @@ const ApplicationForm = ({
         if (!photoFile) err.photo = true;
         else if (photoError) err.photo = true;
         if (!cvFile) err.cv = true;
-        else if (!validatePdf(cvFile, setCvError)) err.cv = true;
+        else if (!validatePdf(cvFile, setCvError, STATUS_LABELS)) err.cv = true;
         if (!coverLetterFile) err.coverLetter = true;
-        else if (!validatePdf(coverLetterFile, setCoverLetterError))
+        else if (!validatePdf(coverLetterFile, setCoverLetterError, STATUS_LABELS))
             err.coverLetter = true;
         setFieldErrors(err);
         return Object.keys(err).length === 0;
@@ -563,7 +573,7 @@ const ApplicationForm = ({
  }`}
                 >
                     <option value=''>
-                        {APPLICATION_FORM_LABELS.selectEducationLevel}
+                        {APPLICATION_FORM_LABELS.choose}
                     </option>
                     {EDUCATION_LEVEL_OPTIONS.map((o) => (
                         <option key={o.value} value={o.value}>
@@ -759,7 +769,7 @@ const ApplicationForm = ({
  }`}
                 >
                     <option value=''>
-                        {APPLICATION_FORM_LABELS.selectTransport}
+                        {APPLICATION_FORM_LABELS.choose}
                     </option>
                     {TRANSPORT_OPTIONS.map((o) => (
                         <option key={o.value} value={o.value}>
@@ -791,7 +801,7 @@ const ApplicationForm = ({
  }`}
                 >
                     <option value=''>
-                        {APPLICATION_FORM_LABELS.selectAvailability}
+                        {APPLICATION_FORM_LABELS.choose}
                     </option>
                     {AVAILABILITY_OPTIONS.map((o) => (
                         <option key={o.value} value={o.value}>
@@ -855,7 +865,7 @@ const ApplicationForm = ({
                 )}
                 {(cvError || fieldErrors.cv) && (
                     <p role='alert' className='mt-1 font-montserrat text-xs text-ls-bad'>
-                        {cvError || "CV requis (PDF, max 10 Mo)."}
+                        {cvError || STATUS_LABELS.cvRequired}
                     </p>
                 )}
             </div>
@@ -881,7 +891,7 @@ const ApplicationForm = ({
                 {(coverLetterError || fieldErrors.coverLetter) && (
                     <p role='alert' className='mt-1 font-montserrat text-xs text-ls-bad'>
                         {coverLetterError ||
-                            "Lettre requise (PDF, max 10 Mo)."}
+                            STATUS_LABELS.coverLetterRequired}
                     </p>
                 )}
             </div>
@@ -908,9 +918,9 @@ const ApplicationForm = ({
                     </p>
                     {submittedApplicationId && (
                         <p className='mt-3 font-montserrat text-sm font-semibold text-ls-accent'>
-                            {STATUS_LABELS.submitSuccessApplicationId(
-                                submittedApplicationId,
-                            )}
+                            {fill(STATUS_LABELS.submitSuccessApplicationId, {
+                                id: submittedApplicationId,
+                            })}
                         </p>
                     )}
                     <Link
@@ -931,10 +941,10 @@ const ApplicationForm = ({
                                 id='application-form-title'
                                 className='font-montserrat text-xl font-bold text-ls-text sm:text-2xl'
                             >
-                                {RECRUITMENT_MODAL_TITLE}
+                                {APPLICATION_FORM_LABELS.title}
                             </h2>
                             <p className='mt-1 font-montserrat text-sm text-ls-faint'>
-                                {jobOffer?.title ?? jobOffer?.name ?? "Poste"}
+                                {jobOffer?.title ?? jobOffer?.name ?? APPLICATION_FORM_LABELS.jobFallback}
                             </p>
                         </>
                     )}
@@ -1006,7 +1016,7 @@ const ApplicationForm = ({
                                                     />
                                                     {fieldErrors[qid] && (
                                                         <p className='mt-1 font-montserrat text-xs text-ls-bad'>
-                                                            Réponse requise.
+                                                            {STATUS_LABELS.answerRequired}
                                                         </p>
                                                     )}
                                                 </div>
@@ -1075,13 +1085,14 @@ const ApplicationForm = ({
                                                 </div>
                                                 {fieldErrors[qid] && (
                                                     <p className='mt-1 font-montserrat text-xs text-ls-bad'>
-                                                        Réponse requise.
+                                                        {STATUS_LABELS.answerRequired}
                                                     </p>
                                                 )}
                                             </fieldset>
                                         );
                                     })}
 
+                                    {consent}
                                     <div className='flex flex-col gap-3 sm:flex-row sm:justify-between'>
                                         <button
                                             type='button'
@@ -1110,7 +1121,7 @@ const ApplicationForm = ({
                                                         className='h-5 w-5 animate-spin rounded-full border-2 border-ls-bg border-t-transparent'
                                                         aria-hidden='true'
                                                     />
-                                                    Envoi…
+                                                    {APPLICATION_FORM_LABELS.sending}
                                                 </span>
                                             ) : (
                                                 APPLICATION_FORM_LABELS.submit
@@ -1120,6 +1131,7 @@ const ApplicationForm = ({
                                 </div>
                             )}
 
+                            {step === 1 && !hasQuestions && consent}
                             {step === 1 && (
                                 <button
                                     type='button'
@@ -1134,7 +1146,7 @@ const ApplicationForm = ({
                                                 className='h-5 w-5 animate-spin rounded-full border-2 border-ls-bg border-t-transparent'
                                                 aria-hidden='true'
                                             />
-                                            Envoi…
+                                            {APPLICATION_FORM_LABELS.sending}
                                         </span>
                                     ) : hasQuestions ? (
                                         <span className='inline-flex items-center justify-center gap-2'>

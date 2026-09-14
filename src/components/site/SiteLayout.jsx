@@ -1,3 +1,4 @@
+import { useCopy } from "../../i18n/useCopy";
 import SiteFooter from "./SiteFooter";
 import SiteNav from "./SiteNav";
 
@@ -6,13 +7,15 @@ import SiteNav from "./SiteNav";
  * pied de page. Le fond et la couleur de texte suivent les jetons `ls-*`, donc
  * le thème clair ou sombre de l'appareil.
  */
-const SiteLayout = ({ children }) => (
+const SiteLayout = ({ children }) => {
+  const copy = useCopy("site");
+  return (
   <div className='min-h-screen bg-ls-bg font-montserrat text-ls-text antialiased'>
     <a
       href='#contenu'
       className='sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ls-text focus:px-5 focus:py-3 focus:text-sm focus:font-bold focus:text-ls-bg'
     >
-      Aller au contenu
+      {copy.skipLink}
     </a>
     <SiteNav />
     <main id='contenu' className='mx-auto max-w-[1440px]'>
@@ -20,6 +23,7 @@ const SiteLayout = ({ children }) => (
     </main>
     <SiteFooter />
   </div>
-);
+  );
+};
 
 export default SiteLayout;

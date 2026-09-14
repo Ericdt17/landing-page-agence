@@ -6,7 +6,9 @@
 
 const toNumber = (value) => (typeof value === "number" && Number.isFinite(value) ? value : null);
 
-export const formatFcfa = (amount) => `${new Intl.NumberFormat("fr-FR").format(amount)} FCFA`;
+/** Montant en francs CFA, séparateurs de milliers selon la langue (« 1 000 » ou « 1,000 »). */
+export const formatFcfa = (amount, language = "fr") =>
+    `${new Intl.NumberFormat(language === "en" ? "en-GB" : "fr-FR").format(amount)} FCFA`;
 
 /** Villes ayant au moins une zone tarifée, zones triées comme dans le back-office. */
 export const cityZones = (landing) =>
@@ -43,22 +45,18 @@ export const deliveryFeeRange = (landing) => {
     return { min: Math.min(...fees), max: Math.max(...fees) };
 };
 
-/** Frais annexes réellement configurés (enlèvement, express, client absent). */
+/**
+ * Frais annexes réellement configurés (enlèvement, express, client absent).
+ * Renvoie des clés et des valeurs : les libellés viennent des traductions.
+ */
 export const feeExtras = (landing) => {
     const settings = landing?.fee_settings;
     if (!settings) return [];
     const extras = [];
-    if (toNumber(settings.pickup_fee)) {
-        extras.push({ label: "Enlèvement chez vous", value: formatFcfa(settings.pickup_fee) });
-    }
-    if (toNumber(settings.express_fee)) {
-        extras.push({ label: "Livraison express", value: `+ ${formatFcfa(settings.express_fee)}` });
-    }
+    if (toNumber(settings.pickup_fee)) extras.push({ id: "pickup", amount: settings.pickup_fee });
+    if (toNumber(settings.express_fee)) extras.push({ id: "express", amount: settings.express_fee });
     if (toNumber(settings.client_absent_fee_percent)) {
-        extras.push({
-            label: "Client absent",
-            value: `${settings.client_absent_fee_percent} % des frais de la course`,
-        });
+        extras.push({ id: "clientAbsent", percent: settings.client_absent_fee_percent });
     }
     return extras;
 };

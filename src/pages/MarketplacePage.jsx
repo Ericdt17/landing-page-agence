@@ -7,17 +7,10 @@ import {
 } from "../assets/images";
 import SEO from "../components/SEO";
 import SiteLayout from "../components/site/SiteLayout";
-import {
-  marketplaceChanges,
-  marketplaceHero,
-  marketplaceOpen,
-  marketplacePath,
-  marketplacePreview,
-  marketplaceSame,
-  marketplaceSeo,
-  marketplaceSteps,
-} from "../constants/marketplace";
-import { siteWhatsappHref } from "../constants/site";
+import { marketplacePhotoCredits } from "../constants/photoCredits";
+import { routes } from "../constants/routes";
+import { useCopy } from "../i18n/useCopy";
+import WhatsAppButton from "../components/site/WhatsAppButton";
 
 /* Aperçus d'écrans : données d'exemple, masquées aux lecteurs d'écran */
 const Card = ({ children }) => (
@@ -68,38 +61,41 @@ const PayoutCard = () => (
 
 const previews = [ProductCard, OrderCard, PayoutCard];
 
-const MarketplacePage = () => (
+const MarketplacePage = () => {
+  const copy = useCopy("marketplace");
+  const { seo, hero, preview, steps, changes, same, open } = copy;
+  return (
   <>
-    <SEO title={marketplaceSeo.title} description={marketplaceSeo.description} canonical={marketplacePath} />
+    <SEO title={seo.title} description={seo.description} canonical={routes.marketplace} />
     <SiteLayout>
       <section aria-labelledby='marketplace-titre' className='px-[18px] pb-12 pt-11 md:px-16 md:pb-[60px] md:pt-[84px]'>
         <div className='flex max-w-[900px] flex-col gap-6 md:gap-[26px]'>
           <div className='flex items-center gap-2.5'>
             <span className='rounded-full border border-ls-speed px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.08em] text-ls-speed'>
-              {marketplaceHero.badge}
+              {hero.badge}
             </span>
-            <span className='ls-kicker text-ls-speed'>{marketplaceHero.kicker}</span>
+            <span className='ls-kicker text-ls-speed'>{hero.kicker}</span>
           </div>
           <h1 id='marketplace-titre' className='ls-h ls-d1'>
-            {marketplaceHero.title}
+            {hero.title}
           </h1>
-          <p className='ls-lede max-w-[62ch] text-ls-muted'>{marketplaceHero.lede}</p>
+          <p className='ls-lede max-w-[62ch] text-ls-muted'>{hero.lede}</p>
           <div className='flex flex-col items-start gap-3'>
-            <a href={siteWhatsappHref} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-lg ls-btn-solid max-sm:w-full'>
-              {marketplaceHero.cta}
-            </a>
-            <p className='ls-cap text-ls-muted'>{marketplaceHero.note}</p>
+            <WhatsAppButton className='ls-btn ls-btn-lg ls-btn-solid max-sm:w-full'>
+              {hero.cta}
+            </WhatsAppButton>
+            <p className='ls-cap text-ls-muted'>{hero.note}</p>
           </div>
         </div>
       </section>
 
       <section aria-labelledby='marketplace-apercu' className='px-[18px] pb-16 md:px-16 md:pb-[84px]'>
         <div className='flex flex-col gap-4 border-t border-ls-rule pb-10 pt-11'>
-          <span className='ls-kicker text-ls-accent'>{marketplacePreview.kicker}</span>
+          <span className='ls-kicker text-ls-accent'>{preview.kicker}</span>
           <h2 id='marketplace-apercu' className='ls-h ls-d2 max-w-[24ch]'>
-            {marketplacePreview.title}
+            {preview.title}
           </h2>
-          <p className='ls-body text-ls-muted'>{marketplacePreview.body}</p>
+          <p className='ls-body text-ls-muted'>{preview.body}</p>
         </div>
 
         <figure className='overflow-hidden rounded-[18px] border border-ls-rule bg-ls-surface shadow-[0_18px_44px_rgba(0,0,0,.08)]'>
@@ -110,7 +106,7 @@ const MarketplacePage = () => (
           </div>
           <img
             src={marketplaceAccueilWeb}
-            alt={marketplacePreview.webAlt}
+            alt={preview.webAlt}
             width='1200'
             height='750'
             loading='lazy'
@@ -119,7 +115,7 @@ const MarketplacePage = () => (
         </figure>
 
         <div className='mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3'>
-          {marketplacePreview.mobile.map((screen) => (
+          {preview.mobile.map((screen) => (
             <figure key={screen.key} className='flex flex-col items-center gap-3'>
               <img
                 src={{ accueil: marketplaceAccueilMobile, produit: marketplaceProduitMobile, suivi: marketplaceSuiviMobile }[screen.key]}
@@ -135,15 +131,15 @@ const MarketplacePage = () => (
         </div>
 
         <details className='mt-8 text-xs text-ls-muted'>
-          <summary className='cursor-pointer font-semibold'>{marketplacePreview.creditsLabel}</summary>
-          <p className='mt-2'>{marketplacePreview.creditsIntro}</p>
+          <summary className='cursor-pointer font-semibold'>{preview.creditsLabel}</summary>
+          <p className='mt-2'>{preview.creditsIntro}</p>
           <ul className='mt-2 flex flex-col gap-1'>
-            {marketplacePreview.credits.map((credit) => (
+            {marketplacePhotoCredits.map((credit) => (
               <li key={credit.url}>
                 <a href={credit.url} target='_blank' rel='noopener noreferrer' className='underline underline-offset-2'>
                   {credit.work}
                 </a>{" "}
-                · {credit.creator} · {credit.license}
+                · {preview.creditBy} {credit.creator} · {credit.license}
               </li>
             ))}
           </ul>
@@ -152,13 +148,13 @@ const MarketplacePage = () => (
 
       <section aria-labelledby='marketplace-etapes' className='px-[18px] pb-16 md:px-16 md:pb-[84px]'>
         <div className='flex flex-col gap-4 border-t border-ls-rule pb-10 pt-11'>
-          <span className='ls-kicker text-ls-accent'>{marketplaceSteps.kicker}</span>
+          <span className='ls-kicker text-ls-accent'>{steps.kicker}</span>
           <h2 id='marketplace-etapes' className='ls-h ls-d2 max-w-[22ch]'>
-            {marketplaceSteps.title}
+            {steps.title}
           </h2>
         </div>
         <ol className='grid grid-cols-1 gap-px border-y border-ls-rule bg-ls-rule sm:grid-cols-2 lg:grid-cols-4'>
-          {marketplaceSteps.steps.map((step) => (
+          {steps.steps.map((step) => (
             <li key={step.number} className='flex flex-col gap-3 bg-ls-bg py-7 sm:px-6 lg:first:pl-0 lg:last:pr-0'>
               <span className='ls-num text-sm text-ls-accent'>{step.number}</span>
               <h3 className='ls-h text-[19px]'>{step.title}</h3>
@@ -171,14 +167,14 @@ const MarketplacePage = () => (
       <section aria-labelledby='marketplace-change' className='px-[18px] pb-16 md:px-16 md:pb-[84px]'>
         <div className='grid grid-cols-1 items-center gap-10 rounded-[30px] border border-ls-rule bg-ls-fill p-6 md:p-11 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-12'>
           <div className='flex flex-col gap-3.5'>
-            <span className='ls-kicker text-ls-accent'>{marketplaceChanges.kicker}</span>
+            <span className='ls-kicker text-ls-accent'>{changes.kicker}</span>
             <h2 id='marketplace-change' className='ls-h ls-d3'>
-              {marketplaceChanges.title}
+              {changes.title}
             </h2>
-            <p className='ls-body text-ls-muted'>{marketplaceChanges.body}</p>
+            <p className='ls-body text-ls-muted'>{changes.body}</p>
           </div>
           <div className='grid grid-cols-1 items-start gap-5 sm:grid-cols-3'>
-            {marketplaceChanges.figures.map((figure, index) => {
+            {changes.figures.map((figure, index) => {
               const Preview = previews[index];
               return (
                 <figure key={figure.title} className='flex flex-col gap-3'>
@@ -194,11 +190,11 @@ const MarketplacePage = () => (
         </div>
       </section>
 
-      <section aria-label='Ce qui ne change pas et ce qui reste à fixer' className='grid grid-cols-1 gap-5 px-[18px] pb-16 md:grid-cols-2 md:px-16 md:pb-[88px]'>
+      <section aria-label={copy.closingLabel} className='grid grid-cols-1 gap-5 px-[18px] pb-16 md:grid-cols-2 md:px-16 md:pb-[88px]'>
         <div className='flex flex-col gap-5 rounded-[26px] border border-ls-rule p-7 md:p-8'>
-          <h2 className='ls-kicker text-ls-accent'>{marketplaceSame.kicker}</h2>
+          <h2 className='ls-kicker text-ls-accent'>{same.kicker}</h2>
           <ul className='flex flex-col gap-3 text-sm'>
-            {marketplaceSame.items.map((item) => (
+            {same.items.map((item) => (
               <li key={item} className='flex gap-2'>
                 <span aria-hidden='true' className='text-ls-faint'>
                   ·
@@ -209,19 +205,20 @@ const MarketplacePage = () => (
           </ul>
         </div>
         <div className='flex flex-col gap-4 rounded-[26px] bg-ls-ink-bg p-7 text-ls-ink-fg md:p-8'>
-          <h2 className='ls-kicker text-ls-ink-speed'>{marketplaceOpen.kicker}</h2>
-          {marketplaceOpen.body.map((paragraph) => (
+          <h2 className='ls-kicker text-ls-ink-speed'>{open.kicker}</h2>
+          {open.body.map((paragraph) => (
             <p key={paragraph} className='ls-body text-ls-ink-mute'>
               {paragraph}
             </p>
           ))}
-          <a href={siteWhatsappHref} target='_blank' rel='noopener noreferrer' className='ls-btn ls-btn-ink mt-auto self-start'>
-            {marketplaceOpen.cta}
-          </a>
+          <WhatsAppButton className='ls-btn ls-btn-ink mt-auto self-start'>
+            {open.cta}
+          </WhatsAppButton>
         </div>
       </section>
     </SiteLayout>
   </>
-);
+  );
+};
 
 export default MarketplacePage;

@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import SEO from "../components/SEO";
 import SiteLayout from "../components/site/SiteLayout";
-import { accueilSeo } from "../constants/accueil";
 import { LandingPublicProvider } from "../context/LandingPublicContext";
 import AccueilApplication from "../sections/accueil/AccueilApplication";
 import AccueilCta from "../sections/accueil/AccueilCta";
@@ -10,6 +9,7 @@ import AccueilDifferences from "../sections/accueil/AccueilDifferences";
 import AccueilHero from "../sections/accueil/AccueilHero";
 import AccueilMarketplace from "../sections/accueil/AccueilMarketplace";
 import AccueilPreuve from "../sections/accueil/AccueilPreuve";
+import { useCopy } from "../i18n/useCopy";
 
 const localBusiness = {
   "@context": "https://schema.org",
@@ -27,9 +27,11 @@ const localBusiness = {
   areaServed: { "@type": "City", name: "Yaoundé" },
 };
 
-const Accueil = () => (
+const Accueil = () => {
+  const { seo } = useCopy("accueil");
+  return (
   <LandingPublicProvider>
-    <SEO title={accueilSeo.title} description={accueilSeo.description} canonical='/' />
+    <SEO title={seo.title} description={seo.description} canonical='/' />
     <Helmet>
       <script type='application/ld+json'>{JSON.stringify(localBusiness)}</script>
     </Helmet>
@@ -43,6 +45,7 @@ const Accueil = () => (
       <AccueilCta />
     </SiteLayout>
   </LandingPublicProvider>
-);
+  );
+};
 
 export default Accueil;

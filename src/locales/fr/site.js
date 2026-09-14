@@ -11,7 +11,7 @@ export default {
         soon: "BIENTÔT",
         links: {
             application: "Espace commerçant",
-            livraison: "Livraison & stockage",
+            livraison: "Livraison\u00a0& stockage",
             tarifs: "Tarifs",
             technologie: "Technologie",
             blog: "Blog",

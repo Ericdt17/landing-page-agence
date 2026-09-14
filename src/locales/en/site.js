@@ -11,7 +11,7 @@ export default {
         soon: "SOON",
         links: {
             application: "Merchant area",
-            livraison: "Delivery & storage",
+            livraison: "Delivery\u00a0& storage",
             tarifs: "Pricing",
             technologie: "Technology",
             blog: "Blog",

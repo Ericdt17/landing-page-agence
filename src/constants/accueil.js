@@ -38,6 +38,7 @@ export const accueilApp = {
     kicker: "L'application",
     title: "Tout ce qui se passe, vous le voyez.",
     body: "Plus d'appels pour savoir où est un colis. Chaque statut se met à jour tout seul, chaque franc encaissé est enregistré, et le relevé se lit sans explication.",
+    link: "Voir les écrans de l'application",
     captions: {
         orders: { title: "La file de commandes", text: "Ce qui attend, en haut. Un geste pour accepter." },
         stock: { title: "Le stock, à jour", text: "Un clavier, pas un formulaire." },

@@ -20,7 +20,10 @@ export const siteWhatsappHref = "https://wa.link/zc5ijs";
 
 export const siteConfidentialitePath = "/legal/confidentialite";
 
+export const siteApplicationPath = "/application";
+
 export const siteNavLinks = [
+    { label: "L'application", to: siteApplicationPath, enabled: true },
     /* Pointe vers l'ancienne page tant que « Livraison & stockage » n'est pas construite */
     { label: "Livraison & stockage", to: plateformeSolutionClientPath, enabled: true },
     { label: "Tarifs", to: "/tarifs", enabled: false },
@@ -50,6 +53,7 @@ export const siteFooterColumns = [
     {
         title: "Commerçants",
         links: [
+            { label: "L'application", to: siteApplicationPath, enabled: true },
             { label: "Commencer à livrer", href: siteWhatsappHref, enabled: true },
             { label: "Base de connaissances", to: "/base-de-connaissances", enabled: false },
             { label: "API", to: plateformeIntegrationsApiPath, soon: true, enabled: true },

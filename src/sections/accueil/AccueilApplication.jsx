@@ -1,4 +1,7 @@
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { Link } from "react-router-dom";
 import { accueilApp } from "../../constants/accueil";
+import { siteApplicationPath } from "../../constants/site";
 import { OrdersScreen, PayoutScreen, StockScreen, TrackingScreen } from "./AppScreens";
 
 const figures = [
@@ -17,7 +20,13 @@ const AccueilApplication = () => (
           {accueilApp.title}
         </h2>
       </div>
-      <p className='ls-body max-w-[46ch] text-ls-muted'>{accueilApp.body}</p>
+      <div className='flex max-w-[46ch] flex-col gap-4'>
+        <p className='ls-body text-ls-muted'>{accueilApp.body}</p>
+        <Link to={siteApplicationPath} className='ls-link inline-flex w-fit items-center gap-1.5 text-sm'>
+          {accueilApp.link}
+          <ArrowRightIcon className='h-4 w-4' aria-hidden='true' />
+        </Link>
+      </div>
     </div>
 
     <div className='grid grid-cols-1 gap-7 sm:grid-cols-2 xl:grid-cols-4'>

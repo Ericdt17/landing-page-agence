@@ -27,6 +27,7 @@ const RecruitmentApplyPage = lazy(() => import("./pages/RecruitmentApplyPage"));
 const RecruitmentJobLayout = lazy(() => import("./pages/RecruitmentJobLayout"));
 const RecruitmentPage = lazy(() => import("./pages/RecruitmentPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const ApplicationPage = lazy(() => import("./pages/ApplicationPage"));
 
 /** Évite `basename: './'` (Vite `base: './'`) : aucune route ne matche → `*` renvoie à `/`. */
 const routerBasename = (() => {
@@ -49,6 +50,7 @@ const App = () => {
       <Suspense fallback={<PageFallback />}>
         <Routes>
           <Route path='/' element={<Accueil />} />
+          <Route path='/application' element={<ApplicationPage />} />
           <Route
             path='/legal/confidentialite'
             element={<ConfidentialitePage />}

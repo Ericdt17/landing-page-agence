@@ -28,6 +28,8 @@ const RecruitmentJobLayout = lazy(() => import("./pages/RecruitmentJobLayout"));
 const RecruitmentPage = lazy(() => import("./pages/RecruitmentPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const ApplicationPage = lazy(() => import("./pages/ApplicationPage"));
+const LivraisonStockagePage = lazy(() => import("./pages/LivraisonStockagePage"));
+const TarifsPage = lazy(() => import("./pages/TarifsPage"));
 
 /** Évite `basename: './'` (Vite `base: './'`) : aucune route ne matche → `*` renvoie à `/`. */
 const routerBasename = (() => {
@@ -51,6 +53,8 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Accueil />} />
           <Route path='/application' element={<ApplicationPage />} />
+          <Route path='/livraison-stockage' element={<LivraisonStockagePage />} />
+          <Route path='/tarifs' element={<TarifsPage />} />
           <Route
             path='/legal/confidentialite'
             element={<ConfidentialitePage />}

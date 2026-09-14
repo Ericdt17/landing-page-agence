@@ -13,7 +13,6 @@ import { legalCookiesPath } from "./cookies";
 import { plateformeCoursesParticuliersPath } from "./coursesParticuliers";
 import { plateformeIntegrationsApiPath } from "./integrationsApi";
 import { entrepriseRecrutementPath } from "./recruitment";
-import { plateformeSolutionClientPath } from "./solutionClient";
 
 /** Point d'entrée WhatsApp unique (même lien que l'ancien site). */
 export const siteWhatsappHref = "https://wa.link/zc5ijs";
@@ -24,9 +23,8 @@ export const siteApplicationPath = "/application";
 
 export const siteNavLinks = [
     { label: "L'application", to: siteApplicationPath, enabled: true },
-    /* Pointe vers l'ancienne page tant que « Livraison & stockage » n'est pas construite */
-    { label: "Livraison & stockage", to: plateformeSolutionClientPath, enabled: true },
-    { label: "Tarifs", to: "/tarifs", enabled: false },
+    { label: "Livraison & stockage", to: "/livraison-stockage", enabled: true },
+    { label: "Tarifs", to: "/tarifs", enabled: true },
     { label: "Technologie", to: "/technologie", enabled: false },
     { label: "Blog", to: "/blog", enabled: false },
     { label: "Rejoindre l'équipe", to: entrepriseRecrutementPath, enabled: true },
@@ -44,8 +42,8 @@ export const siteFooterColumns = [
     {
         title: "Le service",
         links: [
-            { label: "Livraison & stockage", to: plateformeSolutionClientPath, enabled: true },
-            { label: "Tarifs", to: "/tarifs", enabled: false },
+            { label: "Livraison & stockage", to: "/livraison-stockage", enabled: true },
+            { label: "Tarifs", to: "/tarifs", enabled: true },
             { label: "Courses particuliers", to: plateformeCoursesParticuliersPath, enabled: true },
             { label: "Suivre un colis", to: "/suivi", enabled: false },
         ],

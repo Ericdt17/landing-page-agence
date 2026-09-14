@@ -19,7 +19,7 @@ export const accueilHero = {
     title: "Vos colis livrés. Votre argent le même jour.",
     lede: "Nous stockons, nous livrons partout à Yaoundé, nous encaissons pour vous, et vous êtes payé en fin de journée.",
     primary: "Commencer à livrer",
-    secondary: "Comment ça marche",
+    secondary: "Voir les tarifs",
     reassurance: "Aucun abonnement · Mise en place le jour même · À Yaoundé pour l’instant",
 };
 

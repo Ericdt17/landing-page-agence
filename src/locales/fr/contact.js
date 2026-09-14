@@ -22,7 +22,6 @@ export default {
         phone: { title: "Téléphone", text: "Pour les urgences uniquement : appelez le numéro WhatsApp de LivSight" },
     },
     place: {
-        mapLabel: "Plan de situation : Hippodrome, Yaoundé",
         title: "Hippodrome, Yaoundé",
         lines: ["Cameroun", "Lundi au samedi · 8h00 à 18h00", "Fermé le dimanche : urgences sur WhatsApp uniquement"],
     },

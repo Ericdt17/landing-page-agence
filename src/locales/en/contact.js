@@ -17,7 +17,6 @@ export default {
         phone: { title: "Phone", text: "For emergencies only: call LivSight's WhatsApp number" },
     },
     place: {
-        mapLabel: "Location map: Hippodrome, Yaoundé",
         title: "Hippodrome, Yaoundé",
         lines: ["Cameroon", "Monday to Saturday · 8am to 6pm", "Closed on Sunday: emergencies on WhatsApp only"],
     },

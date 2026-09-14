@@ -25,10 +25,10 @@ export const siteNavLinks = [
     { label: "L'application", to: siteApplicationPath, enabled: true },
     { label: "Livraison & stockage", to: "/livraison-stockage", enabled: true },
     { label: "Tarifs", to: "/tarifs", enabled: true },
-    { label: "Technologie", to: "/technologie", enabled: false },
+    { label: "Technologie", to: "/technologie", enabled: true },
     { label: "Blog", to: "/blog", enabled: false },
     { label: "Rejoindre l'équipe", to: entrepriseRecrutementPath, enabled: true },
-    { label: "Marketplace", to: "/marketplace", soon: true, enabled: false },
+    { label: "Marketplace", to: "/marketplace", soon: true, enabled: true },
 ];
 
 export const siteNavCta = { label: "Commencer à livrer", href: siteWhatsappHref };
@@ -55,13 +55,13 @@ export const siteFooterColumns = [
             { label: "Commencer à livrer", href: siteWhatsappHref, enabled: true },
             { label: "Base de connaissances", to: "/base-de-connaissances", enabled: false },
             { label: "API", to: plateformeIntegrationsApiPath, soon: true, enabled: true },
-            { label: "Marketplace", to: "/marketplace", soon: true, enabled: false },
+            { label: "Marketplace", to: "/marketplace", soon: true, enabled: true },
         ],
     },
     {
         title: "L'entreprise",
         links: [
-            { label: "Technologie", to: "/technologie", enabled: false },
+            { label: "Technologie", to: "/technologie", enabled: true },
             { label: "Blog technique", to: "/blog", enabled: false },
             { label: "Rejoindre l'équipe", to: entrepriseRecrutementPath, enabled: true },
             { label: "À propos", to: entrepriseAProposPath, enabled: true },

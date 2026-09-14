@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import { marketplacePath } from "../constants/marketplace";
 import SiteLayout from "../components/site/SiteLayout";
 import {
   tarifsColumns,
@@ -106,6 +108,9 @@ const TarifsPage = () => (
             <h2 className='ls-h text-[22px]'>{tarifsMarketplace.title}</h2>
           </div>
           <p className='ls-body text-ls-ink-mute'>{tarifsMarketplace.body}</p>
+          <Link to={marketplacePath} className='ls-btn ls-btn-ink-line mt-auto self-start'>
+            {tarifsMarketplace.link}
+          </Link>
         </div>
       </section>
     </SiteLayout>

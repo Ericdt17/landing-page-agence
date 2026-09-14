@@ -86,6 +86,7 @@ export const accueilMarketplace = {
     title: "Et si nous vous amenions les clients aussi ?",
     body: "Une place de marché où vos produits sont en vitrine et où les acheteurs de Yaoundé commandent directement. Même entrepôt, mêmes livreurs, même reversement.",
     cta: "Être prévenu",
+    link: "Comment ça va marcher",
 };
 
 export const accueilFinalCta = {

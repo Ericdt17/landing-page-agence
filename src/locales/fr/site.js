@@ -76,14 +76,6 @@ export default {
         refuse: "Refuser",
         accept: "Accepter",
     },
-    gate: {
-        title: "Le nouveau site arrive.",
-        body: "Cette version est en cours de préparation. Entrez le code d'accès pour la consulter.",
-        label: "Code d'accès",
-        submit: "Entrer",
-        error: "Ce code ne correspond pas. Réessayez.",
-        note: "Le site actuel reste disponible sur livsight.com.",
-    },
     apiTeaser: {
         kicker: "Bientôt",
         title: "Connectez votre site, nos livreurs livrent à la demande.",

@@ -1,4 +1,0 @@
-{
-  "gate": "on",
-  "_comment": "gate: \"off\" ouvre le site à tous. Modifiable sans rebuild si VITE_SITE_CONFIG_URL pointe vers un hôte éditable (passerelle, stockage objet)."
-}

@@ -1,13 +1,7 @@
-import {
-  marketplaceAccueilMobile,
-  marketplaceAccueilWeb,
-  marketplaceProduitMobile,
-  marketplaceSuiviMobile,
-  produitCasque,
-} from "../assets/images";
+import { lazy, Suspense } from "react";
+import { marketplaceAccueilWeb, produitCasque } from "../assets/images";
 import SEO from "../components/SEO";
 import SiteLayout from "../components/site/SiteLayout";
-import { marketplacePhotoCredits } from "../constants/photoCredits";
 import { routes } from "../constants/routes";
 import { useCopy } from "../i18n/useCopy";
 import WhatsAppButton from "../components/site/WhatsAppButton";
@@ -21,10 +15,10 @@ const Card = ({ children }) => (
 
 const ProductCard = () => (
   <Card>
-    <img src={produitCasque} alt='' width='160' height='108' className='h-[108px] w-full rounded-[20px] object-cover' />
+    <img src={produitCasque} alt='' width='160' height='108' className='h-[108px] w-full rounded-[20px] bg-white object-contain p-2' />
     <span className='text-[11px] leading-snug'>Casque Bluetooth sans fil</span>
     <span className='ls-h text-[15px]'>12 900 FCFA</span>
-    <span className='text-[9px] font-bold text-ls-ok'>Livraison aujourd&apos;hui</span>
+    <span className='text-[9px] font-bold text-ls-accent'>Livré par LivSight</span>
   </Card>
 );
 
@@ -60,6 +54,9 @@ const PayoutCard = () => (
 );
 
 const previews = [ProductCard, OrderCard, PayoutCard];
+
+/* Démo interactive chargée à part : la page reste légère tant qu'on ne la voit pas */
+const MarketplaceDemo = lazy(() => import("../sections/marketplace/MarketplaceDemo"));
 
 const MarketplacePage = () => {
   const copy = useCopy("marketplace");
@@ -104,6 +101,7 @@ const MarketplacePage = () => {
             <span className='h-2.5 w-2.5 rounded-full bg-ls-stroke' />
             <span className='h-2.5 w-2.5 rounded-full bg-ls-stroke' />
           </div>
+          <figcaption className='sr-only'>{preview.desktopCaption}</figcaption>
           <img
             src={marketplaceAccueilWeb}
             alt={preview.webAlt}
@@ -114,38 +112,11 @@ const MarketplacePage = () => {
           />
         </figure>
 
-        <div className='mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3'>
-          {preview.mobile.map((screen) => (
-            <figure key={screen.key} className='flex flex-col items-center gap-3'>
-              <img
-                src={{ accueil: marketplaceAccueilMobile, produit: marketplaceProduitMobile, suivi: marketplaceSuiviMobile }[screen.key]}
-                alt={screen.alt}
-                width='260'
-                height='563'
-                loading='lazy'
-                className='h-auto w-full max-w-[260px] rounded-[30px] border border-ls-rule shadow-[0_18px_44px_rgba(0,0,0,.08)]'
-              />
-              <figcaption className='text-sm font-bold'>{screen.caption}</figcaption>
-            </figure>
-          ))}
+        <div className='mt-12 border-t border-ls-rule pt-12'>
+          <Suspense fallback={<div className='h-[660px]' aria-busy='true' />}>
+            <MarketplaceDemo />
+          </Suspense>
         </div>
-
-        <details className='mt-8 text-xs text-ls-muted'>
-          <summary className='cursor-pointer font-semibold'>{preview.creditsLabel}</summary>
-          <p className='mt-2'>{preview.creditsIntro}</p>
-          {marketplacePhotoCredits.length > 0 && (
-          <ul className='mt-2 flex flex-col gap-1'>
-            {marketplacePhotoCredits.map((credit) => (
-              <li key={credit.url}>
-                <a href={credit.url} target='_blank' rel='noopener noreferrer' className='underline underline-offset-2'>
-                  {credit.work}
-                </a>{" "}
-                · {preview.creditBy} {credit.creator} · {credit.license}
-              </li>
-            ))}
-          </ul>
-          )}
-        </details>
       </section>
 
       <section aria-labelledby='marketplace-etapes' className='px-[18px] pb-16 md:px-16 md:pb-[84px]'>

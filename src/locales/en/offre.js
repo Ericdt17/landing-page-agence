@@ -92,7 +92,7 @@ export default {
                 kicker: "Storage",
                 value: "3 months",
                 unit: "free",
-                text: "We store your products at Hippodrome, free for your first 3 months. They leave the same day, with no pickup to arrange.",
+                text: "We store your products at Hippodrome, free for your first 3 months. They ship straight from the warehouse, with no pickup to arrange.",
                 bullets: ["Receiving and shelving", "Parcel preparation", "Inventory visible in the app", "Beyond 3 months, depending on size: let's talk"],
             },
             reversement: {

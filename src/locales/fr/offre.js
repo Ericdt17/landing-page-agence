@@ -101,7 +101,7 @@ export default {
                 kicker: "Stockage",
                 value: "3 mois",
                 unit: "offerts",
-                text: "Nous stockons vos produits à l'Hippodrome, offert pendant vos 3 premiers mois. Ils partent le jour même, sans enlèvement à faire.",
+                text: "Nous stockons vos produits à l'Hippodrome, offert pendant vos 3 premiers mois. Ils partent directement de l'entrepôt, sans enlèvement à faire.",
                 bullets: ["Réception et rangement", "Préparation des colis", "Inventaire visible dans l'application", "Au-delà de 3 mois, selon la taille : nous en discutons"],
             },
             reversement: {

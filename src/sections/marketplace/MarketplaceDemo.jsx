@@ -44,20 +44,48 @@ const TRACK_MS = 2800;
 const DELIVERY_FEE = 1000;
 const MOMO_MS = 3200;
 
-/* Palette de l'application marketplace (maquettes « Boutique »), bleu assombri pour le contraste AA */
-const THEME = {
-  "--m-bg": "#F8F9FA",
-  "--m-surface": "#FFFFFF",
-  "--m-stroke": "#E2E8F0",
-  "--m-text": "#191C1D",
-  "--m-muted": "#3C4A3C",
-  "--m-faint": "#5F6873",
-  "--m-primary": "#23709C",
-  "--m-ph": "#EEF2F7",
-  "--m-ok": "#2E7D32",
-  "--m-ok-bg": "#EAF7EE",
-  "--m-info": "#E9F4FB",
-  "--m-ink": "#1D5F84",
+/* Palettes de l'application marketplace (maquettes « Boutique ») : claire et sombre.
+   Le bleu des boutons (fond, texte blanc) et le bleu des textes sont séparés pour
+   rester lisibles dans les deux thèmes. */
+const THEMES = {
+  light: {
+    "--m-bg": "#F8F9FA",
+    "--m-surface": "#FFFFFF",
+    "--m-stroke": "#E2E8F0",
+    "--m-text": "#191C1D",
+    "--m-muted": "#3C4A3C",
+    "--m-faint": "#5F6873",
+    "--m-primary": "#23709C",
+    "--m-primary-fill": "#23709C",
+    "--m-ph": "#EEF2F7",
+    "--m-ok": "#2E7D32",
+    "--m-ok-bg": "#EAF7EE",
+    "--m-info": "#E9F4FB",
+    "--m-ink": "#1D5F84",
+    "--m-icon-bg": "#E0F2FE",
+    "--m-bad": "var(--m-bad)",
+    "--m-switch-off": "#C7CDD2",
+    "--m-toast": "#191C1D",
+  },
+  dark: {
+    "--m-bg": "#101518",
+    "--m-surface": "#1A2023",
+    "--m-stroke": "#2F383C",
+    "--m-text": "#ECEFF1",
+    "--m-muted": "#B4BDC2",
+    "--m-faint": "#97A1A7",
+    "--m-primary": "#6BB8E0",
+    "--m-primary-fill": "#23709C",
+    "--m-ph": "#272F34",
+    "--m-ok": "#79D389",
+    "--m-ok-bg": "#17301D",
+    "--m-info": "#14303D",
+    "--m-ink": "#9AD2EE",
+    "--m-icon-bg": "#1B3949",
+    "--m-bad": "#F18F8F",
+    "--m-switch-off": "#4A545A",
+    "--m-toast": "#2F383C",
+  },
 };
 
 const reducedMotion = () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
@@ -173,7 +201,7 @@ const PrimaryButton = ({ onClick, children, outline = false }) => (
     type='button'
     onClick={onClick}
     className={`flex min-h-[52px] w-full items-center justify-center rounded-full px-5 text-[15px] font-bold ${
-      outline ? "border border-[var(--m-primary)] bg-[var(--m-surface)] text-[var(--m-primary)]" : "bg-[var(--m-primary)] text-white"
+      outline ? "border border-[var(--m-primary)] bg-[var(--m-surface)] text-[var(--m-primary)]" : "bg-[var(--m-primary-fill)] text-white"
     }`}
   >
     {children}
@@ -209,6 +237,8 @@ const MarketplaceDemo = () => {
   const [trackStep, setTrackStep] = useState(0);
   const [notificationsRead, setNotificationsRead] = useState(false);
   const [notificationsOn, setNotificationsOn] = useState(true);
+  const [theme, setTheme] = useState("light");
+  const [systemDark, setSystemDark] = useState(false);
   const titleRef = useRef(null);
   const searchRef = useRef(null);
   const mounted = useRef(false);
@@ -252,6 +282,17 @@ const MarketplaceDemo = () => {
     const timer = setTimeout(() => setTrackStep((step) => step + 1), TRACK_MS);
     return () => clearTimeout(timer);
   }, [screen, order, trackStep, demo.trackSteps.length]);
+
+  /* Thème « Système » : suit le réglage clair ou sombre de l'appareil */
+  useEffect(() => {
+    const query = typeof window !== "undefined" ? window.matchMedia?.("(prefers-color-scheme: dark)") : null;
+    if (!query) return undefined;
+    setSystemDark(query.matches);
+    const onChange = (event) => setSystemDark(event.matches);
+    query.addEventListener?.("change", onChange);
+    return () => query.removeEventListener?.("change", onChange);
+  }, []);
+  const dark = theme === "dark" || (theme === "system" && systemDark);
 
   useEffect(() => {
     if (!toast) return undefined;
@@ -320,10 +361,11 @@ const MarketplaceDemo = () => {
     setTrackStep(0);
     setNotificationsRead(false);
     setNotificationsOn(true);
+    setTheme("light");
   };
 
-  const activeStep = { home: 0, search: 0, category: 0, product: 1, cart: 1, payment: 2, confirmed: 3, tracking: 3, notifications: 0, account: 0, favorites: 0, addresses: 0 }[screen] ?? 0;
-  const tabFor = { home: "home", search: "search", category: "home", product: "home", cart: "cart", payment: "cart", confirmed: "orders", tracking: "orders", orders: "orders", account: "account", favorites: "account", addresses: "account", notifications: "home" }[screen];
+  const activeStep = { home: 0, search: 0, category: 0, product: 1, cart: 1, payment: 2, confirmed: 3, tracking: 3, notifications: 0, account: 0, favorites: 0, addresses: 0, theme: 0 }[screen] ?? 0;
+  const tabFor = { home: "home", search: "search", category: "home", product: "home", cart: "cart", payment: "cart", confirmed: "orders", tracking: "orders", orders: "orders", account: "account", favorites: "account", addresses: "account", theme: "account", notifications: "home" }[screen];
   const withTabs = !["product", "payment", "confirmed", "tracking"].includes(screen);
 
   const ProductCard = ({ item, wide = false }) => (
@@ -377,7 +419,8 @@ const MarketplaceDemo = () => {
       >
         <div
           lang='fr'
-          style={THEME}
+          style={THEMES[dark ? "dark" : "light"]}
+          data-theme={dark ? "dark" : "light"}
           className='relative flex aspect-[430/932] w-full flex-col overflow-hidden rounded-[56px] bg-[var(--m-bg)] font-montserrat text-[var(--m-text)]'
         >
           <div aria-hidden='true' className='relative flex h-[54px] shrink-0 items-center justify-between px-8 pt-1 text-[15px] font-semibold'>
@@ -420,7 +463,7 @@ const MarketplaceDemo = () => {
                       className='relative'
                     >
                       <Icon name='bell' size={21} width={1.8} />
-                      {!notificationsRead && <span aria-hidden='true' className='absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-[#C62828]' />}
+                      {!notificationsRead && <span aria-hidden='true' className='absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-[var(--m-bad)]' />}
                     </RoundButton>
                   </div>
                   <button
@@ -437,7 +480,7 @@ const MarketplaceDemo = () => {
                   <button
                     type='button'
                     onClick={() => tab("orders")}
-                    className='mx-6 mt-4 flex items-center gap-3.5 rounded-[32px] bg-[var(--m-primary)] p-4 text-left text-white'
+                    className='mx-6 mt-4 flex items-center gap-3.5 rounded-[32px] bg-[var(--m-primary-fill)] p-4 text-left text-white'
                   >
                     <span className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/20'>
                       <Icon name='truck' size={24} />
@@ -520,7 +563,7 @@ const MarketplaceDemo = () => {
                       aria-pressed={category === id}
                       onClick={() => setCategory(id)}
                       className={`min-h-[40px] shrink-0 rounded-full border px-4 text-[13px] font-semibold ${
-                        category === id ? "border-[var(--m-text)] bg-[var(--m-text)] text-white" : "border-[var(--m-stroke)] bg-[var(--m-surface)]"
+                        category === id ? "border-[var(--m-text)] bg-[var(--m-text)] text-[var(--m-bg)]" : "border-[var(--m-stroke)] bg-[var(--m-surface)]"
                       }`}
                     >
                       {id === "all" ? demo.all : demo.categories[id]}
@@ -615,16 +658,16 @@ const MarketplaceDemo = () => {
               <div className='flex flex-col bg-[var(--m-surface)] pb-4'>
                 <div className='relative h-[300px] bg-[var(--m-ph)]'>
                   <img src={product.photo} alt='' width='390' height='300' className='h-full w-full object-cover' />
-                  <RoundButton label={demo.back} onClick={back} className='absolute left-5 top-6 border-transparent bg-white/95'>
+                  <RoundButton label={demo.back} onClick={back} className='absolute left-5 top-6 border-transparent bg-[var(--m-surface)]'>
                     <Icon name='back' size={21} width={2.2} />
                   </RoundButton>
                   <RoundButton
                     label={demo.favorite}
                     pressed={Boolean(favorites[product.id])}
                     onClick={() => setFavorites((current) => ({ ...current, [product.id]: !current[product.id] }))}
-                    className='absolute right-5 top-6 border-transparent bg-white/95'
+                    className='absolute right-5 top-6 border-transparent bg-[var(--m-surface)]'
                   >
-                    <Icon name='heart' size={21} color={favorites[product.id] ? "#C62828" : "currentColor"} fillColor={favorites[product.id] ? "#C62828" : "none"} />
+                    <Icon name='heart' size={21} color={favorites[product.id] ? "var(--m-bad)" : "currentColor"} fillColor={favorites[product.id] ? "var(--m-bad)" : "none"} />
                   </RoundButton>
                 </div>
                 <div className='flex flex-col gap-3.5 px-6 pt-5'>
@@ -713,14 +756,14 @@ const MarketplaceDemo = () => {
                 </div>
                 <ol className='flex items-center gap-2 text-[11px] font-semibold'>
                   <li className='flex items-center gap-1.5 text-[var(--m-ok)]'>
-                    <span className='flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[var(--m-ok)] text-white'>
+                    <span className='flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[var(--m-ok)] text-[var(--m-bg)]'>
                       <Icon name='check' size={13} width={3} />
                     </span>
                     {demo.stepAddress}
                   </li>
                   <li aria-hidden='true' className='h-0.5 flex-1 bg-[var(--m-ok)]' />
                   <li aria-current='step' className='flex items-center gap-1.5 text-[var(--m-primary)]'>
-                    <span className='flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[var(--m-primary)] text-white'>2</span>
+                    <span className='flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[var(--m-primary-fill)] text-white'>2</span>
                     {demo.payment}
                   </li>
                   <li aria-hidden='true' className='h-0.5 flex-1 bg-[var(--m-stroke)]' />
@@ -754,7 +797,7 @@ const MarketplaceDemo = () => {
                     <div className='w-full text-left'>
                       <p className='pb-2 text-[12px] font-semibold'>{demo.waiting}</p>
                       <div className='h-2 overflow-hidden rounded-full bg-[var(--m-stroke)]'>
-                        <div className='h-full w-2/3 rounded-full bg-[var(--m-primary)] motion-safe:animate-pulse' />
+                        <div className='h-full w-2/3 rounded-full bg-[var(--m-primary-fill)] motion-safe:animate-pulse' />
                       </div>
                     </div>
                     <PrimaryButton outline onClick={() => placeOrder("momo")}>
@@ -874,7 +917,7 @@ const MarketplaceDemo = () => {
                     </g>
                   </svg>
                   <span
-                    className='absolute flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-white bg-[var(--m-primary)] text-white transition-all duration-700'
+                    className='absolute flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-white bg-[var(--m-primary-fill)] text-white transition-all duration-700'
                     style={{ left: `${[24, 38, 50, 58][trackStep]}%`, top: `${[76, 62, 50, 38][trackStep]}%` }}
                   >
                     <Icon name='moto' size={22} width={2} />
@@ -910,7 +953,7 @@ const MarketplaceDemo = () => {
                             aria-hidden='true'
                             className={`flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full ${
                               index < trackStep || (index === trackStep && index === demo.trackSteps.length - 1)
-                                ? "bg-[var(--m-ok)] text-white"
+                                ? "bg-[var(--m-ok)] text-[var(--m-bg)]"
                                 : index === trackStep
                                   ? "border-[3px] border-[var(--m-primary)] bg-[var(--m-surface)]"
                                   : "border-2 border-[var(--m-stroke)]"
@@ -946,7 +989,7 @@ const MarketplaceDemo = () => {
             {screen === "account" && (
               <div className='flex flex-col gap-3 px-4 pb-6 pt-2'>
                 <div className='flex items-center gap-3.5 px-1 py-2'>
-                  <span aria-hidden='true' className='flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full bg-[#E0F2FE] text-[22px] font-bold text-[var(--m-ink)]'>
+                  <span aria-hidden='true' className='flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full bg-[var(--m-icon-bg)] text-[22px] font-bold text-[var(--m-ink)]'>
                     AN
                   </span>
                   <div className='flex flex-col gap-0.5'>
@@ -965,7 +1008,7 @@ const MarketplaceDemo = () => {
                   ].map(([id, icon, label, count, action], index) => (
                     <li key={id} className={index > 0 ? "border-t border-[var(--m-stroke)]" : ""}>
                       <button type='button' onClick={action} className='flex min-h-[64px] w-full items-center gap-3 px-4 text-left'>
-                        <span className='flex h-[38px] w-[38px] items-center justify-center rounded-[12px] bg-[#E0F2FE] text-[var(--m-ink)]'>
+                        <span className='flex h-[38px] w-[38px] items-center justify-center rounded-[12px] bg-[var(--m-icon-bg)] text-[var(--m-ink)]'>
                           <Icon name={icon} size={19} />
                         </span>
                         <span className='flex-1 text-[13px] font-semibold'>{label}</span>
@@ -976,6 +1019,11 @@ const MarketplaceDemo = () => {
                   ))}
                 </ul>
                 <div className='overflow-hidden rounded-[24px] border border-[var(--m-stroke)] bg-[var(--m-surface)]'>
+                  <button type='button' onClick={() => go("theme")} className='flex min-h-[56px] w-full items-center gap-3 border-b border-[var(--m-stroke)] px-4 text-left'>
+                    <span className='flex-1 text-[13px] font-semibold'>{demo.theme}</span>
+                    <span className='text-[12px] text-[var(--m-muted)]'>{demo.themes[theme]}</span>
+                    <Icon name='next' size={18} width={2.2} color='var(--m-muted)' />
+                  </button>
                   <div className='flex min-h-[56px] items-center gap-3 px-4'>
                     <span id='demo-notif-label' className='flex-1 text-[13px] font-semibold'>
                       {demo.notifSetting}
@@ -986,13 +1034,13 @@ const MarketplaceDemo = () => {
                       aria-checked={notificationsOn}
                       aria-labelledby='demo-notif-label'
                       onClick={() => setNotificationsOn((value) => !value)}
-                      className={`flex h-[26px] w-11 items-center rounded-full px-[3px] transition-colors ${notificationsOn ? "justify-end bg-[var(--m-primary)]" : "justify-start bg-[#C7CDD2]"}`}
+                      className={`flex h-[26px] w-11 items-center rounded-full px-[3px] transition-colors ${notificationsOn ? "justify-end bg-[var(--m-primary-fill)]" : "justify-start bg-[var(--m-switch-off)]"}`}
                     >
                       <span className='h-5 w-5 rounded-full bg-white shadow' />
                     </button>
                   </div>
                 </div>
-                <button type='button' onClick={() => setToast(demo.logoutDemo)} className='min-h-[48px] text-[13px] font-bold text-[#C62828]'>
+                <button type='button' onClick={() => setToast(demo.logoutDemo)} className='min-h-[48px] text-[13px] font-bold text-[var(--m-bad)]'>
                   {demo.logout}
                 </button>
               </div>
@@ -1031,7 +1079,7 @@ const MarketplaceDemo = () => {
                   </Title>
                 </div>
                 <div className='flex items-start gap-3 rounded-[24px] border-2 border-[var(--m-primary)] bg-[var(--m-surface)] p-4'>
-                  <span className='flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[12px] bg-[#E0F2FE] text-[var(--m-ink)]'>
+                  <span className='flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[12px] bg-[var(--m-icon-bg)] text-[var(--m-ink)]'>
                     <Icon name='home' size={19} />
                   </span>
                   <span className='flex flex-col gap-0.5 text-[12px]'>
@@ -1040,6 +1088,34 @@ const MarketplaceDemo = () => {
                     <span className='font-semibold text-[var(--m-primary)]'>{demo.addressDefault}</span>
                   </span>
                 </div>
+              </div>
+            )}
+
+            {screen === "theme" && (
+              <div className='flex flex-col gap-3 px-4 pb-6 pt-2'>
+                <div className='flex items-center gap-2'>
+                  <RoundButton label={demo.back} onClick={back} className='border-transparent bg-transparent'>
+                    <Icon name='back' size={21} width={2.2} />
+                  </RoundButton>
+                  <Title titleRef={titleRef} className='text-[20px]'>
+                    {demo.theme}
+                  </Title>
+                </div>
+                <fieldset className='overflow-hidden rounded-[24px] border border-[var(--m-stroke)] bg-[var(--m-surface)]'>
+                  <legend className='sr-only'>{demo.theme}</legend>
+                  {["light", "dark", "system"].map((id, index) => (
+                    <label
+                      key={id}
+                      className={`flex min-h-[56px] cursor-pointer items-center gap-3 px-4 ${index > 0 ? "border-t border-[var(--m-stroke)]" : ""}`}
+                    >
+                      <span className='flex flex-1 flex-col'>
+                        <span className='text-[13px] font-semibold'>{demo.themes[id]}</span>
+                        {id === "system" && <span className='text-[11px] text-[var(--m-muted)]'>{demo.themeSystemHint}</span>}
+                      </span>
+                      <input type='radio' name='demo-theme' value={id} checked={theme === id} onChange={() => setTheme(id)} className='h-4 w-4 accent-[#23709C]' />
+                    </label>
+                  ))}
+                </fieldset>
               </div>
             )}
 
@@ -1064,7 +1140,7 @@ const MarketplaceDemo = () => {
                         onClick={note.action ?? (() => {})}
                         className='flex w-full items-start gap-3 rounded-[24px] border border-[var(--m-stroke)] bg-[var(--m-surface)] p-4 text-left'
                       >
-                        <span className='flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[12px] bg-[#E0F2FE] text-[var(--m-ink)]'>
+                        <span className='flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[12px] bg-[var(--m-icon-bg)] text-[var(--m-ink)]'>
                           <Icon name={note.icon} size={19} />
                         </span>
                         <span className='flex flex-1 flex-col gap-0.5'>
@@ -1082,7 +1158,7 @@ const MarketplaceDemo = () => {
           </div>
 
           {toast && (
-            <p role='status' className='absolute bottom-[110px] left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-[var(--m-text)] px-4 py-2.5 text-[12px] font-semibold text-white shadow-lg'>
+            <p role='status' className='absolute bottom-[110px] left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-[var(--m-toast)] px-4 py-2.5 text-[12px] font-semibold text-white shadow-lg'>
               {toast}
               <button
                 type='button'
@@ -1149,7 +1225,7 @@ const MarketplaceDemo = () => {
                     <span className='relative'>
                       <Icon name={icon} size={24} />
                       {id === "cart" && cartCount > 0 && (
-                        <span className='absolute -right-2 -top-1.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[var(--m-primary)] px-1 text-[10px] font-bold text-white'>
+                        <span className='absolute -right-2 -top-1.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[var(--m-primary-fill)] px-1 text-[10px] font-bold text-white'>
                           <span aria-hidden='true'>{cartCount}</span>
                           <span className='sr-only'>{fill(demo.cartBadge, { count: cartCount })}</span>
                         </span>

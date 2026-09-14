@@ -18,30 +18,34 @@ const Card = ({ children, className = "" }) => (
 
 const Rule = () => <div className='h-px bg-ls-rule' />;
 
+/* Le commerçant envoie lui-même ses courses : l'écran les montre avec leur statut, rien à accepter */
+const orders = [
+  { name: "Chargeur USB-C", place: "Bastos", status: "En route", tone: "bg-ls-select text-ls-accent", photo: produitChargeur },
+  { name: "Casque Bluetooth", place: "Essos", status: "Livrée", tone: "bg-ls-ok-bg text-ls-ok", photo: produitCasque },
+];
+
 export const OrdersScreen = () => (
   <Card>
     <div className='flex items-baseline justify-between'>
-      <span className='text-[15px] font-bold'>Commandes</span>
-      <span className='ls-num text-[10px] text-ls-faint'>7</span>
+      <span className='text-[15px] font-bold'>Mes courses</span>
+      <span className='ls-num text-[10px] text-ls-faint'>7 aujourd&apos;hui</span>
     </div>
     <Rule />
     <div className='flex flex-col gap-2.5'>
-      <div className='flex items-center gap-2.5'>
-        <img src={produitChargeur} alt='' width='34' height='34' className='h-[34px] w-[34px] rounded-sm object-cover' />
-        <div>
-          <div className='text-[11px] font-semibold'>Chargeur USB-C</div>
-          <div className='ls-num text-[9px] text-ls-bad'>1 h 24</div>
+      {orders.map((order, index) => (
+        <div key={order.name} className='flex flex-col gap-2.5'>
+          {index > 0 && <Rule />}
+          <div className='flex items-center gap-2.5'>
+            <img src={order.photo} alt='' width='34' height='34' className='h-[34px] w-[34px] rounded-sm object-cover' />
+            <div className='min-w-0 flex-1'>
+              <div className='text-[11px] font-semibold'>{order.name}</div>
+              <div className='text-[9px] text-ls-faint'>{order.place}</div>
+            </div>
+            <span className={`rounded-full px-2 py-1 text-[8px] font-bold uppercase tracking-[.06em] ${order.tone}`}>{order.status}</span>
+          </div>
         </div>
-      </div>
-      <div className='ls-btn ls-btn-solid min-h-[34px] text-[11px]'>Accepter</div>
-      <Rule />
-      <div className='flex items-center gap-2.5'>
-        <img src={produitCasque} alt='' width='34' height='34' className='h-[34px] w-[34px] rounded-sm object-cover' />
-        <div>
-          <div className='text-[11px] font-semibold'>Casque Bluetooth</div>
-          <div className='ls-num text-[9px] text-ls-ok'>payée</div>
-        </div>
-      </div>
+      ))}
+      <div className='ls-btn ls-btn-line min-h-[34px] text-[11px]'>+ Nouvelle course</div>
     </div>
   </Card>
 );

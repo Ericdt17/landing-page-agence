@@ -37,7 +37,7 @@ export default {
         body: "Plus d'appels pour savoir où est un colis. Chaque statut se met à jour tout seul, chaque franc encaissé est enregistré, et le relevé se lit sans explication.",
         link: "Voir les écrans de l'application",
         captions: {
-            orders: { title: "La file de commandes", text: "Ce qui attend, en haut. Un geste pour accepter." },
+            orders: { title: "Vos courses, envoyées par vous", text: "Vous créez la course, nous la prenons en charge." },
             stock: { title: "Le stock, à jour", text: "Un clavier, pas un formulaire." },
             payout: { title: "L'argent, tracé", text: "Chaque ligne, expliquée." },
             tracking: { title: "Bientôt : le suivi en direct", text: "Vous et votre client verrez la même carte." },

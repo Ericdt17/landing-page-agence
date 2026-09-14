@@ -30,7 +30,7 @@ export default {
         body: "No more calls to find out where a parcel is. Every status updates on its own, every franc collected is recorded, and the statement needs no explaining.",
         link: "See the app screens",
         captions: {
-            orders: { title: "The order queue", text: "What's waiting, at the top. One tap to accept." },
+            orders: { title: "Your deliveries, sent by you", text: "You create the delivery, we take it from there." },
             stock: { title: "Stock, up to date", text: "A keypad, not a form." },
             payout: { title: "Money, traced", text: "Every line, explained." },
             tracking: { title: "Soon: live tracking", text: "You and your customer will see the same map." },

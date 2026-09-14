@@ -1,10 +1,5 @@
 import { facebook, instagram } from "../assets/icons";
 import {
-    ecosystemAgent,
-    ecosystemClient,
-    ecosystemDriver,
-} from "../assets/images";
-import {
     legalConditionsPath,
     termsContactIntro,
     termsGroups,
@@ -454,31 +449,6 @@ export const problemPoints = [
     "Récupérer votre argent.",
 ];
 
-export const ecosystemEyebrow = "L'Écosystème LivSight";
-
-export const ecosystemHeadline = "Une Solution, Trois Expériences";
-
-export const ecosystemShowcases = [
-    {
-        image: ecosystemClient,
-        title: "Pour les Clients",
-        description:
-            "Créez vos demandes en 2 clics et suivez-les en temps réel sur une interface élégante.",
-    },
-    {
-        image: ecosystemAgent,
-        title: "Pour les Agents",
-        description:
-            "Gérez les flux, assignez les chauffeurs et réglez les imprévus avec un tableau de bord puissant.",
-    },
-    {
-        image: ecosystemDriver,
-        title: "Pour les Livreurs",
-        description:
-            "Une application optimisée pour le terrain avec navigation GPS et validation instantanée.",
-    },
-];
-
 export const solutionEyebrow = "La solution";
 
 export const solutionHeadlineLines = [
@@ -873,68 +843,86 @@ export const privacyPageTitle = "Politique de Confidentialité";
 export const privacyPageUpdated = "Dernière mise à jour : avril 2026";
 
 export const privacyPageIntro =
-    "Chez LivSight, la confiance de nos clients est notre priorité. Cette politique explique clairement quelles données nous collectons, pourquoi, et comment nous les protégeons. Nous nous engageons à ne jamais vendre ni exploiter vos données à des fins commerciales.";
+    "Ce document explique quelles données LivSight collecte, pourquoi, combien de temps nous les gardons et comment exercer vos droits. Il est établi au regard de la loi n° 2024/017 du 23 décembre 2024. Dernière mise à jour : septembre 2026.";
 
 export const privacySections = [
     {
         number: "01",
-        title: "Données que nous collectons",
-        body: "Lors de l'utilisation de nos services, nous collectons uniquement les informations nécessaires au bon déroulement de votre livraison :",
-        items: [
-            "Nom et prénom de l'expéditeur et du destinataire",
-            "Numéro de téléphone (WhatsApp ou appel)",
-            "Adresse de collecte et adresse de livraison",
-            "Contenu des échanges WhatsApp liés à la commande",
-            "Informations sur l'appareil (type, système d'exploitation) pour l'application",
-        ],
+        title: "Qui traite vos données",
+        body: "LivSight SARL, dont le siège est à l'Hippodrome, Yaoundé, est responsable du traitement des données décrites ci-dessous. Ce document est établi au regard de la loi n° 2024/017 du 23 décembre 2024 relative à la protection des données à caractère personnel au Cameroun.",
+        items: [],
     },
     {
         number: "02",
-        title: "Comment nous utilisons vos données",
-        body: "Vos données sont utilisées exclusivement pour :",
+        title: "Données que nous collectons",
+        body: "Nous collectons uniquement ce qui est nécessaire à l'exécution de la livraison, selon la personne concernée :",
         items: [
-            "Traiter et coordonner votre livraison de bout en bout",
-            "Vous envoyer des notifications de statut (confirmation, en route, livré)",
-            "Résoudre d'éventuels litiges ou incidents de livraison",
-            "Améliorer la qualité et la fiabilité de notre service",
+            "Commerçant : identité, téléphone, adresse d'enlèvement, numéro de reversement, historique des courses",
+            "Destinataire : nom, téléphone, adresse de livraison, montant à encaisser, transmis par le commerçant",
+            "Livreur : identité, contact, position pendant le service uniquement, tournées et encaissements",
+            "Candidat : nom, téléphone, quartier, poste visé et, s'il est fourni, un CV",
+            "Visiteur du site : adresse IP, données de connexion et préférences d'affichage",
         ],
     },
     {
         number: "03",
-        title: "Partage de vos données",
-        body: "Nous ne vendons jamais vos données. Elles peuvent être partagées uniquement dans les cas suivants :",
+        title: "Pourquoi nous les traitons",
+        body: "Chaque donnée sert une finalité identifiée. Nous ne réutilisons pas vos données à d'autres fins sans vous en informer :",
         items: [
-            "Avec le livreur assigné à votre commande (nom, adresse, téléphone)",
-            "Avec nos prestataires techniques hébergeant l'infrastructure (sous accord de confidentialité strict)",
-            "Sur injonction légale d'une autorité compétente camerounaise",
+            "Exécuter le transport, le stockage et l'encaissement : exécution du contrat",
+            "Informer le destinataire de l'avancement de sa livraison : exécution du contrat",
+            "Reverser les sommes encaissées et tenir la comptabilité : obligation légale",
+            "Assurer le support et traiter les réclamations : exécution du contrat",
+            "Prévenir la fraude et sécuriser les opérations : intérêt légitime",
+            "Étudier une candidature : mesures précontractuelles, à votre demande",
         ],
     },
     {
         number: "04",
-        title: "Conservation des données",
-        body: "Nous appliquons une politique de conservation minimale :",
+        title: "Qui y a accès",
+        body: "L'accès est limité aux personnes qui en ont besoin pour faire leur travail :",
         items: [
-            "Données de commande : conservées 12 mois après la livraison pour gestion des litiges",
-            "Historique des échanges WhatsApp : 6 mois",
-            "Données de compte : jusqu'à la résiliation de votre contrat, puis supprimées sous 30 jours",
+            "Les personnels habilités de LivSight",
+            "Le livreur en charge de la course, pour les seules données nécessaires à la remise",
+            "Notre prestataire de paiement mobile, pour le reversement",
+            "Notre hébergeur, pour le fonctionnement technique du site",
+            "Les autorités compétentes, sur réquisition régulière",
         ],
     },
     {
         number: "05",
-        title: "Vos droits",
-        body: "Vous disposez à tout moment des droits suivants sur vos données personnelles :",
+        title: "Combien de temps nous les gardons",
+        body: "Nous ne conservons pas les données indéfiniment :",
         items: [
-            "Droit d'accès : obtenir une copie de vos données",
-            "Droit de rectification : corriger des informations inexactes",
-            "Droit à l'effacement : demander la suppression de vos données",
-            "Droit d'opposition : refuser certains traitements",
-            "Pour exercer ces droits, contactez-nous via email ou WhatsApp",
+            "Compte commerçant : pendant la relation, puis la durée de prescription applicable",
+            "Données de livraison : le temps nécessaire au traitement des réclamations",
+            "Pièces comptables et encaissements : la durée légale de conservation comptable",
+            "Candidatures non retenues : six mois, sauf accord de votre part pour les conserver",
+            "Position des livreurs : quelques jours, puis suppression",
         ],
     },
     {
         number: "06",
-        title: "Modifications de cette politique",
-        body: "Nous pouvons mettre à jour cette politique pour refléter des évolutions légales ou techniques. En cas de modification importante, nous vous informerons par WhatsApp ou email. La date de dernière mise à jour est toujours indiquée en haut de cette page.",
+        title: "Transferts hors du Cameroun",
+        body: "Certains prestataires techniques peuvent être établis hors du Cameroun. Nous limitons ces transferts au strict nécessaire et nous nous assurons qu'ils respectent les formalités prévues par la loi. Les polices de caractères du site sont hébergées sur notre propre domaine, précisément pour éviter un transfert inutile à chaque visite.",
+        items: [],
+    },
+    {
+        number: "07",
+        title: "Vos droits",
+        body: "Vous pouvez à tout moment demander à accéder à vos données, à les rectifier, à les faire effacer, à en limiter le traitement ou à vous opposer à celui-ci. Écrivez-nous et nous vous répondons dans les meilleurs délais. Si notre réponse ne vous satisfait pas, vous pouvez saisir l'Autorité de protection des données à caractère personnel (APDP).",
+        items: [],
+    },
+    {
+        number: "08",
+        title: "Sécurité",
+        body: "Les accès sont restreints aux personnes habilitées, les échanges sont chiffrés et les opérations sensibles sont tracées. Les reversements font l'objet d'une double validation humaine avant exécution.",
+        items: [],
+    },
+    {
+        number: "09",
+        title: "Modifications",
+        body: "Nous pouvons faire évoluer ce document. Toute modification substantielle vous sera signalée, et la date de mise à jour figure en tête de page.",
         items: [],
     },
 ];

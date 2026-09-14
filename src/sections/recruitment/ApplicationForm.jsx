@@ -1,7 +1,5 @@
-import Lottie from "lottie-react";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { candidatureSuccess } from "../../assets/lottie";
 import {
     APPLICATION_FORM_LABELS,
     AVAILABILITY_OPTIONS,
@@ -15,6 +13,8 @@ import {
     entrepriseRecrutementPath,
 } from "../../constants";
 import { submitApplication } from "../../services/recruitmentApi";
+
+const SuccessAnimation = lazy(() => import("./SuccessAnimation"));
 
 const RECRUITMENT_PHOTO_FIELD =
     import.meta.env.VITE_RECRUITMENT_PHOTO_FIELD ?? "photo";
@@ -53,7 +53,7 @@ const API_FIELD_TO_FORM = {
 };
 
 const sectionHeadingClass =
-    "font-montserrat text-sm font-semibold text-brand-blue";
+    "font-montserrat text-sm font-semibold text-brand-ink";
 
 const inputClass =
     "w-full rounded-2xl border border-gray-200 px-4 py-3 font-montserrat text-base text-gray-900 outline-none transition-all focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20";
@@ -638,7 +638,7 @@ const ApplicationForm = ({
                                 onChange={(e) =>
                                     toggleLanguage(opt.value, e.target.checked)
                                 }
-                                className='h-4 w-4 rounded border-gray-300 text-brand-blue focus:ring-brand-blue'
+                                className='h-4 w-4 rounded border-gray-300 text-brand-ink focus:ring-brand-blue'
                             />
                             <span>{opt.label}</span>
                         </label>
@@ -679,7 +679,7 @@ const ApplicationForm = ({
                                             }));
                                         }
                                     }}
-                                    className='h-4 w-4 border-gray-300 text-brand-blue focus:ring-brand-blue'
+                                    className='h-4 w-4 border-gray-300 text-brand-ink focus:ring-brand-blue'
                                 />
                                 <span>{opt.label}</span>
                             </label>
@@ -715,7 +715,7 @@ const ApplicationForm = ({
                                             }));
                                         }
                                     }}
-                                    className='h-4 w-4 border-gray-300 text-brand-blue focus:ring-brand-blue'
+                                    className='h-4 w-4 border-gray-300 text-brand-ink focus:ring-brand-blue'
                                 />
                                 <span>{opt.label}</span>
                             </label>
@@ -812,7 +812,7 @@ const ApplicationForm = ({
                     type='file'
                     accept='image/jpeg,image/png,image/webp'
                     onChange={handlePhotoChange}
-                    className='mt-2 w-full font-montserrat text-sm text-gray-600 file:mr-4 file:rounded-full file:border-0 file:bg-brand-blue file:px-4 file:py-2 file:font-semibold file:text-white'
+                    className='mt-2 w-full font-montserrat text-sm text-gray-600 file:mr-4 file:rounded-full file:border-0 file:bg-brand-ink file:px-4 file:py-2 file:font-semibold file:text-white'
                 />
                 {photoFile && (
                     <p className='mt-2 font-montserrat text-xs text-gray-600'>
@@ -837,7 +837,7 @@ const ApplicationForm = ({
                     type='file'
                     accept='.pdf,application/pdf'
                     onChange={handleCvChange}
-                    className='mt-2 w-full font-montserrat text-sm text-gray-600 file:mr-4 file:rounded-full file:border-0 file:bg-brand-blue file:px-4 file:py-2 file:font-semibold file:text-white'
+                    className='mt-2 w-full font-montserrat text-sm text-gray-600 file:mr-4 file:rounded-full file:border-0 file:bg-brand-ink file:px-4 file:py-2 file:font-semibold file:text-white'
                 />
                 {cvFile && (
                     <p className='mt-2 font-montserrat text-xs text-gray-600'>
@@ -862,7 +862,7 @@ const ApplicationForm = ({
                     type='file'
                     accept='.pdf,application/pdf'
                     onChange={handleCoverLetterChange}
-                    className='mt-2 w-full font-montserrat text-sm text-gray-600 file:mr-4 file:rounded-full file:border-0 file:bg-brand-blue file:px-4 file:py-2 file:font-semibold file:text-white'
+                    className='mt-2 w-full font-montserrat text-sm text-gray-600 file:mr-4 file:rounded-full file:border-0 file:bg-brand-ink file:px-4 file:py-2 file:font-semibold file:text-white'
                 />
                 {coverLetterFile && (
                     <p className='mt-2 font-montserrat text-xs text-gray-600'>
@@ -887,11 +887,9 @@ const ApplicationForm = ({
                         className='h-36 w-36 sm:h-40 sm:w-40'
                         aria-hidden='true'
                     >
-                        <Lottie
-                            animationData={candidatureSuccess}
-                            loop={false}
-                            autoplay
-                        />
+                        <Suspense fallback={null}>
+                            <SuccessAnimation />
+                        </Suspense>
                     </div>
                     <p className='mt-6 font-montserrat text-2xl font-bold text-gray-900'>
                         {STATUS_LABELS.submitSuccessTitle}
@@ -900,7 +898,7 @@ const ApplicationForm = ({
                         {STATUS_LABELS.submitSuccessSubtitle}
                     </p>
                     {submittedApplicationId && (
-                        <p className='mt-3 font-montserrat text-sm font-semibold text-brand-blue'>
+                        <p className='mt-3 font-montserrat text-sm font-semibold text-brand-ink'>
                             {STATUS_LABELS.submitSuccessApplicationId(
                                 submittedApplicationId,
                             )}
@@ -909,7 +907,7 @@ const ApplicationForm = ({
                     <Link
                         to={successHref}
                         onClick={handleCloseSuccess}
-                        className='mt-8 rounded-full bg-brand-blue px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95'
+                        className='mt-8 rounded-full bg-brand-ink px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95'
                     >
                         {APPLICATION_FORM_LABELS.close}
                     </Link>
@@ -948,7 +946,7 @@ const ApplicationForm = ({
 
                             {step === 2 && hasQuestions && (
                                 <div className='flex flex-col gap-6'>
-                                    <p className='font-montserrat text-sm font-semibold text-brand-blue'>
+                                    <p className='font-montserrat text-sm font-semibold text-brand-ink'>
                                         {APPLICATION_FORM_LABELS.step2Title}
                                     </p>
                                     {questions
@@ -1057,7 +1055,7 @@ const ApplicationForm = ({
                                                                             }),
                                                                         )
                                                                     }
-                                                                    className='mt-1 h-4 w-4 border-gray-300 text-brand-blue focus:ring-brand-blue'
+                                                                    className='mt-1 h-4 w-4 border-gray-300 text-brand-ink focus:ring-brand-blue'
                                                                 />
                                                                 <span>
                                                                     {lab}
@@ -1091,7 +1089,7 @@ const ApplicationForm = ({
                                             disabled={
                                                 submitStatus === "loading"
                                             }
-                                            className='rounded-full bg-brand-blue px-6 py-3 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60'
+                                            className='rounded-full bg-brand-ink px-6 py-3 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60'
                                         >
                                             {submitStatus === "loading" ? (
                                                 <span className='inline-flex items-center justify-center gap-2'>
@@ -1114,7 +1112,7 @@ const ApplicationForm = ({
                                     type='button'
                                     onClick={handleNext}
                                     disabled={submitStatus === "loading"}
-                                    className='mt-2 w-full rounded-full bg-brand-blue px-6 py-3.5 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60'
+                                    className='mt-2 w-full rounded-full bg-brand-ink px-6 py-3.5 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60'
                                 >
                                     {submitStatus === "loading" &&
                                     !hasQuestions ? (

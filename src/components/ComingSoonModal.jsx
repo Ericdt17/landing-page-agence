@@ -139,7 +139,7 @@ const ComingSoonModal = () => {
             <button
               type="button"
               onClick={close}
-              className="mt-8 rounded-full bg-brand-blue px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95"
+              className="mt-8 rounded-full bg-brand-ink px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95"
             >
               Fermer
             </button>
@@ -149,7 +149,7 @@ const ComingSoonModal = () => {
         {/* ── Duplicate ── */}
         {status === "duplicate" && (
           <div className="flex flex-col items-center py-6 text-center">
-            <RocketLaunchIcon className="h-8 w-8 text-brand-blue" aria-hidden="true" />
+            <RocketLaunchIcon className="h-8 w-8 text-brand-ink" aria-hidden="true" />
             <p className="mt-6 font-montserrat text-2xl font-bold text-gray-900">Déjà inscrit !</p>
             <p className="mt-2 font-montserrat text-base leading-6 text-gray-500">
               Ces coordonnées sont déjà sur notre liste. Vous serez notifié au lancement.
@@ -157,7 +157,7 @@ const ComingSoonModal = () => {
             <button
               type="button"
               onClick={close}
-              className="mt-8 rounded-full bg-brand-blue px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95"
+              className="mt-8 rounded-full bg-brand-ink px-8 py-3 font-montserrat text-base font-bold text-white transition-opacity hover:opacity-95"
             >
               Parfait
             </button>
@@ -168,7 +168,7 @@ const ComingSoonModal = () => {
         {(status === "idle" || status === "loading" || status === "error") && (
           <>
             <div className="text-center">
-              <RocketLaunchIcon className="mx-auto h-8 w-8 text-brand-blue" aria-hidden="true" />
+              <RocketLaunchIcon className="mx-auto h-8 w-8 text-brand-ink" aria-hidden="true" />
               <h2
                 id="modal-title"
                 className="mt-6 font-montserrat text-2xl font-bold text-gray-900"
@@ -221,7 +221,7 @@ const ComingSoonModal = () => {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="mt-1 w-full rounded-full bg-brand-blue px-6 py-3.5 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60"
+                className="mt-1 w-full rounded-full bg-brand-ink px-6 py-3.5 font-montserrat text-base font-bold text-white shadow-lg shadow-brand-blue/20 transition-opacity hover:opacity-95 disabled:opacity-60"
               >
                 {status === "loading" ? "Envoi en cours…" : "Me notifier au lancement"}
               </button>

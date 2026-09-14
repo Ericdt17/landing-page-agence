@@ -9,7 +9,7 @@ const LeProbleme = () => {
   return (
     <section id='probleme' className='relative scroll-mt-24'>
       <div className='max-container px-6 py-10 sm:px-10 sm:py-14 lg:px-14'>
-        <p className='font-montserrat text-sm font-semibold uppercase tracking-[1.4px] text-brand-blue'>
+        <p className='font-montserrat text-sm font-semibold uppercase tracking-[1.4px] text-brand-ink'>
           {problemEyebrow}
         </p>
         <h2 className='mt-4 max-w-4xl font-montserrat text-2xl font-bold leading-snug text-gray-900 sm:text-3xl sm:leading-tight md:text-4xl lg:text-[48px] lg:leading-[1.15]'>
@@ -23,7 +23,7 @@ const LeProbleme = () => {
           ))}
         </h2>
         <div
-          className='mt-4 h-1.5 w-24 rounded-full bg-brand-blue'
+          className='mt-4 h-1.5 w-24 rounded-full bg-brand-ink'
           aria-hidden='true'
         />
 

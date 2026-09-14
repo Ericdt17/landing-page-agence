@@ -19,13 +19,13 @@ const Hero = () => {
     >
       <div className='relative max-container padding-x pt-6 sm:pt-16 lg:pt-28 pb-8 sm:pb-14 lg:pb-20'>
         <div className='mx-auto max-w-3xl text-center'>
-          <div className='inline-flex max-w-full items-center rounded-full bg-brand-blue px-4 py-1.5'>
+          <div className='inline-flex max-w-full items-center rounded-full bg-brand-ink px-4 py-1.5'>
             <span className='font-montserrat text-[11px] font-semibold leading-snug text-white sm:text-xs'>
               {heroBadge}
             </span>
           </div>
 
-          <h1 className='mt-6 font-palanquin font-extrabold text-[#1a1a1a] text-[34px] leading-[1.08] tracking-tight sm:text-5xl sm:leading-[1.05] lg:text-[72px] lg:leading-[72px] lg:tracking-[-1.8px]'>
+          <h1 className='mt-6 font-montserrat font-extrabold text-[#1a1a1a] text-[34px] leading-[1.08] tracking-tight sm:text-5xl sm:leading-[1.05] lg:text-[72px] lg:leading-[72px] lg:tracking-[-1.8px]'>
             {heroHeadlineLines.map((line) => {
               if (!line.includes(heroHeadlineEmphasis)) {
                 return (
@@ -39,7 +39,7 @@ const Hero = () => {
               return (
                 <span key={line} className='block'>
                   {before}
-                  <span className='text-brand-blue'>{heroHeadlineEmphasis}</span>
+                  <span className='text-brand-ink'>{heroHeadlineEmphasis}</span>
                   {after}
                 </span>
               );
@@ -56,7 +56,7 @@ const Hero = () => {
                 key={perk}
                 className='flex items-center gap-3 rounded-2xl border border-brand-blue/15 bg-pale-blue/60 px-4 py-3 text-left sm:px-5 sm:py-3.5'
               >
-                <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white'>
+                <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-ink text-white'>
                   <CheckIcon className='h-4 w-4' aria-hidden='true' />
                 </span>
                 <span className='font-montserrat text-sm font-semibold leading-6 text-gray-800 sm:text-base'>
@@ -69,7 +69,7 @@ const Hero = () => {
           <div className='mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4'>
             <Button
               label={heroCtaSecondaryLabel}
-              backgroundColor='bg-brand-blue'
+              backgroundColor='bg-brand-ink'
               textColor='text-white'
               borderColor='border-brand-blue'
               fullWidth

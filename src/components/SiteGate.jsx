@@ -97,7 +97,7 @@ const SiteGate = ({ children }) => {
     <main className='flex min-h-screen items-center justify-center bg-white px-6 py-16'>
       <div className='w-full max-w-sm'>
         <img src={headerLogo} alt='LivSight' className='h-9 w-auto' />
-        <h1 className='mt-6 font-palanquin text-3xl font-bold leading-tight text-gray-900'>
+        <h1 className='mt-6 font-montserrat text-3xl font-bold leading-tight text-gray-900'>
           Le nouveau site arrive.
         </h1>
         <p className='mt-3 font-montserrat text-sm leading-6 text-gray-600'>
@@ -121,11 +121,11 @@ const SiteGate = ({ children }) => {
             aria-invalid={error}
             aria-describedby={error ? "gate-error" : undefined}
             placeholder='Code d&rsquo;accès'
-            className='h-12 rounded-full border border-gray-200 px-5 font-montserrat text-sm text-gray-900 outline-none focus-visible:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue/30'
+            className='h-12 rounded-full border border-gray-200 px-5 font-montserrat text-sm text-gray-900 outline-none focus-visible:border-brand-ink focus-visible:ring-2 focus-visible:ring-brand-ink/30'
           />
           <button
             type='submit'
-            className='h-12 rounded-full bg-brand-blue px-5 font-montserrat text-sm font-bold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue'
+            className='h-12 rounded-full bg-brand-ink px-5 font-montserrat text-sm font-bold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink'
           >
             Entrer
           </button>

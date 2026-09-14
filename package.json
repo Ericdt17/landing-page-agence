@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "size": "node scripts/check-bundle-size.mjs",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "screenshot:hero": "node scripts/screenshot-hero.mjs"
   },
   "dependencies": {
+    "@fontsource/montserrat": "^5.3.0",
     "@heroicons/react": "^2.2.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",

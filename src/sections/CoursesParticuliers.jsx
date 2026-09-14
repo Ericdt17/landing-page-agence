@@ -51,7 +51,7 @@ const CoursesParticuliers = () => {
                         key={title}
                         className='rounded-2xl border border-gray-100 bg-gray-50/80 px-5 py-5 text-center shadow-soft-card sm:px-6'
                     >
-                        <p className='font-montserrat text-lg font-bold text-brand-blue'>
+                        <p className='font-montserrat text-lg font-bold text-brand-ink'>
                             {title}
                         </p>
                         <p className='mt-2 font-montserrat text-sm text-gray-600'>
@@ -80,7 +80,7 @@ const CoursesParticuliers = () => {
                                 className='flex flex-col rounded-3xl border border-gray-100 bg-white px-6 py-7 shadow-soft-card'
                             >
                                 <Icon
-                                    className='h-6 w-6 text-brand-blue'
+                                    className='h-6 w-6 text-brand-ink'
                                     aria-hidden='true'
                                 />
                                 <h3 className='mt-5 font-montserrat text-lg font-bold text-gray-900'>
@@ -112,7 +112,7 @@ const CoursesParticuliers = () => {
                             className='flex gap-4 sm:gap-6'
                         >
                             <span
-                                className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue font-montserrat text-sm font-bold text-white sm:h-12 sm:w-12 sm:text-base'
+                                className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-ink font-montserrat text-sm font-bold text-white sm:h-12 sm:w-12 sm:text-base'
                                 aria-hidden='true'
                             >
                                 {step}
@@ -131,7 +131,7 @@ const CoursesParticuliers = () => {
             </section>
 
             <div className='mt-10 rounded-2xl border border-gray-100 bg-gray-50/80 px-6 py-5 text-center shadow-soft-card sm:px-8'>
-                <p className='font-montserrat text-lg font-bold text-brand-blue'>
+                <p className='font-montserrat text-lg font-bold text-brand-ink'>
                     {coursesParticuliersPricingTitle}
                 </p>
                 <p className='mt-1 font-montserrat text-sm leading-relaxed text-gray-600 sm:text-base'>

@@ -18,7 +18,7 @@ const ConfidentialiteSection = () => {
         {privacySections.map((section) => (
           <div key={section.number}>
             <div className='flex items-baseline gap-3'>
-              <span className='font-montserrat text-xs font-bold tracking-[0.14em] text-brand-blue'>
+              <span className='font-montserrat text-xs font-bold tracking-[0.14em] text-brand-ink'>
                 {section.number}
               </span>
               <h2 className='font-montserrat text-lg font-bold text-gray-900 sm:text-xl'>
@@ -35,7 +35,7 @@ const ConfidentialiteSection = () => {
                 {section.items.map((item) => (
                   <li key={item} className='flex items-start gap-2.5'>
                     <span
-                      className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue'
+                      className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-ink'
                       aria-hidden='true'
                     />
                     <span className='font-montserrat text-sm leading-6 text-gray-600 sm:text-base sm:leading-7'>
@@ -61,7 +61,7 @@ const ConfidentialiteSection = () => {
         <div className='mt-5 flex flex-col gap-3 sm:flex-row sm:gap-4'>
           <a
             href={`mailto:${footerSupportEmail}`}
-            className='inline-flex items-center justify-center rounded-full border border-brand-blue px-6 py-3 font-montserrat text-sm font-bold text-brand-blue transition-colors hover:bg-brand-blue hover:text-white'
+            className='inline-flex items-center justify-center rounded-full border border-brand-blue px-6 py-3 font-montserrat text-sm font-bold text-brand-ink transition-colors hover:bg-brand-ink hover:text-white'
           >
             {footerSupportEmail}
           </a>
@@ -69,7 +69,7 @@ const ConfidentialiteSection = () => {
             href={whatsappCtaHref}
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 font-montserrat text-sm font-bold text-white transition-colors hover:bg-brand-blue/90'
+            className='inline-flex items-center justify-center rounded-full bg-brand-ink px-6 py-3 font-montserrat text-sm font-bold text-white transition-colors hover:bg-brand-blue/90'
           >
             Écrire sur WhatsApp
           </a>

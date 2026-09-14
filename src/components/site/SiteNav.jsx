@@ -118,7 +118,7 @@ const NavGroup = ({ item, copy }) => {
         <ul
           id={panelId}
           aria-label={copy.nav.entrepriseMenu}
-          className='absolute right-0 top-full z-50 mt-3 flex min-w-[220px] flex-col rounded-2xl border border-ls-rule bg-ls-surface p-2 shadow-[0_18px_40px_rgba(14,21,24,.12)]'
+          className='absolute left-1/2 top-full z-50 mt-3 -translate-x-1/2 flex min-w-[220px] flex-col rounded-2xl border border-ls-rule bg-ls-surface p-2 shadow-[0_18px_40px_rgba(14,21,24,.12)]'
         >
           {item.children.map((child) => (
             <li key={child.id}>
@@ -165,12 +165,13 @@ const SiteNav = () => {
     <header className='border-b border-ls-rule bg-ls-bg'>
       <nav
         aria-label={copy.nav.label}
-        className='mx-auto flex max-w-[1440px] items-center gap-3 px-[18px] py-3.5 md:gap-10 md:px-16 md:py-[22px]'
+        className='mx-auto flex max-w-[1440px] items-center gap-3 px-[18px] py-3.5 md:gap-10 md:px-16 md:py-[22px] xl:grid xl:grid-cols-[minmax(max-content,1fr)_auto_minmax(max-content,1fr)]'
       >
-        <Link to={routes.home} aria-label={copy.nav.home} onClick={close}>
+        <Link to={routes.home} aria-label={copy.nav.home} onClick={close} className='justify-self-start'>
           <SiteLogo />
         </Link>
 
+        {/* Menu complet centré dans la barre : logo à gauche, langue et bouton à droite */}
         <ul className='hidden items-center gap-[26px] text-sm xl:flex'>
           {items.map((item) => (
             <li key={item.id}>

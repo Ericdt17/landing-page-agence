@@ -56,6 +56,7 @@ export const navItems = [
     { id: "blog", to: routes.blog, enabled: false },
     { id: "recrutement", to: routes.recrutement, enabled: true },
     { id: "marketplace", to: routes.marketplace, soon: true, enabled: true },
+    { id: "contact", to: routes.contact, enabled: true },
 ];
 
 export const footerColumns = [

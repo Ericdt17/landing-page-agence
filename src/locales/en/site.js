@@ -17,6 +17,7 @@ export default {
             blog: "Blog",
             recrutement: "Join the team",
             marketplace: "Marketplace",
+            contact: "Contact",
         },
     },
     language: {

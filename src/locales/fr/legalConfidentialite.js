@@ -23,7 +23,7 @@ export default {
                 "Commerçant : identité, téléphone, adresse d'enlèvement, numéro de reversement, historique des courses",
                 "Destinataire : nom, téléphone, adresse de livraison, montant à encaisser, transmis par le commerçant",
                 "Livreur : identité, contact, position pendant le service uniquement, tournées et encaissements",
-                "Candidat : nom, téléphone, quartier, poste visé et, s'il est fourni, un CV",
+                "Candidat : poste visé, nom complet, téléphone, email, quartier de résidence, niveau et domaine d'études, école ou université, langues parlées, situation professionnelle actuelle, moyen de transport, disponibilité, photo de profil, CV, lettre de motivation et réponses aux questions propres au poste",
                 "Visiteur du site : adresse IP, données de connexion et préférences d'affichage",
             ],
         },
@@ -37,7 +37,7 @@ export default {
                 "Reverser les sommes encaissées et tenir la comptabilité : obligation légale",
                 "Assurer le support et traiter les réclamations : exécution du contrat",
                 "Prévenir la fraude et sécuriser les opérations : intérêt légitime",
-                "Étudier une candidature : mesures précontractuelles, à votre demande",
+                "Étudier une candidature : mesures précontractuelles, à votre demande. La photo, le CV et la lettre de motivation servent uniquement au recrutement",
             ],
         },
         {

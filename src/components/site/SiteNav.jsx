@@ -73,7 +73,7 @@ const SiteNav = () => {
       if (event.key === "Escape") setOpen(false);
     };
     const onResize = () => {
-      if (window.innerWidth >= 1024) setOpen(false);
+      if (window.innerWidth >= 1280) setOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("resize", onResize);
@@ -89,13 +89,13 @@ const SiteNav = () => {
     <header className='border-b border-ls-rule bg-ls-bg'>
       <nav
         aria-label={copy.nav.label}
-        className='mx-auto flex max-w-[1440px] items-center gap-3 px-[18px] py-3.5 md:gap-10 md:px-16 md:py-[22px]'
+        className='mx-auto flex max-w-[1440px] items-center gap-3 px-[18px] py-3.5 md:gap-10 md:px-16 md:py-[22px] xl:gap-7 xl:px-12 min-[1366px]:gap-10 min-[1366px]:px-16'
       >
         <Link to={routes.home} aria-label={copy.nav.home} onClick={close}>
           <SiteLogo />
         </Link>
 
-        <ul className='hidden items-center gap-[26px] text-sm lg:flex'>
+        <ul className='hidden items-center gap-5 text-sm xl:flex min-[1366px]:gap-[26px]'>
           {items.map((item) => (
             <li key={item.id}>
               <NavItem item={item} label={copy.nav.links[item.id]} soon={copy.nav.soon} className='whitespace-nowrap transition-colors' />
@@ -108,7 +108,7 @@ const SiteNav = () => {
           <WhatsAppButton className='ls-btn ls-btn-sm ls-btn-solid max-sm:hidden'>{copy.nav.cta}</WhatsAppButton>
           <button
             type='button'
-            className='inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ls-stroke text-ls-text lg:hidden'
+            className='inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ls-stroke text-ls-text xl:hidden'
             aria-expanded={open}
             aria-controls='menu-principal'
             aria-label={open ? copy.nav.closeMenu : copy.nav.openMenu}
@@ -124,7 +124,7 @@ const SiteNav = () => {
       </nav>
 
       {open && (
-        <div id='menu-principal' className='border-t border-ls-rule lg:hidden'>
+        <div id='menu-principal' className='border-t border-ls-rule xl:hidden'>
           <ul className='mx-auto flex max-w-[1440px] flex-col px-[18px] md:px-16'>
             {items.map((item) => (
               <li key={item.id} className='border-b border-ls-rule'>

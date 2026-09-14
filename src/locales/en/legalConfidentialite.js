@@ -23,7 +23,7 @@ export default {
                 "Merchant: identity, phone, pickup address, payout number, delivery history",
                 "Recipient: name, phone, delivery address, amount to collect, provided by the merchant",
                 "Driver: identity, contact details, position during working hours only, rounds and collections",
-                "Applicant: name, phone, neighbourhood, position applied for and, if provided, a CV",
+                "Applicant: position applied for, full name, phone, email, neighbourhood, level and field of study, school or university, languages spoken, current employment situation, means of transport, availability, profile photo, CV, cover letter and answers to position-specific questions",
                 "Website visitor: IP address, connection data and display preferences",
             ],
         },
@@ -37,7 +37,7 @@ export default {
                 "Paying out collected sums and keeping accounts: legal obligation",
                 "Providing support and handling complaints: performance of the contract",
                 "Preventing fraud and securing operations: legitimate interest",
-                "Reviewing an application: pre-contractual measures, at your request",
+                "Reviewing an application: pre-contractual measures, at your request. The photo, CV and cover letter are used for hiring only",
             ],
         },
         {

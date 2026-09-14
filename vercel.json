@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/application",
+      "destination": "/espace-commercant",
+      "permanent": true
+    },
+    {
       "source": "/plateforme/integrations-api",
       "destination": "/api-livraison",
       "permanent": true
@@ -12,7 +17,7 @@
     },
     {
       "source": "/plateforme/portail-agent",
-      "destination": "/application",
+      "destination": "/espace-commercant",
       "permanent": true
     },
     {

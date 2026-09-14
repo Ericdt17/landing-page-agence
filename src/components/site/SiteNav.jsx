@@ -89,13 +89,13 @@ const SiteNav = () => {
     <header className='border-b border-ls-rule bg-ls-bg'>
       <nav
         aria-label={copy.nav.label}
-        className='mx-auto flex max-w-[1440px] items-center gap-3 px-[18px] py-3.5 md:gap-10 md:px-16 md:py-[22px] xl:gap-7 xl:px-12 min-[1366px]:gap-10 min-[1366px]:px-16'
+        className='mx-auto flex max-w-[1440px] items-center gap-3 px-[18px] py-3.5 md:gap-10 md:px-16 md:py-[22px] xl:gap-5 xl:px-12 min-[1366px]:gap-7 min-[1440px]:gap-10 min-[1440px]:px-16'
       >
         <Link to={routes.home} aria-label={copy.nav.home} onClick={close}>
           <SiteLogo />
         </Link>
 
-        <ul className='hidden items-center gap-5 text-sm xl:flex min-[1366px]:gap-[26px]'>
+        <ul className='hidden items-center gap-4 text-sm xl:flex min-[1366px]:gap-5 min-[1440px]:gap-[26px]'>
           {items.map((item) => (
             <li key={item.id}>
               <NavItem item={item} label={copy.nav.links[item.id]} soon={copy.nav.soon} className='whitespace-nowrap transition-colors' />

@@ -52,7 +52,7 @@ const App = () => {
       <Suspense fallback={<PageFallback />}>
         <Routes>
           <Route path='/' element={<Accueil />} />
-          <Route path='/application' element={<ApplicationPage />} />
+          <Route path='/espace-commercant' element={<ApplicationPage />} />
           <Route path='/livraison-stockage' element={<LivraisonStockagePage />} />
           <Route path='/tarifs' element={<TarifsPage />} />
           <Route path='/technologie' element={<TechnologiePage />} />

@@ -5,7 +5,7 @@
 
 export const routes = {
     home: "/",
-    application: "/application",
+    application: "/espace-commercant",
     livraison: "/livraison-stockage",
     tarifs: "/tarifs",
     technologie: "/technologie",
@@ -33,6 +33,7 @@ export const recruitmentApplyPath = (jobId) => `${recruitmentOfferPath(jobId)}/p
 export const legacyRedirects = {
     "/plateforme/solution-client": routes.livraison,
     "/plateforme/portail-agent": routes.application,
+    "/application": routes.application,
     "/plateforme/portail-livreur": routes.livraison,
     "/plateforme/integrations-api": routes.apiLivraison,
 };

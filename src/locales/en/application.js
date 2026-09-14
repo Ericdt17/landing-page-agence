@@ -1,12 +1,12 @@
-/** Merchant app page (English). Same shape as locales/fr/application.js. */
+/** Merchant area page (English). Same shape as locales/fr/application.js. */
 export default {
     seo: {
-        title: "The merchant app",
+        title: "Merchant area",
         description:
             "Orders, stock, deliveries and money in one place, on your phone. Installed and taught at your shop, no subscription.",
     },
     hero: {
-        kicker: "The merchant app",
+        kicker: "Merchant area",
         title: "Your deliveries fit in your pocket.",
         lede: "Orders, stock, deliveries, money. All in one place, on the phone you already have. And we come over to show you how to use it.",
         primary: "Start delivering",

@@ -10,7 +10,7 @@ export default {
         cta: "Start delivering",
         soon: "SOON",
         links: {
-            application: "The app",
+            application: "Merchant area",
             livraison: "Delivery & storage",
             tarifs: "Pricing",
             technologie: "Technology",
@@ -39,7 +39,7 @@ export default {
             tarifs: "Pricing",
             courses: "Errands for individuals",
             suivi: "Track a parcel",
-            application: "The app",
+            application: "Merchant area",
             commencer: "Start delivering",
             baseConnaissances: "Knowledge base",
             apiLivraison: "Delivery API",

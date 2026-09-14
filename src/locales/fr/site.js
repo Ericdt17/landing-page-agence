@@ -10,7 +10,7 @@ export default {
         cta: "Commencer à livrer",
         soon: "BIENTÔT",
         links: {
-            application: "L'application",
+            application: "Espace commerçant",
             livraison: "Livraison & stockage",
             tarifs: "Tarifs",
             technologie: "Technologie",
@@ -39,7 +39,7 @@ export default {
             tarifs: "Tarifs",
             courses: "Courses particuliers",
             suivi: "Suivre un colis",
-            application: "L'application",
+            application: "Espace commerçant",
             commencer: "Commencer à livrer",
             baseConnaissances: "Base de connaissances",
             apiLivraison: "API de livraison",

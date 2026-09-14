@@ -1,5 +1,5 @@
 /**
- * Page « L'application commerçant » (français).
+ * Page « Espace commerçant » (français) : l'application des commerçants.
  *
  * Écarts volontaires avec la maquette :
  * - « Base de connaissances » remplacé par un lien vers les écrans, la base
@@ -8,12 +8,12 @@
  */
 export default {
     seo: {
-        title: "L'application commerçant",
+        title: "Espace commerçant",
         description:
             "Commandes, stock, livraisons et argent au même endroit, sur votre téléphone. Installation et formation chez vous, sans abonnement.",
     },
     hero: {
-        kicker: "L'application commerçant",
+        kicker: "Espace commerçant",
         title: "Vos livraisons tiennent dans votre poche.",
         lede: "Les commandes, le stock, les livraisons, l'argent. Tout au même endroit, sur le téléphone que vous avez déjà. Et nous venons vous montrer comment l'utiliser.",
         primary: "Commencer à livrer",

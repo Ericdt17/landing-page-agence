@@ -53,11 +53,19 @@ export const navItems = [
     { id: "application", to: routes.application, enabled: true },
     { id: "livraison", to: routes.livraison, enabled: true },
     { id: "tarifs", to: routes.tarifs, enabled: true },
-    { id: "technologie", to: routes.technologie, enabled: true },
     { id: "blog", to: routes.blog, enabled: false },
-    { id: "recrutement", to: routes.recrutement, enabled: true },
     { id: "marketplace", to: routes.marketplace, soon: true, enabled: true },
-    { id: "contact", to: routes.contact, enabled: true },
+    /* Pages de l'entreprise regroupées dans un menu déroulant */
+    {
+        id: "entreprise",
+        enabled: true,
+        children: [
+            { id: "technologie", to: routes.technologie, enabled: true },
+            { id: "recrutement", to: routes.recrutement, enabled: true },
+            { id: "apropos", to: routes.apropos, enabled: true },
+            { id: "contact", to: routes.contact, enabled: true },
+        ],
+    },
 ];
 
 export const footerColumns = [

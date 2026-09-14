@@ -1,25 +1,21 @@
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { logoMark } from "../../assets/images";
 import { navItems, routes } from "../../constants/routes";
 import { LANGUAGES } from "../../i18n";
 import { useCopy, useLanguage } from "../../i18n/useCopy";
 import WhatsAppButton from "./WhatsAppButton";
 
-const items = navItems.filter((item) => item.enabled);
+const enabledOnly = (list) => list.filter((item) => item.enabled);
+const items = enabledOnly(navItems).map((item) => (item.children ? { ...item, children: enabledOnly(item.children) } : item));
 
-/* `wrap` : dans le menu complet, les libellés longs passent sur deux lignes, comme dans les maquettes ;
-   la mention « Bientôt » reste à côté du texte, hors de la largeur limitée */
-const NavItem = ({ item, label, soon, onNavigate, className, wrap = false }) => (
-  <NavLink
-    to={item.to}
-    onClick={onNavigate}
-    className={({ isActive }) =>
-      `${className} ${isActive ? "font-semibold text-ls-text" : "text-ls-muted hover:text-ls-text"}`
-    }
-  >
-    <span className={wrap ? "block max-w-[11ch]" : undefined}>{label}</span>
+const linkTone = (isActive) => (isActive ? "font-semibold text-ls-text" : "text-ls-muted hover:text-ls-text");
+
+const NavItem = ({ item, label, soon, onNavigate, className }) => (
+  <NavLink to={item.to} onClick={onNavigate} className={({ isActive }) => `${className} ${linkTone(isActive)}`}>
+    {label}
     {item.soon && <sup className='ls-soon'>{soon}</sup>}
   </NavLink>
 );
@@ -65,6 +61,84 @@ export const LanguageSwitch = ({ className = "" }) => {
   );
 };
 
+/**
+ * Menu déroulant « Entreprise » : un bouton qui ouvre la liste des pages de
+ * l'entreprise. Se ferme avec Échap (le focus revient au bouton), par un clic
+ * ailleurs, quand le focus quitte le menu ou après une navigation.
+ */
+const NavGroup = ({ item, copy }) => {
+  const [open, setOpen] = useState(false);
+  const wrapper = useRef(null);
+  const button = useRef(null);
+  const { pathname } = useLocation();
+  const current = item.children.some((child) => pathname.startsWith(child.to));
+  const panelId = `menu-${item.id}`;
+
+  useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onPointer = (event) => {
+      if (!wrapper.current?.contains(event.target)) setOpen(false);
+    };
+    const onKey = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        button.current?.focus();
+      }
+    };
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div
+      ref={wrapper}
+      className='relative'
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+      }}
+    >
+      <button
+        ref={button}
+        type='button'
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => setOpen((value) => !value)}
+        className={`flex items-center gap-1 whitespace-nowrap transition-colors ${linkTone(current)}`}
+      >
+        {copy.nav.links[item.id]}
+        <ChevronDownIcon aria-hidden='true' className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <ul
+          id={panelId}
+          aria-label={copy.nav.entrepriseMenu}
+          className='absolute right-0 top-full z-50 mt-3 flex min-w-[220px] flex-col rounded-2xl border border-ls-rule bg-ls-surface p-2 shadow-[0_18px_40px_rgba(14,21,24,.12)]'
+        >
+          {item.children.map((child) => (
+            <li key={child.id}>
+              <NavLink
+                to={child.to}
+                onClick={() => setOpen(false)}
+                className={({ isActive }) =>
+                  `block whitespace-nowrap rounded-xl px-3 py-2.5 transition-colors hover:bg-ls-fill ${linkTone(isActive)}`
+                }
+              >
+                {copy.nav.links[child.id]}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
 const SiteNav = () => {
   const copy = useCopy("site");
   const [open, setOpen] = useState(false);
@@ -97,10 +171,14 @@ const SiteNav = () => {
           <SiteLogo />
         </Link>
 
-        <ul className='hidden items-center gap-[26px] text-sm leading-tight xl:flex'>
+        <ul className='hidden items-center gap-[26px] text-sm xl:flex'>
           {items.map((item) => (
             <li key={item.id}>
-              <NavItem wrap item={item} label={copy.nav.links[item.id]} soon={copy.nav.soon} className='flex items-start transition-colors' />
+              {item.children ? (
+                <NavGroup item={item} copy={copy} />
+              ) : (
+                <NavItem item={item} label={copy.nav.links[item.id]} soon={copy.nav.soon} className='whitespace-nowrap transition-colors' />
+              )}
             </li>
           ))}
         </ul>
@@ -128,17 +206,36 @@ const SiteNav = () => {
       {open && (
         <div id='menu-principal' className='border-t border-ls-rule xl:hidden'>
           <ul className='mx-auto flex max-w-[1440px] flex-col px-[18px] md:px-16'>
-            {items.map((item) => (
-              <li key={item.id} className='border-b border-ls-rule'>
-                <NavItem
-                  item={item}
-                  label={copy.nav.links[item.id]}
-                  soon={copy.nav.soon}
-                  onNavigate={close}
-                  className='flex py-4 text-base'
-                />
-              </li>
-            ))}
+            {items.map((item) =>
+              item.children ? (
+                <li key={item.id} className='border-b border-ls-rule pb-2 pt-4'>
+                  <p className='ls-kicker text-ls-faint'>{copy.nav.links[item.id]}</p>
+                  <ul className='flex flex-col'>
+                    {item.children.map((child) => (
+                      <li key={child.id}>
+                        <NavItem
+                          item={child}
+                          label={copy.nav.links[child.id]}
+                          soon={copy.nav.soon}
+                          onNavigate={close}
+                          className='flex py-3 text-base'
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ) : (
+                <li key={item.id} className='border-b border-ls-rule'>
+                  <NavItem
+                    item={item}
+                    label={copy.nav.links[item.id]}
+                    soon={copy.nav.soon}
+                    onNavigate={close}
+                    className='flex py-4 text-base'
+                  />
+                </li>
+              ),
+            )}
           </ul>
           <div className='mx-auto flex max-w-[1440px] flex-col gap-4 px-[18px] pb-6 pt-5 md:px-16'>
             <LanguageSwitch className='sm:hidden' />

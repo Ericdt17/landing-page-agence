@@ -18,7 +18,10 @@ export default {
             recrutement: "Join the team",
             marketplace: "Marketplace",
             contact: "Contact",
+            apropos: "About",
+            entreprise: "Company",
         },
+        entrepriseMenu: "Company pages",
     },
     language: {
         label: "Site language",

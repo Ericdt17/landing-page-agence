@@ -27,7 +27,7 @@ export default {
         figures: [
             { value: "Fin de journée", label: "Vos fonds reversés" },
             { value: "3 mois", label: "Stockage offert" },
-            { value: "< 30 min", label: "Réponse WhatsApp" },
+            { value: "< 10 min", label: "Réponse WhatsApp" },
             { value: "1 000 FCFA", label: "La livraison, dès" },
         ],
     },
@@ -62,7 +62,7 @@ export default {
             },
             {
                 title: "Une réponse, vraiment",
-                text: "Sur WhatsApp, en moins de 30 minutes pendant les heures d'ouverture.",
+                text: "Sur WhatsApp, en moins de 10 minutes pendant les heures d'ouverture.",
             },
         ],
     },

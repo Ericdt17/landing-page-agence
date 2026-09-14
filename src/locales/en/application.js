@@ -15,7 +15,7 @@ export default {
             { label: "Installation", value: "the same day" },
             { label: "Training", value: "at your shop, included" },
             { label: "Subscription", value: "none" },
-            { label: "Help", value: "WhatsApp < 30 min" },
+            { label: "Help", value: "WhatsApp < 10 min" },
         ],
     },
     soon: {

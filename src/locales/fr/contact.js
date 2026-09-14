@@ -8,16 +8,16 @@ export default {
     seo: {
         title: "Contact",
         description:
-            "Écrivez à LivSight sur WhatsApp, réponse en moins de 30 minutes pendant les heures d'ouverture, ou par email. Hippodrome, Yaoundé.",
+            "Écrivez à LivSight sur WhatsApp, réponse en moins de 10 minutes pendant les heures d'ouverture, ou par email. Hippodrome, Yaoundé.",
     },
     hero: {
         kicker: "Contact",
         title: "On vous répond vite. Vraiment.",
-        lede: "WhatsApp est le canal le plus rapide : réponse en moins de 30 minutes pendant les heures d'ouverture, avec un suivi écrit de votre demande.",
+        lede: "WhatsApp est le canal le plus rapide : réponse en moins de 10 minutes pendant les heures d'ouverture, avec un suivi écrit de votre demande.",
     },
     channelsLabel: "Nous joindre",
     channels: {
-        whatsapp: { title: "WhatsApp", text: "Réponse en moins de 30 min · le canal le plus rapide", cta: "Écrire sur WhatsApp" },
+        whatsapp: { title: "WhatsApp", text: "Réponse en moins de 10 min · le canal le plus rapide", cta: "Écrire sur WhatsApp" },
         email: { title: "Email", text: "Demandes formelles, partenariats, presse", cta: "Envoyer un email" },
         phone: { title: "Téléphone", text: "Pour les urgences uniquement : appelez le numéro WhatsApp de LivSight" },
     },

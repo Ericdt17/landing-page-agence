@@ -40,7 +40,7 @@ export default {
     },
     closing: {
         title: "Got an errand?",
-        body: "Message us on WhatsApp: we reply within 30 minutes during opening hours.",
+        body: "Message us on WhatsApp: we reply within 10 minutes during opening hours.",
         cta: "Order on WhatsApp",
     },
 };

@@ -109,6 +109,6 @@ export default {
         },
         trackingLead: "Looking for a parcel?",
         trackingLink: "Message us on WhatsApp",
-        trackingTail: ", we reply within 30 minutes during opening hours.",
+        trackingTail: ", we reply within 10 minutes during opening hours.",
     },
 };

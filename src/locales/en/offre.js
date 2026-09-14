@@ -16,7 +16,7 @@ export default {
                 { label: "Payout", value: "at the end of the day" },
                 { label: "Storage at Hippodrome", value: "3 months free" },
                 { label: "Delivery", value: "Monday to Saturday" },
-                { label: "WhatsApp reply", value: "< 30 min" },
+                { label: "WhatsApp reply", value: "< 10 min" },
             ],
         },
         services: {
@@ -44,7 +44,7 @@ export default {
             title: "Hippodrome, Yaoundé.",
             lines: [
                 "Monday to Saturday · 8am to 6pm",
-                "WhatsApp, reply in under 30 min",
+                "WhatsApp, reply in under 10 min",
                 "Phone for emergencies only",
             ],
             cta: "Message us on WhatsApp",
@@ -108,7 +108,7 @@ export default {
             body: "These prices are read live from our system: they are the ones the app applies to every delivery.",
             loading: "Loading prices…",
             unavailable:
-                "Prices by neighbourhood appear as soon as our service responds. In the meantime, ask for your neighbourhood's price on WhatsApp: we reply in under 30 minutes.",
+                "Prices by neighbourhood appear as soon as our service responds. In the meantime, ask for your neighbourhood's price on WhatsApp: we reply in under 10 minutes.",
             unavailableCta: "Message us on WhatsApp",
             extrasTitle: "Additional fees",
             entryFeeNote: "An access fee may apply for this neighbourhood.",

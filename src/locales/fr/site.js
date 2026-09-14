@@ -108,6 +108,6 @@ export default {
         },
         trackingLead: "Vous cherchez où en est un colis ?",
         trackingLink: "Écrivez-nous sur WhatsApp",
-        trackingTail: ", nous répondons en moins de 30 minutes pendant les heures d'ouverture.",
+        trackingTail: ", nous répondons en moins de 10 minutes pendant les heures d'ouverture.",
     },
 };

@@ -40,7 +40,7 @@ export default {
     },
     closing: {
         title: "Vous avez une course ?",
-        body: "Écrivez-nous sur WhatsApp : nous répondons en moins de 30 minutes pendant les heures d'ouverture.",
+        body: "Écrivez-nous sur WhatsApp : nous répondons en moins de 10 minutes pendant les heures d'ouverture.",
         cta: "Commander sur WhatsApp",
     },
 };

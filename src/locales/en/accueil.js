@@ -20,7 +20,7 @@ export default {
         figures: [
             { value: "End of day", label: "Your payout" },
             { value: "3 months", label: "Free storage" },
-            { value: "< 30 min", label: "WhatsApp reply" },
+            { value: "< 10 min", label: "WhatsApp reply" },
             { value: "1,000 FCFA", label: "Delivery from" },
         ],
     },
@@ -55,7 +55,7 @@ export default {
             },
             {
                 title: "A real answer",
-                text: "On WhatsApp, in under 30 minutes during opening hours.",
+                text: "On WhatsApp, in under 10 minutes during opening hours.",
             },
         ],
     },

@@ -22,7 +22,7 @@ export default {
             { label: "Installation", value: "le jour même" },
             { label: "Formation", value: "chez vous, incluse" },
             { label: "Abonnement", value: "aucun" },
-            { label: "Aide", value: "WhatsApp < 30 min" },
+            { label: "Aide", value: "WhatsApp < 10 min" },
         ],
     },
     soon: {

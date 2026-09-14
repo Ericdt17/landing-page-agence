@@ -25,7 +25,7 @@ export default {
                 { label: "Reversement", value: "en fin de journée" },
                 { label: "Stockage à l'Hippodrome", value: "3 mois offerts" },
                 { label: "Livraison", value: "du lundi au samedi" },
-                { label: "Réponse WhatsApp", value: "< 30 min" },
+                { label: "Réponse WhatsApp", value: "< 10 min" },
             ],
         },
         services: {
@@ -53,7 +53,7 @@ export default {
             title: "Hippodrome, Yaoundé.",
             lines: [
                 "Lundi au samedi · 8h00 à 18h00",
-                "WhatsApp, réponse en moins de 30 min",
+                "WhatsApp, réponse en moins de 10 min",
                 "Téléphone pour les urgences uniquement",
             ],
             cta: "Écrire sur WhatsApp",
@@ -117,7 +117,7 @@ export default {
             body: "Ces tarifs sont lus en direct depuis notre système : ce sont ceux que l'application applique à chaque course.",
             loading: "Chargement des tarifs…",
             unavailable:
-                "Les tarifs par quartier s'affichent dès que notre service répond. En attendant, demandez le tarif de votre quartier sur WhatsApp : nous répondons en moins de 30 minutes.",
+                "Les tarifs par quartier s'affichent dès que notre service répond. En attendant, demandez le tarif de votre quartier sur WhatsApp : nous répondons en moins de 10 minutes.",
             unavailableCta: "Écrire sur WhatsApp",
             extrasTitle: "Frais annexes",
             entryFeeNote: "Des frais d'accès peuvent s'ajouter pour ce quartier.",

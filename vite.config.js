@@ -14,6 +14,11 @@ export default defineConfig({
   },
   /** `/` = SPA à la racine ; `base: './'` donne `BASE_URL: './'` et casse le matching React Router */
   base: '/',
+  build: {
+    // Aucune image intégrée au JavaScript : même les petites photos restent des
+    // fichiers à part, mis en cache et chargés seulement quand on les affiche.
+    assetsInlineLimit: 0,
+  },
   server: {
     port: 5175,
     strictPort: false,

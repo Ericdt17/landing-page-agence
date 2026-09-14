@@ -113,7 +113,7 @@ const MarketplacePage = () => {
         </figure>
 
         <div className='mt-12 border-t border-ls-rule pt-12'>
-          <Suspense fallback={<div className='h-[660px]' aria-busy='true' />}>
+          <Suspense fallback={<div className='mx-auto aspect-[454/956] w-full max-w-[454px]' aria-busy='true' />}>
             <MarketplaceDemo />
           </Suspense>
         </div>

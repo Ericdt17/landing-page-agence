@@ -30,6 +30,9 @@ const TarifsPage = lazy(() => import("./pages/TarifsPage"));
 const TechnologiePage = lazy(() => import("./pages/TechnologiePage"));
 const MarketplacePage = lazy(() => import("./pages/MarketplacePage"));
 const ApiLivraisonPage = lazy(() => import("./pages/ApiLivraisonPage"));
+const SignatureContratPage = lazy(
+  () => import("./pages/SignatureContratPage")
+);
 
 /** Évite `basename: './'` (Vite `base: './'`) : aucune route ne matche → `*` renvoie à `/`. */
 const routerBasename = (() => {
@@ -85,6 +88,7 @@ const App = () => {
           {Object.entries(legacyRedirects).map(([from, to]) => (
             <Route key={from} path={from} element={<Navigate to={to} replace />} />
           ))}
+          <Route path='/signer/:token' element={<SignatureContratPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Suspense>

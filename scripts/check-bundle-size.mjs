@@ -13,7 +13,9 @@ const budgets = [
   { label: "JS de l'accueil (entrée)", test: /^assets\/index-.*\.js$/, gzip: true, max: 110 },
   /* Démo interactive de la marketplace : chargée seulement quand on ouvre /marketplace */
   { label: "Démo marketplace", test: /^assets\/MarketplaceDemo-.*\.js$/, gzip: true, max: 20 },
-  { label: "JS d'une page", test: /^assets\/(?!index-|SuccessAnimation-|MarketplaceDemo-).*\.js$/, gzip: true, max: 15 },
+  /* pdf.js : lecteur PDF embarqué de la page de signature de contrat, chargé seulement sur /signer */
+  { label: "Lecteur PDF (signature)", test: /^assets\/pdf-.*\.js$/, gzip: true, max: 160 },
+  { label: "JS d'une page", test: /^assets\/(?!index-|SuccessAnimation-|MarketplaceDemo-|pdf-).*\.js$/, gzip: true, max: 15 },
   { label: "Animation de succès", test: /^assets\/SuccessAnimation-.*\.js$/, gzip: true, max: 150 },
   { label: "CSS", test: /\.css$/, gzip: true, max: 12 },
   /* Aperçu marketplace sur ordinateur, en haute définition (écrans Retina), chargé à la demande */
@@ -36,7 +38,7 @@ for (const file of walk(dist)) {
   const size = kb(budget.gzip ? gzipSync(raw).length : raw.length);
   const over = size > budget.max;
   if (over) failed = true;
-  if (over || /index-|SuccessAnimation-|MarketplaceDemo-|\.css$/.test(rel)) {
+  if (over || /index-|SuccessAnimation-|MarketplaceDemo-|pdf-|\.css$/.test(rel)) {
     console.log(`${over ? "✗" : "✓"} ${budget.label.padEnd(26)} ${String(size).padStart(7)} ko / ${budget.max} ko  ${rel}`);
   }
 }

@@ -39,7 +39,7 @@ export const legacyRedirects = {
 };
 
 export const links = {
-    whatsapp: "https://wa.link/zc5ijs",
+    whatsapp: "https://wa.me/237691969014",
     email: "contact@livsight.com",
     facebook: "https://www.facebook.com/share/1J4aQ42T2t/?mibextid=wwXIfr",
     instagram: "https://www.instagram.com/livsight7?igsh=eHkyMjQyZWVkeGc4&utm_source=qr",

@@ -2,7 +2,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { logoMark } from "../../assets/images";
+import { logoHeader } from "../../assets/images";
 import { navItems, routes } from "../../constants/routes";
 import { LANGUAGES } from "../../i18n";
 import { useCopy, useLanguage } from "../../i18n/useCopy";
@@ -20,12 +20,7 @@ const NavItem = ({ item, label, soon, onNavigate, className }) => (
   </NavLink>
 );
 
-export const SiteLogo = ({ tone = "text-ls-text" }) => (
-  <span className={`inline-flex items-center gap-[9px] ${tone}`}>
-    <img src={logoMark} alt='' width='28' height='28' className='h-7 w-7' />
-    <span className='ls-h text-xl tracking-[-0.01em]'>LivSight</span>
-  </span>
-);
+export const SiteLogo = () => <img src={logoHeader} alt='LivSight' width='130' height='40' className='h-10 w-auto' />;
 
 /**
  * Sélecteur FR · EN : deux boutons à bascule. Le choix est mémorisé dans le

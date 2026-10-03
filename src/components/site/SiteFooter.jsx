@@ -43,7 +43,7 @@ const SiteFooter = () => {
         <div className='grid grid-cols-2 gap-8 pt-2 lg:grid-cols-[320px_repeat(4,minmax(0,1fr))]'>
           <div className='col-span-2 flex flex-col gap-2.5 lg:col-span-1'>
             <Link to={routes.home} aria-label={copy.nav.home} className='w-fit'>
-              <SiteLogo tone='text-ls-ink-fg' />
+              <SiteLogo />
             </Link>
             <p className='text-[13px] leading-relaxed text-ls-ink-mute'>
               {footer.addressLines.map((line) => (

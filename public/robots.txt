@@ -3,5 +3,6 @@ Allow: /
 
 Disallow: /api/
 Disallow: /entreprise/recrutement/offre/
+Disallow: /signer/
 
 Sitemap: https://www.livsight.com/sitemap.xml

@@ -16,6 +16,9 @@ const localBusiness = {
   "@type": "LocalBusiness",
   name: "LivSight",
   url: "https://www.livsight.com",
+  telephone: "+237691969014",
+  email: "contact@livsight.com",
+  image: "https://www.livsight.com/og-livsight.jpg",
   description: "Agence de livraison pour commerçants et boutiques en ligne à Yaoundé.",
   address: {
     "@type": "PostalAddress",

@@ -30,7 +30,7 @@ export default {
     },
     footer: {
         addressLines: ["Hippodrome, Yaoundé · Cameroon", "Monday to Saturday · 8am to 6pm"],
-        copyright: "© 2026 LivSight · Yaoundé, Cameroon",
+        copyright: "© 2026 LivSight SARL · Yaoundé, Cameroon",
         columns: {
             service: "The service",
             commercants: "Merchants",

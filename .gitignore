@@ -19,6 +19,9 @@ tmp/
 .env
 .env.*
 
+# Local AI assistant skills
+.claude/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

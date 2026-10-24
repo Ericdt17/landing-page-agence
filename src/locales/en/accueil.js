@@ -15,8 +15,6 @@ export default {
     },
     proof: {
         ariaLabel: "Key figures",
-        liveLabel: "Live",
-        counterLabel: "parcels delivered so far",
         figures: [
             { value: "End of day", label: "Your payout" },
             { value: "3 months", label: "Free storage" },
@@ -58,6 +56,7 @@ export default {
                 text: "On WhatsApp, in under 10 minutes during opening hours.",
             },
         ],
+        link: "See our pricing",
     },
     steps: {
         title: "Start delivering in less than a day.",

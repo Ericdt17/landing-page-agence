@@ -1,3 +1,6 @@
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { Link } from "react-router-dom";
+import { routes } from "../../constants/routes";
 import { useCopy } from "../../i18n/useCopy";
 
 /** Une liste séparée par des filets, pas quatre cartes. */
@@ -13,17 +16,23 @@ const AccueilDifferences = () => {
         </h2>
         <p className='ls-body text-ls-muted'>{differences.body}</p>
       </div>
-      <dl className='flex flex-col border-t border-ls-rule'>
-        {differences.rows.map((row) => (
-          <div
-            key={row.title}
-            className='grid grid-cols-1 gap-2 border-b border-ls-rule py-6 md:grid-cols-[260px_minmax(0,1fr)] md:gap-10 md:py-[30px]'
-          >
-            <dt className='ls-h ls-d3'>{row.title}</dt>
-            <dd className='ls-body text-ls-muted'>{row.text}</dd>
-          </div>
-        ))}
-      </dl>
+      <div className='flex flex-col'>
+        <dl className='flex flex-col border-t border-ls-rule'>
+          {differences.rows.map((row) => (
+            <div
+              key={row.title}
+              className='grid grid-cols-1 gap-2 border-b border-ls-rule py-6 md:grid-cols-[260px_minmax(0,1fr)] md:gap-10 md:py-[30px]'
+            >
+              <dt className='ls-h ls-d3'>{row.title}</dt>
+              <dd className='ls-body text-ls-muted'>{row.text}</dd>
+            </div>
+          ))}
+        </dl>
+        <Link to={routes.tarifs} className='ls-link inline-flex w-fit items-center gap-1.5 pt-6 text-sm'>
+          {differences.link}
+          <ArrowRightIcon className='h-4 w-4' aria-hidden='true' />
+        </Link>
+      </div>
     </div>
   </section>
   );

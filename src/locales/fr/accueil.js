@@ -4,7 +4,7 @@
  * Écarts volontaires avec la maquette :
  * - pas de témoignages : ceux de la maquette sont des exemples inventés (#12) ;
  * - « 100 % livreurs salariés » remplacé par le tarif d'entrée (#9) ;
- * - pas de faux « Dernière livraison : Bastos », seul le total réel est affiché.
+ * - pas de faux « Dernière livraison : Bastos » ni de compteur : uniquement des repères factuels.
  */
 export default {
     seo: {
@@ -22,8 +22,6 @@ export default {
     },
     proof: {
         ariaLabel: "Chiffres",
-        liveLabel: "En direct",
-        counterLabel: "colis livrés depuis le début",
         figures: [
             { value: "Fin de journée", label: "Vos fonds reversés" },
             { value: "3 mois", label: "Stockage offert" },
@@ -65,6 +63,7 @@ export default {
                 text: "Sur WhatsApp, en moins de 10 minutes pendant les heures d'ouverture.",
             },
         ],
+        link: "Découvrir nos tarifs",
     },
     steps: {
         title: "Commencez à livrer en moins d'une journée.",

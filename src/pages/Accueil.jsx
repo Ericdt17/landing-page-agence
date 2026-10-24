@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import SEO from "../components/SEO";
+import Reveal from "../components/Reveal";
 import SiteLayout from "../components/site/SiteLayout";
-import { LandingPublicProvider } from "../context/LandingPublicContext";
 import AccueilApplication from "../sections/accueil/AccueilApplication";
 import AccueilCta from "../sections/accueil/AccueilCta";
 import AccueilDemarrer from "../sections/accueil/AccueilDemarrer";
@@ -33,21 +33,22 @@ const localBusiness = {
 const Accueil = () => {
   const { seo } = useCopy("accueil");
   return (
-  <LandingPublicProvider>
+  <>
     <SEO title={seo.title} description={seo.description} canonical='/' />
     <Helmet>
       <script type='application/ld+json'>{JSON.stringify(localBusiness)}</script>
     </Helmet>
     <SiteLayout>
+      {/* Le héros reste affiché d'emblée ; les sections suivantes se révèlent au défilement */}
       <AccueilHero />
-      <AccueilPreuve />
-      <AccueilApplication />
-      <AccueilDifferences />
-      <AccueilDemarrer />
-      <AccueilMarketplace />
-      <AccueilCta />
+      <Reveal><AccueilPreuve /></Reveal>
+      <Reveal><AccueilApplication /></Reveal>
+      <Reveal><AccueilDifferences /></Reveal>
+      <Reveal><AccueilDemarrer /></Reveal>
+      <Reveal><AccueilMarketplace /></Reveal>
+      <Reveal><AccueilCta /></Reveal>
     </SiteLayout>
-  </LandingPublicProvider>
+  </>
   );
 };
 

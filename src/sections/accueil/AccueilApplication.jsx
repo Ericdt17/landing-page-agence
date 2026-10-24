@@ -36,7 +36,7 @@ const AccueilApplication = () => {
         <figure key={key} className='flex flex-col gap-3.5'>
           <Screen />
           <figcaption>
-            <span className='ls-h text-[15px]'>{app.captions[key].title}</span>
+            <span className='ls-h ls-cap'>{app.captions[key].title}</span>
             <span className='ls-cap block pt-1 text-ls-faint'>{app.captions[key].text}</span>
           </figcaption>
         </figure>

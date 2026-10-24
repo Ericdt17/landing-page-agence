@@ -21,7 +21,7 @@ const AccueilHero = () => {
           {hero.secondary}
         </Link>
       </div>
-      <p className='ls-num text-xs font-semibold tracking-[0.02em] text-ls-faint'>{hero.reassurance}</p>
+      <p className='ls-cap font-semibold text-ls-faint'>{hero.reassurance}</p>
     </div>
   </section>
   );

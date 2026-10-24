@@ -2,6 +2,8 @@
 
 This file provides guidance for AI assistants working in this repository.
 
+Before any content or design work, read `docs/company-context.md` (official business context: LivSight SARL is a logistics company first, merchant acquisition is the primary goal, marketplace upcoming) and `docs/design-system.md` (tokens, component rules, accessibility criteria).
+
 ## Commands
 
 ```bash

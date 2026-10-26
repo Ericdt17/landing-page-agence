@@ -36,25 +36,26 @@ Light theme (page default):
 
 | Token | Value | Role |
 | --- | --- | --- |
-| `ls-bg` | `#F8F9FA` | Page background |
-| `ls-surface` | `#FFFFFF` | Cards, panels, inputs |
+| `ls-bg` | `#FFFFFF` | Page background (pure white since 2026-10-24; was `#F8F9FA`) |
+| `ls-surface` | `#FFFFFF` | Cards, panels, inputs. Same as the page background, so cards **must** keep their `border-ls-rule` to stay visible |
 | `ls-fill` | `#F8F9FA` | Subtle fills inside surfaces |
 | `ls-stroke` | `#E2E8F0` | Decorative strokes |
 | `ls-rule` | `#DCE3E5` | Borders on cards and inputs |
-| `ls-text` | `#191C1D` | Primary text (15.7:1 on bg) |
+| `ls-text` | `#191C1D` | Primary text (15.7:1 on white). "Dark to read, blue to sign" (2026-10-25): body and section headings are dark; the logo blue carries the hero title, buttons, kickers, numbers and route lines |
 | `ls-muted` | `#3C4A3C` | Secondary text (8.6:1) |
 | `ls-faint` | `#5F6873` | Tertiary text, captions (5.4:1) |
-| `ls-primary` | `#1891CA` | Brand marker, focus ring on inputs. Not for body text |
-| `ls-accent` | `#11698F` | Links, kickers, focus outline (5.6:1) |
+| `ls-primary` | `#2697D0` | Official logo blue. Solid CTA fill under white text, brand marker, focus ring on inputs, display-size headings (AA-large: 3.1:1 ≥ 3:1 at `ls-d1`/`ls-d2` sizes) and the hero kicker. Never for body-size text. **Documented AA exception**: white on logo blue is 3.3:1 (below 4.5:1), accepted as a deliberate brand decision (owner, 2026-10-24) and limited to bold button labels and ink bands; do not extend this pair to body text |
+| `ls-accent` | `#2697D0` | Links, kickers, focus outline — aligned on the logo blue since 2026-10-24 (focus outline 3.3:1 ≥ 3:1 for non-text UI) |
+| `ls-cta-hover` | `#11698F` | Hover of primary-filled buttons (the former accent blue) |
 | `ls-ph` | `#EEF2F7` | Placeholders, skeletons |
 | `ls-ok` / `ls-warn` / `ls-bad` | `#2E7D32` / `#6E5406` / `#C62828` | Feedback text (all ≥ 4.5:1) |
 | `ls-ok-bg` | `#EAF7EE` | Success surface |
 | `ls-dim` | `#C7CDD2` | Disabled strokes, inactive dots |
 | `ls-speed` | `#8A5700` | "Soon" badge, emphasis accents |
 | `ls-select` | `#F2F8FC` | Selected row or option background |
-| `ls-primary-soft` | `rgba(24,145,202,.14)` | Input focus ring, soft highlights |
+| `ls-primary-soft` | `rgba(38,151,208,.14)` | Input focus ring, soft highlights |
 
-Ink context (dark panels inside the light page, such as the hero band; this is not a dark mode):
+Ink context (dark panels inside the light page, such as the marketplace band and the footer; this is not a dark mode). Dark restored on 2026-10-25 after a one-day logo-blue experiment; the brand lives inside these bands through the logo-blue accent:
 
 | Token | Value | Role |
 | --- | --- | --- |
@@ -62,7 +63,7 @@ Ink context (dark panels inside the light page, such as the hero band; this is n
 | `ls-ink-fg` | `#F2F5F6` | Text on ink (16.9:1) |
 | `ls-ink-mute` | `#A3B4BB` | Secondary text on ink (7.4:1) |
 | `ls-ink-line` | `#2A3B42` | Borders on ink |
-| `ls-ink-speed` | `#E0A32B` | Accent on ink |
+| `ls-ink-speed` | `#2697D0` | Accent on ink: logo blue (5.6:1 on ink-bg), used for badges and kickers |
 
 Rules:
 
@@ -152,6 +153,7 @@ Rules:
 
 - Every animation **must** have a `prefers-reduced-motion: reduce` branch that disables it or reduces it to opacity (all current ones comply; new ones follow).
 - Scroll reveals **must** use the `Reveal` component (`src/components/Reveal.jsx`) and the `ls-reveal` class, never a new IntersectionObserver per section.
+- Scroll-linked progress effects (route timelines) **must** use the `useFlowProgress` hook (`src/components/useFlowProgress.js`) with the `ls-flow-*` classes. It writes transforms directly to the DOM (no React re-render per frame), smooths with a rAF lerp (no CSS transition on the lines, the two would fight), latches steps on permanently (no flicker at thresholds), and renders the final state under `prefers-reduced-motion`.
 - Animation **must not** move content more than ~14px or delay interactivity; content **must** be readable with JavaScript disabled (reveal starts visible without JS or falls back via the reduced-motion branch).
 
 ### 2.7 Breakpoints
@@ -170,8 +172,8 @@ Variants and states:
 
 | State | `ls-btn-solid` | `ls-btn-line` | `ls-btn-ink` / `ls-btn-ink-line` (on ink) |
 | --- | --- | --- | --- |
-| Default | `bg ls-text`, text `ls-bg` | border `ls-rule`, text `ls-text` | `bg ls-ink-fg` / border `ls-ink-line` |
-| Hover | `bg ls-muted` | border `ls-text` | white / border `ls-ink-fg` |
+| Default | `bg ls-primary` (logo blue), text `ls-surface` (documented AA exception, see 2.1) | border `ls-rule`, text `ls-text` | `bg ls-ink-fg` / border `ls-ink-line` |
+| Hover | `bg ls-cta-hover` | border `ls-text` | white / border `ls-ink-fg` |
 | Focus-visible | global 2px `ls-accent` outline, offset 2px | same | same (outline remains visible on ink) |
 | Active | **should** add `active:translate-y-px` or a darker step; no scale animation | same | same |
 | Disabled | `opacity-50 pointer-events-none` on a real `disabled` attribute (buttons) or `aria-disabled` (links); **must not** be removed from the tab order silently when it conveys state | same | same |

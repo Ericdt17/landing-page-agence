@@ -16,7 +16,12 @@ const linkTone = (isActive) => (isActive ? "font-semibold text-ls-text" : "text-
 const NavItem = ({ item, label, soon, onNavigate, className }) => (
   <NavLink to={item.to} onClick={onNavigate} className={({ isActive }) => `${className} ${linkTone(isActive)}`}>
     {label}
-    {item.soon && <sup className='ls-soon'>{soon}</sup>}
+    {item.soon && (
+      <>
+        {" "}
+        <sup className='ls-soon'>{soon}</sup>
+      </>
+    )}
   </NavLink>
 );
 
@@ -157,7 +162,9 @@ const SiteNav = () => {
   const close = () => setOpen(false);
 
   return (
-    <header className='border-b border-ls-rule bg-ls-bg'>
+    /* Barre transparente posée sur le contenu (héros) ; fond opaque seulement
+       quand le menu mobile est ouvert, pour rester lisible */
+    <header className={`relative z-10 ${open ? "bg-ls-bg" : ""}`}>
       <nav
         aria-label={copy.nav.label}
         className='mx-auto flex max-w-[1440px] items-center gap-3 px-[18px] py-3.5 md:gap-10 md:px-16 md:py-[22px] xl:grid xl:grid-cols-[minmax(max-content,1fr)_auto_minmax(max-content,1fr)]'
@@ -184,7 +191,7 @@ const SiteNav = () => {
           <WhatsAppButton className='ls-btn ls-btn-sm ls-btn-solid max-sm:hidden'>{copy.nav.cta}</WhatsAppButton>
           <button
             type='button'
-            className='inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ls-stroke text-ls-text xl:hidden'
+            className='ls-icon-btn text-ls-text xl:hidden'
             aria-expanded={open}
             aria-controls='menu-principal'
             aria-label={open ? copy.nav.closeMenu : copy.nav.openMenu}

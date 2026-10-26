@@ -1,6 +1,7 @@
 import { useCopy } from "../../i18n/useCopy";
 import SiteFooter from "./SiteFooter";
 import SiteNav from "./SiteNav";
+import WhatsAppFab from "./WhatsAppFab";
 
 /**
  * Coquille des pages du nouveau site : lien d'évitement, navigation, contenu,
@@ -22,6 +23,7 @@ const SiteLayout = ({ children }) => {
       {children}
     </main>
     <SiteFooter />
+    <WhatsAppFab />
   </div>
   );
 };

@@ -9,13 +9,23 @@
 @layer base {
   :root {
     color-scheme: light;
-    --ls-bg: #F8F9FA; --ls-surface: #FFFFFF; --ls-fill: #F8F9FA; --ls-stroke: #E2E8F0; --ls-rule: #DCE3E5;
+    /* Fond blanc pur (décision de marque 2026-10-24, anciennement #F8F9FA) ;
+       les cartes se détachent par leur bordure --ls-rule */
+    --ls-bg: #FFFFFF; --ls-surface: #FFFFFF; --ls-fill: #F8F9FA; --ls-stroke: #E2E8F0; --ls-rule: #DCE3E5;
+    /* « Noir pour lire, bleu pour signer » (2026-10-25) : texte sombre pour
+       la lecture ; le bleu logo vit dans le héros, les boutons, les kickers,
+       les numéros et les itinéraires */
     --ls-text: #191C1D; --ls-muted: #3C4A3C; --ls-faint: #5F6873;
-    --ls-primary: #1891CA; --ls-accent: #11698F; --ls-ph: #EEF2F7;
+    /* --ls-primary : bleu officiel du logo ; --ls-accent aligné dessus depuis
+       le 2026-10-24 (kickers, liens, focus) ; --ls-cta-hover garde l'ancien
+       bleu foncé pour le survol des boutons pleins */
+    --ls-primary: #2697D0; --ls-accent: #2697D0; --ls-cta-hover: #11698F; --ls-ph: #EEF2F7;
     --ls-ok: #2E7D32; --ls-warn: #6E5406; --ls-bad: #C62828; --ls-dim: #C7CDD2;
     --ls-speed: #8A5700;
-    --ls-select: #F2F8FC; --ls-primary-soft: rgba(24,145,202,.14); --ls-ok-bg: #EAF7EE;
-    --ls-ink-bg: #0E1518; --ls-ink-fg: #F2F5F6; --ls-ink-mute: #A3B4BB; --ls-ink-line: #2A3B42; --ls-ink-speed: #E0A32B;
+    --ls-select: #F2F8FC; --ls-primary-soft: rgba(38,151,208,.14); --ls-ok-bg: #EAF7EE;
+    /* Bandes « ink » : retour au sombre d'origine (2026-10-25), avec l'accent
+       au bleu logo (5,6:1 sur ce fond) pour garder la marque dans le noir */
+    --ls-ink-bg: #0E1518; --ls-ink-fg: #F2F5F6; --ls-ink-mute: #A3B4BB; --ls-ink-line: #2A3B42; --ls-ink-speed: #2697D0;
   }
 }
 
@@ -67,8 +77,12 @@
   }
   .ls-btn-lg { min-height: 48px; padding: 0 26px; font-size: 15px; }
   .ls-btn-sm { min-height: 36px; padding: 0 16px; font-size: 12px; }
-  .ls-btn-solid { background: var(--ls-text); color: var(--ls-bg); font-weight: 700; }
-  .ls-btn-solid:hover { background: var(--ls-muted); }
+  /* CTA principal au bleu exact du logo, texte blanc. Exception assumée au
+     contraste AA (3,3:1, décision de marque du 2026-10-24, voir
+     docs/design-system.md) ; graisse 700 pour compenser. Survol vers le bleu
+     foncé de la marque (5,6:1) */
+  .ls-btn-solid { background: var(--ls-primary); color: var(--ls-surface); font-weight: 700; }
+  .ls-btn-solid:hover { background: var(--ls-cta-hover); }
   .ls-btn-line { border: 1px solid var(--ls-rule); color: var(--ls-text); }
   .ls-btn-line:hover { border-color: var(--ls-text); }
   .ls-btn-ink { background: var(--ls-ink-fg); color: var(--ls-ink-bg); font-weight: 700; }
@@ -102,6 +116,20 @@
   @keyframes ls-fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { .ls-tour-screen { transition: none; } .ls-fade-in { animation: none; } }
 
+  /* Frise « itinéraire » pilotée par le défilement (hook useFlowProgress) :
+     le hook écrit les transforms directement (interpolation douce en rAF,
+     pas de transition CSS sur les lignes : les deux se battraient) et pose
+     .is-on sur chaque étape atteinte, de façon définitive. */
+  .ls-flow-line-y, .ls-flow-line-x { background: var(--ls-primary); }
+  .ls-flow-line-y { transform: scaleY(0); transform-origin: top; }
+  .ls-flow-line-x { transform: scaleX(0); transform-origin: left; }
+  .ls-flow-step { opacity: 0; transform: translateY(10px); transition: opacity 400ms ease-out, transform 400ms cubic-bezier(.32,.72,0,1); }
+  .ls-flow-step.is-on { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .ls-flow-line-y, .ls-flow-line-x { transition: none; transform: none !important; }
+    .ls-flow-step { transition: none; transform: none; opacity: 1; }
+  }
+
   /* Révélation des sections de l'accueil au défilement (composant Reveal) */
   .ls-reveal { opacity: 0; transform: translateY(14px); transition: opacity 560ms ease-out, transform 560ms cubic-bezier(.32,.72,0,1); }
   .ls-reveal.is-shown { opacity: 1; transform: none; }
@@ -112,8 +140,14 @@
   @keyframes ls-draw { to { stroke-dashoffset: 0; } }
   @media (prefers-reduced-motion: reduce) { .ls-route { animation: none; stroke-dashoffset: 0; } }
 
+  /* line-height:1 (et non 0) : le badge garde une hauteur propre et ne
+     chevauche plus la ligne précédente quand le libellé passe à la ligne.
+     Rester en display:inline, sinon le badge crée son propre point de coupure.
+     Dans le JSX, coller le badge au dernier mot avec « » pour qu'il ne
+     passe jamais à la ligne tout seul. */
   .ls-soon {
-    font-size: 10px; font-weight: 800; letter-spacing: .05em; line-height: 0;
-    vertical-align: super; margin-left: 3px; color: var(--ls-speed);
+    font-size: 10px; font-weight: 800; letter-spacing: .05em;
+    line-height: 1; vertical-align: 0.45em; margin-left: 3px; white-space: nowrap;
+    color: var(--ls-speed);
   }
 }

@@ -15,7 +15,12 @@ const FooterLink = ({ link, label, soon }) => {
   const content = (
     <>
       {label}
-      {link.soon && <sup className='ls-soon !text-ls-ink-speed'>{soon}</sup>}
+      {link.soon && (
+        <>
+          {" "}
+          <sup className='ls-soon !text-ls-ink-speed'>{soon}</sup>
+        </>
+      )}
     </>
   );
   if (link.href) {

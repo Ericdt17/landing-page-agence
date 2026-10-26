@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { routes } from "../../constants/routes";
 import { useCopy } from "../../i18n/useCopy";
 
-/** Une liste séparée par des filets, pas quatre cartes. */
+/** Une liste numérotée (01 à 07) séparée par le blanc, sans filets ni cartes. */
 const AccueilDifferences = () => {
   const { differences } = useCopy("accueil");
   return (
@@ -15,20 +15,29 @@ const AccueilDifferences = () => {
           {differences.title}
         </h2>
         <p className='ls-body text-ls-muted'>{differences.body}</p>
+        <p className='ls-body text-ls-muted'>{differences.body2}</p>
+        <p className='ls-body font-semibold'>{differences.body3}</p>
       </div>
       <div className='flex flex-col'>
-        <dl className='flex flex-col border-t border-ls-rule'>
-          {differences.rows.map((row) => (
+        {/* Sans filets : chaque point est numéroté et la séparation se fait
+           par le blanc */}
+        <dl className='flex flex-col gap-9 md:gap-11'>
+          {differences.rows.map((row, index) => (
             <div
               key={row.title}
-              className='grid grid-cols-1 gap-2 border-b border-ls-rule py-6 md:grid-cols-[260px_minmax(0,1fr)] md:gap-10 md:py-[30px]'
+              className='grid grid-cols-1 gap-2 md:grid-cols-[260px_minmax(0,1fr)] md:gap-10'
             >
-              <dt className='ls-h ls-d3'>{row.title}</dt>
+              <dt className='flex flex-col gap-2'>
+                <span aria-hidden='true' className='ls-num text-xs font-semibold text-ls-accent'>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className='ls-h ls-d3'>{row.title}</span>
+              </dt>
               <dd className='ls-body text-ls-muted'>{row.text}</dd>
             </div>
           ))}
         </dl>
-        <Link to={routes.tarifs} className='ls-link inline-flex w-fit items-center gap-1.5 pt-6 text-sm'>
+        <Link to={routes.tarifs} className='ls-link inline-flex w-fit items-center gap-1.5 pt-9 text-sm'>
           {differences.link}
           <ArrowRightIcon className='h-4 w-4' aria-hidden='true' />
         </Link>

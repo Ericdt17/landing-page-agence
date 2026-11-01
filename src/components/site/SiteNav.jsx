@@ -142,18 +142,35 @@ const NavGroup = ({ item, copy }) => {
 const SiteNav = () => {
   const copy = useCopy("site");
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const burger = useRef(null);
+
+  /* Fond opaque et filet dès que la page défile : la barre reste lisible
+     au-dessus de n'importe quel contenu */
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!open) return undefined;
     const onKeyDown = (event) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        burger.current?.focus();
+      }
     };
     const onResize = () => {
       if (window.innerWidth >= 1280) setOpen(false);
     };
+    /* Menu ouvert : la page derrière ne défile plus */
+    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("resize", onResize);
     return () => {
+      document.body.style.overflow = "";
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("resize", onResize);
     };
@@ -162,9 +179,13 @@ const SiteNav = () => {
   const close = () => setOpen(false);
 
   return (
-    /* Barre transparente posée sur le contenu (héros) ; fond opaque seulement
-       quand le menu mobile est ouvert, pour rester lisible */
-    <header className={`relative z-10 ${open ? "bg-ls-bg" : ""}`}>
+    /* Barre collante : transparente posée sur le héros en haut de page,
+       fond opaque avec filet dès le défilement ou menu mobile ouvert */
+    <header
+      className={`sticky top-0 ${open ? "z-50" : "z-40"} border-b transition-colors ${
+        open || scrolled ? "border-ls-rule bg-ls-bg" : "border-transparent"
+      }`}
+    >
       <nav
         aria-label={copy.nav.label}
         className='mx-auto flex max-w-[1440px] items-center gap-3 px-[18px] py-3.5 md:gap-10 md:px-16 md:py-[22px] xl:grid xl:grid-cols-[minmax(max-content,1fr)_auto_minmax(max-content,1fr)]'
@@ -190,6 +211,7 @@ const SiteNav = () => {
           <LanguageSwitch className='max-sm:hidden' />
           <WhatsAppButton className='ls-btn ls-btn-sm ls-btn-solid max-sm:hidden'>{copy.nav.cta}</WhatsAppButton>
           <button
+            ref={burger}
             type='button'
             className='ls-icon-btn text-ls-text xl:hidden'
             aria-expanded={open}
@@ -207,7 +229,13 @@ const SiteNav = () => {
       </nav>
 
       {open && (
-        <div id='menu-principal' className='border-t border-ls-rule xl:hidden'>
+        <>
+          {/* Fond cliquable invisible : un tap hors du menu le ferme */}
+          <div aria-hidden='true' onClick={close} className='fixed inset-0 z-10 xl:hidden' />
+          <div
+            id='menu-principal'
+            className='ls-fade-in absolute inset-x-0 top-full z-20 max-h-[calc(100dvh-68px)] overflow-y-auto border-t border-ls-rule bg-ls-bg shadow-[0_18px_40px_rgba(14,21,24,.12)] md:max-h-[calc(100dvh-84px)] xl:hidden'
+          >
           <ul className='mx-auto flex max-w-[1440px] flex-col px-[18px] md:px-16'>
             {items.map((item) =>
               item.children ? (
@@ -246,7 +274,8 @@ const SiteNav = () => {
               {copy.nav.cta}
             </WhatsAppButton>
           </div>
-        </div>
+          </div>
+        </>
       )}
     </header>
   );

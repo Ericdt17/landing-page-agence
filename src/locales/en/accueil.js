@@ -28,12 +28,15 @@ export default {
         title: "Your business keeps running, even without you.",
         body: "No more calls to find out where a parcel is. Every status updates on its own, every franc collected is recorded, and the statement needs no explaining.",
         link: "See the app screens",
-        captions: {
-            orders: { title: "Your orders, in a few taps.", text: "Create your deliveries from the app. We handle the rest." },
-            stock: { title: "Your stock, under control.", text: "Check your products and their quantities at any time." },
-            payout: { title: "Your collections, fully transparent.", text: "Track the amounts collected and your financial operations." },
-            tracking: { title: "Soon: your couriers in real time.", text: "Follow your deliveries' progress directly on a map." },
-        },
+        tourLabel: "App screens",
+        tabs: [
+            { id: "accueil", label: "Home", caption: "Your services and your latest order, at a glance." },
+            { id: "courses", label: "Deliveries", caption: "Each delivery, its status, the amount to collect." },
+            { id: "stock", label: "Stock", caption: "Your products, the quantities, what's out of stock." },
+            { id: "rapports", label: "Reports", caption: "Your deliveries, their statuses, the amount paid back to you." },
+            { id: "inbox", label: "Notifications", caption: "Every update to your stock and your report for the day." },
+            { id: "tarifs", label: "Prices by area", caption: "The price known in advance, neighbourhood by neighbourhood." },
+        ],
     },
     differences: {
         kicker: "What sets us apart",

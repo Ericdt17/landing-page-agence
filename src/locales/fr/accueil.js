@@ -35,12 +35,15 @@ export default {
         title: "Votre commerce continue de tourner, même sans vous.",
         body: "Plus d'appels pour savoir où est un colis. Chaque statut se met à jour tout seul, chaque franc encaissé est enregistré, et le relevé se lit sans explication.",
         link: "Voir les écrans de l'application",
-        captions: {
-            orders: { title: "Vos commandes, en quelques clics.", text: "Créez vos livraisons depuis l'application. Nous nous occupons du reste." },
-            stock: { title: "Votre stock, sous contrôle.", text: "Consultez vos produits et leurs quantités à tout moment." },
-            payout: { title: "Vos encaissements, en toute transparence.", text: "Suivez les montants collectés et vos opérations financières." },
-            tracking: { title: "Bientôt : vos livreurs en temps réel.", text: "Suivez l'avancement de vos livraisons directement sur une carte." },
-        },
+        tourLabel: "Écrans de l'application",
+        tabs: [
+            { id: "accueil", label: "Accueil", caption: "Vos services et votre dernière commande, d'un coup d'œil." },
+            { id: "courses", label: "Courses", caption: "Chaque course, son statut, le montant à encaisser." },
+            { id: "stock", label: "Stock", caption: "Vos produits, les quantités, ce qui est en rupture." },
+            { id: "rapports", label: "Rapports", caption: "Vos livraisons, leurs statuts, le montant à vous reverser." },
+            { id: "inbox", label: "Notifications", caption: "Chaque mise à jour de votre stock et votre bilan du jour." },
+            { id: "tarifs", label: "Tarifs par zone", caption: "Le prix connu d'avance, quartier par quartier." },
+        ],
     },
     differences: {
         kicker: "Ce qui nous différencie",

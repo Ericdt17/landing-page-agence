@@ -1,30 +1,38 @@
 import { Link } from "react-router-dom";
+import { heroEntrepot } from "../../assets/images";
 import { routes } from "../../constants/routes";
 import { useCopy } from "../../i18n/useCopy";
 import WhatsAppButton from "../../components/site/WhatsAppButton";
-import AccueilHeroMap from "./AccueilHeroMap";
 
 /**
- * Sur mobile, le héros occupe tout le premier écran (100svh) et remonte de
- * 68 px sous la barre de navigation transparente : la carte dessinée couvre
- * l'écran entier derrière le texte, ancré en bas ; un dégradé vers --ls-bg
- * garde le texte lisible. Sur bureau, texte à gauche et carte paysage à droite.
+ * Le héros remonte sous la barre de navigation transparente (68 px mobile,
+ * 84 px bureau). Mobile : photo de l'entrepôt en haut du plein écran, texte
+ * ancré en bas. Bureau : split-screen, texte à gauche, photo bord à bord sur
+ * la moitié droite, pleine hauteur. Photo décorative (le titre porte le
+ * message), d'où alt=''.
  */
 const AccueilHero = () => {
   const { hero } = useCopy("accueil");
   return (
   <section
     aria-labelledby='accueil-titre'
-    className='relative -mt-[68px] flex min-h-[100svh] flex-col px-[18px] pb-10 pt-[84px] md:mt-0 md:grid md:min-h-0 md:grid-cols-[minmax(0,1fr)_400px] md:items-center md:gap-[72px] md:px-16 md:pb-[72px] md:pt-12 lg:grid-cols-[minmax(0,1fr)_460px]'
+    className='relative -mt-[68px] flex min-h-[100svh] flex-col px-[18px] pb-10 pt-[84px] md:-mt-[84px] md:min-h-[640px] md:justify-center md:px-16 md:pb-16 md:pt-[120px]'
   >
-    <div aria-hidden='true' className='absolute inset-0 md:hidden'>
-      <AccueilHeroMap portrait />
-      <div className='absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-ls-bg to-transparent' />
+    {/* Photo : bande haute sur mobile, moitié droite pleine hauteur sur
+       bureau ; fondue vers --ls-bg (vers le bas sur mobile, vers la gauche
+       sur bureau) pour laisser le texte lisible */}
+    <div aria-hidden='true' className='absolute inset-x-0 top-0 h-[62%] md:inset-y-0 md:left-auto md:right-0 md:h-full md:w-[46%]'>
+      <img
+        src={heroEntrepot}
+        alt=''
+        width='765'
+        height='510'
+        className='h-full w-full object-cover object-[60%_center]'
+      />
+      <div className='absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-ls-bg to-transparent md:hidden' />
+      <div className='absolute inset-y-0 left-0 hidden w-[45%] bg-gradient-to-r from-ls-bg to-transparent md:block' />
     </div>
-    <div className='relative hidden md:order-2 md:block md:h-[460px]'>
-      <AccueilHeroMap />
-    </div>
-    <div className='relative mt-auto flex flex-col gap-5 md:order-1 md:mt-0 md:gap-[30px]'>
+    <div className='relative mt-auto flex flex-col gap-5 md:mt-0 md:max-w-[560px] md:gap-[30px]'>
       <span className='ls-kicker text-ls-primary'>{hero.kicker}</span>
       <h1 id='accueil-titre' className='ls-h ls-d1 max-w-[15ch] text-ls-primary'>
         {hero.title}

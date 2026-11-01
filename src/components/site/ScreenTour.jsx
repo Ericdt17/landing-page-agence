@@ -2,7 +2,6 @@ import { PauseIcon, PlayIcon } from "@heroicons/react/20/solid";
 import { useEffect, useId, useRef, useState } from "react";
 import { useCopy } from "../../i18n/useCopy";
 
-const SPACING = 322;
 const AUTOPLAY_MS = 5000;
 
 const placement = (offset) => {
@@ -32,6 +31,13 @@ const prefersReducedMotion = () =>
  * centre, ses voisins estompés de part et d'autre (sur mobile, seul l'écran
  * choisi est affiché). Onglets conformes au motif ARIA : flèches, Début, Fin.
  *
+ * Sur toutes les tailles d'écran, seul le titre actif est affiché, centré
+ * au-dessus de son écran, et la visite avance toute seule (sa barre de
+ * progression et le bouton pause restent là) ; les écrans précédent et
+ * suivant dépassent en aperçu estompé de part et d'autre (écart via
+ * --tour-spacing) et un balayage horizontal sur les écrans passe au suivant
+ * ou au précédent.
+ *
  * Défilement automatique toutes les 5 secondes, avec un bouton pause (un
  * contenu qui bouge plus de 5 s doit pouvoir être arrêté). Le simple survol
  * ne l'arrête pas : un clic dans la visite la suspend, et elle reprend quand
@@ -50,6 +56,25 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
   const [pageHidden, setPageHidden] = useState(false);
   const baseId = useId();
   const tabRefs = useRef([]);
+  const swipeStart = useRef(null);
+
+  const step = (direction) => setActive((index) => (index + direction + tabs.length) % tabs.length);
+
+  /* Balayage sur les écrans : un geste horizontal franc (48 px, plus large
+     que haut) passe à l'écran suivant ou précédent ; touch-action pan-y
+     laisse la page défiler verticalement */
+  const onSwipeStart = (event) => {
+    swipeStart.current = { x: event.clientX, y: event.clientY };
+  };
+  const onSwipeEnd = (event) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+    if (!start) return;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (Math.abs(dx) < 48 || Math.abs(dx) <= Math.abs(dy)) return;
+    step(dx < 0 ? 1 : -1);
+  };
 
   useEffect(() => {
     const onVisibility = () => setPageHidden(document.hidden);
@@ -68,7 +93,9 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
 
   const select = (index, focus = false) => {
     setActive(index);
-    if (focus) tabRefs.current[index]?.focus();
+    /* Après le rendu : sur mobile la pastille visée est cachée tant qu'elle
+       n'est pas devenue l'active */
+    if (focus) requestAnimationFrame(() => tabRefs.current[index]?.focus());
   };
 
   const onKeyDown = (event, index) => {
@@ -103,7 +130,7 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
       <div
         role='tablist'
         aria-label={label}
-        className='flex flex-wrap items-start justify-center gap-2.5 pb-8 md:gap-3.5 md:pb-[76px]'
+        className='flex items-center justify-center pb-8 md:pb-10'
       >
         {tabs.map((tab, index) => {
           const selected = index === active;
@@ -121,13 +148,11 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
               tabIndex={selected ? 0 : -1}
               onClick={() => select(index)}
               onKeyDown={(event) => onKeyDown(event, index)}
-              style={{ "--lift": `${tab.lift ?? 0}px` }}
-              className={`relative flex items-center gap-2.5 overflow-hidden rounded-full border px-4 py-3 shadow-[0_6px_18px_rgba(0,0,0,.06)] transition-colors md:translate-y-[var(--lift)] md:px-[18px] md:py-[13px] ${
-                selected ? "border-ls-primary bg-ls-select" : "border-ls-stroke bg-ls-surface hover:border-ls-faint"
+              className={`relative items-center overflow-hidden rounded-full px-4 py-3 text-ls-accent transition-colors ${
+                selected ? "flex" : "hidden"
               }`}
             >
-              <span aria-hidden='true' className={`h-2 w-2 shrink-0 rounded-full ${selected ? "bg-ls-primary" : "bg-ls-stroke"}`} />
-              <span className='ls-h whitespace-nowrap text-sm'>{tab.label}</span>
+              <span className='ls-h whitespace-nowrap text-lg'>{tab.label}</span>
               {selected && running && (
                 /* Barre de progression : montre quand l'écran suivant arrive */
                 <span
@@ -146,7 +171,13 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
         id={`${baseId}-ecran`}
         role='tabpanel'
         aria-labelledby={`${baseId}-onglet-${active}`}
-        className='relative overflow-hidden'
+        onPointerDown={onSwipeStart}
+        onPointerUp={onSwipeEnd}
+        onPointerCancel={() => {
+          swipeStart.current = null;
+        }}
+        onDragStart={(event) => event.preventDefault()}
+        className='relative touch-pan-y overflow-hidden [--tour-spacing:260px] md:[--tour-spacing:322px]'
         style={{ height }}
       >
         {tabs.map((tab, index) => {
@@ -162,7 +193,7 @@ const ScreenTour = ({ label, tabs, screens, height = 440 }) => {
               data-side={offset !== 0 ? "" : undefined}
               className={`ls-tour-screen absolute left-1/2 top-0 -ml-[150px] w-[300px] ${offset !== 0 ? "pointer-events-none" : ""}`}
               style={{
-                transform: `translate3d(${offset * SPACING}px, 0, 0) scale(${scale})`,
+                transform: `translate3d(calc(${offset} * var(--tour-spacing, 322px)), 0, 0) scale(${scale})`,
                 "--tour-opacity": opacity,
                 zIndex: z,
               }}

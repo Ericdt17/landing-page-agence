@@ -38,8 +38,10 @@ export const legacyRedirects = {
     "/plateforme/integrations-api": routes.apiLivraison,
 };
 
+const DEFAULT_WHATSAPP = "https://wa.me/237691969014";
+
 export const links = {
-    whatsapp: "https://wa.me/237691969014",
+    whatsapp: (import.meta.env.VITE_WHATSAPP_WA_ME || DEFAULT_WHATSAPP).trim(),
     email: "contact@livsight.com",
     facebook: "https://www.facebook.com/share/1J4aQ42T2t/?mibextid=wwXIfr",
     instagram: "https://www.instagram.com/livsight7?igsh=eHkyMjQyZWVkeGc4&utm_source=qr",

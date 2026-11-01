@@ -33,6 +33,7 @@ export default {
         "ls-faint": "var(--ls-faint)",
         "ls-primary": "var(--ls-primary)",
         "ls-accent": "var(--ls-accent)",
+        "ls-cta-hover": "var(--ls-cta-hover)",
         "ls-ph": "var(--ls-ph)",
         "ls-ok": "var(--ls-ok)",
         "ls-warn": "var(--ls-warn)",

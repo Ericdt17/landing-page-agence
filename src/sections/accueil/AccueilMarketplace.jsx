@@ -3,7 +3,7 @@ import { routes } from "../../constants/routes";
 import { useCopy } from "../../i18n/useCopy";
 import WhatsAppButton from "../../components/site/WhatsAppButton";
 
-/** Le seul moment sombre de la page. */
+/** La bande bleue de la marque (jetons ink). */
 const AccueilMarketplace = () => {
   const { marketplace } = useCopy("accueil");
   return (

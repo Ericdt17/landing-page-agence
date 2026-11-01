@@ -2,6 +2,8 @@
 
 This file provides guidance for AI assistants working in this repository.
 
+Before any content or design work, read `docs/company-context.md` (official business context: LivSight SARL is a logistics company first, merchant acquisition is the primary goal, marketplace upcoming) and `docs/design-system.md` (tokens, component rules, accessibility criteria).
+
 ## Commands
 
 ```bash
@@ -18,10 +20,10 @@ React 18 + Vite + React Router + Tailwind CSS site for LivSight, deployed on Ver
 
 - `src/App.jsx`: routes. The home page is bundled; every other page is lazy-loaded. Retired URLs redirect through `legacyRedirects` (keep `vercel.json` in sync).
 - `src/pages/`: one file per route.
-- `src/sections/`: larger blocks used by pages (`accueil/`, `application/`, `offre/`, `recruitment/`).
-- `src/components/site/`: the site shell (`SiteLayout`, `SiteNav` with the FR · EN switch, `SiteFooter`, `InkHero`, `LegalPage`, `ScreenTour`, `ApiTeaser`).
-- `src/constants/routes.js`: the only source for paths, external links, nav and footer structure (links carry `enabled` / `soon` flags).
-- `src/services/`: API clients and data helpers (public landing API, recruitment API, tariffs, jobs).
+- `src/sections/`: larger blocks used by pages (`accueil/`, `application/`, `marketplace/`, `offre/`, `recruitment/`).
+- `src/components/site/`: the site shell (`SiteLayout`, `SiteNav` with the FR · EN switch, `SiteFooter`, `InkHero`, `LegalPage`, `ScreenTour`, `ApiTeaser`, `WhatsAppButton`).
+- `src/constants/routes.js`: the only source for paths, external links, nav and footer structure (links carry `enabled` / `soon` flags). The WhatsApp link can be overridden with `VITE_WHATSAPP_WA_ME`.
+- `src/services/`: API clients and data helpers (public landing API, recruitment API, contract signing, cookie consent, tariffs, jobs).
 
 ## Text and translations
 

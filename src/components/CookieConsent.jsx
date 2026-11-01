@@ -25,10 +25,10 @@ const CookieConsent = () => {
       role='dialog'
       aria-live='polite'
       aria-label={cookies.label}
-      className='fixed inset-x-0 bottom-0 z-50 border-t border-ls-rule bg-ls-surface px-4 py-4 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] sm:px-6'
+      className='fixed inset-x-0 bottom-0 z-50 border-t border-ls-rule bg-ls-surface px-4 py-3 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] sm:px-6 sm:py-4'
     >
-      <div className='mx-auto flex max-w-5xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-        <p className='font-montserrat text-sm leading-6 text-ls-muted'>
+      <div className='mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4'>
+        <p className='ls-cap font-montserrat text-ls-muted'>
           {cookies.text}{" "}
           <Link
             to={routes.cookies}
@@ -48,7 +48,7 @@ const CookieConsent = () => {
           <button
             type='button'
             onClick={() => decide("accepted")}
-            className='h-11 rounded-full bg-ls-text px-5 font-montserrat text-sm font-bold text-ls-bg'
+            className='h-11 rounded-full bg-ls-primary px-5 font-montserrat text-sm font-bold text-ls-surface'
           >
             {cookies.accept}
           </button>

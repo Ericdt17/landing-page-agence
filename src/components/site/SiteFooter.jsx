@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { facebook, instagram } from "../../assets/icons";
-import { footerColumns, links, routes } from "../../constants/routes";
+import { footerColumns, links } from "../../constants/routes";
 import { useCopy } from "../../i18n/useCopy";
 import WhatsAppIcon from "../WhatsAppIcon";
-import { SiteLogo } from "./SiteNav";
 
 const linkClass = "text-ls-ink-mute transition-colors hover:text-ls-ink-fg";
 
@@ -16,7 +15,12 @@ const FooterLink = ({ link, label, soon }) => {
   const content = (
     <>
       {label}
-      {link.soon && <sup className='ls-soon !text-ls-ink-speed'>{soon}</sup>}
+      {link.soon && (
+        <>
+          {" "}
+          <sup className='ls-soon !text-ls-ink-speed'>{soon}</sup>
+        </>
+      )}
     </>
   );
   if (link.href) {
@@ -42,10 +46,7 @@ const SiteFooter = () => {
       <div className='mx-auto max-w-[1440px]'>
         <div className='grid grid-cols-2 gap-8 pt-2 lg:grid-cols-[320px_repeat(4,minmax(0,1fr))]'>
           <div className='col-span-2 flex flex-col gap-2.5 lg:col-span-1'>
-            <Link to={routes.home} aria-label={copy.nav.home} className='w-fit'>
-              <SiteLogo />
-            </Link>
-            <p className='text-[13px] leading-relaxed text-ls-ink-mute'>
+            <p className='ls-cap text-ls-ink-mute'>
               {footer.addressLines.map((line) => (
                 <span key={line} className='block'>
                   {line}
@@ -55,7 +56,7 @@ const SiteFooter = () => {
           </div>
 
           {footerColumns.map((column) => (
-            <nav key={column.id} aria-label={footer.columns[column.id]} className='text-[13px]'>
+            <nav key={column.id} aria-label={footer.columns[column.id]} className='ls-cap'>
               <h2 className='font-bold text-ls-ink-fg'>{footer.columns[column.id]}</h2>
               <ul className='mt-2.5 flex flex-col gap-2.5'>
                 {column.links
@@ -72,7 +73,7 @@ const SiteFooter = () => {
 
         <div className='mt-10 flex flex-wrap items-center justify-between gap-6 border-t border-ls-ink-line pt-6'>
           <p className='text-xs text-ls-ink-mute'>{footer.copyright}</p>
-          <ul className='flex items-center gap-2.5'>
+          <ul className='flex items-center gap-3'>
             {socials.map((social) => (
               <li key={social.id}>
                 <a
@@ -80,9 +81,9 @@ const SiteFooter = () => {
                   target='_blank'
                   rel='noopener noreferrer'
                   aria-label={footer.social[social.id]}
-                  className='inline-flex h-11 w-11 items-center justify-center rounded-full border border-ls-ink-line transition-colors hover:border-ls-ink-fg'
+                  className='ls-icon-btn -m-3.5 opacity-80 transition-opacity hover:opacity-100'
                 >
-                  <img src={social.icon} alt='' width='16' height='16' className='h-4 w-4 opacity-80 invert' />
+                  <img src={social.icon} alt='' width='16' height='16' className='h-4 w-4 invert' />
                 </a>
               </li>
             ))}
@@ -92,7 +93,7 @@ const SiteFooter = () => {
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label={footer.social.whatsapp}
-                className='inline-flex h-11 w-11 items-center justify-center rounded-full border border-ls-ink-line text-ls-ink-mute transition-colors hover:border-ls-ink-fg hover:text-ls-ink-fg'
+                className='ls-icon-btn -m-3.5 text-ls-ink-mute transition-colors hover:text-ls-ink-fg'
               >
                 <WhatsAppIcon className='h-4 w-4' />
               </a>

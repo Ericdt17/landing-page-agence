@@ -58,14 +58,8 @@ export const LandingPublicProvider = ({ children }) => {
 
   const clientsCount = parseCount(landing?.clients_count);
 
-  const completedDeliveries = parseCount(
-    landing?.completed_deliveries ?? landing?.completed_deliveries_count
-  );
-
   return (
-    <LandingPublicContext.Provider
-      value={{ landing, status, clientsCount, completedDeliveries }}
-    >
+    <LandingPublicContext.Provider value={{ landing, status, clientsCount }}>
       {children}
     </LandingPublicContext.Provider>
   );
@@ -79,7 +73,6 @@ export const useLandingPublic = () => {
       landing: null,
       status: "idle",
       clientsCount: null,
-      completedDeliveries: null,
     };
   }
   return ctx;

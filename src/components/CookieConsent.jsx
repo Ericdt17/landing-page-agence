@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { routes } from "../constants/routes";
 import { useCopy } from "../i18n/useCopy";
+import { syncConsent, trackPageview } from "../services/analytics";
 import { cookieChoice, rememberCookieChoice } from "../services/cookieConsent";
 
 const CookieConsent = () => {
@@ -15,6 +16,8 @@ const CookieConsent = () => {
 
   const decide = (choice) => {
     rememberCookieChoice(choice);
+    syncConsent(choice);
+    if (choice === "accepted") trackPageview(window.location.pathname);
     setVisible(false);
   };
 

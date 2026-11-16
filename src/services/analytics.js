@@ -15,7 +15,7 @@ const KEY = (import.meta.env.VITE_POSTHOG_KEY || "").trim();
 const HOST = (
   import.meta.env.VITE_POSTHOG_HOST || "https://eu.i.posthog.com"
 ).trim();
-const ENVIRONMENT = (import.meta.env.VITE_APP_ENV || "development").trim();
+const ENVIRONMENT = (import.meta.env.VITE_APP_ENV || "staging").trim();
 
 export const analyticsConfigured = () => KEY !== "";
 

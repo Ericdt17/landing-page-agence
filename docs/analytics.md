@@ -9,7 +9,7 @@ Intégration de PostHog sur le site (issue LIV-21). Le code est dans
 | -- | -- |
 | `VITE_POSTHOG_KEY` | Clé du projet PostHog. Vide : aucune collecte. |
 | `VITE_POSTHOG_HOST` | Hôte PostHog (défaut `https://eu.i.posthog.com`). |
-| `VITE_APP_ENV` | `staging` ou `production`, ajouté à chaque événement. |
+| `VITE_APP_ENV` | `staging` (défaut) ou `production`, ajouté à chaque événement. |
 
 Staging et production utilisent deux projets PostHog distincts, donc deux clés
 différentes. Sur Vercel, définir les variables par environnement (Preview pour

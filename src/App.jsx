@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieConsent from "./components/CookieConsent";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 import { legacyRedirects } from "./constants/routes";
 import Accueil from "./pages/Accueil";
 
@@ -51,6 +52,7 @@ const App = () => {
   return (
     <BrowserRouter basename={routerBasename}>
       <ScrollToTop />
+      <AnalyticsTracker />
       <CookieConsent />
       <Suspense fallback={<PageFallback />}>
         <Routes>

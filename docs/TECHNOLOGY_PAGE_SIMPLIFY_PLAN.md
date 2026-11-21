@@ -9,8 +9,8 @@ separately before implementation or publication.
 **Base for PRs:** `main`  
 **Route (unchanged):** `/technologie`  
 **Primary files:** `src/pages/TechnologiePage.jsx`, `src/locales/fr/technologie.js`, `src/locales/en/technologie.js`  
-**Last updated:** 2026-11-21  
-**Current phase:** 4 (Done — EN draft in Appendix B); next = Phase 5 on human OK
+**Last updated:** 2026-11-22  
+**Current phase:** 5 (Done — implemented, desktop review + UX pass done, committed 2026-11-22); Linear checkbox flips pending
 
 ---
 
@@ -117,7 +117,7 @@ before editing this file, and LIV-122-linked commits when committing.
 | 2 | French content draft (not published) | Done (draft in plan; not live) | Cursor | 2026-11-21 |
 | 3 | Explicit French content approval (hard gate) | Done (human approved Appendix A) | Cursor | 2026-11-21 |
 | 4 | English translation (after FR approval) | Done (Appendix B draft) | Cursor | 2026-11-21 |
-| 5 | Implement approved FR+EN; desktop/mobile review | Not started | — | — |
+| 5 | Implement approved FR+EN; desktop/mobile review | Done (code; human UI review) | Cursor | 2026-11-21 |
 
 Statuses: `Not started` · `In progress` · `Blocked` · `Done`
 
@@ -276,14 +276,16 @@ Both labeled **BIENTÔT**. Planned only. No launch dates.
 
 ### 05 — Commencez avec LivSight
 
-Merchant CTAs:
+Merchant CTAs (human-confirmed 2026-11-21):
 
-- Créer mon compte  
-- Contacter LivSight sur WhatsApp  
-- Découvrir nos offres et tarifs  
+- **Contacter nous sur WhatsApp** → `links.whatsapp` (replaces former “Créer mon compte”)  
+- Découvrir nos offres et tarifs → `routes.offre` (or pricing anchor as used elsewhere)  
 
-**No recruitment aside** (hiring on `/recrutement`). Phase 5 must map CTAs to real routes
-(confirm “Créer mon compte” vs WhatsApp/onboarding).
+Drop the redundant second WhatsApp line (“Contacter LivSight sur WhatsApp”) so section 05
+does not show two WhatsApp buttons. Hero may still use Commencer à livrer → WhatsApp and
+Découvrir nos solutions → offre/application as mapped in Phase 5.
+
+**No recruitment aside** (hiring on `/recrutement`).
 
 ### Implementation constraints (carry into Phases 3–5)
 
@@ -451,7 +453,9 @@ Refs LIV-122
 ### Exit notes
 
 - Appendix B added: full EN parallel to approved FR.
-- Still not in `src/locales`. Phase 5 needs human OK + CTA mapping for “Create my account”.
+- Still not in `src/locales`. Phase 5 needs human OK to implement.
+- CTA: “Créer mon compte” / “Create my account” replaced by WhatsApp contact
+  (“Contacter nous sur WhatsApp” / “Contact us on WhatsApp”).
 
 ### Commit
 
@@ -465,7 +469,7 @@ Refs LIV-122
 
 ## Phase 5 — Implement approved FR+EN; desktop/mobile review
 
-**Status:** Not started  
+**Status:** Done (code 2026-11-21; human desktop/mobile review pending)  
 **Goal:** Ship approved content on `/technologie` without breaking design system or responsiveness.
 
 ### Scope
@@ -484,10 +488,30 @@ Refs LIV-122
 
 ### Verification
 
-- `npm run lint` (and build if human requests).
-- Manual desktop + mobile check of `/technologie`.
-- No leftover engineering benchmarks / stack theater unless human re-approved.
+- `npm run lint` passed (2026-11-21).
+- Manual desktop + mobile check of `/technologie` by human.
+- No leftover engineering benchmarks / stack theater.
 - FR and EN shapes match.
+
+### Exit notes
+
+- Implemented Hero + 01–05; removed stack pills, algorithm problems, recruitment aside, ApiTeaser pair.
+- Page shipped **text-only**: no screenshots or mockup wired; merchant/agent/driver visual slots stay pending (correction of an earlier note that claimed `ecran-*` + `appAccueilMockup` were used).
+- CTAs: WhatsApp (`Contactez-nous sur WhatsApp`) + `/tarifs`; hero WhatsApp + `#solutions`.
+- Upcoming: Marketplace + API with BIENTÔT/Soon badges linking to existing soon pages.
+
+**UX review pass (Claude Code, 2026-11-22; human-reviewed desktop):**
+
+- Fixes applied: hero kicker `text-ls-primary` → `text-ls-accent` (token semantics); FR CTA
+  grammar `Contacter nous` → `Contactez-nous` (grammatical correction of Appendix A text, no
+  meaning change); global `.ls-btn:active` pressed-state feedback added in `src/index.css`
+  (separate commit).
+- Layout variants tried (60ch measure caps, centered hero, hero app mockup) were **reverted**:
+  human keeps the original full-width text layout as this page's aesthetic. This is a deliberate
+  exception to the 60ch rule in `docs/design-system.md`.
+- Deferred decisions: em dashes in kickers/CTAs (Appendix A copy vs CLAUDE.md no-em-dash rule);
+  10px BIENTÔT badge size (shared site-wide pattern).
+- Verification re-run 2026-11-22: `npm run lint`, `npm run build`, `npm run size` all pass.
 
 ### Commit
 
@@ -503,11 +527,13 @@ Refs LIV-122
 
 ## Open questions
 
-1. **Phase 5 CTA:** Where does “Créer mon compte” go (existing route vs WhatsApp / Application)?
+- Human mobile review of `/technologie` (desktop reviewed 2026-11-22).
+- Linear checkbox flips for Phase 5 (propose per checkbox map; commit done 2026-11-22).
 
 Resolved (2026-11-21): coming-soon = Marketplace + Delivery API only; real screenshots preferred;
 no recruitment aside; **adopted FR outline** (Hero + 01–05) is canonical; **Appendix A FR
-approved** (Phase 3); **Appendix B EN drafted** (Phase 4).
+approved** (Phase 3); **Appendix B EN drafted** (Phase 4); **“Créer mon compte” → Contacter
+nous sur WhatsApp** (`links.whatsapp`); Phase 5 code shipped.
 
 ---
 
@@ -586,7 +612,9 @@ Nous développons de nouvelles solutions pour faciliter les ventes, simplifier l
 
 LivSight associe une équipe de terrain à des outils technologiques conçus pour simplifier votre logistique et vous offrir une meilleure visibilité sur votre activité. Que vous expédiiez quelques colis ou gériez des commandes chaque jour, nous vous accompagnons dans l’organisation et le suivi de vos livraisons.  
 
-**CTAs:** Créer mon compte · Contacter LivSight sur WhatsApp · Découvrir nos offres et tarifs  
+**CTAs:** Contacter nous sur WhatsApp · Découvrir nos offres et tarifs  
+
+*(Former “Créer mon compte” and duplicate “Contacter LivSight sur WhatsApp” replaced/merged per human, 2026-11-21.)*
 
 ---
 
@@ -665,7 +693,9 @@ We are building new solutions to make selling easier, simplify exchanges between
 
 LivSight combines a field team with technology built to simplify your logistics and give you better visibility on your activity. Whether you ship a few parcels or manage orders every day, we support you in organizing and tracking your deliveries.  
 
-**CTAs:** Create my account · Contact LivSight on WhatsApp · Discover our offers and pricing  
+**CTAs:** Contact us on WhatsApp · Discover our offers and pricing  
+
+*(Former “Create my account” and duplicate WhatsApp CTA replaced/merged per human, 2026-11-21.)*
 
 ---
 

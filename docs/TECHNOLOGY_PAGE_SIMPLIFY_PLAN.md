@@ -10,7 +10,7 @@ separately before implementation or publication.
 **Route (unchanged):** `/technologie`  
 **Primary files:** `src/pages/TechnologiePage.jsx`, `src/locales/fr/technologie.js`, `src/locales/en/technologie.js`  
 **Last updated:** 2026-11-21  
-**Current phase:** 3 (Done — FR approved); next = Phase 4 English translation
+**Current phase:** 4 (Done — EN draft in Appendix B); next = Phase 5 on human OK
 
 ---
 
@@ -116,7 +116,7 @@ before editing this file, and LIV-122-linked commits when committing.
 | 1 | Review existing page & lock simplified structure | Done (superseded by adopted FR outline) | Cursor | 2026-11-21 |
 | 2 | French content draft (not published) | Done (draft in plan; not live) | Cursor | 2026-11-21 |
 | 3 | Explicit French content approval (hard gate) | Done (human approved Appendix A) | Cursor | 2026-11-21 |
-| 4 | English translation (after FR approval) | Not started | — | — |
+| 4 | English translation (after FR approval) | Done (Appendix B draft) | Cursor | 2026-11-21 |
 | 5 | Implement approved FR+EN; desktop/mobile review | Not started | — | — |
 
 Statuses: `Not started` · `In progress` · `Blocked` · `Done`
@@ -436,17 +436,22 @@ Refs LIV-122
 
 ## Phase 4 — English translation (after FR approval)
 
-**Status:** Not started  
+**Status:** Done (2026-11-21)  
 **Goal:** EN draft with the **same shape** as approved FR; English falls back rules still apply.
 
 ### Scope
 
-- Translate approved FR into `en` draft (same keys/structure).
-- No publication until Phase 5.
+- Translate approved FR (Appendix A) into EN draft (Appendix B); same section shape.
+- No publication / locales until Phase 5.
 
 ### Verification
 
 - Human review of EN (or explicit permission to proceed to Phase 5 with EN as proposed).
+
+### Exit notes
+
+- Appendix B added: full EN parallel to approved FR.
+- Still not in `src/locales`. Phase 5 needs human OK + CTA mapping for “Create my account”.
 
 ### Commit
 
@@ -502,14 +507,14 @@ Refs LIV-122
 
 Resolved (2026-11-21): coming-soon = Marketplace + Delivery API only; real screenshots preferred;
 no recruitment aside; **adopted FR outline** (Hero + 01–05) is canonical; **Appendix A FR
-approved** (Phase 3).
+approved** (Phase 3); **Appendix B EN drafted** (Phase 4).
 
 ---
 
-## Appendix A — French draft (Phase 2, not published)
+## Appendix A — French copy (approved Phase 3; not live)
 
-Source: human-supplied copy, 2026-11-21. Do **not** put into `src/locales` until Phase 3 approval
-and Phase 5 implementation permission.
+Source: human-supplied copy, 2026-11-21; approved Phase 3. Do **not** put into `src/locales`
+until Phase 5 implementation permission.
 
 ### Hero
 
@@ -582,6 +587,85 @@ Nous développons de nouvelles solutions pour faciliter les ventes, simplifier l
 LivSight associe une équipe de terrain à des outils technologiques conçus pour simplifier votre logistique et vous offrir une meilleure visibilité sur votre activité. Que vous expédiiez quelques colis ou gériez des commandes chaque jour, nous vous accompagnons dans l’organisation et le suivi de vos livraisons.  
 
 **CTAs:** Créer mon compte · Contacter LivSight sur WhatsApp · Découvrir nos offres et tarifs  
+
+---
+
+## Appendix B — English draft (Phase 4, not published)
+
+Translation of approved Appendix A. Same section shape. Do **not** put into `src/locales` until
+Phase 5 implementation permission. Human may request EN edits before Phase 5.
+
+### Hero
+
+**Kicker:** OUR TECHNOLOGY  
+
+**Title:** Your deliveries under control. Your business in full view.  
+
+**Lede:** Manage your orders, plan your deliveries, track your parcels, and keep an eye on your performance from a connected platform.  
+
+**Own-tech:** At LivSight, we build our own technology to simplify your logistics and give you the information you need to run your business with more clarity.  
+
+**CTAs:** Start delivering · Discover our solutions  
+
+### 01 — A connected ecosystem
+
+**Title:** One platform. Connected teams. Controlled operations.  
+
+**Intro:** Behind every delivery, several people take part. Our applications bring them together in one ecosystem so information flows, coordination is easier, and operations stay easier to follow.  
+
+**For merchants** — Your business, within reach.  
+Create your orders, schedule your deliveries, check tariffs, and track your parcels from your app. Keep visibility on your stock, cash collections, and activity reports. Receive important notifications and message our support team directly.  
+*Your orders, your deliveries, and your performance. One place.*  
+
+**For our teams** — Efficient organization from start to finish.  
+Our agents centralize orders, organize rounds, and coordinate drivers from a dedicated application. Stock management, parcel tracking, support, cash collections, and operational reports: the essentials live in one place to make daily work easier.  
+*Better-coordinated teams for better-organized deliveries.*  
+
+**For drivers** — Every mission, clearly organized.  
+Our drivers open their missions, check their routes, and update delivery statuses from their app. Sharing their location during missions and messaging our agents makes field coordination easier.  
+*The right information at the right time.*  
+
+### 02 — Solutions designed for your business
+
+**Title:** Fewer complications. More control.  
+
+**All your orders in one place** — Create and manage your delivery requests from a single app. Choose delivery dates and see the applicable fees by service and destination area. *Simpler management, even as your business grows.*  
+
+**Track your parcels at every step** — Check delivery statuses and the latest available driver locations during their missions. Get notifications for important events without multiplying phone calls. *You know where your deliveries stand.*  
+
+**Manage your stock with more visibility** — Find your products in stock and follow the operations linked to your parcels. Our tools help manage goods from receipt and storage through to distribution. *Your products better tracked, from storage to delivery.*  
+
+**Reports and financial follow-up** — Your numbers help you make better decisions. LivSight centralizes your delivery information so you can understand your activity. Review your reports, follow cash collections, and find what you need to control your operations. See completed, pending, or failed deliveries, plus the fees linked to your logistics activity. These data help you track performance, understand your operations, and spot what needs attention. *Your orders. Your collections. Your performance. A clear view of your business.*  
+
+**Support built into the app** — A question about an order? A delivery that needs help? Message our team from your app through integrated support. *Help when you need it.*  
+
+**WhatsApp, connected to our operations** — Do you receive orders on WhatsApp? Our tools help process them by extracting the essential details from the messages you send, before our teams verify them. *Your ways of working, connected to our logistics organization.*  
+
+### 03 — Technology built for the field
+
+**Title:** Designed for the realities of urban delivery.  
+
+Vague addresses, schedule changes, absent recipients, or travel constraints: every delivery day brings its challenges. Our applications help teams organize deliveries by area, manage postponements, follow interventions, and keep information up to date. Agents and drivers stay connected to the same operations, while merchants have what they need to follow their orders.  
+
+*Technology built to support work in the field.*  
+
+### 04 — Coming soon on LivSight
+
+**Title:** Commerce and logistics, even more connected.  
+
+We are building new solutions to make selling easier, simplify exchanges between businesses, and bring merchants closer to our logistics network.  
+
+**LivSight Marketplace — SOON** — A new way to sell and buy. We are preparing a marketplace that will bring merchants, shoppers, and delivery services together in one ecosystem. Merchants will be able to present their products, manage their orders, and reach a new sales channel. Shoppers will be able to discover products, place orders, and track their purchases. Built on our logistics infrastructure and connected applications, this marketplace aims to simplify the path from discovering a product to receiving it. *Your products. New customers. Connected logistics.* CTA: Marketplace — Coming soon  
+
+**LivSight Delivery API — SOON** — Connect your business to our logistics network. We are building an API that will let companies connect their e-commerce sites and business software to LivSight. It will make it easier to send delivery requests and exchange information between their systems and our platform. *Your tools and our logistics, connected.* CTA: API — In development  
+
+### 05 — Get started with LivSight
+
+**Title:** Focus on your sales. Keep control of your deliveries.  
+
+LivSight combines a field team with technology built to simplify your logistics and give you better visibility on your activity. Whether you ship a few parcels or manage orders every day, we support you in organizing and tracking your deliveries.  
+
+**CTAs:** Create my account · Contact LivSight on WhatsApp · Discover our offers and pricing  
 
 ---
 

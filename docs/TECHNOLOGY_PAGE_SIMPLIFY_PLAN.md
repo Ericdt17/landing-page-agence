@@ -10,7 +10,7 @@ separately before implementation or publication.
 **Route (unchanged):** `/technologie`  
 **Primary files:** `src/pages/TechnologiePage.jsx`, `src/locales/fr/technologie.js`, `src/locales/en/technologie.js`  
 **Last updated:** 2026-11-22  
-**Current phase:** 5 (Done — implemented, desktop review + UX pass done, committed 2026-11-22); Linear checkbox flips pending
+**Current phase:** 5 (Done — shipped text-only; desktop UX pass done); open: mobile review + Linear checkbox flips
 
 ---
 
@@ -117,7 +117,7 @@ before editing this file, and LIV-122-linked commits when committing.
 | 2 | French content draft (not published) | Done (draft in plan; not live) | Cursor | 2026-11-21 |
 | 3 | Explicit French content approval (hard gate) | Done (human approved Appendix A) | Cursor | 2026-11-21 |
 | 4 | English translation (after FR approval) | Done (Appendix B draft) | Cursor | 2026-11-21 |
-| 5 | Implement approved FR+EN; desktop/mobile review | Done (code; human UI review) | Cursor | 2026-11-21 |
+| 5 | Implement approved FR+EN; desktop/mobile review | Done (code + desktop UX; mobile review open) | Cursor / Claude Code | 2026-11-22 |
 
 Statuses: `Not started` · `In progress` · `Blocked` · `Done`
 
@@ -151,18 +151,22 @@ desktop/mobile review.
 |---|---|---|
 | Route | `src/constants/routes.js` → `technologie: "/technologie"` | Nav + footer enabled; **do not change** without compelling reason |
 | Page | `src/pages/TechnologiePage.jsx` | Lazy-loaded in `src/App.jsx` |
-| FR copy | `src/locales/fr/technologie.js` | ~400 words today; engineering / benchmark heavy |
-| EN copy | `src/locales/en/technologie.js` | Same shape as FR |
-| Shell | `SiteLayout`, `SEO`, `ApiTeaser` | Design system / bilingual via `useCopy` |
+| FR copy | `src/locales/fr/technologie.js` | Approved Appendix A shape; live after Phase 5 |
+| EN copy | `src/locales/en/technologie.js` | Same shape as FR (Appendix B); live after Phase 5 |
+| Shell | `SiteLayout`, `SEO` | Design system / bilingual via `useCopy` (`ApiTeaser` removed from this page) |
 | Company context | `docs/company-context.md` | Merchants primary; benefits before architecture |
 | Design system | `docs/design-system.md` | `ls-*` tokens; `ls-soon` for upcoming |
 
-### Current page composition (to simplify)
+### Current page composition (shipped Phase 5)
 
-1. Hero + **tech stack pills** (typed backend, internal API, jobs, etc.)
-2. Three long “problems” (routes / WhatsApp / offline) with algorithm/benchmark detail
-3. Decorative SVG / mock figures (not product screenshots)
-4. Aside: `ApiTeaser` (API bientôt) + recruitment card
+1. Hero (full-width text; no mockup)  
+2. 01 Écosystème — commerçants / équipes / livreurs  
+3. 02 Solutions — capability blocks (text-only)  
+4. 03 Terrain  
+5. 04 Prochainement — Marketplace + Delivery API (BIENTÔT)  
+6. 05 CTA — WhatsApp + `/tarifs`  
+
+*(Pre-Phase-5 page had stack pills, algorithm “problems”, SVG figures, ApiTeaser + recruitment.)*
 
 ### Audience priority (human-confirmed)
 
@@ -249,7 +253,8 @@ Three audiences (what each enables):
 - **Pour nos équipes** — agents centralize orders, rounds, drivers; stock, tracking, assistance, cash, ops reports  
 - **Pour les livreurs** — missions, itineraries, status updates, position sharing, agent coordination  
 
-Prefer real screenshots; agent / driver visuals **pending** if missing (do not invent UIs).
+Visuals: page shipped **text-only**; agent / driver / merchant screenshot slots remain pending
+(do not invent UIs).
 
 ### 02 — Des solutions conçues pour votre activité
 
@@ -276,30 +281,26 @@ Both labeled **BIENTÔT**. Planned only. No launch dates.
 
 ### 05 — Commencez avec LivSight
 
-Merchant CTAs (human-confirmed 2026-11-21):
+Merchant CTAs (shipped):
 
-- **Contacter nous sur WhatsApp** → `links.whatsapp` (replaces former “Créer mon compte”)  
-- Découvrir nos offres et tarifs → `routes.offre` (or pricing anchor as used elsewhere)  
+- **Contactez-nous sur WhatsApp** → `links.whatsapp` (replaces former “Créer mon compte”; grammar fix 2026-11-22)  
+- Découvrir nos offres et tarifs → `routes.tarifs`  
 
-Drop the redundant second WhatsApp line (“Contacter LivSight sur WhatsApp”) so section 05
-does not show two WhatsApp buttons. Hero may still use Commencer à livrer → WhatsApp and
-Découvrir nos solutions → offre/application as mapped in Phase 5.
+Hero: Commencer à livrer → WhatsApp; Découvrir nos solutions → `#solutions`.  
+No recruitment aside. Page is **text-only** (screenshots deferred). Full-width text is a
+deliberate exception to the design-system 60ch measure on this page.
 
-**No recruitment aside** (hiring on `/recrutement`).
-
-### Implementation constraints (carry into Phases 3–5)
+### Implementation constraints (Phases 3–5 — now satisfied for code)
 
 - French first; English after approval.  
 - Preserve branding, `ls-*` tokens, responsive patterns, bilingual `useCopy("technologie")`.  
-- Prioritize real product screenshots; avoid excessive technical explanations.  
 - No backend modifications.  
-- No site implementation until content approval (Phase 3) and Phase 5 go-ahead.  
-- Drop current stack pills, algorithm/benchmark essays, and recruitment card in Phase 5.
+- Stack pills, algorithm essays, recruitment card, and ApiTeaser removed in Phase 5.
 
-### Phase 5 structural note
+### Phase 5 structural note (done)
 
-`TechnologiePage.jsx` remaps to Hero + 01–05; locales reshape to match Appendix A (after
-approval). Reuse `SiteLayout`, `ls-soon`, existing marketplace & API routes.
+`TechnologiePage.jsx` = Hero + 01–05; locales match Appendix A/B (live). `SiteLayout` +
+marketplace/API routes for section 04.
 
 ---
 
@@ -453,9 +454,9 @@ Refs LIV-122
 ### Exit notes
 
 - Appendix B added: full EN parallel to approved FR.
-- Still not in `src/locales`. Phase 5 needs human OK to implement.
+- Later shipped into `src/locales` in Phase 5.
 - CTA: “Créer mon compte” / “Create my account” replaced by WhatsApp contact
-  (“Contacter nous sur WhatsApp” / “Contact us on WhatsApp”).
+  (shipped FR label: **Contactez-nous sur WhatsApp**).
 
 ### Commit
 
@@ -469,7 +470,7 @@ Refs LIV-122
 
 ## Phase 5 — Implement approved FR+EN; desktop/mobile review
 
-**Status:** Done (code 2026-11-21; human desktop/mobile review pending)  
+**Status:** Done (code + desktop UX 2026-11-22; mobile review still open)  
 **Goal:** Ship approved content on `/technologie` without breaking design system or responsiveness.
 
 ### Scope
@@ -497,8 +498,9 @@ Refs LIV-122
 
 - Implemented Hero + 01–05; removed stack pills, algorithm problems, recruitment aside, ApiTeaser pair.
 - Page shipped **text-only**: no screenshots or mockup wired; merchant/agent/driver visual slots stay pending (correction of an earlier note that claimed `ecran-*` + `appAccueilMockup` were used).
-- CTAs: WhatsApp (`Contactez-nous sur WhatsApp`) + `/tarifs`; hero WhatsApp + `#solutions`.
+- CTAs: WhatsApp (`Contactez-nous sur WhatsApp`) + `routes.tarifs`; hero WhatsApp + `#solutions`.
 - Upcoming: Marketplace + API with BIENTÔT/Soon badges linking to existing soon pages.
+- Plan doc cleaned 2026-11-22 so status/appendices match shipped code (no stale “not in locales”).
 
 **UX review pass (Claude Code, 2026-11-22; human-reviewed desktop):**
 
@@ -527,20 +529,23 @@ Refs LIV-122
 
 ## Open questions
 
-- Human mobile review of `/technologie` (desktop reviewed 2026-11-22).
-- Linear checkbox flips for Phase 5 (propose per checkbox map; commit done 2026-11-22).
+- Human **mobile** review of `/technologie` (desktop reviewed 2026-11-22).
+- Linear checkbox flips for Phase 5 (need human OK). Propose: flip remove-jargon, ecosystem,
+  capabilities, distinguish upcoming, preserve layout, draft copy; **leave open** identify
+  screenshots/visuals (page shipped text-only).
 
-Resolved (2026-11-21): coming-soon = Marketplace + Delivery API only; real screenshots preferred;
-no recruitment aside; **adopted FR outline** (Hero + 01–05) is canonical; **Appendix A FR
-approved** (Phase 3); **Appendix B EN drafted** (Phase 4); **“Créer mon compte” → Contacter
-nous sur WhatsApp** (`links.whatsapp`); Phase 5 code shipped.
+Resolved: coming-soon = Marketplace + Delivery API only; no recruitment aside; Hero + 01–05
+canonical; Appendix A/B approved and **live in locales**; “Créer mon compte” →
+**Contactez-nous sur WhatsApp** (`links.whatsapp`); offers CTA → `routes.tarifs`; Phase 5
+shipped text-only / full-width.
 
 ---
 
-## Appendix A — French copy (approved Phase 3; not live)
+## Appendix A — French copy (approved Phase 3; live in locales as of Phase 5)
 
-Source: human-supplied copy, 2026-11-21; approved Phase 3. Do **not** put into `src/locales`
-until Phase 5 implementation permission.
+Source: human-supplied copy, 2026-11-21; approved Phase 3; implemented in
+`src/locales/fr/technologie.js`. Section 05 CTA grammar in locales:
+**Contactez-nous sur WhatsApp** (not “Contacter nous”).
 
 ### Hero
 
@@ -612,16 +617,17 @@ Nous développons de nouvelles solutions pour faciliter les ventes, simplifier l
 
 LivSight associe une équipe de terrain à des outils technologiques conçus pour simplifier votre logistique et vous offrir une meilleure visibilité sur votre activité. Que vous expédiiez quelques colis ou gériez des commandes chaque jour, nous vous accompagnons dans l’organisation et le suivi de vos livraisons.  
 
-**CTAs:** Contacter nous sur WhatsApp · Découvrir nos offres et tarifs  
+**CTAs:** Contactez-nous sur WhatsApp · Découvrir nos offres et tarifs  
 
-*(Former “Créer mon compte” and duplicate “Contacter LivSight sur WhatsApp” replaced/merged per human, 2026-11-21.)*
+*(Former “Créer mon compte” and duplicate WhatsApp CTA replaced/merged; grammar fix to
+Contactez-nous in locales, 2026-11-22.)*
 
 ---
 
-## Appendix B — English draft (Phase 4, not published)
+## Appendix B — English copy (Phase 4 draft; live in locales as of Phase 5)
 
-Translation of approved Appendix A. Same section shape. Do **not** put into `src/locales` until
-Phase 5 implementation permission. Human may request EN edits before Phase 5.
+Translation of approved Appendix A. Same section shape. Implemented in
+`src/locales/en/technologie.js`.
 
 ### Hero
 

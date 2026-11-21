@@ -77,6 +77,11 @@
   }
   .ls-btn-lg { min-height: 48px; padding: 0 26px; font-size: 15px; }
   .ls-btn-sm { min-height: 36px; padding: 0 16px; font-size: 12px; }
+  /* Retour visuel à l'appui : indispensable au tactile, où :hover n'existe pas */
+  .ls-btn:active { transform: scale(.98); }
+  @media (prefers-reduced-motion: reduce) {
+    .ls-btn:active { transform: none; }
+  }
   /* CTA principal au bleu exact du logo, texte blanc. Exception assumée au
      contraste AA (3,3:1, décision de marque du 2026-10-24, voir
      docs/design-system.md) ; graisse 700 pour compenser. Survol vers le bleu

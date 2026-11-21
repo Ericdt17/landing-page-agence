@@ -23,6 +23,7 @@
     --ls-ok: #2E7D32; --ls-warn: #6E5406; --ls-bad: #C62828; --ls-dim: #C7CDD2;
     --ls-speed: #8A5700;
     --ls-select: #F2F8FC; --ls-primary-soft: rgba(38,151,208,.14); --ls-ok-bg: #EAF7EE;
+    --ls-speed-soft: rgba(138,87,0,.10);
     /* Bandes « ink » : retour au sombre d'origine (2026-10-25), avec l'accent
        au bleu logo (5,6:1 sur ce fond) pour garder la marque dans le noir */
     --ls-ink-bg: #0E1518; --ls-ink-fg: #F2F5F6; --ls-ink-mute: #A3B4BB; --ls-ink-line: #2A3B42; --ls-ink-speed: #2697D0;
@@ -77,6 +78,11 @@
   }
   .ls-btn-lg { min-height: 48px; padding: 0 26px; font-size: 15px; }
   .ls-btn-sm { min-height: 36px; padding: 0 16px; font-size: 12px; }
+  /* Retour visuel à l'appui : indispensable au tactile, où :hover n'existe pas */
+  .ls-btn:active { transform: scale(.98); }
+  @media (prefers-reduced-motion: reduce) {
+    .ls-btn:active { transform: none; }
+  }
   /* CTA principal au bleu exact du logo, texte blanc. Exception assumée au
      contraste AA (3,3:1, décision de marque du 2026-10-24, voir
      docs/design-system.md) ; graisse 700 pour compenser. Survol vers le bleu
@@ -147,5 +153,19 @@
     font-size: 10px; font-weight: 800; letter-spacing: .05em;
     line-height: 1; vertical-align: 0.45em; margin-left: 3px; white-space: nowrap;
     color: var(--ls-speed);
+  }
+
+  /* Badge « Bientôt » autoportant (cartes produits à venir) : pastille ambre
+     douce avec point d'état, plus lisible que l'ancien contour 10 px */
+  .ls-badge-soon {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 9999px;
+    background: var(--ls-speed-soft); color: var(--ls-speed);
+    font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    line-height: 1.4; text-transform: uppercase; white-space: nowrap;
+  }
+  .ls-badge-soon::before {
+    content: ""; width: 6px; height: 6px; border-radius: 9999px;
+    background: currentColor; flex: none;
   }
 }

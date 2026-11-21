@@ -10,7 +10,7 @@ separately before implementation or publication.
 **Route (unchanged):** `/technologie`  
 **Primary files:** `src/pages/TechnologiePage.jsx`, `src/locales/fr/technologie.js`, `src/locales/en/technologie.js`  
 **Last updated:** 2026-11-21  
-**Current phase:** 0 (Done — branch + this plan); next = Phase 1 on human request
+**Current phase:** 1 (Done — six-section structure locked); next = Phase 2 when human provides FR copy
 
 ---
 
@@ -113,7 +113,7 @@ before editing this file, and LIV-122-linked commits when committing.
 | Phase | Name | Status | Owner / agent | Completed |
 |---|---|---|---|---|
 | 0 | Preconditions, allowlist & Linear gate | Done (branch + plan) | Cursor | 2026-11-21 |
-| 1 | Review existing page & lock simplified structure | Not started | — | — |
+| 1 | Review existing page & lock simplified structure | Done (six-section lock) | Cursor | 2026-11-21 |
 | 2 | French content draft (not published) | Not started | — | — |
 | 3 | Explicit French content approval (hard gate) | Not started | — | — |
 | 4 | English translation (after FR approval) | Not started | — | — |
@@ -170,17 +170,20 @@ desktop/mobile review.
 2. Business partners  
 3. Technical audiences  
 
-Communicate improved delivery operations, reliability, visibility, and efficiency. Show that
-LivSight develops its own technology without overwhelming visitors with implementation detail.
+Communicate technological differentiation through **customer benefits** (reliability, visibility,
+coordination, efficiency), not engineering implementation detail. Show that LivSight develops its
+own software without stack theater or infra terminology.
 
-### Verified capabilities to highlight (issue + company context)
+### Verified capabilities to highlight (Technology in Action — operational only)
 
-- Order management  
-- Delivery tracking  
+- WhatsApp order intake and information extraction  
+- Centralized order management  
 - Route organization  
-- WhatsApp order intake  
+- Delivery tracking and status updates  
+- Operational visibility  
 
-Plus ecosystem: merchant, agent, driver, operations — in accessible language.
+Only describe features confirmed to be operational. Ecosystem apps: merchant, agent, driver,
+operations dashboard.
 
 ### Assets inventory
 
@@ -191,15 +194,15 @@ Plus ecosystem: merchant, agent, driver, operations — in accessible language.
 | Marketplace demo products | `src/assets/images/marketplace/demo/*` | Not for inventing tech UI; marketplace is upcoming |
 | Ops / driver / agent screens | — | **Missing** — leave visual slots pending; do not invent UIs or use unapproved shots with customer data |
 
-### Coming soon — Phase 0 open allowlist
+### Coming soon — allowlist (locked in Phase 1)
 
-Already marked `soon` elsewhere on the site:
+Both labeled **BIENTÔT** / planned (not available today). No launch dates. No extra promises.
 
-- Delivery API (`/api-livraison`, footer + `ApiTeaser` on Technology page)
-- Marketplace (`/marketplace`, nav/footer)
-
-**Product Trends & Discovery:** not found in this landing repo. **Not approved** for inclusion
-until the human confirms.
+| Product | On Technology page | Notes |
+|---|---|---|
+| **LivSight Marketplace** | **Yes** | Consumers ↔ merchants; discovery & ordering; logistics integration; merchant sales opportunities. Link to existing `/marketplace` soon page as appropriate. |
+| **LivSight Delivery API** | **Yes** | E-commerce / business-software integrations; automated delivery requests; logistics integration. Existing `/api-livraison` + teaser patterns. |
+| Product Trends & Discovery | **No** | Not approved for this page. |
 
 Do **not** introduce additional upcoming features or availability promises without confirmation.
 
@@ -219,29 +222,100 @@ Do **not** introduce additional upcoming features or availability promises witho
 
 ---
 
-## Proposed simplified page structure (lock in Phase 1)
+## Locked page structure (Phase 1 — human-approved 2026-11-21)
 
-Merchants first. Benefits before tech. Own-tech signal without stack theater.
+Six sections. Merchants → partners → technical. Benefits before implementation. Route
+`/technologie` unchanged. French copy first (human will supply full copy); English after FR
+approval; **no implementation until structure + content are approved** (Phases 3 then 5).
 
-1. **Hero** — LivSight builds its own software for delivery operations (reliability, visibility,
-   efficiency). Short lede. **No** engineering stack chips.
-2. **Ecosystem** — Merchant · agent · driver · operations in plain language (how they connect for
-   the merchant’s outcome).
-3. **Available today** — The four verified capabilities only. Prefer authentic merchant screens
-   where useful; reduce or replace decorative SVGs.
-4. **Coming soon** — Only items on the Phase 0 allowlist (human-confirmed). Clear `BIENTÔT` /
-   `ls-soon` labeling. No new promises.
-5. **CTA** — Merchant-oriented (Application / WhatsApp / Offre as appropriate). Recruitment
-   secondary or trimmed so it does not overpower the merchant story.
+### 1. Hero — La technologie au cœur de chaque livraison
 
-Preserve: `SiteLayout`, `ls-*` tokens, existing spacing/breakpoint patterns, `useCopy("technologie")`
-shape updates as needed for the new structure (FR and EN stay in sync).
+- Strong headline: technology-driven logistics company.
+- Short intro: LivSight develops its own software.
+- Emphasize reliability, visibility, coordination, and efficiency.
+- **No** technology-stack pills or infrastructure terminology.
+
+### 2. Connected Ecosystem — Une plateforme, des opérations connectées
+
+Four connected components (what each enables):
+
+- Merchant application  
+- Agent application  
+- Driver application  
+- Operations dashboard  
+
+Use a visual representation of the ecosystem where appropriate. Prefer real product screenshots;
+leave agent / driver / ops slots **pending** if approved shots are missing (do not invent UIs).
+
+### 3. Delivery Workflow — De la commande à la livraison
+
+Four short, accessible stages:
+
+1. Order reception  
+2. Order verification and organization  
+3. Driver assignment and delivery  
+4. Delivery tracking and status updates  
+
+### 4. Technology in Action — Conçue pour les réalités du terrain
+
+Existing, verified capabilities only (practical benefits, not implementation):
+
+- WhatsApp order intake and information extraction  
+- Centralized order management  
+- Route organization  
+- Delivery tracking and status updates  
+- Operational visibility  
+
+Prioritize real product screenshots (e.g. existing merchant `ecran-*`).
+
+### 5. Upcoming Innovations — Nos prochaines innovations
+
+Two products, both clearly labeled **BIENTÔT**. Planned capabilities, not current services.
+No launch dates; no unapproved functionality.
+
+**LivSight Marketplace**
+
+- Future marketplace connecting consumers with merchants  
+- Product discovery and online ordering  
+- Integration with LivSight’s logistics ecosystem  
+- New sales opportunities for merchants  
+
+**LivSight Delivery API**
+
+- Future integration for e-commerce sites and business software  
+- Automated delivery request creation  
+- Integration with LivSight’s logistics infrastructure  
+
+### 6. CTA — Une logistique connectée à votre activité
+
+Clear merchant paths:
+
+- Access the merchant application  
+- Contact LivSight via WhatsApp  
+- Explore delivery services and pricing  
+
+**No recruitment aside** on this page (hiring stays on `/recrutement`).
+
+### Implementation constraints (carry into Phases 2–5)
+
+- French copy first; English after approval.  
+- Preserve branding, `ls-*` tokens, responsive patterns, bilingual `useCopy("technologie")`.  
+- Prioritize real product screenshots; avoid excessive technical explanations.  
+- No backend modifications.  
+- No site implementation until content and structure receive approval.  
+- Drop current stack pills, algorithm/benchmark “problems” essays, and recruitment card in Phase 5.
+
+### Phase 5 structural note
+
+`TechnologiePage.jsx` remaps to these six sections; locales reshape to match. Reuse `SiteLayout`,
+`ls-soon` / existing API & marketplace routes for section 5. Exact strings = human-supplied FR
+(Phase 2+) then approved EN.
 
 ---
 
 ## Phase 0 — Preconditions, allowlist & Linear gate
 
-**Status:** Done (branch + plan) — **open item:** coming-soon allowlist confirmation  
+**Status:** Done (branch + plan)  
 **Goal:** Branch, plan, inventory; no site copy changes.
 
 ### Scope
@@ -249,7 +323,7 @@ shape updates as needed for the new structure (FR and EN stay in sync).
 - Create branch from `origin/main` using Linear’s `gitBranchName`.
 - Write this plan (agent rules, hard gate, checkbox map, phases, structure proposal).
 - Record route, assets, and existing soon markers.
-- Leave Product Trends / coming-soon allowlist as an **open question** until human confirms.
+- Coming-soon allowlist finalized in Phase 1 (Marketplace + Delivery API only).
 
 ### Out of scope
 
@@ -265,8 +339,7 @@ shape updates as needed for the new structure (FR and EN stay in sync).
 - Branch `edjou/liv-122-website-simplify-technology-page` created from `origin/main` (tip
   `9c619cb` at creation).
 - No `staging` branch in this repo; PR base is **`main`**.
-- Coming-soon allowlist still open: keep API + Marketplace teasers? include Product Trends? drop any?
-- No application code yet.
+- No application code in Phase 0.
 
 ### Commit (when human asks to commit Phase 0)
 
@@ -280,25 +353,35 @@ Refs LIV-122
 
 ## Phase 1 — Review existing page & lock simplified structure
 
-**Status:** Not started  
+**Status:** Done (six-section lock, 2026-11-21)  
 **Goal:** Human-approved structure for the redesign (content outline only; no final copy live).
 
 ### Scope
 
 - Confirm audience reading (merchants → partners → technical).
-- Lock section order and purpose vs current hero/stack/problems/aside.
-- Decide visual slots: which existing `app/ecran-*` images (if any), which slots stay pending.
-- Confirm coming-soon block contents from Phase 0 allowlist.
-- Note any minimal `TechnologiePage.jsx` structural changes needed later in Phase 5 (still no code
-  until Phase 5 permission).
+- Lock six-section order and purpose vs current hero/stack/problems/aside.
+- Decide visual approach: prioritize real product screenshots; merchant `ecran-*` reusable;
+  agent / driver / ops shots pending if missing.
+- Lock coming-soon allowlist: Marketplace + Delivery API only (BIENTÔT); exclude Product Trends.
+- CTA = merchant paths only; no recruitment aside.
+- Note Phase 5 remapping of `TechnologiePage.jsx` (no code until Phase 5 permission).
 
 ### Out of scope
 
-- Writing final FR/EN strings into locales; shipping UI changes.
+- Writing final FR/EN strings into locales; shipping UI changes. Human will supply full FR copy
+  for Phase 2.
 
 ### Verification
 
-- Human explicitly approves the locked structure (and allowlist).
+- Human explicitly approved the locked six-section structure (message 2026-11-21).
+
+### Exit notes
+
+- Structure locked: Hero → Connected Ecosystem → Delivery Workflow → Technology in Action →
+  Upcoming Innovations → CTA (see [Locked page structure](#locked-page-structure-phase-1--human-approved-2026-11-21)).
+- Allowlist: Marketplace + Delivery API; Product Trends out.
+- Recruitment aside removed from Technology page intent.
+- Ready for Phase 2 when human provides full French copy (draft for review, not published).
 
 ### Commit
 
@@ -313,14 +396,14 @@ Refs LIV-122
 ## Phase 2 — French content draft (not published)
 
 **Status:** Not started  
-**Goal:** FR draft for review only (~400–600 words), matching locked structure.
+**Goal:** FR draft for review only (~400–600 words), matching the locked six-section structure.
 
 ### Scope
 
-- Draft French copy (propose in chat and/or a clearly marked draft section / file only after
-  human OK on where to put it — **not** into live locales until Phase 5).
-- Remove algorithm explanations, infra terminology, unsupported benchmarks.
-- Cover ecosystem + verified capabilities; label upcoming per allowlist.
+- Accept human-supplied full French copy (preferred) and/or assist with drafting; review only —
+  **not** into live locales until Phase 5.
+- Cover all six locked sections (Hero → … → CTA); remove algorithm/infra/benchmark language.
+- Marketplace + Delivery API only under Upcoming Innovations, labeled BIENTÔT.
 - Stay consistent with `docs/company-context.md` (no invented stats, prices, or promises).
 
 ### Out of scope
@@ -431,11 +514,10 @@ Refs LIV-122
 
 ## Open questions
 
-1. **Coming-soon allowlist for this page:** keep API teaser + Marketplace mention? Include Product
-   Trends & Discovery? Drop any?
-2. Prefer **reuse** of existing merchant `ecran-*` screens on Technology, or keep visuals minimal
-   until ops/driver shots exist?
-3. Keep a **recruitment** aside on this page, move it, or remove for focus?
+None for Phase 1. Phase 2 waits on **full French copy** from the human.
+
+Resolved (2026-11-21): coming-soon = Marketplace + Delivery API only; prioritize real screenshots
+(pending slots OK); no recruitment aside on Technology.
 
 ---
 

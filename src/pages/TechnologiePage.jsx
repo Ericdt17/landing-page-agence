@@ -102,9 +102,7 @@ const TechnologiePage = () => {
               {upcoming.products.map((product) => (
                 <li key={product.id} className='flex flex-col gap-4 rounded-[26px] border border-ls-rule p-7 md:p-9'>
                   <div className='flex flex-wrap items-center gap-2.5'>
-                    <span className='rounded-full border border-ls-speed px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.08em] text-ls-speed'>
-                      {upcoming.badge}
-                    </span>
+                    <span className='ls-badge-soon'>{upcoming.badge}</span>
                     <span className='ls-kicker text-ls-speed'>{product.name}</span>
                   </div>
                   <h3 className='ls-h ls-d3'>{product.title}</h3>

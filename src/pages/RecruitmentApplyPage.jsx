@@ -107,12 +107,12 @@ const RecruitmentApplyPage = () => {
           {loading ? (
             <div aria-busy='true' className='h-12 max-w-md animate-pulse rounded-lg bg-ls-ink-line' />
           ) : loadKind ? (
-            <h1 id='candidature-titre' className='ls-h ls-d1 max-w-[18ch]'>
+            <h1 id='candidature-titre' className='ls-h ls-d1 max-w-[18ch] text-ls-primary'>
               {loadKind === "notfound" ? offer.notFound : offer.loadError}
             </h1>
           ) : (
             <>
-              <h1 id='candidature-titre' className='ls-h ls-d1 max-w-[20ch]' lang='fr'>
+              <h1 id='candidature-titre' className='ls-h ls-d1 max-w-[20ch] text-ls-primary' lang='fr'>
                 {meta?.title}
               </h1>
               {subtitle && <p className='ls-h text-lg text-ls-ink-fg'>{subtitle}</p>}

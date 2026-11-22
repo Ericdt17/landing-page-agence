@@ -16,7 +16,6 @@ const TechnologiePage = () => {
       <SiteLayout>
         <section aria-labelledby='technologie-titre' className='w-full px-[18px] pb-12 pt-11 md:px-16 md:pb-[60px] md:pt-[84px]'>
           <div className='flex w-full flex-col gap-6 md:gap-[26px]'>
-            <span className='ls-kicker text-ls-accent'>{hero.kicker}</span>
             <h1 id='technologie-titre' className='ls-h ls-d1 w-full text-ls-primary'>
               {hero.title}
             </h1>
@@ -101,10 +100,11 @@ const TechnologiePage = () => {
             <ul className='grid w-full grid-cols-1 gap-5 md:grid-cols-2'>
               {upcoming.products.map((product) => (
                 <li key={product.id} className='flex flex-col gap-4 rounded-[26px] border border-ls-rule p-7 md:p-9'>
-                  <div className='flex flex-wrap items-center gap-2.5'>
-                    <span className='ls-badge-soon'>{upcoming.badge}</span>
-                    <span className='ls-kicker text-ls-speed'>{product.name}</span>
-                  </div>
+                  <span className='ls-kicker text-ls-speed'>
+                    {product.name}
+                    {" "}
+                    <sup className='ls-soon'>{upcoming.badge}</sup>
+                  </span>
                   <h3 className='ls-h ls-d3'>{product.title}</h3>
                   <p className='ls-body text-ls-muted'>{product.text}</p>
                   <p className='ls-cap font-semibold text-ls-text'>{product.closing}</p>

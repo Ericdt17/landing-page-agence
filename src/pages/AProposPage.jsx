@@ -43,7 +43,7 @@ const AProposPage = () => {
     <LandingPublicProvider>
       <SEO title={seo.title} description={seo.description} canonical={routes.apropos} />
       <SiteLayout>
-        <InkHero id='apropos-titre' kicker={hero.kicker} title={hero.title} lede={hero.lede} />
+        <InkHero id='apropos-titre' title={hero.title} lede={hero.lede} />
 
         <section aria-label={copy.principlesLabel} className='px-[18px] pt-12 md:px-16 md:pt-[68px]'>
           <ol className='grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5'>

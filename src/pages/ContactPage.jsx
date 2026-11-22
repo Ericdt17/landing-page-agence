@@ -19,7 +19,7 @@ const ContactPage = () => {
     <>
       <SEO title={seo.title} description={seo.description} canonical={routes.contact} />
       <SiteLayout>
-        <InkHero id='contact-titre' kicker={hero.kicker} title={hero.title} lede={hero.lede} />
+        <InkHero id='contact-titre' title={hero.title} lede={hero.lede} />
 
         <div className='grid grid-cols-1 gap-10 px-[18px] pb-16 pt-12 md:px-16 md:pb-[88px] md:pt-[68px] lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-11'>
           <div className='flex flex-col gap-10'>

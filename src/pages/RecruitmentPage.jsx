@@ -33,7 +33,7 @@ const RecruitmentPage = () => {
     <>
       <SEO title={seo.title} description={seo.description} canonical={routes.recrutement} />
       <SiteLayout>
-        <InkHero id='recrutement-titre' kicker={hero.kicker} title={hero.title} lede={hero.lede}>
+        <InkHero id='recrutement-titre' title={hero.title} lede={hero.lede}>
           <a href='#postes' className='ls-btn ls-btn-lg ls-btn-ink mt-2 self-start'>
             {hero.cta}
           </a>

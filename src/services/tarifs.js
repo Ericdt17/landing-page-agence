@@ -6,6 +6,34 @@
 
 const toNumber = (value) => (typeof value === "number" && Number.isFinite(value) ? value : null);
 
+/* Mots français qui restent en minuscules à l'intérieur d'un nom de quartier */
+const MOTS_MINUSCULES = new Set([
+    "de", "du", "des", "la", "le", "les", "à", "a", "au", "aux", "et", "en",
+    "sur", "sous", "chez", "par", "pour", "vers", "un", "une", "face",
+]);
+
+/**
+ * Les noms de quartiers arrivent de l'API avec des casses disparates
+ * (« anguissa », « CARREFOUR REGIS », « Bastos »). On les affiche en
+ * capitalisant chaque mot, sans toucher à la donnée source.
+ */
+export const formatQuartierName = (raw) => {
+    if (typeof raw !== "string" || raw.trim() === "") return raw;
+    return raw
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase()
+        .split(" ")
+        .map((word, index) => {
+            if (index > 0 && MOTS_MINUSCULES.has(word)) return word;
+            // « l'hippodrome » → « l'Hippodrome »
+            const apostrophe = word.match(/^([a-z]['’])(.+)$/);
+            if (apostrophe) return apostrophe[1] + apostrophe[2].charAt(0).toUpperCase() + apostrophe[2].slice(1);
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(" ");
+};
+
 /** Montant en francs CFA, séparateurs de milliers selon la langue (« 1 000 » ou « 1,000 »). */
 export const formatFcfa = (amount, language = "fr") =>
     `${new Intl.NumberFormat(language === "en" ? "en-GB" : "fr-FR").format(amount)} FCFA`;

@@ -1,12 +1,12 @@
 import { useLandingPublic } from "../../context/LandingPublicContext";
 import { fill, useCopy, useLanguage } from "../../i18n/useCopy";
-import { cityZones, feeExtras, formatFcfa } from "../../services/tarifs";
+import { cityZones, feeExtras, formatFcfa, formatQuartierName } from "../../services/tarifs";
 import WhatsAppButton from "../../components/site/WhatsAppButton";
 
 const neighborhoodLabel = (neighborhood, zoneFee, language) => {
   const override =
     neighborhood.fee != null && neighborhood.fee !== zoneFee ? ` (${formatFcfa(neighborhood.fee, language)})` : "";
-  return `${neighborhood.name}${override}${neighborhood.entryFee ? " †" : ""}`;
+  return `${formatQuartierName(neighborhood.name)}${override}${neighborhood.entryFee ? " †" : ""}`;
 };
 
 const extraValue = (extra, labels, language) => {

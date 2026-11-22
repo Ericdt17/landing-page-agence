@@ -12,14 +12,10 @@ const ApiLivraisonPage = () => {
     <SiteLayout>
       <section aria-labelledby='api-titre' className='px-[18px] pb-12 pt-11 md:px-16 md:pb-[60px] md:pt-[84px]'>
         <div className='flex max-w-[900px] flex-col gap-6 md:gap-[26px]'>
-          <div className='flex items-center gap-2.5'>
-            <span className='rounded-full border border-ls-speed px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.08em] text-ls-speed'>
-              {hero.badge}
-            </span>
-            <span className='ls-kicker text-ls-accent'>{hero.kicker}</span>
-          </div>
-          <h1 id='api-titre' className='ls-h ls-d1'>
+          <h1 id='api-titre' className='ls-h ls-d1 text-ls-primary'>
             {hero.title}
+            {" "}
+            <sup className='ls-soon'>{hero.badge}</sup>
           </h1>
           <p className='ls-lede ls-measure text-ls-muted'>{hero.lede}</p>
           <div className='flex flex-col items-start gap-3'>

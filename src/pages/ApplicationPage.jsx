@@ -36,7 +36,6 @@ const ApplicationPage = () => {
         className='grid grid-cols-1 items-center gap-10 px-[18px] pb-12 pt-11 md:px-16 md:pb-[60px] md:pt-[84px] lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-[72px]'
       >
         <div className='flex flex-col gap-6 md:gap-[26px]'>
-          <span className='ls-kicker text-ls-primary'>{hero.kicker}</span>
           <h1 id='application-titre' className='ls-h ls-d1 max-w-[17ch] text-ls-primary'>
             {hero.title}
           </h1>
@@ -53,7 +52,7 @@ const ApplicationPage = () => {
             {hero.facts.map((fact) => (
               <div key={fact.label} className='flex items-baseline justify-between gap-6 border-b border-ls-rule py-4'>
                 <dt className='ls-cap text-ls-muted'>{fact.label}</dt>
-                <dd className='ls-num text-[13px] font-semibold'>{fact.value}</dd>
+                <dd className='ls-num text-[13px] font-semibold first-letter:uppercase'>{fact.value}</dd>
               </div>
             ))}
           </dl>

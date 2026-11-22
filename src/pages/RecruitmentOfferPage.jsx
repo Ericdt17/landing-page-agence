@@ -80,7 +80,7 @@ const RecruitmentOfferPage = () => {
             </div>
           ) : (
             <>
-              <h1 id='offre-titre' className='ls-h ls-d1 max-w-[18ch]' lang={loadKind ? undefined : "fr"}>
+              <h1 id='offre-titre' className='ls-h ls-d1 max-w-[18ch] text-ls-primary' lang={loadKind ? undefined : "fr"}>
                 {title}
               </h1>
               {subtitle && <p className='ls-lede text-ls-ink-mute'>{subtitle}</p>}

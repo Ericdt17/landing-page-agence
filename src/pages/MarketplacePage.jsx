@@ -66,17 +66,15 @@ const MarketplacePage = () => {
     <SEO title={seo.title} description={seo.description} canonical={routes.marketplace} />
     <SiteLayout>
       <section aria-labelledby='marketplace-titre' className='px-[18px] pb-12 pt-11 md:px-16 md:pb-[60px] md:pt-[84px]'>
-        <div className='flex max-w-[900px] flex-col gap-6 md:gap-[26px]'>
-          <div className='flex items-center gap-2.5'>
-            <span className='rounded-full border border-ls-speed px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.08em] text-ls-speed'>
-              {hero.badge}
-            </span>
-            <span className='ls-kicker text-ls-speed'>{hero.kicker}</span>
-          </div>
-          <h1 id='marketplace-titre' className='ls-h ls-d1'>
+        <div className='flex w-full flex-col gap-6 md:gap-[26px]'>
+          {/* Titre long : sans l'équilibrage des lignes (ls-h), chaque ligne
+             remplit la largeur au lieu de s'arrêter aux deux tiers */}
+          <h1 id='marketplace-titre' className='ls-h ls-d1 w-full text-ls-primary [text-wrap:wrap]'>
             {hero.title}
+            {" "}
+            <sup className='ls-soon'>{hero.badge}</sup>
           </h1>
-          <p className='ls-lede max-w-[62ch] text-ls-muted'>{hero.lede}</p>
+          <p className='ls-lede w-full text-ls-muted'>{hero.lede}</p>
           <div className='flex flex-col items-start gap-3'>
             <WhatsAppButton className='ls-btn ls-btn-lg ls-btn-solid max-sm:w-full'>
               {hero.cta}

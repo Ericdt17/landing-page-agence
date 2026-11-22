@@ -13,8 +13,7 @@ const CoursesParticuliersPage = () => {
       <SiteLayout>
         <section aria-labelledby='courses-titre' className='px-[18px] pb-12 pt-11 md:px-16 md:pb-[60px] md:pt-[84px]'>
           <div className='flex max-w-[900px] flex-col gap-6 md:gap-[26px]'>
-            <span className='ls-kicker text-ls-accent'>{hero.kicker}</span>
-            <h1 id='courses-titre' className='ls-h ls-d1'>
+            <h1 id='courses-titre' className='ls-h ls-d1 text-ls-primary'>
               {hero.title}
             </h1>
             <p className='ls-lede ls-measure text-ls-muted'>{hero.lede}</p>
